@@ -10,7 +10,8 @@ export const STEP16 = BEAT / 4;
 
 export type Inst =
   | 'heart' | 'kick' | 'snare' | 'hat' | 'ohat' | 'bass' | 'pad' | 'lead' | 'crash' | 'glitch'
-  | 'roll' | 'drone' | 'riser' | 'piano' | 'click' | 'fall' | 'hit' | 'boom' | 'sub';
+  | 'roll' | 'drone' | 'riser' | 'piano' | 'click' | 'fall' | 'hit' | 'boom' | 'sub'
+  | 'clap' | 'stab' | 'shaker' | 'tom';
 
 export interface NoteEvent {
   time: number;
@@ -24,26 +25,27 @@ export interface NoteEvent {
 
 /** Ackord per takt: grundton (MIDI) och treklang. */
 export const CHORDS = [
-  { name: 'Dm', root: 38, pad: [50, 53, 57, 62] },
-  { name: 'Bb', root: 34, pad: [46, 50, 53, 58] },
-  { name: 'Gm', root: 31, pad: [43, 50, 55, 58] },
-  { name: 'A', root: 33, pad: [45, 49, 52, 57] },
+  { name: 'Dm', root: 38, pad: [50, 53, 57, 62], stab: [62, 65, 69] },
+  { name: 'Bb', root: 34, pad: [46, 50, 53, 58], stab: [62, 65, 70] },
+  { name: 'Gm', root: 43, pad: [43, 50, 55, 58], stab: [62, 67, 70] },
+  { name: 'A', root: 45, pad: [45, 49, 52, 57], stab: [61, 64, 69] },
 ];
 export const chordAt = (bar: number) => CHORDS[((bar % 4) + 4) % 4];
 
 // Melodi – [startsteg (16-delar), längd, midi] per takt i en fyrtaktsfras.
 type Phrase = [number, number, number][][];
+// Ny krok: kortare, rytmiska fraser som slår mot trummorna.
 const PHRASE_A: Phrase = [
-  [[0, 6, 69], [6, 2, 65], [8, 2, 67], [10, 4, 69], [14, 2, 74]],
-  [[0, 4, 74], [4, 2, 72], [6, 2, 70], [8, 8, 65]],
-  [[0, 4, 67], [4, 2, 70], [6, 2, 69], [8, 4, 67], [12, 4, 62]],
-  [[0, 6, 64], [6, 2, 65], [8, 2, 67], [10, 2, 69], [12, 4, 73]],
+  [[0, 2, 74], [3, 1, 74], [4, 2, 72], [6, 2, 69], [8, 3, 65], [11, 1, 67], [12, 4, 69]],
+  [[0, 2, 70], [2, 2, 69], [4, 4, 65], [8, 2, 62], [10, 2, 65], [12, 4, 67]],
+  [[0, 3, 67], [3, 1, 70], [4, 4, 74], [8, 2, 72], [10, 2, 70], [12, 2, 69], [14, 2, 67]],
+  [[0, 3, 69], [3, 3, 73], [6, 2, 76], [8, 2, 74], [10, 2, 73], [12, 4, 69]],
 ];
 const PHRASE_B: Phrase = [
-  [[0, 6, 74], [6, 2, 76], [8, 4, 77], [12, 2, 76], [14, 2, 74]],
-  [[0, 2, 74], [2, 2, 72], [4, 4, 70], [8, 4, 69], [12, 4, 65]],
-  [[0, 6, 67], [6, 2, 69], [8, 4, 70], [12, 4, 74]],
-  [[0, 8, 73], [8, 4, 76], [12, 4, 69]],
+  [[0, 2, 77], [2, 2, 76], [4, 4, 74], [8, 2, 69], [10, 2, 74], [12, 4, 77]],
+  [[0, 3, 77], [3, 1, 74], [4, 4, 70], [8, 2, 74], [10, 2, 77], [12, 4, 76]],
+  [[0, 2, 74], [2, 2, 70], [4, 4, 67], [8, 2, 70], [10, 2, 74], [12, 4, 79]],
+  [[0, 3, 76], [3, 3, 73], [6, 2, 69], [8, 4, 76], [12, 4, 81]],
 ];
 
 // Sektioner (taktnummer, inklusive start, exklusive slut).
@@ -105,18 +107,34 @@ export function buildScore(): NoteEvent[] {
     const drums = inSec(bar, SECTIONS.groove) || inSec(bar, SECTIONS.lead) || inSec(bar, SECTIONS.lead8va) || inSec(bar, SECTIONS.heavy);
     if (drums) {
       const heavy = inSec(bar, SECTIONS.heavy);
-      const sixteenth = inSec(bar, SECTIONS.lead8va) || heavy;
+      const late = inSec(bar, SECTIONS.lead8va);
+      const sixteenth = late || heavy;
       const roll = bar === 41;
-      // Kick: stor, trög big beat – 1, "och" före 3, 3 (+ extra i det tunga partiet)
-      const kicks = heavy ? [0, 7, 8, 10, 14] : [0, 7, 10];
-      if (!roll) for (const k of kicks) push({ time: s16(k), dur: 0.4, inst: 'kick', midi: 0, vel: k === 0 ? 1 : 0.85, p: heavy ? 1 : 0 });
-      if (!roll) for (const s of [4, 12]) push({ time: s16(s), dur: 0.35, inst: 'snare', midi: 0, vel: 1, p: heavy ? 1 : 0 });
+      const fill = !roll && bar % 4 === 3 && bar > 6;
+      // Breakbeat: kick 1, "och" efter 2, 3, "e" efter 3 – tyngre och tätare i det tunga partiet.
+      const kicks = heavy ? [0, 3, 6, 8, 10, 11] : late ? [0, 3, 8, 10, 11] : [0, 8, 10];
+      if (!roll) for (const k of kicks) if (!(fill && k > 11)) push({ time: s16(k), dur: 0.3, inst: 'kick', midi: 0, vel: k === 0 || k === 8 ? 1 : 0.8, p: heavy ? 1 : 0 });
       if (!roll) {
+        for (const sn of [4, 12]) {
+          if (fill && sn === 12) continue;
+          push({ time: s16(sn), dur: 0.3, inst: 'snare', midi: 0, vel: 1, p: heavy ? 1 : 0 });
+          if (bar >= 15) push({ time: s16(sn), dur: 0.2, inst: 'clap', midi: 0, vel: heavy ? 0.9 : 0.7 });
+        }
+        // spökslag
+        push({ time: s16(7), dur: 0.1, inst: 'snare', midi: 0, vel: 0.28, p: 0 });
+        if (!fill) push({ time: s16(15), dur: 0.1, inst: 'snare', midi: 0, vel: 0.22, p: 0 });
         const step = sixteenth ? 1 : 2;
         for (let i = 0; i < 16; i += step) {
-          const open = !sixteenth && (i === 6 || i === 14);
-          const accent = i % 4 === 2 ? 1 : 0.6;
-          push({ time: s16(i), dur: open ? 0.25 : 0.05, inst: open ? 'ohat' : 'hat', midi: 0, vel: (sixteenth ? 0.4 : 0.5) * accent * (0.85 + rng.next() * 0.3) });
+          if (fill && i >= 12) break;
+          const open = i === 6 || i === 14;
+          const accent = i % 4 === 2 ? 1 : i % 2 ? 0.45 : 0.7;
+          push({ time: s16(i), dur: open ? 0.22 : 0.04, inst: open ? 'ohat' : 'hat', midi: 0, vel: 0.5 * accent * (0.85 + rng.next() * 0.3) });
+        }
+        if (!sixteenth) for (let i = 1; i < 16; i += 2) push({ time: s16(i), dur: 0.05, inst: 'shaker', midi: 0, vel: 0.25 + rng.next() * 0.1 });
+        // Trumvirvel/tom-fill sista taktdelen i var fjärde takt.
+        if (fill) {
+          [[12, 0], [13, 0], [14, 1], [15, 2]].forEach(([st, k], j) => push({ time: s16(st), dur: 0.25, inst: 'tom', midi: [50, 45, 41][k], vel: 0.75 + j * 0.08 }));
+          push({ time: s16(14.5), dur: 0.1, inst: 'snare', midi: 0, vel: 0.55, p: 0 });
         }
       }
       if (roll) {
@@ -127,17 +145,24 @@ export function buildScore(): NoteEvent[] {
         }
         push({ time: t0 + BAR * 0.5, dur: BAR * 0.5, inst: 'riser', midi: 0, vel: 0.5, p: 0 });
       }
-      if (bar % 4 === 0 && bar > 6) push({ time: t0, dur: 2.5, inst: 'crash', midi: 0, vel: heavy ? 0.8 : 0.5 });
+      if (bar % 4 === 0 && bar > 6) push({ time: t0, dur: 2.5, inst: 'crash', midi: 0, vel: heavy ? 0.8 : 0.55 });
     }
 
-    // --- Bas
+    // --- Bas: kort och studsande, i ett högre register (mindre dån).
     if (inSec(bar, SECTIONS.hats)) {
-      for (const i of [0, 6, 8, 14]) push({ time: s16(i), dur: STEP16 * 2, inst: 'bass', midi: ch.root, vel: 0.7, p: 0.1 });
+      for (const i of [0, 3, 8, 11]) push({ time: s16(i), dur: STEP16 * 1.5, inst: 'bass', midi: ch.root, vel: 0.6, p: 0.1 });
     }
     if (drums && bar !== 41) {
       const heavy = inSec(bar, SECTIONS.heavy);
-      const pat: [number, number, number][] = [[0, 3, 0], [3, 2, 0], [6, 2, 12], [8, 2, 0], [10, 2, 0], [12, 2, 7], [14, 2, 10]];
-      for (const [i, len, iv] of pat) push({ time: s16(i), dur: STEP16 * len * 0.95, inst: 'bass', midi: ch.root + iv, vel: 0.85, p: heavy ? 1 : 0.35 + 0.25 * Math.min(1, (bar - 6) / 30) });
+      const pat: [number, number, number][] = [[0, 2, 0], [3, 1, 0], [6, 2, 12], [8, 2, 0], [11, 1, 0], [12, 2, 7], [14, 2, 12]];
+      for (const [i, len, iv] of pat) push({ time: s16(i), dur: STEP16 * len * 0.8, inst: 'bass', midi: ch.root + iv, vel: 0.8, p: heavy ? 0.9 : 0.3 + 0.3 * Math.min(1, (bar - 6) / 30) });
+    }
+
+    // --- Ackordstötar: distade, korta – ger slagkraft mellan trumslagen.
+    if (drums && bar !== 41 && bar >= 10) {
+      const heavy = inSec(bar, SECTIONS.heavy);
+      const hits = heavy ? [0, 3, 6, 10, 12] : bar >= 30 ? [0, 6, 10] : [0, 10];
+      for (const h of hits) push({ time: s16(h), dur: 0.2, inst: 'stab', midi: 0, vel: heavy ? 0.9 : 0.7, p: bar });
     }
 
     // --- Lead: ren → alltmer distad; en oktav upp från takt 30.
@@ -159,7 +184,6 @@ export function buildScore(): NoteEvent[] {
     }
     if (bar === 44) push({ time: t0, dur: 2 * BAR, inst: 'riser', midi: 0, vel: 1, p: 1 });
     if (bar === 46) push({ time: t0, dur: 3, inst: 'crash', midi: 0, vel: 1 });
-    if (inSec(bar, SECTIONS.heavy)) push({ time: t0, dur: BAR, inst: 'sub', midi: ch.root - 12, vel: 0.8 });
 
     // --- Slutet: låga, dissonanta pianotoner och en svag drone.
     if (bar === 52) push({ time: t0, dur: 8 * BAR, inst: 'drone', midi: 26, vel: 0.35, p: -1 });

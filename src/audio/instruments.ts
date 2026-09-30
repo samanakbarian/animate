@@ -2,7 +2,7 @@
 // Slumpmässiga detaljer (brus, glitch) använder seedade generatorer.
 
 import { Rng } from '../core/math';
-import type { NoteEvent } from './score';
+import { chordAt, type NoteEvent } from './score';
 
 export const mtof = (m: number) => 440 * Math.pow(2, (m - 69) / 12);
 
@@ -14,6 +14,8 @@ export interface Bus {
   reverb: AudioNode; // send
   delay: AudioNode; // send
   noise: AudioBuffer;
+  /** Musikbussens förstärkning – pumpar ner på varje kick (sidechain-känsla). */
+  duck: AudioParam;
   curve: (amount: number) => Float32Array<ArrayBuffer>;
 }
 
@@ -82,49 +84,128 @@ export function play(b: Bus, e: NoteEvent, when: number) {
       break;
     }
     case 'kick': {
+      // Kort och hård: snabb tonhöjdsdykning, tydlig klick-transient, lite sub.
       const o = ctx.createOscillator();
       o.type = 'sine';
-      o.frequency.setValueAtTime(e.p ? 150 : 128, when);
-      o.frequency.exponentialRampToValueAtTime(42, when + 0.11);
-      o.frequency.exponentialRampToValueAtTime(36, when + 0.4);
+      o.frequency.setValueAtTime(e.p ? 190 : 170, when);
+      o.frequency.exponentialRampToValueAtTime(58, when + 0.05);
+      o.frequency.exponentialRampToValueAtTime(48, when + 0.25);
       const g = gainNode(b, 0);
-      env(g.gain, when, 0.003, 1.05 * v, 0.5);
-      let out: AudioNode = g;
-      if (e.p) {
-        const ws = ctx.createWaveShaper();
-        ws.curve = b.curve(0.6);
-        g.connect(ws);
-        const post = gainNode(b, 0.7);
-        ws.connect(post);
-        out = post;
-      }
-      o.connect(g);
-      out.connect(b.drums);
-      // klick
+      env(g.gain, when, 0.002, 1.1 * v, 0.26);
+      const ws = ctx.createWaveShaper();
+      ws.curve = b.curve(e.p ? 0.55 : 0.3);
+      const hp = filter(b, 'highpass', 38);
+      const post = gainNode(b, e.p ? 0.75 : 0.85);
+      o.connect(g).connect(ws).connect(hp).connect(post).connect(b.drums);
+      // slag-transient
+      const pu = ctx.createOscillator();
+      pu.type = 'triangle';
+      pu.frequency.setValueAtTime(420, when);
+      pu.frequency.exponentialRampToValueAtTime(120, when + 0.03);
+      const pg = gainNode(b, 0);
+      env(pg.gain, when, 0.001, 0.45 * v, 0.035);
+      pu.connect(pg).connect(b.drums);
       const n = noiseSrc(b, when, 0.02, when * 3.1);
-      const hp = filter(b, 'highpass', 3000);
+      const nhp = filter(b, 'highpass', 2500);
       const ng = gainNode(b, 0);
-      env(ng.gain, when, 0.001, 0.22 * v, 0.018);
-      n.connect(hp).connect(ng).connect(b.drums);
+      env(ng.gain, when, 0.0008, 0.4 * v, 0.014);
+      n.connect(nhp).connect(ng).connect(b.drums);
+      // pumpa musiken
+      b.duck.cancelScheduledValues(when);
+      b.duck.setValueAtTime(1, when);
+      b.duck.linearRampToValueAtTime(0.45, when + 0.012);
+      b.duck.setTargetAtTime(1, when + 0.04, 0.07);
       o.start(when);
-      o.stop(when + 0.6);
+      o.stop(when + 0.45);
+      pu.start(when);
+      pu.stop(when + 0.06);
+      break;
+    }
+    case 'clap': {
+      // tre snabba brusstötar + svans
+      const n = noiseSrc(b, when, 0.4, when * 2.9);
+      const bp = filter(b, 'bandpass', 1300, 1.1);
+      const hp = filter(b, 'highpass', 600);
+      const g = gainNode(b, 0);
+      g.gain.setValueAtTime(0.0001, when);
+      for (let k = 0; k < 3; k++) {
+        const tt = when + k * 0.011;
+        g.gain.setValueAtTime(0.55 * v, tt);
+        g.gain.exponentialRampToValueAtTime(0.08 * v, tt + 0.009);
+      }
+      g.gain.setValueAtTime(0.4 * v, when + 0.033);
+      g.gain.exponentialRampToValueAtTime(0.0001, when + 0.2);
+      n.connect(bp).connect(hp).connect(g).connect(b.drums);
+      send(b, g, 0.35);
+      break;
+    }
+    case 'shaker': {
+      const n = noiseSrc(b, when, 0.08, when * 4.3);
+      const bp = filter(b, 'bandpass', 8500, 1.5);
+      const g = gainNode(b, 0);
+      g.gain.setValueAtTime(0.0001, when);
+      g.gain.linearRampToValueAtTime(0.18 * v, when + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, when + 0.07);
+      n.connect(bp).connect(g).connect(b.drums);
+      break;
+    }
+    case 'tom': {
+      const o = ctx.createOscillator();
+      o.type = 'sine';
+      const f = mtof(e.midi);
+      o.frequency.setValueAtTime(f * 1.6, when);
+      o.frequency.exponentialRampToValueAtTime(f, when + 0.05);
+      const g = gainNode(b, 0);
+      env(g.gain, when, 0.002, 0.7 * v, 0.22);
+      const ws = ctx.createWaveShaper();
+      ws.curve = b.curve(0.3);
+      o.connect(g).connect(ws).connect(b.drums);
+      send(b, g, 0.25);
+      o.start(when);
+      o.stop(when + 0.35);
+      break;
+    }
+    case 'stab': {
+      // Distade, korta ackordstötar (ackordets treklang, en oktav upp).
+      const notes = chordAt(e.p ?? 0).stab;
+      const lp = filter(b, 'lowpass', 900, 2);
+      lp.frequency.setValueAtTime(5200, when);
+      lp.frequency.exponentialRampToValueAtTime(700, when + 0.18);
+      const ws = ctx.createWaveShaper();
+      ws.curve = b.curve(0.6);
+      const g = gainNode(b, 0);
+      env(g.gain, when, 0.003, 0.2 * v, 0.2);
+      for (const m of notes) {
+        for (const det of [-12, 10]) {
+          const o = ctx.createOscillator();
+          o.type = 'sawtooth';
+          o.frequency.value = mtof(m);
+          o.detune.value = det;
+          o.connect(ws);
+          o.start(when);
+          o.stop(when + 0.3);
+        }
+      }
+      const hp = filter(b, 'highpass', 220);
+      ws.connect(lp).connect(hp).connect(g).connect(b.music);
+      send(b, g, 0.3, 0.15);
       break;
     }
     case 'snare':
     case 'roll': {
       const big = e.inst === 'snare';
       const n = noiseSrc(b, when, 0.5, when * 1.7);
-      const bp = filter(b, 'bandpass', big ? 1900 : 2400, 0.6);
-      const hp = filter(b, 'highpass', 700);
+      const bp = filter(b, 'bandpass', big ? 2600 : 2800, 0.5);
+      const hp = filter(b, 'highpass', 900);
       const g = gainNode(b, 0);
-      env(g.gain, when, 0.002, (big ? 0.75 : 0.45) * v, big ? 0.24 : 0.09);
+      env(g.gain, when, 0.001, (big ? 0.95 : 0.5) * v, big ? 0.2 : 0.08);
       n.connect(bp).connect(hp).connect(g);
       const o = ctx.createOscillator();
       o.type = 'triangle';
-      o.frequency.setValueAtTime(210, when);
-      o.frequency.exponentialRampToValueAtTime(150, when + 0.08);
+      o.frequency.setValueAtTime(240, when);
+      o.frequency.exponentialRampToValueAtTime(180, when + 0.06);
       const og = gainNode(b, 0);
-      env(og.gain, when, 0.002, 0.5 * v, 0.1);
+      env(og.gain, when, 0.001, 0.45 * v, 0.07);
       o.connect(og);
       let out: AudioNode = g;
       if (e.p) {
@@ -136,7 +217,7 @@ export function play(b: Bus, e: NoteEvent, when: number) {
       } else og.connect(g);
       const post = gainNode(b, e.p ? 0.6 : 1);
       out.connect(post).connect(b.drums);
-      send(b, post, big ? 0.45 : 0.2);
+      send(b, post, big && v > 0.5 ? 0.4 : 0.08);
       o.start(when);
       o.stop(when + 0.3);
       break;
@@ -170,21 +251,23 @@ export function play(b: Bus, e: NoteEvent, when: number) {
       o1.frequency.value = f;
       const o2 = ctx.createOscillator();
       o2.type = 'square';
-      o2.frequency.value = f / 2;
+      o2.frequency.value = f;
+      o2.detune.value = 7;
       const lp = filter(b, 'lowpass', 200, 6);
       const drive = e.p ?? 0.3;
       lp.frequency.setValueAtTime(140 + drive * 250, when);
-      lp.frequency.linearRampToValueAtTime(420 + drive * 1400, when + 0.02);
+      lp.frequency.linearRampToValueAtTime(700 + drive * 1800, when + 0.01);
       lp.frequency.exponentialRampToValueAtTime(120 + drive * 250, when + e.dur);
       const mix = gainNode(b, 0.5);
-      const g2 = gainNode(b, 0.4);
+      const g2 = gainNode(b, 0.25);
       o1.connect(mix);
       o2.connect(g2).connect(mix);
       const ws = ctx.createWaveShaper();
       ws.curve = b.curve(0.2 + drive * 0.7);
       const g = gainNode(b, 0);
-      env(g.gain, when, 0.005, 0.55 * v, 0.1, 0.4, 0.06, e.dur);
-      mix.connect(lp).connect(ws).connect(g).connect(b.music);
+      env(g.gain, when, 0.003, 0.32 * v, 0.08, 0.2, 0.04, e.dur);
+      const bhp = filter(b, 'highpass', 55);
+      mix.connect(lp).connect(ws).connect(bhp).connect(g).connect(b.music);
       o1.start(when);
       o2.start(when);
       o1.stop(when + e.dur + 0.2);
@@ -196,7 +279,7 @@ export function play(b: Bus, e: NoteEvent, when: number) {
       o.type = 'sine';
       o.frequency.value = mtof(e.midi);
       const g = gainNode(b, 0);
-      env(g.gain, when, 0.05, 0.35 * v, 0.4, 0.3, 0.2, e.dur);
+      env(g.gain, when, 0.05, 0.12 * v, 0.4, 0.1, 0.2, e.dur);
       o.connect(g).connect(b.music);
       o.start(when);
       o.stop(when + e.dur + 0.3);
@@ -281,7 +364,7 @@ export function play(b: Bus, e: NoteEvent, when: number) {
       g.gain.linearRampToValueAtTime((ending ? 0.12 : 0.26) * e.vel, when + (ending ? 3 : 0.6));
       g.gain.setValueAtTime((ending ? 0.12 : 0.26) * e.vel, when + e.dur - (ending ? 3 : 0.2));
       g.gain.linearRampToValueAtTime(0.0001, when + e.dur);
-      for (const [iv, det, type] of [[0, -6, 'sawtooth'], [0, 5, 'sawtooth'], [7, 0, 'sawtooth'], [12, 3, 'square'], [-12, 0, 'sine']] as const) {
+      for (const [iv, det, type] of [[0, -6, 'sawtooth'], [0, 5, 'sawtooth'], [7, 0, 'sawtooth'], [12, 3, 'square'], [19, -4, 'sawtooth']] as const) {
         const o = ctx.createOscillator();
         o.type = type;
         o.frequency.value = mtof(e.midi + iv);

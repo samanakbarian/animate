@@ -8,11 +8,11 @@ import { NoteEvent, buildScore } from './score';
 
 /** Regnets ljudnivå över tid. */
 export function rainLevel(t: number): number {
-  // Regnet ligger lågt i mixen (ca −8 dB mot tidigare) – en bakgrund, inte ett lager.
-  if (t < 105) return 0.08 + 0.015 * smoothstep(0, 4, t);
+  // Regnet ligger lågt i mixen – en svag bakgrund.
+  if (t < 105) return 0.035 + 0.008 * smoothstep(0, 4, t);
   // takt 51 (127,5–130): tystnad
-  if (t < 130) return (0.09 - 0.07 * smoothstep(105, 109, t)) * (1 - smoothstep(127.2, 127.6, t));
-  return 0.11 * (1 - smoothstep(139, 142, t));
+  if (t < 130) return (0.04 - 0.03 * smoothstep(105, 109, t)) * (1 - smoothstep(127.2, 127.6, t));
+  return 0.05 * (1 - smoothstep(139, 142, t));
 }
 
 export class AudioEngine {
@@ -35,8 +35,21 @@ export class AudioEngine {
     comp.attack.value = 0.005;
     comp.release.value = 0.2;
     this.master = ctx.createGain();
-    this.master.gain.value = 0.7;
-    this.master.connect(comp).connect(ctx.destination);
+    this.master.gain.value = 0.72;
+    // Tonkontroll: mindre dån i botten, lite mer närvaro i toppen.
+    const lowCut = ctx.createBiquadFilter();
+    lowCut.type = 'lowshelf';
+    lowCut.frequency.value = 110;
+    lowCut.gain.value = -5;
+    const hpf = ctx.createBiquadFilter();
+    hpf.type = 'highpass';
+    hpf.frequency.value = 32;
+    const presence = ctx.createBiquadFilter();
+    presence.type = 'peaking';
+    presence.frequency.value = 3200;
+    presence.Q.value = 0.8;
+    presence.gain.value = 2.5;
+    this.master.connect(hpf).connect(lowCut).connect(presence).connect(comp).connect(ctx.destination);
 
     const rng = new Rng(4242);
     // Seedat vitt brus (2 s, stereo)
@@ -74,11 +87,13 @@ export class AudioEngine {
     dlp.connect(dOut).connect(this.master);
 
     const drums = ctx.createGain();
-    drums.gain.value = 0.9;
+    drums.gain.value = 1.0;
     drums.connect(this.master);
     const music = ctx.createGain();
-    music.gain.value = 0.9;
-    music.connect(this.master);
+    music.gain.value = 0.85;
+    const duck = ctx.createGain();
+    duck.gain.value = 1;
+    music.connect(duck).connect(this.master);
     const fx = ctx.createGain();
     fx.gain.value = 0.9;
     fx.connect(this.master);
@@ -98,7 +113,7 @@ export class AudioEngine {
       }
       return c;
     };
-    this.bus = { ctx, drums, music, fx, reverb: conv, delay, noise, curve };
+    this.bus = { ctx, drums, music, fx, reverb: conv, delay, noise, curve, duck: duck.gain };
 
     // Regn: kontinuerligt filtrerat brus med automatiserad nivå.
     const rainSrc = ctx.createBufferSource();
