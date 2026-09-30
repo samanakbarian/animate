@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:," />
+    <title>NÄSTA STEG</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="start">
+      <h1>NÄSTA STEG</h1>
+      <p>en kortfilm i kod · 2 min 30 s · ljud på</p>
+      <button type="button">SPELA</button>
+      <div class="q">
+        <span>kvalitet:</span>
+        <label><input type="radio" name="q" value="low" /> låg</label>
+        <label><input type="radio" name="q" value="medium" /> mellan</label>
+        <label><input type="radio" name="q" value="high" /> hög</label>
+      </div>
+      <p class="status"></p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

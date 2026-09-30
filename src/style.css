@@ -1,0 +1,212 @@
+@import '@fontsource/jetbrains-mono/300.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/500.css';
+
+:root {
+  --ink: #e8ebee;
+  --dim: rgba(232, 235, 238, 0.62);
+  --u: 10px; /* 1 % av bildytans bredd – sätts från JS */
+  --mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Bildytan (2,39:1 i liggande läge) centreras – svarta balkar runt. */
+#stage {
+  position: absolute;
+  overflow: hidden;
+  background: #000;
+}
+#stage canvas { display: block; width: 100%; height: 100%; }
+
+@media (orientation: portrait) {
+  .hud-bl { max-width: 90%; }
+  .bubble { max-width: 70%; }
+}
+
+.hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--sans);
+}
+
+.hud-bl {
+  position: absolute;
+  left: calc(var(--u) * 3.2);
+  bottom: calc(var(--u) * 2.6);
+  max-width: 62%;
+  text-shadow: 0 0 calc(var(--u) * 0.6) rgba(0, 0, 0, 0.8);
+}
+.hud-year {
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: max(15px, calc(var(--u) * 2.1));
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  min-height: 1.1em;
+}
+.hud-title {
+  margin-top: calc(var(--u) * 0.55);
+  font-weight: 500;
+  font-size: max(10px, calc(var(--u) * 1.02));
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  min-height: 1.35em;
+}
+.hud-sub {
+  margin-top: calc(var(--u) * 0.35);
+  font-weight: 300;
+  font-size: max(10px, calc(var(--u) * 0.92));
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  line-height: 1.4;
+  min-height: 1.4em;
+}
+.hud-tr {
+  position: absolute;
+  right: calc(var(--u) * 3.2);
+  top: calc(var(--u) * 2.4);
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: max(10px, calc(var(--u) * 0.85));
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.bubble {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  max-width: min(46%, calc(var(--u) * 34));
+  padding: calc(var(--u) * 0.45) calc(var(--u) * 0.8);
+  background: rgba(6, 8, 10, 0.82);
+  border: 1px solid rgba(232, 235, 238, 0.75);
+  font-family: var(--mono);
+  font-size: max(10px, calc(var(--u) * 0.9));
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  white-space: pre-wrap;
+  will-change: transform, opacity;
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: var(--tail, 24px);
+  bottom: -7px;
+  width: 11px;
+  height: 11px;
+  margin-left: -6px;
+  background: rgba(6, 8, 10, 0.95);
+  border-right: 1px solid rgba(232, 235, 238, 0.75);
+  border-bottom: 1px solid rgba(232, 235, 238, 0.75);
+  transform: rotate(45deg);
+}
+
+.titlecard {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: calc(var(--u) * 1.2);
+  padding: 0 6%;
+}
+.tc-title {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: max(22px, calc(var(--u) * 3.6));
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+  min-height: 1.2em;
+}
+.tc-sub {
+  font-family: var(--mono);
+  font-weight: 300;
+  font-size: max(11px, calc(var(--u) * 1.0));
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  min-height: 1.4em;
+}
+
+/* Startskärm */
+#start {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: #000;
+  z-index: 10;
+  font-family: var(--sans);
+  text-align: center;
+  padding: 24px;
+}
+#start h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: clamp(26px, 6vw, 56px);
+  letter-spacing: 0.42em;
+  margin-right: -0.42em;
+}
+#start p {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+}
+#start button {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  padding: 14px 34px 14px 38px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(232, 235, 238, 0.7);
+  cursor: pointer;
+}
+#start button:hover { background: rgba(232, 235, 238, 0.08); }
+#start button:disabled { opacity: 0.4; cursor: wait; }
+#start .q {
+  display: flex;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+}
+#start .q label { cursor: pointer; }
+#start.hidden { display: none; }
+
+#dev {
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  z-index: 5;
+  font: 11px var(--mono);
+  color: #9ab;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 6px;
+  pointer-events: none;
+  white-space: pre;
+}
