@@ -8,10 +8,11 @@ import { NoteEvent, buildScore } from './score';
 
 /** Regnets ljudnivå över tid. */
 export function rainLevel(t: number): number {
-  if (t < 105) return 0.2 + 0.04 * smoothstep(0, 4, t);
+  // Regnet ligger lågt i mixen (ca −8 dB mot tidigare) – en bakgrund, inte ett lager.
+  if (t < 105) return 0.08 + 0.015 * smoothstep(0, 4, t);
   // takt 51 (127,5–130): tystnad
-  if (t < 130) return (0.22 - 0.17 * smoothstep(105, 109, t)) * (1 - smoothstep(127.2, 127.6, t));
-  return 0.26 * (1 - smoothstep(139, 142, t));
+  if (t < 130) return (0.09 - 0.07 * smoothstep(105, 109, t)) * (1 - smoothstep(127.2, 127.6, t));
+  return 0.11 * (1 - smoothstep(139, 142, t));
 }
 
 export class AudioEngine {
