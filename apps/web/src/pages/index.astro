@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import FilmPlayer from '../components/FilmPlayer.astro';
+import ModuleCard from '../components/ModuleCard.astro';
+
+const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
+const launch = modules.filter((m) => m.data.stage === 'mvp');
+---
+
+<Base>
+  <FilmPlayer />
+
+  <section class="wrap intro">
+    <p class="eyebrow">2 min 30 s · från −300 000 till ∞</p>
+    <h1>Från neuroner till agenter.</h1>
+    <div class="prose">
+      <p>
+        Filmen ovan visar resan i ett svep: människan, språkmodellerna, AGI och det som kanske kommer efter. Här på sajten tar vi den i
+        lugnare takt. Varje modul är en kort film som du kan pausa och styra själv.
+      </p>
+      <p>Börja med de tre grunderna: hur ett neuralt nätverk fungerar, vad en språkmodell gör och vad en agent är.</p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="start-har">
+    <h2 id="start-har" class="eyebrow">
+      Börja här
+    </h2>
+    <div class="grid">
+      {launch.map((m) => (
+        <ModuleCard module={m} />
+      ))}
+    </div>
+    <p class="more">
+      <a href="/moduler">Alla {modules.length} moduler →</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 1.4rem;
+    padding-block: 4rem 3rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .more {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+</style>

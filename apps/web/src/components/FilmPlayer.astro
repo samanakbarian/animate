@@ -1,0 +1,61 @@
+---
+// Filmen som klient-ö. Paketet (~700 kB) laddas först när webbläsaren är ledig,
+// så sidan i övrigt blir snabb. Utan WebGL2 visas en textreserv (MP4 senare).
+interface Props {
+  startAt?: number;
+}
+const { startAt = 0 } = Astro.props;
+---
+
+<section class="film" aria-label="Kortfilmen NÄSTA STEG">
+  <div class="frame" data-film data-start={startAt}>
+    <noscript>
+      <p class="fallback">Filmen kräver JavaScript.</p>
+    </noscript>
+  </div>
+</section>
+
+<script>
+  import '@nastasteg/film/style.css';
+
+  const host = document.querySelector<HTMLElement>('[data-film]');
+  const boot = async () => {
+    if (!host) return;
+    const film = await import('@nastasteg/film');
+    if (!film.supportsRealtime()) {
+      host.innerHTML = '<p class="fallback">Din webbläsare saknar WebGL2. En videoversion av filmen kommer här.</p>';
+      return;
+    }
+    film.mountPlayer(host, { quality: 'auto', startAt: Number(host.dataset.start) || 0 });
+  };
+  if ('requestIdleCallback' in window) requestIdleCallback(() => void boot(), { timeout: 1500 });
+  else setTimeout(() => void boot(), 200);
+</script>
+
+<style>
+  .film {
+    background: #000;
+    border-block: 1px solid var(--line);
+  }
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2.39 / 1;
+    max-height: 82vh;
+    margin-inline: auto;
+  }
+  @media (max-aspect-ratio: 1/1) {
+    .frame {
+      aspect-ratio: 0.85 / 1;
+    }
+  }
+  .fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: var(--gutter);
+    color: var(--dim);
+    text-align: center;
+  }
+</style>

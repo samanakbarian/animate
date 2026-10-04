@@ -1,0 +1,10 @@
+packages:
+  - packages/*
+  - apps/*
+  - tools/*
+
+# Binärer som behöver köra sitt install-skript (ffmpeg laddas ner, esbuild/sharp för Astro).
+onlyBuiltDependencies:
+  - esbuild
+  - ffmpeg-static
+  - sharp

@@ -1,0 +1,126 @@
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/jetbrains-mono/300.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+/* Layout: en smal läskolumn (~68 tecken) under en filmisk 2,39:1-yta.
+   Samma mörka, kalla värld som filmen – ett varmt terrakotta används sparsamt. */
+:root {
+  color-scheme: dark;
+  --bg: #07090b;
+  --surface: #0e1216;
+  --line: #222a32;
+  --ink: #e8ebee;
+  --dim: #9aa5b0;
+  --cold: #9db6d6;
+  --warm: #c8643f;
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --measure: 68ch;
+  --gutter: clamp(16px, 4vw, 40px);
+  --step--1: 0.84rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 5vw, 3.2rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  background: var(--bg);
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 300 var(--step-0) / 1.65 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--cold);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 2px solid var(--cold);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 300;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 {
+  font-size: var(--step-3);
+  letter-spacing: 0.02em;
+}
+h2 {
+  font-size: var(--step-2);
+}
+h3 {
+  font-size: var(--step-1);
+  font-weight: 500;
+}
+p {
+  margin: 0;
+}
+
+.wrap {
+  width: min(100%, 72rem);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.prose {
+  max-width: var(--measure);
+  display: grid;
+  gap: 1.1em;
+}
+.prose h2 {
+  margin-top: 1.2em;
+}
+.prose ul {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 0.35em;
+}
+
+.eyebrow {
+  font: 400 var(--step--1) / 1.4 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.chip {
+  display: inline-block;
+  font: 400 0.72rem / 1 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4em 0.6em;
+  border: 1px solid var(--line);
+  color: var(--dim);
+}
+.chip[data-stage='mvp'] {
+  border-color: var(--warm);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ModuleCard from '../../components/ModuleCard.astro';
+import { STAGE_LABEL } from '../../lib/site';
+import { STAGES } from '../../content.config';
+
+const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Moduler" description="Tio korta, interaktiva filmer som förklarar AI från neuron till agent.">
+  <div class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">Moduler</p>
+      <h1>Tio steg från neuron till agent.</h1>
+      <p>Varje modul tar 2–4 minuter. Den börjar som film och slutar med att du styr modellen själv.</p>
+    </header>
+    {STAGES.map((stage) => (
+      <section aria-label={STAGE_LABEL[stage]}>
+        <h2 class="eyebrow">{STAGE_LABEL[stage]}</h2>
+        <div class="grid">
+          {modules
+            .filter((m) => m.data.stage === stage)
+            .map((m) => (
+              <ModuleCard module={m} />
+            ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 3rem;
+    padding-block: 4rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+</style>

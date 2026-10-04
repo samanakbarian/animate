@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'sv'));
+const modules = new Map((await getCollection('modules')).map((m) => [m.id, m.data.title]));
+---
+
+<Base title="Ordlista" description="Begreppen bakom AI, förklarade med en mening var.">
+  <div class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">Ordlista</p>
+      <h1>{terms.length} begrepp, en mening var.</h1>
+    </header>
+    <dl class="list">
+      {terms.map((t) => (
+        <div id={t.id} class="term">
+          <dt>{t.data.term}</dt>
+          <dd>
+            {t.data.definition}
+            {t.data.module && (
+              <a class="link mono" href={`/moduler/${t.data.module}`}>
+                {modules.get(t.data.module)} →
+              </a>
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 4rem;
+  }
+  .list {
+    margin: 0;
+    max-width: var(--measure);
+    display: grid;
+  }
+  .term {
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 2rem;
+  }
+  .term:target {
+    border-top-color: var(--warm);
+  }
+  dt {
+    font-weight: 500;
+  }
+  dd {
+    margin: 0.3rem 0 0;
+    color: var(--dim);
+  }
+  .link {
+    display: inline-block;
+    margin-left: 0.4em;
+    font-size: var(--step--1);
+  }
+</style>

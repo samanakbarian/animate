@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { STAGE_LABEL, STATUS_LABEL } from '../lib/site';
+
+interface Props {
+  module: CollectionEntry<'modules'>;
+}
+const { module: m } = Astro.props;
+---
+
+<a class="card" href={`/moduler/${m.id}`}>
+  <span class="num mono">{String(m.data.order).padStart(2, '0')}</span>
+  <h3>{m.data.title}</h3>
+  <p>{m.data.summary}</p>
+  <span class="meta">
+    <span class="chip" data-stage={m.data.stage}>
+      {STAGE_LABEL[m.data.stage]}
+    </span>
+    <span class="chip">{STATUS_LABEL[m.data.status]}</span>
+  </span>
+</a>
+
+<style>
+  .card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.6rem;
+    padding: 1.4rem;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .card:hover {
+    border-color: var(--cold);
+  }
+  .num {
+    color: var(--dim);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+  }
+  p {
+    color: var(--dim);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+</style>

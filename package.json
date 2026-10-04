@@ -1,27 +1,35 @@
 {
-  "name": "nasta-steg",
+  "name": "nastasteg",
   "private": true,
-  "version": "2.0.0",
+  "description": "nastasteg.se – AI förklarat från grunden, med kortfilmen NÄSTA STEG som ingång.",
   "type": "module",
-  "description": "NÄSTA STEG – en mörk 3D-kortfilm i kod (Three.js + Web Audio).",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "render": "node export/render.mjs"
+  "engines": {
+    "node": ">=22"
   },
-  "dependencies": {
-    "@fontsource/inter": "^5.3.0",
-    "@fontsource/jetbrains-mono": "^5.3.0",
-    "postprocessing": "^6.39.5",
-    "three": "^0.186.1"
+  "scripts": {
+    "dev": "pnpm --filter @nastasteg/web dev",
+    "dev:film": "pnpm --filter @nastasteg/film dev",
+    "build": "pnpm --filter @nastasteg/web build",
+    "build:film": "pnpm --filter @nastasteg/film build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "render": "pnpm --filter @nastasteg/render render",
+    "frames": "pnpm --filter @nastasteg/render preview"
   },
   "devDependencies": {
-    "@types/three": "^0.186.0",
-    "ffmpeg-static": "^5.2.0",
-    "playwright": "1.56.1",
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "globals": "^17.13.0",
+    "prettier": "^3.6.0",
+    "prettier-plugin-astro": "^1.1.0",
     "typescript": "^5.9.0",
-    "vite": "^7.1.0"
-  }
+    "typescript-eslint": "^8.40.0",
+    "vitest": "^4.0.0"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

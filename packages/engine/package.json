@@ -1,0 +1,23 @@
+{
+  "name": "@nastasteg/engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Delad motor för filmer och förklarmoduler: deterministisk tid, figurer, scener, efterbehandling och syntat ljud.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "postprocessing": "^6.39.0",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "postprocessing": "^6.39.5",
+    "three": "^0.186.1"
+  }
+}

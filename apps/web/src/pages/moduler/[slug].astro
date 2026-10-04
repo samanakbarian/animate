@@ -1,0 +1,106 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { STAGE_LABEL, STATUS_LABEL } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
+  return modules.map((m, i) => ({ params: { slug: m.id }, props: { module: m, next: modules[i + 1] } }));
+}
+
+const { module: m, next } = Astro.props;
+const { Content } = await render(m);
+const terms = (await getCollection('glossary')).filter((g) => g.data.module === m.id);
+---
+
+<Base title={m.data.title} description={m.data.summary}>
+  <article class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">Modul {String(m.data.order).padStart(2, '0')}</p>
+      <h1>{m.data.title}</h1>
+      <p class="lead">{m.data.summary}</p>
+      <p class="chips">
+        <span class="chip" data-stage={m.data.stage}>
+          {STAGE_LABEL[m.data.stage]}
+        </span>
+        <span class="chip">{STATUS_LABEL[m.data.status]}</span>
+      </p>
+    </header>
+
+    <div class="stage" role="img" aria-label="Plats för modulens film">
+      <p class="mono">Modulens film kommer här.</p>
+    </div>
+
+    <dl class="facts">
+      <div>
+        <dt class="eyebrow">Efteråt kan du förklara</dt>
+        <dd>{m.data.goal}</dd>
+      </div>
+      <div>
+        <dt class="eyebrow">Du provar själv</dt>
+        <dd>{m.data.interactive}</dd>
+      </div>
+    </dl>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {terms.length > 0 && (
+      <aside class="prose">
+        <h2 class="eyebrow">Begrepp i modulen</h2>
+        <ul>
+          {terms.map((t) => (
+            <li>
+              <a href={`/ordlista#${t.id}`}>{t.data.term}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    )}
+
+    {next && (
+      <p class="next mono">
+        <a href={`/moduler/${next.id}`}>Nästa: {next.data.title} →</a>
+      </p>
+    )}
+  </article>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .chips {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .stage {
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    display: grid;
+    place-items: center;
+    background: #000;
+    border: 1px solid var(--line);
+    color: var(--dim);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1.5rem;
+    margin: 0;
+  }
+  .facts dd {
+    margin: 0.4rem 0 0;
+  }
+  .next {
+    font-size: var(--step--1);
+  }
+</style>

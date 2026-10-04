@@ -1,0 +1,23 @@
+{
+  "name": "@nastasteg/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "nastasteg.se – hemsidan (Astro).",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.0",
+    "@fontsource/jetbrains-mono": "^5.2.0",
+    "@nastasteg/film": "workspace:*",
+    "astro": "^7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^5.9.0"
+  }
+}

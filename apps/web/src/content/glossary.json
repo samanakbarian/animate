@@ -1,0 +1,121 @@
+[
+  {
+    "id": "neuron",
+    "term": "Neuron",
+    "definition": "Den minsta räknedelen i ett neuralt nätverk. Den tar emot tal, väger dem, summerar och skickar vidare ett nytt tal.",
+    "module": "neuralt-natverk"
+  },
+  {
+    "id": "vikt",
+    "term": "Vikt",
+    "definition": "Ett tal som avgör hur mycket en signal mellan två neuroner ska räknas. Det är vikterna som ändras när ett nätverk tränas.",
+    "module": "neuralt-natverk"
+  },
+  {
+    "id": "lager",
+    "term": "Lager",
+    "definition": "En rad neuroner som tar emot samma indata. Ett djupt nätverk har många lager efter varandra.",
+    "module": "neuralt-natverk"
+  },
+  {
+    "id": "parameter",
+    "term": "Parameter",
+    "definition": "Ett tal i modellen som lärs in under träningen, oftast en vikt. GPT-3 har 175 miljarder parametrar.",
+    "module": "neuralt-natverk"
+  },
+  {
+    "id": "traning",
+    "term": "Träning",
+    "definition": "Processen där modellen gissar, mäter hur fel den har och justerar sina parametrar lite i taget.",
+    "module": "traning"
+  },
+  {
+    "id": "gradient",
+    "term": "Gradient",
+    "definition": "Riktningen som felet ökar snabbast i. Träning flyttar parametrarna åt motsatt håll.",
+    "module": "traning"
+  },
+  {
+    "id": "token",
+    "term": "Token",
+    "definition": "En bit text som modellen arbetar med – ett ord, en del av ett ord eller ett tecken.",
+    "module": "ord-som-tal"
+  },
+  {
+    "id": "inbaddning",
+    "term": "Inbäddning",
+    "definition": "En lista med tal som representerar en token. Liknande betydelser ger liknande tal.",
+    "module": "ord-som-tal"
+  },
+  {
+    "id": "transformer",
+    "term": "Transformer",
+    "definition": "Nätverksarkitekturen från 2017 som bygger på uppmärksamhet. Grunden för dagens språkmodeller.",
+    "module": "transformern"
+  },
+  {
+    "id": "uppmarksamhet",
+    "term": "Uppmärksamhet",
+    "definition": "Mekanismen som låter varje token väga in alla andra tokens för att förstå sammanhanget.",
+    "module": "transformern"
+  },
+  {
+    "id": "sprakmodell",
+    "term": "Språkmodell",
+    "definition": "En modell som tränats att förutsäga nästa token i en text.",
+    "module": "sprakmodellen"
+  },
+  {
+    "id": "kontextfonster",
+    "term": "Kontextfönster",
+    "definition": "Hur mycket text modellen kan ta hänsyn till på en gång, mätt i tokens.",
+    "module": "sprakmodellen"
+  },
+  {
+    "id": "temperatur",
+    "term": "Temperatur",
+    "definition": "En inställning som styr hur slumpmässigt modellen väljer nästa token. Låg temperatur ger förutsägbara svar.",
+    "module": "sprakmodellen"
+  },
+  {
+    "id": "fortraning",
+    "term": "Förträning",
+    "definition": "Den första, stora träningen på enorma mängder text, där modellen lär sig språk och fakta.",
+    "module": "fran-fortraning-till-assistent"
+  },
+  {
+    "id": "finjustering",
+    "term": "Finjustering",
+    "definition": "Extra träning på utvalda exempel som anpassar en förtränad modell till en uppgift eller ett beteende.",
+    "module": "fran-fortraning-till-assistent"
+  },
+  {
+    "id": "tankekedja",
+    "term": "Tankekedja",
+    "definition": "Mellansteg som modellen skriver ut innan den svarar, för att lösa svårare problem.",
+    "module": "resonerande-modeller"
+  },
+  {
+    "id": "agent",
+    "term": "Agent",
+    "definition": "En AI som får ett mål och verktyg, och själv planerar och utför steg i en loop tills målet är nått.",
+    "module": "agenten"
+  },
+  {
+    "id": "verktygsanrop",
+    "term": "Verktygsanrop",
+    "definition": "När en modell ber om att få köra ett verktyg, till exempel en sökning eller ett program, och får tillbaka resultatet.",
+    "module": "agenten"
+  },
+  {
+    "id": "hallucination",
+    "term": "Hallucination",
+    "definition": "När en modell säger något som låter rimligt men är påhittat eller fel.",
+    "module": "risker-och-sakerhet"
+  },
+  {
+    "id": "agi",
+    "term": "AGI",
+    "definition": "Artificiell generell intelligens: en tänkt AI som är minst lika bra som människor på i stort sett allt."
+  }
+]

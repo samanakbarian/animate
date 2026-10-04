@@ -1,0 +1,117 @@
+---
+import '../styles/global.css';
+import { SITE } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} – AI förklarat från grunden`;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonical = new URL(path, Astro.site);
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07090b" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="sv_SE" />
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Hoppa till innehållet
+    </a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/">
+          NÄSTA STEG
+        </a>
+        <nav aria-label="Huvudmeny">
+          {SITE.nav.map((n) => (
+            <a href={n.href} aria-current={path === n.href || (n.href !== '/' && path.startsWith(n.href)) ? 'page' : undefined}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap bar">
+        <span class="mono">{SITE.domain}</span>
+        <span>AI förklarat från grunden.</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.5em 1em;
+    z-index: 10;
+  }
+  .skip:focus {
+    left: 1rem;
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding-block: 1.1rem;
+  }
+  .site-header {
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font: 300 1rem / 1 var(--font-sans);
+    letter-spacing: 0.42em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+  }
+  nav a {
+    font: 400 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-decoration: none;
+    padding-block: 0.3rem;
+    border-bottom: 1px solid transparent;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--ink);
+    border-bottom-color: var(--warm);
+  }
+  .site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 6rem;
+    color: var(--dim);
+    font-size: var(--step--1);
+  }
+</style>

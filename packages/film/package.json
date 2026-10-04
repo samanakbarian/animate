@@ -1,0 +1,28 @@
+{
+  "name": "@nastasteg/film",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Kortfilmen NÄSTA STEG (2 min 30 s) – byggd på @nastasteg/engine.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./style.css": "./src/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.0",
+    "@fontsource/jetbrains-mono": "^5.2.0",
+    "@nastasteg/engine": "workspace:*",
+    "postprocessing": "^6.39.5",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "vite": "^7.1.0"
+  }
+}
