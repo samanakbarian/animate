@@ -1,6 +1,6 @@
 # 0004 – Moduler: film som kan pausas och styras
 
-- **Status:** föreslagen
+- **Status:** beslutad
 - **Datum:** 2026-10-04
 
 ## Sammanhang
@@ -8,13 +8,23 @@
 Varje förklarmodul ska börja som en kort film och sedan låta besökaren styra modellen själv
 (dra i vikter, välja nästa ord, följa en agent).
 
-## Beslut (förslag)
+## Beslut
 
-En modul är ett paket med `timeline` (som filmen) och en mängd **parametrar** (vikter, temperatur …).
-Scenen renderas från `(t, params)`. Under film styr tidslinjen parametrarna, och vid paus tar reglagen över.
-Riktiga minimodeller (små nätverk) körs i webbläsaren och har seedad initiering.
+En modul är ett paket `packages/module-<slug>` som default-exporterar en `ModuleDefinition`
+(`@nastasteg/engine/module/types`):
+
+- `params`: reglagen (id, etikett, min/max/steg, standardvärde).
+- `tracks`: nyckelrutor per parameter (`linear`/`smooth`/`hold`) – filmens manus.
+- `chapters`: kapitel med berättartext. `exploreCaption` visas i utforskaläget.
+- `createScene(host)`: en scen som ritar `render(t, params, mode)`. Valfri teknik (Canvas 2D, Three.js …).
+
+`ModuleController` (ingen DOM, injicerad klocka) har två lägen. I **film** räknas parametrarna fram från
+nyckelrutorna vid `t`. I **explore** gäller besökarens värden, och de startar från filmens värden där den pausades.
+Ett reglage som rörs växlar till explore. När filmen tar slut går spelaren automatiskt över i explore.
+`mountModulePlayer(el, def)` bygger scen, berättartext, uppspelningsrad med kapitelmarkeringar och reglage.
 
 ## Konsekvenser
 
-Motorn behöver ett gemensamt modulramverk (spelare, reglage-UI, paus/scrub). Byggs med modul 1 som
-första användare och generaliseras när modul 2 kommer.
+Scenen är en ren funktion av `(t, params)`, så determinism och export fungerar som för filmen.
+Hemsidan registrerar moduler i `apps/web/src/lib/interactive.ts`, och varje modul blir en egen chunk.
+Ljud i moduler finns inte än. Det kan läggas till som ett `Score` per modul.

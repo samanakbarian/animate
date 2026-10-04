@@ -5,6 +5,30 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-04 (2) – Modulramverk och modul 1 del 1
+
+**Vad**
+
+- `@nastasteg/engine/module/*`: `ModuleDefinition` (params, nyckelrutor, kapitel, scen), rena funktioner för
+  nyckelrutor, `ModuleController` (film/explore, injicerad klocka) och `mountModulePlayer` (scen, berättartext,
+  scrubbning med kapitelmarkeringar, reglage, ”Fortsätt filmen”, ”Återställ reglagen”). CSS i `player.css`
+  under `.ns-module`. Container query ger stående 4:5-yta på smala skärmar.
+- `packages/module-neuralt-natverk`: en neuron (z = w₁x₁ + w₂x₂ + b, y = σ(4z)), en 64 s film i 5 kapitel,
+  och en Canvas 2D-scen med diagram och plan med beslutsgräns. Staplad layout när ytan är stående.
+- Hemsidan: `ModuleStage.astro` monterar modulen från registret `src/lib/interactive.ts` (egen chunk per modul).
+  Modul 1 har status `under-arbete`.
+- Om-sidan: kontakt saman.akbarian@gmail.com (användaren skrev ”saman akbarian@gmail.com”, tolkat som punkt).
+- ADR 0004 beslutad. 30 tester.
+
+**Fällor**
+
+- Exportmönstret `"./*": "./src/*.ts"` matchar inte CSS. Därför har `./module/player.css` en egen rad före den.
+- Scenen får CSS-pixlar i `resize`. Använd `ctx.setTransform(dpr…)` och rita i CSS-pixlar.
+
+**Återstår**: del 2 av modul 1 (tränat nätverk), se STATUS.
+
+---
+
 ## 2026-10-04 – Monorepo, hemsida och agentdokumentation
 
 **Vad**

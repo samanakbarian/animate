@@ -22,6 +22,8 @@ Läs inte hela kodbasen. Gå direkt till filen som kartan nedan pekar på.
 | `apps/web/src/content/glossary.json` | Ordlistan                                                                     | lägga till begrepp                       |
 | `packages/engine`                    | Delad motor: tid, figurrigg, material, mark, regn, efterbehandling, ljudmotor | något som fler än en film behöver        |
 | `packages/film`                      | Kortfilmen NÄSTA STEG (tidslinje, regi, scener, partitur, HUD, spelare)       | filmen                                   |
+| `packages/module-<slug>`             | En förklarmodul: manus (`timeline.ts`) + scen (`scene.ts`), se ADR 0004       | en moduls film eller interaktion         |
+| `apps/web/src/lib/interactive.ts`    | Register: vilka moduler som har film + reglage                                | ny modul ska synas på sajten             |
 | `tools/render`                       | Export till MP4 och stillbilder (Playwright + ffmpeg)                         | exportkedjan                             |
 | `docs/`                              | Status, devlogg, arkitektur, ADR:er, roadmap                                  | efter varje arbetspass                   |
 

@@ -1,0 +1,51 @@
+---
+// Modulens film + reglage (klient-ö). Visar en platshållare om modulen
+// ännu inte har någon interaktiv del.
+import { hasInteractive } from '../lib/interactive';
+
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+const interactive = hasInteractive(slug);
+---
+
+{interactive ? (
+  <div class="module-host" data-module={slug}>
+    <p class="loading mono">Laddar modulen …</p>
+  </div>
+) : (
+  <div class="placeholder" role="img" aria-label="Plats för modulens film">
+    <p class="mono">Modulens film kommer här.</p>
+  </div>
+)}
+
+<script>
+  import '@nastasteg/engine/module/player.css';
+  import { INTERACTIVE_MODULES } from '../lib/interactive';
+  import { mountModulePlayer } from '@nastasteg/engine/module/player';
+
+  for (const host of document.querySelectorAll<HTMLElement>('[data-module]')) {
+    const load = INTERACTIVE_MODULES[host.dataset.module ?? ''];
+    if (!load) continue;
+    load()
+      .then(({ default: def }) => mountModulePlayer(host, def))
+      .catch((e) => {
+        console.error(e);
+        host.innerHTML = '<p class="loading">Modulen kunde inte laddas.</p>';
+      });
+  }
+</script>
+
+<style>
+  .placeholder,
+  .module-host:has(.loading) {
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    display: grid;
+    place-items: center;
+    background: #000;
+    border: 1px solid var(--line);
+    color: var(--dim);
+  }
+</style>

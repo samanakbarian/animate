@@ -6,6 +6,7 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./module/player.css": "./src/module/player.css",
     "./*": "./src/*.ts"
   },
   "scripts": {

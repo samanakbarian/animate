@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { STAGE_LABEL, STATUS_LABEL } from '../../lib/site';
+import ModuleStage from '../../components/ModuleStage.astro';
 
 export async function getStaticPaths() {
   const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
@@ -27,9 +28,7 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
       </p>
     </header>
 
-    <div class="stage" role="img" aria-label="Plats för modulens film">
-      <p class="mono">Modulens film kommer här.</p>
-    </div>
+    <ModuleStage slug={m.id} />
 
     <dl class="facts">
       <div>
@@ -81,15 +80,6 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
-  }
-  .stage {
-    aspect-ratio: 16 / 9;
-    max-width: 100%;
-    display: grid;
-    place-items: center;
-    background: #000;
-    border: 1px solid var(--line);
-    color: var(--dim);
   }
   .facts {
     display: grid;

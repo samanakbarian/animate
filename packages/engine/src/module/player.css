@@ -1,0 +1,182 @@
+/* Modulspelaren. All stil är avgränsad till .ns-module. */
+.ns-module {
+  --m-bg: #07090b;
+  --m-surface: #0e1216;
+  --m-line: #222a32;
+  --m-ink: #e8ebee;
+  --m-dim: #9aa5b0;
+  --m-cold: #9db6d6;
+  --m-warm: #c8643f;
+  --m-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  display: grid;
+  gap: 0;
+  background: var(--m-bg);
+  border: 1px solid var(--m-line);
+  color: var(--m-ink);
+  container-type: inline-size;
+}
+.ns-module * {
+  box-sizing: border-box;
+}
+.ns-module .nsm-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+}
+.ns-module .nsm-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ns-module .nsm-caption {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 6%;
+  max-width: 34em;
+  pointer-events: none;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+.ns-module .nsm-chapter {
+  font: 400 0.72rem / 1.4 var(--m-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--m-dim);
+}
+.ns-module .nsm-text {
+  margin: 0.25rem 0 0;
+  font-size: clamp(0.9rem, 2.2cqi, 1.15rem);
+  line-height: 1.45;
+  min-height: 2.9em;
+}
+.ns-module .nsm-bigplay {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 235, 238, 0.7);
+  background: rgba(7, 9, 11, 0.55);
+  color: var(--m-ink);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.ns-module .nsm-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border-top: 1px solid var(--m-line);
+  font: 400 0.78rem / 1 var(--m-mono);
+  color: var(--m-dim);
+}
+.ns-module button {
+  font: inherit;
+  color: var(--m-ink);
+  background: transparent;
+  border: 1px solid var(--m-line);
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+.ns-module button:hover {
+  border-color: var(--m-cold);
+}
+.ns-module :focus-visible {
+  outline: 2px solid var(--m-cold);
+  outline-offset: 2px;
+}
+.ns-module .nsm-play {
+  min-width: 2.6rem;
+}
+.ns-module .nsm-time {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ns-module .nsm-scrub {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+.ns-module .nsm-scrub input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--m-cold);
+}
+.ns-module .nsm-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ns-module .nsm-ticks span {
+  position: absolute;
+  top: 0.1rem;
+  width: 1px;
+  height: 0.4rem;
+  background: var(--m-dim);
+}
+.ns-module .nsm-mode {
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ns-module .nsm-mode[data-mode='explore'] {
+  color: var(--m-warm);
+}
+.ns-module .nsm-params {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.9rem 1.4rem;
+  padding: 1rem 0.9rem 1.1rem;
+  border-top: 1px solid var(--m-line);
+}
+.ns-module .nsm-param {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.ns-module .nsm-param label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.ns-module .nsm-param output {
+  font: 400 0.82rem / 1 var(--m-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--m-cold);
+}
+.ns-module .nsm-param input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--m-warm);
+}
+.ns-module .nsm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  grid-column: 1 / -1;
+}
+.ns-module .nsm-hint {
+  font-size: 0.82rem;
+  color: var(--m-dim);
+}
+/* Smal behållare (mobil): stående bildyta, scenen byter till staplad layout. */
+@container (max-width: 560px) {
+  .ns-module .nsm-stage {
+    aspect-ratio: 4 / 5;
+  }
+  .ns-module .nsm-text {
+    font-size: 0.92rem;
+  }
+  .ns-module .nsm-mode {
+    display: none;
+  }
+}

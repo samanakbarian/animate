@@ -3,10 +3,11 @@
 ## Lager och beroenderiktning
 
 ```
-apps/web  ──────────▶  packages/film  ──────────▶  packages/engine
-(Astro, statisk)       (en film: data + regi)      (generisk motor, inga filmberoenden)
-                              ▲
-tools/render  ── bygger och styr packages/film/dist via Playwright
+apps/web ──┬──▶ packages/film ─────────────────┬──▶ packages/engine
+(Astro)    │    (en film: data + regi)          │    (generisk motor, inga film-/modulberoenden)
+           └──▶ packages/module-<slug> ─────────┘
+                (en förklarmodul: manus + scen)
+tools/render ── bygger och styr packages/film/dist via Playwright
 ```
 
 - Pilarna är tillåtna importer. Motorn får aldrig importera från en film eller från webben.
@@ -24,6 +25,7 @@ tools/render  ── bygger och styr packages/film/dist via Playwright
 | `scene/*`                        | Mark med planar reflection, regn, himmel, miljökarta, rekvisita och shaderbitar     |
 | `render/post`                    | Efterbehandling: ACES, 3D-LUT, bloom, skärpedjup, kromatisk aberration, korn        |
 | `audio/*`                        | `Score`-typer, syntinstrument, sequencer (realtid + offline) och WAV                |
+| `module/*`                       | Modulramverket: typer, nyckelrutor, `ModuleController`, `mountModulePlayer` + CSS   |
 
 Tumregel: flytta något till motorn först när en **andra** film eller modul behöver det.
 
@@ -63,8 +65,9 @@ och att modulerna senare kan pausas och scrubbas.
 
 - **ett begrepp:** en post i `glossary.json` (`id`, `term`, `definition`, valfri `module`).
 - **en modul (text):** en ny `.md` i `content/modules`. Sidan genereras automatiskt.
-- **en modul med film/interaktion:** ett nytt paket `packages/module-<slug>` som bygger på motorn och
-  exporterar `mountModule(el)`. Det monteras i `moduler/[slug].astro` (ramverket är nästa uppgift, se STATUS).
+- **en modul med film/interaktion:** kopiera `packages/module-neuralt-natverk` (manus i `timeline.ts`,
+  scen i `scene.ts`, ren matematik med tester), default-exportera en `ModuleDefinition`, lägg till paketet
+  som beroende i `apps/web` och en rad i `apps/web/src/lib/interactive.ts`. Se ADR 0004.
 - **en ny film:** ett nytt paket som `packages/film`: tidslinje, regi, partitur och spelare. Återanvänd motorn.
 
 ## Kvalitetsgrindar
