@@ -3,7 +3,8 @@
 // Varje modul blir en egen chunk som bara laddas på sin sida.
 import type { ModuleDefinition } from '@nastasteg/engine/module/types';
 
-export const INTERACTIVE_MODULES: Record<string, () => Promise<{ default: ModuleDefinition }>> = {
+/** Ett modulpaket exporterar `parts`: en eller flera delar som visas efter varandra. */
+export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDefinition[] }>> = {
   'neuralt-natverk': () => import('@nastasteg/module-neuralt-natverk'),
 };
 

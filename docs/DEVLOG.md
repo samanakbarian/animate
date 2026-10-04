@@ -5,6 +5,27 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-04 (3) – Modul 1 del 2: ett nätverk lär sig
+
+**Vad**
+
+- `network.ts`: 2 → H → 1 (tanh, sigmoid ut), korsentropi, full-batch gradientnedstigning. Seedat dataset
+  (40 punkter innanför en cirkel och 40 utanför) och seedade startvikter. `computeRun` (ren) och `trainingRun`
+  (cachad per H och steglängd) sparar vikter och fel för steg 0–800. Filmen visar ”steg n” som funktion av t.
+- `scene-network.ts`: nätverksdiagram, planet med data (felklassade får en ring), gränsen via marching squares,
+  de dolda neuronernas linjer (streckade) och felkurva med ”steg · fel · % rätt”.
+- `timeline-network.ts`: 74 s i 6 kapitel. En neuron misslyckas (74 %), sedan fyra dolda neuroner från
+  slumpade vikter (44 %), träning till 100 %, och till sist linjerna inuti.
+- Modulpaket exporterar nu `parts: ModuleDefinition[]`, och `ModuleStage.astro` monterar en spelare per del
+  med rubrik. Modul 1 har status `publicerad`. 34 tester (bl.a. ”H = 1 når < 80 %, H = 4 når ≥ 95 %”).
+
+**Fällor**
+
+- Värmekartans kantpixlar gav trappsteg. Gränsen ritas därför som vektor (marching squares) ovanpå.
+- `hold` i nyckelrutor = värdet hoppar vid nyckelns tid. Använd två nycklar tätt (22 → 22,01) för hopp.
+
+---
+
 ## 2026-10-04 (2) – Modulramverk och modul 1 del 1
 
 **Vad**

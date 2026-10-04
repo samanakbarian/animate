@@ -11,7 +11,7 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Hemsidans skal: startsida med filmen, moduler, ordlista (20 begrepp), om
 - [ ] MP4-reserv för filmen (mobil, utan WebGL2)
 - [x] Modulramverk: film som kan pausas och styras (ADR 0004)
-- [ ] Modul 1 – Neuralt nätverk (del 1 klar: en neuron, film + reglage)
+- [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
 - [ ] Modul 5 – Språkmodellen
 - [ ] Modul 8 – Agenten
 - [ ] Driftsättning på nastasteg.se

@@ -1,11 +1,13 @@
-// Modul 1 – Neuralt nätverk (del 1: en neuron).
+// Modul 1 – Neuralt nätverk. Två delar som spelas efter varandra på modulsidan.
 import type { ModuleDefinition } from '@nastasteg/engine/module/types';
 import { createNeuronScene } from './scene';
+import { createNetworkScene } from './scene-network';
 import { CHAPTERS, DURATION, EXPLORE_CAPTION, PARAMS, TRACKS } from './timeline';
+import { CHAPTERS_2, DURATION_2, EXPLORE_CAPTION_2, PARAMS_2, TRACKS_2 } from './timeline-network';
 
-const module: ModuleDefinition = {
-  id: 'neuralt-natverk',
-  title: 'Neuralt nätverk – en neuron',
+export const neuron: ModuleDefinition = {
+  id: 'neuralt-natverk-1',
+  title: 'Del 1: En neuron',
   duration: DURATION,
   params: PARAMS,
   tracks: TRACKS,
@@ -14,4 +16,15 @@ const module: ModuleDefinition = {
   createScene: createNeuronScene,
 };
 
-export default module;
+export const network: ModuleDefinition = {
+  id: 'neuralt-natverk-2',
+  title: 'Del 2: Ett nätverk lär sig',
+  duration: DURATION_2,
+  params: PARAMS_2,
+  tracks: TRACKS_2,
+  chapters: CHAPTERS_2,
+  exploreCaption: EXPLORE_CAPTION_2,
+  createScene: createNetworkScene,
+};
+
+export const parts: ModuleDefinition[] = [neuron, network];

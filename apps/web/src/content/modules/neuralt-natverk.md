@@ -5,7 +5,7 @@ summary: 'Hur ett nät av enkla räknedosor kan lära sig känna igen mönster.'
 goal: 'Vad en neuron, en vikt och ett lager är – och hur en signal blir ett svar.'
 interactive: 'Dra i vikterna och se utdata ändras; träna ett litet nätverk att känna igen handskrivna siffror.'
 stage: mvp
-status: under-arbete
+status: publicerad
 filmChapter: human
 ---
 

@@ -29,7 +29,20 @@ const interactive = hasInteractive(slug);
     const load = INTERACTIVE_MODULES[host.dataset.module ?? ''];
     if (!load) continue;
     load()
-      .then(({ default: def }) => mountModulePlayer(host, def))
+      .then(({ parts }) => {
+        host.innerHTML = '';
+        for (const def of parts) {
+          const section = document.createElement('section');
+          section.className = 'module-part';
+          const h = document.createElement('h2');
+          h.className = 'eyebrow';
+          h.textContent = def.title;
+          const el = document.createElement('div');
+          section.append(h, el);
+          host.appendChild(section);
+          mountModulePlayer(el, def);
+        }
+      })
       .catch((e) => {
         console.error(e);
         host.innerHTML = '<p class="loading">Modulen kunde inte laddas.</p>';
@@ -38,6 +51,14 @@ const interactive = hasInteractive(slug);
 </script>
 
 <style>
+  .module-host {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .module-host :global(.module-part) {
+    display: grid;
+    gap: 0.8rem;
+  }
   .placeholder,
   .module-host:has(.loading) {
     aspect-ratio: 16 / 9;
