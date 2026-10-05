@@ -3,13 +3,13 @@
 //
 //   pnpm module-frames -- sprakmodellen 5 30 55 --part 1 --w 1280 --h 900 --mobile
 //
-// Bygger INTE sajten: kör `pnpm build` först. Startar `astro preview` själv,
+// Bygger INTE sajten: kör `pnpm build` först. Serverar apps/web/dist själv,
 // spolar modulens del (--part, 1-baserad) till varje tid och sparar scenen
 // som PNG i out/module-frames/<slug>/. Fel i konsolen skrivs ut.
 
-import { spawn } from 'node:child_process';
-import { mkdirSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { createReadStream, existsSync, mkdirSync, statSync } from 'node:fs';
+import { createServer } from 'node:http';
+import { extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '../../..');
@@ -34,20 +34,29 @@ const H = Number(opt('h', 900));
 const out = resolve(root, opt('out', `out/module-frames/${slug}`));
 mkdirSync(out, { recursive: true });
 
-const port = 4400 + Math.floor(Math.random() * 400);
-const server = spawn('pnpm', ['--filter', '@nastasteg/web', 'exec', 'astro', 'preview', '--port', String(port)], {
-  cwd: root,
-  stdio: 'ignore',
-});
-const base = `http://localhost:${port}`;
-for (let i = 0; i < 60; i++) {
-  try {
-    await fetch(base);
-    break;
-  } catch {
-    await new Promise((r) => setTimeout(r, 500));
+// Egen statisk server för apps/web/dist (Astro 7:s preview körs som delad demon).
+const dist = join(root, 'apps/web/dist');
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript',
+  '.css': 'text/css',
+  '.woff2': 'font/woff2',
+  '.svg': 'image/svg+xml',
+};
+const server = createServer((req, res) => {
+  let p = decodeURIComponent((req.url || '/').split('?')[0]);
+  if (p.endsWith('/')) p += 'index';
+  let file = join(dist, p);
+  if (!extname(file)) file += '.html';
+  if (!file.startsWith(dist) || !existsSync(file) || statSync(file).isDirectory()) {
+    res.writeHead(404);
+    return res.end();
   }
-}
+  res.writeHead(200, { 'Content-Type': MIME[extname(file)] || 'application/octet-stream' });
+  createReadStream(file).pipe(res);
+});
+await new Promise((r) => server.listen(0, '127.0.0.1', r));
+const base = `http://127.0.0.1:${server.address().port}`;
 
 const { chromium } = await import('playwright');
 const browser = await chromium.launch({
@@ -84,7 +93,7 @@ try {
   }
 } finally {
   await browser.close();
-  server.kill();
+  server.close();
 }
 if (errors.length) {
   console.error('Fel:', errors);

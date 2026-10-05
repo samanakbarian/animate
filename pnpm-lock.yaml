@@ -50,6 +50,9 @@ importers:
       '@nastasteg/film':
         specifier: workspace:*
         version: link:../../packages/film
+      '@nastasteg/module-agenten':
+        specifier: workspace:*
+        version: link:../../packages/module-agenten
       '@nastasteg/module-neuralt-natverk':
         specifier: workspace:*
         version: link:../../packages/module-neuralt-natverk
@@ -103,6 +106,12 @@ importers:
       vite:
         specifier: ^7.1.0
         version: 7.3.6(lightningcss@1.33.0)(yaml@2.9.1)
+
+  packages/module-agenten:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
 
   packages/module-neuralt-natverk:
     dependencies:

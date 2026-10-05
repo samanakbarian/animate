@@ -7,6 +7,7 @@ import type { ModuleDefinition } from '@nastasteg/engine/module/types';
 export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDefinition[] }>> = {
   'neuralt-natverk': () => import('@nastasteg/module-neuralt-natverk'),
   sprakmodellen: () => import('@nastasteg/module-sprakmodellen'),
+  agenten: () => import('@nastasteg/module-agenten'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;

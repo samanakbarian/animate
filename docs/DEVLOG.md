@@ -5,6 +5,29 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-05 – Modul 5 (Språkmodellen) och modul 8 (Agenten)
+
+**Vad**
+
+- `engine/module/canvas.ts`: delad palett, typsnitt och `createSurface` (canvas med DPR, `text()` som ger bredden).
+  Modul 1 använder den inte än (egen kopia av paletten). Byt när den ändå röras.
+- `module-sprakmodellen`: egen svensk text (`corpus.ts`), trigram med interpolation (0,72/0,25/0,03),
+  temperatur som p^(1/T) och sampling via `hash2(frö, steg)`. Scen: token-rutor med id, topp 8-staplar, och den
+  dragna token glider in. 80 s, 6 kapitel.
+- `module-agenten`: `scenario({failure, approval})` är ren data (18 händelser i fullt läge). Scen: loopdiagram
+  med människa utanför, verktygschips och logg som skrivs fram. 84 s, 7 kapitel.
+- `tools/render/module-frames.mjs` (`pnpm module-frames -- <slug> <t…> [--part N] [--mobile]`).
+- Moduler 5 och 8 publicerade. 45 tester.
+
+**Fällor**
+
+- Testa språkmodellen mot vad texten faktiskt innehåller. ”regnet” följs lika ofta av punkt som av ”faller”.
+- Astro 7:s preview är en demon som lever kvar mellan körningar (se STATUS).
+
+**Återstår**: MP4-reserv (kräver GPU), driftsättning och v2-moduler. Se STATUS.
+
+---
+
 ## 2026-10-04 (3) – Modul 1 del 2: ett nätverk lär sig
 
 **Vad**

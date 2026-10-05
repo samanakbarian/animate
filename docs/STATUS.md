@@ -6,27 +6,34 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 ## Nuläge
 
-- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-neuralt-natverk`, `tools/render`.
+- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (3 st), `tools/render`.
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
 - **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
   scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
 - **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 en neuron (64 s), del 2 ett
   2–H–1-nätverk som tränas deterministiskt i webbläsaren (74 s, reglage för dolda neuroner, steg, steglängd).
+- **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,
+  antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
+  tänk/agera/observera med verktyg. Reglage för fel (rummet upptaget) och människa i loopen.
+- Alla tre MVP-modulerna är publicerade.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 34 tester gröna. CI kör format, lint, typecheck, test och bygge.
+- 45 tester gröna. CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
-2. **Modul 5 – Språkmodellen** och **modul 8 – Agenten** (MVP), byggda på modulramverket.
-3. Driftsättning: välj värd (t.ex. Cloudflare Pages eller Netlify) och peka nastasteg.se dit.
+2. Driftsättning: välj värd (t.ex. Cloudflare Pages eller Netlify) och peka nastasteg.se dit.
+3. **Version 2-moduler** (se ROADMAP): Träning, Ord som tal, Transformern, Resonerande modeller, Från förträning
+   till assistent. Börja med _Transformern_ (kopplar till filmens kapitel 2).
+4. Ljud i modulerna (ett `Score` per modul, återanvänd `AudioEngine`).
 
 ## Kända problem och fällor
 
 - Byggmiljön för agenter saknar GPU: filmen renderas i mjukvara (~0,4 bilder/s). Använd `pnpm frames` sparsamt.
 - 60 fps på integrerad grafik är inte uppmätt på riktig hårdvara.
-- `pkill -f "astro preview"` i samma kommando som startar servern dödar det egna skalet. Starta servern som bakgrundsjobb.
+- Astro 7:s `astro preview` körs som en delad demon (`astro preview stop`). `pnpm module-frames` har därför en egen statisk server.
+- Node:s `fetch` mot localhost kan få ett felsvar från proxyn. Kontrollera status 200, inte bara att anropet lyckas.
 - Moduler har inget ljud än (filmen har).
 - `trainingRun(H, lr)` cachar per (H, steglängd); första anropet för en ny kombination tar några ms.
 

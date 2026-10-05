@@ -5,7 +5,7 @@ summary: 'En modell som planerar, använder verktyg och agerar i en loop tills u
 goal: 'Vad som skiljer en agent från en chatt: mål, verktyg, minne och en loop.'
 interactive: 'Följ en agent som löser en uppgift – plan, verktygsanrop, kontroll, nästa steg.'
 stage: mvp
-status: planerad
+status: publicerad
 filmChapter: today
 ---
 

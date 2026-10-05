@@ -36,7 +36,8 @@ pnpm dev:film       # filmen fristående, http://localhost:5173 (?dev&t=104&q=me
 pnpm check          # typecheck + lint + test – kör före varje commit
 pnpm format         # Prettier
 pnpm build          # bygger hemsidan till apps/web/dist
-pnpm frames -- 12 50 118 --w 1280 --h 720   # stillbilder till out/preview (snabb visuell kontroll)
+pnpm frames -- 12 50 118 --w 1280 --h 720   # stillbilder av filmen till out/preview (snabb visuell kontroll)
+pnpm module-frames -- agenten 15 40 --mobile # stillbilder av en modul på sajten (kör pnpm build först)
 pnpm render         # hela filmen till out/nasta-steg.mp4 (kräver GPU för rimlig tid)
 ```
 

@@ -12,8 +12,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [ ] MP4-reserv för filmen (mobil, utan WebGL2)
 - [x] Modulramverk: film som kan pausas och styras (ADR 0004)
 - [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
-- [ ] Modul 5 – Språkmodellen
-- [ ] Modul 8 – Agenten
+- [x] Modul 5 – Språkmodellen (liten seedad trigrammodell, temperatur, slumpfrö)
+- [x] Modul 8 – Agenten (simulerad agent: tänk/agera/observera, fel och människa i loopen)
 - [ ] Driftsättning på nastasteg.se
 
 ## Version 2
