@@ -18,7 +18,8 @@
     "test": "vitest run",
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "render": "pnpm --filter @nastasteg/render render",
-    "frames": "pnpm --filter @nastasteg/render preview"
+    "frames": "pnpm --filter @nastasteg/render preview",
+    "module-frames": "pnpm --filter @nastasteg/render module-frames"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.0",

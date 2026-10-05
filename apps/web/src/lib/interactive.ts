@@ -6,6 +6,7 @@ import type { ModuleDefinition } from '@nastasteg/engine/module/types';
 /** Ett modulpaket exporterar `parts`: en eller flera delar som visas efter varandra. */
 export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDefinition[] }>> = {
   'neuralt-natverk': () => import('@nastasteg/module-neuralt-natverk'),
+  sprakmodellen: () => import('@nastasteg/module-sprakmodellen'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;

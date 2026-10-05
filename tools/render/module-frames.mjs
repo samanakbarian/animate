@@ -1,0 +1,92 @@
+#!/usr/bin/env node
+// Stillbilder av en modul på hemsidan – snabb visuell kontroll.
+//
+//   pnpm module-frames -- sprakmodellen 5 30 55 --part 1 --w 1280 --h 900 --mobile
+//
+// Bygger INTE sajten: kör `pnpm build` först. Startar `astro preview` själv,
+// spolar modulens del (--part, 1-baserad) till varje tid och sparar scenen
+// som PNG i out/module-frames/<slug>/. Fel i konsolen skrivs ut.
+
+import { spawn } from 'node:child_process';
+import { mkdirSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(fileURLToPath(import.meta.url), '../../..');
+const argv = process.argv.slice(2).filter((a) => a !== '--');
+const opt = (k, d) => {
+  const i = argv.indexOf('--' + k);
+  return i >= 0 ? argv[i + 1] : d;
+};
+const flag = (k) => argv.includes('--' + k);
+const positional = argv.filter(
+  (a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && !['--mobile'].includes(argv[i - 1])),
+);
+const [slug, ...timesRaw] = positional;
+if (!slug) {
+  console.error('Användning: pnpm module-frames -- <slug> <t1> <t2> … [--part 1] [--w 1280] [--h 900] [--mobile]');
+  process.exit(1);
+}
+const times = timesRaw.map(Number);
+const part = Number(opt('part', 1));
+const W = Number(opt('w', 1280));
+const H = Number(opt('h', 900));
+const out = resolve(root, opt('out', `out/module-frames/${slug}`));
+mkdirSync(out, { recursive: true });
+
+const port = 4400 + Math.floor(Math.random() * 400);
+const server = spawn('pnpm', ['--filter', '@nastasteg/web', 'exec', 'astro', 'preview', '--port', String(port)], {
+  cwd: root,
+  stdio: 'ignore',
+});
+const base = `http://localhost:${port}`;
+for (let i = 0; i < 60; i++) {
+  try {
+    await fetch(base);
+    break;
+  } catch {
+    await new Promise((r) => setTimeout(r, 500));
+  }
+}
+
+const { chromium } = await import('playwright');
+const browser = await chromium.launch({
+  executablePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium',
+  args: ['--enable-unsafe-swiftshader'],
+});
+const errors = [];
+const viewports = [['desktop', W, H]];
+if (flag('mobile')) viewports.push(['mobil', 390, 844]);
+try {
+  for (const [name, vw, vh] of viewports) {
+    const page = await browser.newPage({ viewport: { width: vw, height: vh } });
+    page.on('pageerror', (e) => errors.push(`${name}: ${e.message}`));
+    page.on('console', (m) => m.type() === 'error' && errors.push(`${name}: ${m.text()}`));
+    await page.goto(`${base}/moduler/${slug}`);
+    const sel = `.module-part:nth-of-type(${part}) .nsm-stage`;
+    await page.waitForSelector(sel, { timeout: 15000 });
+    for (const t of times) {
+      await page.evaluate(
+        ([p, tt]) => {
+          const r = document.querySelectorAll('.nsm-scrub input')[p - 1];
+          r.value = String(tt);
+          r.dispatchEvent(new Event('input'));
+        },
+        [part, t],
+      );
+      await page.waitForTimeout(350);
+      const file = join(out, `${name}-del${part}-t${String(t).padStart(5, '0')}.png`);
+      await (await page.$(sel)).screenshot({ path: file });
+      console.log(file);
+    }
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+    if (overflow) errors.push(`${name}: sidan scrollar i sidled`);
+  }
+} finally {
+  await browser.close();
+  server.kill();
+}
+if (errors.length) {
+  console.error('Fel:', errors);
+  process.exitCode = 1;
+} else console.log('Inga fel i konsolen.');

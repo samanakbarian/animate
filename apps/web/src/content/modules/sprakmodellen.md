@@ -5,7 +5,7 @@ summary: 'En språkmodell gör en sak: den gissar nästa ord. Om och om igen.'
 goal: 'Att en språkmodell förutsäger nästa token, och vad temperatur gör med svaren.'
 interactive: 'Generera text ord för ord, se sannolikheterna och dra i temperaturen.'
 stage: mvp
-status: planerad
+status: publicerad
 filmChapter: gpt3
 ---
 

@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/module-sprakmodellen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 5 – Språkmodellen: en liten modell som gissar nästa ord, med temperatur.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

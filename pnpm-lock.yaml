@@ -53,6 +53,9 @@ importers:
       '@nastasteg/module-neuralt-natverk':
         specifier: workspace:*
         version: link:../../packages/module-neuralt-natverk
+      '@nastasteg/module-sprakmodellen':
+        specifier: workspace:*
+        version: link:../../packages/module-sprakmodellen
       astro:
         specifier: ^7.3.5
         version: 7.3.5(yaml@2.9.1)
@@ -102,6 +105,12 @@ importers:
         version: 7.3.6(lightningcss@1.33.0)(yaml@2.9.1)
 
   packages/module-neuralt-natverk:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-sprakmodellen:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

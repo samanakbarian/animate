@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "render": "node render.mjs",
-    "preview": "node preview.mjs"
+    "preview": "node preview.mjs",
+    "module-frames": "node module-frames.mjs"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0",
