@@ -19,6 +19,7 @@
     "@nastasteg/module-neuralt-natverk": "workspace:*",
     "@nastasteg/module-ord-som-tal": "workspace:*",
     "@nastasteg/module-sprakmodellen": "workspace:*",
+    "@nastasteg/module-traning": "workspace:*",
     "@nastasteg/module-transformern": "workspace:*",
     "astro": "^7.3.5"
   },
