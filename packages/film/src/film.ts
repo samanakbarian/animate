@@ -143,6 +143,7 @@ export class Film {
     this.renderer.setPixelRatio(pr);
     this.renderer.setSize(w, h, false);
     this.post.setSize(w, h);
+    this.post.cinema.set('uAspect', w / h);
     this.world.reflection.setSize(w * pr, h * pr);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();

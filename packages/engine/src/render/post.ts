@@ -93,6 +93,7 @@ uniform float uWarmth;
 uniform float uCA;
 uniform float uGlitch;
 uniform float uGrain;
+uniform float uAspect;
 uniform float uVignette;
 uniform float uFlash;
 uniform float uFade;
@@ -150,11 +151,16 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
   col *= mix(1.0, vig, uVignette);
   // --- Blixt
   col = mix(col, vec3(1.0), clamp(uFlash, 0.0, 1.0));
-  // --- Filmkorn (deterministiskt per bildruta)
-  float g = hsh(uv * vec2(1931.0, 1777.0) + vec2(tq * 3.17, tq * 1.31)) - 0.5;
+  // --- Filmkorn (deterministiskt per bildruta). Läggs i sRGB så att det syns lika
+  // mycket i mörker som i ljus (i linjärt rum blev det skarpt brus i mörka partier),
+  // och kornet är lika stort oavsett upplösning (≈ 720 rader) så hög kvalitet inte
+  // ser brusigare ut än låg.
+  vec2 cell = floor(uv * vec2(720.0 * uAspect, 720.0));
+  float g = hsh(cell + vec2(mod(tq, 64.0) * 37.0, mod(tq, 64.0) * 17.0)) - 0.5;
   float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
-  col += g * uGrain * (0.35 + 0.65 * (1.0 - lum)) * 0.12;
-  col = max(col, 0.0);
+  vec3 sg = toSRGB(max(col, 0.0));
+  sg += g * uGrain * (0.6 + 0.4 * (1.0 - lum)) * 0.1;
+  col = toLin(clamp(sg, 0.0, 1.0));
   // --- Toning till svart
   col *= uFade;
   outputColor = vec4(col, 1.0);
@@ -174,6 +180,7 @@ export class CinemaEffect extends Effect {
         ['uCA', new THREE.Uniform(0.018)],
         ['uGlitch', new THREE.Uniform(0)],
         ['uGrain', new THREE.Uniform(0.3)],
+        ['uAspect', new THREE.Uniform(2.39)],
         ['uVignette', new THREE.Uniform(0.85)],
         ['uFlash', new THREE.Uniform(0)],
         ['uFade', new THREE.Uniform(1)],
