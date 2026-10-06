@@ -18,7 +18,7 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 
 ## Version 2
 
-- [ ] Moduler: Träning, Ord som tal, Transformern, Resonerande modeller, Från förträning till assistent
+- [x] Moduler: Träning, Ord som tal, Transformern, Resonerande modeller, Från förträning till assistent
 - [ ] Klickbara kapitel i filmen som länkar till moduler
 - [ ] Tidslinje 1943–2026
 - [ ] Engelska

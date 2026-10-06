@@ -5,6 +5,33 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-06 – Version 2-modulerna (fem st)
+
+**Vad**
+
+- `module-transformern`: uppmärksamhet = softmax(q·k/√d) med tre huvuden (syftning, närhet, vem gör vad) på tre
+  meningar. Bågar mellan ord och en uppmärksamhetsmatris.
+- `module-ord-som-tal`: tokenisering (längsta prefix), sexdimensionella inbäddningar, PCA-karta och analogier
+  (kung − man + kvinna ≈ drottning) med cosinuslikhet.
+- `module-traning`: felyta med en böjd dal och en grop. Gradientnedstigning (60 steg) och felkurva. Kapitel visar för
+  korta steg, för långa steg (studs, flyger iväg) och att fastna i gropen.
+- `module-resonerande-modeller`: leksaksmodell där skrivna steg har liten felrisk, steg ”i huvudet” stor, och
+  överbliven budget blir kontroller. Diagram: andel rätt på 100 seedade uppgifter per budget (46 % → 100 %).
+- `module-fran-fortraning-till-assistent`: fyra sorters svar per fråga, logits per skede, och belöning per sort
+  som lärs med Bradley–Terry från seedade jämförelser (10 % brus).
+- Alla registrerade och publicerade. 70 tester.
+
+**Fällor**
+
+- Mobil (4:5): berättartexten täcker nedre ~25 %. Håll innehållet ovanför ~0,72 H. Slå hellre ihop rader
+  (t.ex. kontroller utan fynd) än att krympa text.
+- Testa narrativet: filmens kapitel förutsätter vissa utfall (t.ex. att äggen får ett fel som kontroll 1 hittar).
+  Tester låser dem, så en ändrad seed syns direkt.
+
+**Återstår**: varmare filmslut, textgenomgång. Se STATUS.
+
+---
+
 ## 2026-10-05 – Modul 5 (Språkmodellen) och modul 8 (Agenten)
 
 **Vad**

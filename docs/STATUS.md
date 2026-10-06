@@ -2,11 +2,11 @@
 
 _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
-**Senast uppdaterad:** 2026-10-04
+**Senast uppdaterad:** 2026-10-06
 
 ## Nuläge
 
-- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (3 st), `tools/render`.
+- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (8 st), `tools/render`.
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
 - **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
   scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
@@ -16,16 +16,18 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
   tänk/agera/observera med verktyg. Reglage för fel (rummet upptaget) och människa i loopen.
 - Alla tre MVP-modulerna är publicerade.
+- **Alla fem v2-moduler är publicerade:** Träning (gradientnedstigning i ett fellandskap), Ord som tal (tokens,
+  inbäddningar, PCA-karta, analogier), Transformern (uppmärksamhet med tre huvuden), Resonerande modeller
+  (tankesteg och kontroller, andel rätt mot budget) och Från förträning till assistent (tre skeden, återkoppling).
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 45 tester gröna. CI kör format, lint, typecheck, test och bygge.
+- 70 tester gröna. CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
 2. Driftsättning: välj värd (t.ex. Cloudflare Pages eller Netlify) och peka nastasteg.se dit.
-3. **Version 2-moduler** (se ROADMAP): Träning, Ord som tal, Transformern, Resonerande modeller, Från förträning
-   till assistent. Börja med _Transformern_ (kopplar till filmens kapitel 2).
+3. **Pågår:** ett varmare slut på filmen och en genomgång av all text (mindre ”AI-ton”).
 4. Ljud i modulerna (ett `Score` per modul, återanvänd `AudioEngine`).
 
 ## Kända problem och fällor
