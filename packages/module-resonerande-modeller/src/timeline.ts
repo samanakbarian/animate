@@ -1,0 +1,78 @@
+// Manus för modul 7 – Resonerande modeller.
+
+import type { Chapter, Keyframe, ParamSpec } from '@nastasteg/engine/module/types';
+import { MAX_BUDGET, PROBLEMS } from './solver';
+
+export const DURATION = 80;
+
+const NAMES = ['tåget', 'bokhyllan', 'äggen'];
+
+export const PARAMS: ParamSpec[] = [
+  { id: 'problem', label: 'Uppgift', min: 0, max: PROBLEMS.length - 1, step: 1, default: 0, format: (v) => NAMES[Math.round(v)] },
+  { id: 'budget', label: 'Tankesteg', min: 0, max: MAX_BUDGET, step: 1, default: 4, format: (v) => String(Math.floor(v)) },
+];
+
+export const CHAPTERS: Chapter[] = [
+  {
+    id: 'direkt',
+    start: 0,
+    title: 'Svara direkt',
+    caption:
+      'En språkmodell skriver ett ord i taget. Ska den svara direkt måste hela uträkningen få plats i ett enda svarsord. Ofta går det fel.',
+  },
+  {
+    id: 'steg',
+    start: 13,
+    title: 'Skriv ut stegen',
+    caption: 'Låt modellen skriva ut mellanleden först. Varje steg är litet och lätt, och nästa steg kan läsa det förra.',
+  },
+  {
+    id: 'kurva',
+    start: 27,
+    title: 'Mer tanke, fler rätt',
+    caption: 'På hundra liknande uppgifter: utan tankesteg blir ungefär hälften rätt. Med fler steg blir nästan alla rätt.',
+  },
+  {
+    id: 'slarv',
+    start: 39,
+    title: 'Även steg kan bli fel',
+    caption: 'Ett utskrivet steg kan också bli fel. Här blev 24 − 5 till 22, och felet följer med till svaret.',
+  },
+  {
+    id: 'kontroll',
+    start: 51,
+    title: 'Kontrollera',
+    caption: 'Tankesteg som blir över kan användas till att räkna om. En kontroll hittar felet, och svaret blir rätt.',
+  },
+  {
+    id: 'pris',
+    start: 62,
+    title: 'Priset',
+    caption: 'Varje tankesteg kostar tid och beräkning. Därför tänker resonerande modeller länge på svåra frågor och kort på lätta.',
+  },
+  { id: 'din-tur', start: 72, title: 'Din tur', caption: 'Välj en uppgift och hur många tankesteg modellen får.' },
+];
+
+export const EXPLORE_CAPTION = 'Välj en uppgift och hur många tankesteg modellen får. Följ stegen och diagrammet.';
+
+const k = (t: number, v: number, ease?: Keyframe['ease']): Keyframe => ({ t, v, ease });
+
+export const TRACKS: Partial<Record<string, Keyframe[]>> = {
+  problem: [k(0, 0), k(39, 0), k(39.01, 2, 'hold'), k(72, 2), k(72.01, 0, 'hold'), k(80, 0)],
+  budget: [
+    k(0, 0),
+    k(14, 0),
+    k(24, 4.99, 'linear'),
+    k(30, 4.99),
+    k(36, 8.99, 'linear'),
+    k(39, 8.99),
+    k(39.01, 2, 'hold'),
+    k(53, 2),
+    k(53.01, 3, 'hold'),
+    k(62, 3),
+    k(70, 8.99, 'linear'),
+    k(72, 8.99),
+    k(72.01, 4, 'hold'),
+    k(80, 4),
+  ],
+};

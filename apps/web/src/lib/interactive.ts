@@ -11,6 +11,7 @@ export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDe
   transformern: () => import('@nastasteg/module-transformern'),
   'ord-som-tal': () => import('@nastasteg/module-ord-som-tal'),
   traning: () => import('@nastasteg/module-traning'),
+  'resonerande-modeller': () => import('@nastasteg/module-resonerande-modeller'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;

@@ -59,6 +59,9 @@ importers:
       '@nastasteg/module-ord-som-tal':
         specifier: workspace:*
         version: link:../../packages/module-ord-som-tal
+      '@nastasteg/module-resonerande-modeller':
+        specifier: workspace:*
+        version: link:../../packages/module-resonerande-modeller
       '@nastasteg/module-sprakmodellen':
         specifier: workspace:*
         version: link:../../packages/module-sprakmodellen
@@ -129,6 +132,12 @@ importers:
         version: link:../engine
 
   packages/module-ord-som-tal:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-resonerande-modeller:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*
