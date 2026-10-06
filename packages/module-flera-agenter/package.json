@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/module-flera-agenter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 9 – Flera agenter: uppdelning, granskning och människa i loopen.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

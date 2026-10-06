@@ -53,6 +53,9 @@ importers:
       '@nastasteg/module-agenten':
         specifier: workspace:*
         version: link:../../packages/module-agenten
+      '@nastasteg/module-flera-agenter':
+        specifier: workspace:*
+        version: link:../../packages/module-flera-agenter
       '@nastasteg/module-fran-fortraning-till-assistent':
         specifier: workspace:*
         version: link:../../packages/module-fran-fortraning-till-assistent
@@ -123,6 +126,12 @@ importers:
         version: 7.3.6(lightningcss@1.33.0)(yaml@2.9.1)
 
   packages/module-agenten:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-flera-agenter:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*
