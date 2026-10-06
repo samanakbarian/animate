@@ -6,7 +6,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 ## Nuläge
 
-- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (8 st), `tools/render`.
+- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (10 st), `tools/render`.
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
 - **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
   scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
@@ -15,6 +15,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,
   antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
   tänk/agera/observera med verktyg. Reglage för fel (rummet upptaget) och människa i loopen.
+- **Alla tio moduler är publicerade och interaktiva**, med ljud (lugnt syntat partitur per modul, knapp för av/på).
 - Alla tre MVP-modulerna är publicerade.
 - **Alla fem v2-moduler är publicerade:** Träning (gradientnedstigning i ett fellandskap), Ord som tal (tokens,
   inbäddningar, PCA-karta, analogier), Transformern (uppmärksamhet med tre huvuden), Resonerande modeller
@@ -22,14 +23,14 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
 - Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 70 tester gröna. CI kör format, lint, typecheck, test och bygge.
+- 88 tester gröna. CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
-2. Driftsättning: välj värd (t.ex. Cloudflare Pages eller Netlify) och peka nastasteg.se dit.
-3. Ljud i modulerna (ett `Score` per modul, återanvänd `AudioEngine`).
+2. Driftsättning: välj domän (nastasteg.se är upptagen, förslag: aiforklarat.se, nastasteg.org) och värd (t.ex. Cloudflare Pages).
+3. Besöksstatistik utan kakor och delningsbilder (og:image).
 
 ## Kända problem och fällor
 
@@ -37,7 +38,6 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - 60 fps på integrerad grafik är inte uppmätt på riktig hårdvara.
 - Astro 7:s `astro preview` körs som en delad demon (`astro preview stop`). `pnpm module-frames` har därför en egen statisk server.
 - Node:s `fetch` mot localhost kan få ett felsvar från proxyn. Kontrollera status 200, inte bara att anropet lyckas.
-- Moduler har inget ljud än (filmen har).
 - Spelaren erbjuder bara låg och mellan. Hög (full pixeltäthet, 4× MSAA) gav trasig bild hos användaren, orsaken är
   okänd (troligen minne eller MSAA på halvflyttal). Hög används bara vid export.
 - `trainingRun(H, lr)` cachar per (H, steglängd); första anropet för en ny kombination tar några ms.

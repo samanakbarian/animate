@@ -27,6 +27,7 @@ tools/render ── bygger och styr packages/film/dist via Playwright
 | `audio/*`                        | `Score`-typer, syntinstrument, sequencer (realtid + offline) och WAV                |
 | `module/*`                       | Modulramverket: typer, nyckelrutor, `ModuleController`, `mountModulePlayer` + CSS   |
 | `module/canvas`                  | Palett, typsnitt och `createSurface` (canvas med pixeltäthet) för modulscener       |
+| `module/sound`                   | `moduleScore(def)` (syntat partitur ur id + kapitel) och `ModuleSound` (spelar det) |
 
 Tumregel: flytta något till motorn först när en **andra** film eller modul behöver det.
 

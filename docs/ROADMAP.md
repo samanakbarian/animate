@@ -8,13 +8,13 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 ## Lansering (MVP)
 
 - [x] Kortfilmen NÄSTA STEG (realtid i webbläsaren, MP4-export)
-- [x] Hemsidans skal: startsida med filmen, moduler, ordlista (20 begrepp), om
+- [x] Hemsidans skal: startsida med filmen, moduler, ordlista (22 begrepp), om
 - [ ] MP4-reserv för filmen (mobil, utan WebGL2)
 - [x] Modulramverk: film som kan pausas och styras (ADR 0004)
 - [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
 - [x] Modul 5 – Språkmodellen (liten seedad trigrammodell, temperatur, slumpfrö)
 - [x] Modul 8 – Agenten (simulerad agent: tänk/agera/observera, fel och människa i loopen)
-- [ ] Driftsättning på nastasteg.se
+- [ ] Driftsättning (nastasteg.se var upptagen – välj domän)
 
 ## Version 2
 
@@ -25,6 +25,7 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 
 ## Senare
 
-- [ ] Moduler: Flera agenter, Risker och säkerhet
+- [x] Moduler: Flera agenter, Risker och säkerhet (två delar)
+- [x] Ljud i modulerna (`module/sound.ts`)
 - [ ] Fråga sajten (svarar bara från sajtens innehåll)
 - [ ] Lärarmaterial, inloggning, framsteg och diplom

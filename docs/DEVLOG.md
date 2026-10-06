@@ -5,6 +5,26 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-06 (3) – Modul 9 och 10, ljud i modulerna
+
+**Vad**
+
+- `module-flera-agenter`: tolv delar fördelas på 1–4 agenter. Slarvfel hittas av en granskande agent, men fel i
+  knepiga delar är blinda fläckar som granskaren delar. En människa hittar dem men kostar tid (5 → 9 enheter).
+- `module-risker-och-sakerhet`, två delar. Del 1, säker men fel: kandidatsvar med sannolikheter, svaret låter lika
+  säkert oavsett. En gräns gör att modellen säger ”vet inte” (0 fel, men Uppsala 1477 blir också ”vet inte”).
+  Del 2, spärrar: 120 seedade förfrågningar, gräns, lurendrejeri (rollspel) och omträning.
+- Ljud: `engine/module/sound.ts`. `moduleScore(def)` är en ren funktion av id och kapitel. `ModuleSound` skapar
+  sin `AudioContext` först vid klick och startar om motorn vid sökning (hopp > 0,25 s). Ljudet spelar bara i
+  filmläget. Knappen ljud på/av sparar valet i localStorage.
+- Ingen modul är längre planerad. 88 tester.
+
+**Fällor**
+
+- Faktafrågor i del 1 måste stämma (Pippi, spindeln, Uppsala 1477, VM). De påhittade svaren är märkta som påhittade.
+
+---
+
 ## 2026-10-06 (2) – Ljusare filmslut, kornfix och textgenomgång
 
 **Vad**
