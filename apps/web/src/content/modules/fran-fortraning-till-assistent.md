@@ -5,7 +5,7 @@ summary: 'Hur en textgissare blir en hjälpsam assistent.'
 goal: 'Förträning, finjustering och mänsklig återkoppling.'
 interactive: 'Jämför svar från samma modell före och efter finjustering.'
 stage: v2
-status: planerad
+status: publicerad
 filmChapter: chatgpt
 ---
 

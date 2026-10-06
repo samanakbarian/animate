@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/module-fran-fortraning-till-assistent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 6 – Från förträning till assistent: finjustering och återkoppling.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

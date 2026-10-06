@@ -16,6 +16,7 @@
     "@nastasteg/engine": "workspace:*",
     "@nastasteg/film": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",
+    "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",
     "@nastasteg/module-neuralt-natverk": "workspace:*",
     "@nastasteg/module-ord-som-tal": "workspace:*",
     "@nastasteg/module-resonerande-modeller": "workspace:*",
