@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/module-transformern",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 4 – Transformern och uppmärksamhet.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

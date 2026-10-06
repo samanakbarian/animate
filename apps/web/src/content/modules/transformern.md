@@ -5,7 +5,7 @@ summary: 'Arkitekturen från 2017 som gjorde dagens språkmodeller möjliga.'
 goal: 'Hur modellen väger varje ord i en mening mot alla andra.'
 interactive: 'Skriv en mening och se uppmärksamhetens linjer mellan orden.'
 stage: v2
-status: planerad
+status: publicerad
 filmChapter: transformer
 ---
 

@@ -18,6 +18,7 @@
     "@nastasteg/module-agenten": "workspace:*",
     "@nastasteg/module-neuralt-natverk": "workspace:*",
     "@nastasteg/module-sprakmodellen": "workspace:*",
+    "@nastasteg/module-transformern": "workspace:*",
     "astro": "^7.3.5"
   },
   "devDependencies": {

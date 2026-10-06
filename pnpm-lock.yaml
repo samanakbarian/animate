@@ -59,6 +59,9 @@ importers:
       '@nastasteg/module-sprakmodellen':
         specifier: workspace:*
         version: link:../../packages/module-sprakmodellen
+      '@nastasteg/module-transformern':
+        specifier: workspace:*
+        version: link:../../packages/module-transformern
       astro:
         specifier: ^7.3.5
         version: 7.3.5(yaml@2.9.1)
@@ -120,6 +123,12 @@ importers:
         version: link:../engine
 
   packages/module-sprakmodellen:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-transformern:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

@@ -8,6 +8,7 @@ export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDe
   'neuralt-natverk': () => import('@nastasteg/module-neuralt-natverk'),
   sprakmodellen: () => import('@nastasteg/module-sprakmodellen'),
   agenten: () => import('@nastasteg/module-agenten'),
+  transformern: () => import('@nastasteg/module-transformern'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;
