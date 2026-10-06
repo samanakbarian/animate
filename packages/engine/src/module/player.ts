@@ -5,6 +5,7 @@
 import './player.css';
 import { ModuleController } from './controller';
 import { chapterIndexAt, formatNumber } from './params';
+import { ModuleSound } from './sound';
 import type { ModuleDefinition, ModuleScene } from './types';
 
 export interface ModulePlayerHandle {
@@ -34,6 +35,7 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
         <input type="range" min="0" max="${def.duration}" step="0.01" value="0" aria-label="Tid i filmen" />
         <div class="nsm-ticks">${def.chapters.map((c) => `<span style="left:${(c.start / def.duration) * 100}%"></span>`).join('')}</div>
       </div>
+      <button type="button" class="nsm-sound" aria-pressed="true">ljud på</button>
       <span class="nsm-mode" data-mode="film">film</span>
     </div>
     <div class="nsm-params" role="group" aria-label="Reglage">
@@ -63,6 +65,14 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
   const scrub = q<HTMLInputElement>('.nsm-scrub input');
   const modeEl = q<HTMLSpanElement>('.nsm-mode');
   const sliders = [...root.querySelectorAll<HTMLInputElement>('input[data-param]')];
+  const soundBtn = q<HTMLButtonElement>('.nsm-sound');
+  const sound = new ModuleSound(def);
+  const showSound = () => {
+    soundBtn.textContent = sound.enabled ? 'ljud på' : 'ljud av';
+    soundBtn.setAttribute('aria-pressed', String(sound.enabled));
+    soundBtn.setAttribute('aria-label', sound.enabled ? 'Stäng av ljudet' : 'Slå på ljudet');
+  };
+  showSound();
   host.style.cssText = 'position:absolute;inset:0';
 
   const scene: ModuleScene = def.createScene(host);
@@ -77,18 +87,33 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
   // --- interaktion
   stage.addEventListener('click', (e) => {
     if (e.target === bigPlay) return;
+    sound.unlock();
     ctl.toggle();
   });
-  bigPlay.addEventListener('click', () => ctl.play());
-  playBtn.addEventListener('click', () => ctl.toggle());
+  bigPlay.addEventListener('click', () => {
+    sound.unlock();
+    ctl.play();
+  });
+  playBtn.addEventListener('click', () => {
+    sound.unlock();
+    ctl.toggle();
+  });
+  soundBtn.addEventListener('click', () => {
+    sound.setEnabled(!sound.enabled);
+    showSound();
+  });
   scrub.addEventListener('input', () => ctl.seek(Number(scrub.value)));
   for (const s of sliders) s.addEventListener('input', () => ctl.setParam(s.dataset.param!, Number(s.value)));
-  q<HTMLButtonElement>('.nsm-resume').addEventListener('click', () => ctl.play());
+  q<HTMLButtonElement>('.nsm-resume').addEventListener('click', () => {
+    sound.unlock();
+    ctl.play();
+  });
   q<HTMLButtonElement>('.nsm-reset').addEventListener('click', () => ctl.resetParams());
   const onKey = (e: KeyboardEvent) => {
     if (!root.contains(document.activeElement) || (document.activeElement as HTMLElement)?.dataset?.param) return;
     if (e.key === ' ' || e.key === 'k') {
       e.preventDefault();
+      sound.unlock();
       ctl.toggle();
     }
   };
@@ -99,6 +124,7 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
   let visible = true;
   const io = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
+    if (!visible) sound.stop();
     if (visible && !raf) raf = requestAnimationFrame(frame);
   });
   io.observe(root);
@@ -111,6 +137,7 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
     const params = ctl.params();
     const mode = ctl.mode;
     scene.render(t, params, mode);
+    sound.update(t, ctl.isPlaying && mode === 'film');
 
     // berättartext
     const ci = chapterIndexAt(def.chapters, t);
@@ -148,6 +175,7 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
     controller: ctl,
     destroy() {
       cancelAnimationFrame(raf);
+      sound.dispose();
       io.disconnect();
       ro.disconnect();
       window.removeEventListener('keydown', onKey);

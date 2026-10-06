@@ -121,6 +121,13 @@
   height: 0.4rem;
   background: var(--m-dim);
 }
+.ns-module .nsm-sound {
+  white-space: nowrap;
+  color: var(--m-dim);
+}
+.ns-module .nsm-sound[aria-pressed='true'] {
+  color: var(--m-ink);
+}
 .ns-module .nsm-mode {
   white-space: nowrap;
   letter-spacing: 0.1em;
