@@ -21,6 +21,7 @@
     "@nastasteg/module-neuralt-natverk": "workspace:*",
     "@nastasteg/module-ord-som-tal": "workspace:*",
     "@nastasteg/module-resonerande-modeller": "workspace:*",
+    "@nastasteg/module-risker-och-sakerhet": "workspace:*",
     "@nastasteg/module-sprakmodellen": "workspace:*",
     "@nastasteg/module-traning": "workspace:*",
     "@nastasteg/module-transformern": "workspace:*",

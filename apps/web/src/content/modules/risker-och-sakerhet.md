@@ -5,7 +5,7 @@ summary: 'Påhittade fakta, fördomar och missbruk, och hur man testar modeller.
 goal: 'Vanliga fel och risker, och hur forskare arbetar för att göra modeller säkrare.'
 interactive: 'Hitta felet i ett svar som låter säkert men är fel.'
 stage: senare
-status: planerad
+status: publicerad
 filmChapter: asi
 ---
 

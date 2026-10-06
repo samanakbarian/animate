@@ -68,6 +68,9 @@ importers:
       '@nastasteg/module-resonerande-modeller':
         specifier: workspace:*
         version: link:../../packages/module-resonerande-modeller
+      '@nastasteg/module-risker-och-sakerhet':
+        specifier: workspace:*
+        version: link:../../packages/module-risker-och-sakerhet
       '@nastasteg/module-sprakmodellen':
         specifier: workspace:*
         version: link:../../packages/module-sprakmodellen
@@ -156,6 +159,12 @@ importers:
         version: link:../engine
 
   packages/module-resonerande-modeller:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-risker-och-sakerhet:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*
