@@ -18,13 +18,14 @@ export const CHAPTERS: Chapter[] = [
     start: 0,
     title: 'Svara direkt',
     caption:
-      'En språkmodell skriver ett ord i taget. Ska den svara direkt måste hela uträkningen få plats i ett enda svarsord. Ofta går det fel.',
+      'En språkmodell skriver ett ord i taget. Ska den svara direkt måste hela uträkningen göras på ett enda ord, och då blir det ofta fel.',
   },
   {
     id: 'steg',
     start: 13,
     title: 'Skriv ut stegen',
-    caption: 'Låt modellen skriva ut mellanleden först. Varje steg är litet och lätt, och nästa steg kan läsa det förra.',
+    caption:
+      'Låt i stället modellen skriva ner mellanleden först, som man gör på papper. Varje steg blir enkelt, och nästa steg kan bygga på det förra.',
   },
   {
     id: 'kurva',

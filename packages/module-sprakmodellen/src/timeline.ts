@@ -21,7 +21,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'tokens',
     start: 0,
     title: 'Text blir tokens',
-    caption: 'En språkmodell läser inte som vi. Texten delas upp i bitar – tokens. Här är varje ord och skiljetecken en token.',
+    caption: 'En språkmodell läser inte som vi. Texten delas upp i bitar som kallas tokens. Här är varje ord och skiljetecken en token.',
   },
   {
     id: 'nasta',
@@ -33,20 +33,20 @@ export const CHAPTERS: Chapter[] = [
     id: 'ett-i-taget',
     start: 22,
     title: 'En token i taget',
-    caption: 'Den drar en token, lägger till den – och gissar igen. Så växer texten, bit för bit.',
+    caption: 'Modellen drar en token, lägger till den i texten och gissar igen. Så växer texten fram.',
   },
   {
     id: 'temperatur',
     start: 42,
     title: 'Temperatur',
-    caption: 'Temperaturen styr slumpen. Låg: nästan alltid det mest troliga, och tjatigt. Hög: överraskande – och snart nonsens.',
+    caption: 'Temperaturen styr hur mycket slump som får vara med. Låg blir förutsägbart och tjatigt. Hög blir snabbt rena nonsens.',
   },
   {
     id: 'storlek',
     start: 60,
     title: 'Liten och stor',
     caption:
-      'Den här modellen har bara räknat ordpar i några stycken text. De stora gör samma sak – med ett neuralt nätverk och tusentals miljarder ord.',
+      'Den här modellen har bara räknat vilka ord som följer på vilka i en kort text. De stora gör samma sak med ett neuralt nätverk och biljoner ord.',
   },
   {
     id: 'din-tur',

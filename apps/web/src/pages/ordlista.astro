@@ -6,11 +6,11 @@ const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.local
 const modules = new Map((await getCollection('modules')).map((m) => [m.id, m.data.title]));
 ---
 
-<Base title="Ordlista" description="Begreppen bakom AI, förklarade med en mening var.">
+<Base title="Ordlista" description="Vanliga ord om AI, förklarade kort.">
   <div class="wrap page">
     <header class="prose">
-      <p class="eyebrow">Ordlista</p>
-      <h1>{terms.length} begrepp, en mening var.</h1>
+      <p class="eyebrow">{terms.length} begrepp</p>
+      <h1>Ordlista</h1>
     </header>
     <dl class="list">
       {terms.map((t) => (

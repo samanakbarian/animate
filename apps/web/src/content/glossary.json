@@ -26,37 +26,37 @@
   {
     "id": "traning",
     "term": "Träning",
-    "definition": "Processen där modellen gissar, mäter hur fel den har och justerar sina parametrar lite i taget.",
+    "definition": "Att låta modellen gissa, mäta hur fel den har och justera sina parametrar lite i taget. Det upprepas väldigt många gånger.",
     "module": "traning"
   },
   {
     "id": "gradient",
     "term": "Gradient",
-    "definition": "Riktningen som felet ökar snabbast i. Träning flyttar parametrarna åt motsatt håll.",
+    "definition": "Den riktning där felet ökar snabbast. Vid träning flyttas parametrarna åt motsatt håll.",
     "module": "traning"
   },
   {
     "id": "token",
     "term": "Token",
-    "definition": "En bit text som modellen arbetar med – ett ord, en del av ett ord eller ett tecken.",
+    "definition": "En bit text som modellen arbetar med, till exempel ett ord, en del av ett ord eller ett skiljetecken.",
     "module": "ord-som-tal"
   },
   {
     "id": "inbaddning",
     "term": "Inbäddning",
-    "definition": "En lista med tal som representerar en token. Liknande betydelser ger liknande tal.",
+    "definition": "En lista med tal som står för en token. Ord med liknande betydelse får liknande tal.",
     "module": "ord-som-tal"
   },
   {
     "id": "transformer",
     "term": "Transformer",
-    "definition": "Nätverksarkitekturen från 2017 som bygger på uppmärksamhet. Grunden för dagens språkmodeller.",
+    "definition": "Den typ av nätverk som de flesta språkmodeller bygger på sedan 2017. Kärnan i den är uppmärksamhet.",
     "module": "transformern"
   },
   {
     "id": "uppmarksamhet",
     "term": "Uppmärksamhet",
-    "definition": "Mekanismen som låter varje token väga in alla andra tokens för att förstå sammanhanget.",
+    "definition": "Det sätt som en transformer låter varje token väga in de andra tokens i texten för att förstå sammanhanget.",
     "module": "transformern"
   },
   {
@@ -80,25 +80,25 @@
   {
     "id": "fortraning",
     "term": "Förträning",
-    "definition": "Den första, stora träningen på enorma mängder text, där modellen lär sig språk och fakta.",
+    "definition": "Den första och största träningen, på väldigt mycket text. Där lär sig modellen språk och fakta.",
     "module": "fran-fortraning-till-assistent"
   },
   {
     "id": "finjustering",
     "term": "Finjustering",
-    "definition": "Extra träning på utvalda exempel som anpassar en förtränad modell till en uppgift eller ett beteende.",
+    "definition": "Extra träning på utvalda exempel, så att en förtränad modell beter sig på ett visst sätt, till exempel som en assistent.",
     "module": "fran-fortraning-till-assistent"
   },
   {
     "id": "tankekedja",
     "term": "Tankekedja",
-    "definition": "Mellansteg som modellen skriver ut innan den svarar, för att lösa svårare problem.",
+    "definition": "Mellansteg som modellen skriver ner innan den svarar, för att klara svårare uppgifter.",
     "module": "resonerande-modeller"
   },
   {
     "id": "agent",
     "term": "Agent",
-    "definition": "En AI som får ett mål och verktyg, och själv planerar och utför steg i en loop tills målet är nått.",
+    "definition": "En AI som får ett mål och verktyg och sedan själv tar ett steg i taget tills målet är nått.",
     "module": "agenten"
   },
   {
@@ -117,5 +117,17 @@
     "id": "agi",
     "term": "AGI",
     "definition": "Artificiell generell intelligens: en tänkt AI som är minst lika bra som människor på i stort sett allt."
+  },
+  {
+    "id": "aterkoppling",
+    "term": "Mänsklig återkoppling",
+    "definition": "När människor jämför modellens svar och väljer det bästa, så att modellen kan tränas mot svar som folk föredrar.",
+    "module": "fran-fortraning-till-assistent"
+  },
+  {
+    "id": "steglangd",
+    "term": "Steglängd",
+    "definition": "Hur stort steg träningen tar varje gång vikterna ändras. För litet går långsamt, för stort missar målet.",
+    "module": "traning"
   }
 ]

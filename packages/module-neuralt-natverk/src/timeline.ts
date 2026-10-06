@@ -19,7 +19,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'vikter',
     start: 9,
     title: 'Vikter',
-    caption: 'Varje insignal multipliceras med en vikt. Vikten avgör hur mycket – och åt vilket håll – signalen räknas.',
+    caption: 'Varje insignal multipliceras med en vikt. Vikten avgör hur mycket signalen räknas, och om den drar uppåt eller nedåt.',
   },
   {
     id: 'bias',

@@ -16,7 +16,7 @@ const { module: m } = Astro.props;
     <span class="chip" data-stage={m.data.stage}>
       {STAGE_LABEL[m.data.stage]}
     </span>
-    <span class="chip">{STATUS_LABEL[m.data.status]}</span>
+    {m.data.status !== 'publicerad' && <span class="chip">{STATUS_LABEL[m.data.status]}</span>}
   </span>
 </a>
 

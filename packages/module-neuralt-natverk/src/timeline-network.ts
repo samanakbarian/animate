@@ -25,7 +25,7 @@ export const CHAPTERS_2: Chapter[] = [
     id: 'misslyckas',
     start: 14,
     title: 'En linje räcker inte',
-    caption: 'Nej. En neuron kan bara dra en rak linje. Hur länge den än tränar fastnar den långt från alla rätt.',
+    caption: 'Nej. En neuron kan bara dra en rak linje, så hur länge den än tränar kommer den inte i närheten av alla rätt.',
   },
   {
     id: 'fler',
@@ -37,7 +37,7 @@ export const CHAPTERS_2: Chapter[] = [
     id: 'traning',
     start: 30,
     title: 'Träning',
-    caption: 'Mät felet. Flytta varje vikt en liten bit åt det håll som minskar felet. Gör om det – hundratals gånger.',
+    caption: 'Mät felet och flytta varje vikt en liten bit åt det håll där felet minskar. Gör om det några hundra gånger.',
   },
   {
     id: 'inuti',
@@ -49,7 +49,7 @@ export const CHAPTERS_2: Chapter[] = [
     id: 'din-tur',
     start: 66,
     title: 'Din tur',
-    caption: 'Prova färre neuroner, en större steglängd eller färre träningssteg – och se vad som händer.',
+    caption: 'Prova färre neuroner, en större steglängd eller färre träningssteg och se vad som händer.',
   },
 ];
 

@@ -27,13 +27,14 @@ export const CHAPTERS: Chapter[] = [
     id: 'tokens',
     start: 0,
     title: 'Text blir bitar',
-    caption: 'En dator kan bara räkna. Först delas texten i bitar – tokens. Långa ord blir flera bitar, och varje bit har ett nummer.',
+    caption:
+      'En dator kan bara räkna. Därför delas texten först i bitar som kallas tokens. Långa ord blir flera bitar, och varje bit har ett nummer.',
   },
   {
     id: 'tal',
     start: 18,
     title: 'Bitar blir tal',
-    caption: 'Varje token får en lista med tal – en inbäddning. Här sex tal per ord. I stora modeller är de tusentals.',
+    caption: 'Varje token får sedan en lista med tal, en inbäddning. Här är det sex tal per ord. I stora modeller är det tusentals.',
   },
   {
     id: 'karta',
@@ -45,7 +46,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'rakna',
     start: 42,
     title: 'Räkna med ord',
-    caption: 'Man kan räkna med betydelser: ta kung, dra bort man, lägg till kvinna – och hamna vid drottning.',
+    caption: 'Man kan till och med räkna med betydelser. Ta kung, dra bort man och lägg till kvinna, så hamnar man vid drottning.',
   },
   {
     id: 'fler',

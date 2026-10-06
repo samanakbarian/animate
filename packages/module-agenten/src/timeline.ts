@@ -18,7 +18,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'mal',
     start: 0,
     title: 'Ett mål, inte en fråga',
-    caption: 'En agent får ett mål. Den ska själv komma fram till hur det nås – steg för steg.',
+    caption: 'En agent får ett mål i stället för en fråga. Hur målet ska nås får den lista ut själv.',
   },
   {
     id: 'loopen',
@@ -36,7 +36,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'hinder',
     start: 32,
     title: 'Något går fel',
-    caption: 'Rummet är upptaget. Ingen talar om vad agenten ska göra – den ändrar planen själv.',
+    caption: 'Rummet är upptaget. Ingen säger åt agenten vad den ska göra, så den gör om planen.',
   },
   {
     id: 'manniska',
@@ -48,7 +48,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'klart',
     start: 56,
     title: 'Målet nått',
-    caption: 'Rummet bokas, inbjudan skickas. Målet är nått utan att någon sa hur – fem varv i loopen.',
+    caption: 'Rummet bokas och inbjudan skickas. Det tog fem varv i loopen, och ingen behövde säga hur.',
   },
   {
     id: 'din-tur',

@@ -1,22 +1,22 @@
 ---
 title: Språkmodellen
 order: 5
-summary: 'En språkmodell gör en sak: den gissar nästa ord. Om och om igen.'
-goal: 'Att en språkmodell förutsäger nästa token, och vad temperatur gör med svaren.'
-interactive: 'Generera text ord för ord, se sannolikheterna och dra i temperaturen.'
+summary: 'En språkmodell gissar nästa ord, och sedan nästa, och nästa.'
+goal: 'Att en språkmodell förutsäger nästa token, och vad temperaturen gör med svaren.'
+interactive: 'Låt en liten modell skriva ord för ord. Se sannolikheterna och ändra temperaturen.'
 stage: mvp
 status: publicerad
 filmChapter: gpt3
 ---
 
-En språkmodell är ett mycket stort neuralt nätverk som tränats på enorma mängder text för att gissa nästa token. Ur den enkla uppgiften växer förmågor som att sammanfatta, översätta och resonera.
+En språkmodell är ett stort neuralt nätverk som har tränats på väldigt mycket text för att gissa nästa token. Det låter enkelt, men för att gissa bra måste modellen fånga grammatik, fakta och sammanhang. Därför kan den också sammanfatta, översätta och svara på frågor.
 
 ## Filmen visar
 
-- En mening som byggs upp en token i taget.
-- Sannolikhetsfördelningen över nästa ord.
-- Varför samma fråga kan ge olika svar.
+- En mening som växer fram en token i taget.
+- Vilka ord modellen tror kan komma härnäst, och hur troliga de är.
+- Varför samma början kan ge olika fortsättningar.
 
 ## Du provar själv
 
-En liten modell körs i webbläsaren. Du väljer själv nästa ord eller låter den slumpa.
+Modulen kör en liten modell som tränats på en kort svensk text. Välj början, antal ord och temperatur, och byt slumpfrö för att få en ny text.

@@ -22,7 +22,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'harmar',
     start: 13,
     title: 'Den härmar nätet',
-    caption: 'Modellen svarar inte, den härmar. Ser texten ut som ett forum eller ett quiz, fortsätter den som ett forum eller ett quiz.',
+    caption: 'Modellen svarar egentligen inte, den härmar. Ser texten ut som ett forum eller ett quiz så fortsätter den i samma stil.',
   },
   {
     id: 'finjustering',

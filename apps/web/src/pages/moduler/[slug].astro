@@ -24,7 +24,7 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
         <span class="chip" data-stage={m.data.stage}>
           {STAGE_LABEL[m.data.stage]}
         </span>
-        <span class="chip">{STATUS_LABEL[m.data.status]}</span>
+        {m.data.status !== 'publicerad' && <span class="chip">{STATUS_LABEL[m.data.status]}</span>}
       </p>
     </header>
 
@@ -32,7 +32,7 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
 
     <dl class="facts">
       <div>
-        <dt class="eyebrow">Efteråt kan du förklara</dt>
+        <dt class="eyebrow">Efteråt vet du</dt>
         <dd>{m.data.goal}</dd>
       </div>
       <div>

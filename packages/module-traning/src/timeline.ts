@@ -17,13 +17,14 @@ export const CHAPTERS: Chapter[] = [
     id: 'landskap',
     start: 0,
     title: 'Felet är ett landskap',
-    caption: 'Varje val av vikter ger ett fel. Med två vikter blir felet ett landskap – mörkt är lågt fel. Målet är dalens botten.',
+    caption:
+      'Varje val av vikter ger ett visst fel. Med två vikter kan felet ritas som ett landskap där mörkt är litet fel. Målet är dalens botten.',
   },
   {
     id: 'lutning',
     start: 12,
     title: 'Känn lutningen',
-    caption: 'Gradienten säger åt vilket håll felet ökar mest. Vi tar ett litet steg åt motsatt håll – nedför.',
+    caption: 'Gradienten visar åt vilket håll felet ökar mest. Vi tar ett litet steg åt andra hållet, alltså nedför.',
   },
   {
     id: 'nedfor',
@@ -41,7 +42,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'for-langt',
     start: 47,
     title: 'För långa steg',
-    caption: 'Med för lång steglängd studsar bollen fram och tillbaka över dalen – eller flyger iväg helt.',
+    caption: 'Med för lång steglängd studsar bollen fram och tillbaka över dalen, eller flyger iväg helt.',
   },
   {
     id: 'grop',

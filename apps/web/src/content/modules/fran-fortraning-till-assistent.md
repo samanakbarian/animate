@@ -1,12 +1,14 @@
 ---
 title: Från förträning till assistent
 order: 6
-summary: 'Hur en textgissare blir en hjälpsam assistent.'
-goal: 'Förträning, finjustering och mänsklig återkoppling.'
-interactive: 'Jämför svar från samma modell före och efter finjustering.'
+summary: 'Hur en modell som bara fortsätter text blir en assistent som svarar.'
+goal: 'Förträning, finjustering och träning med mänsklig återkoppling.'
+interactive: 'Jämför samma modells svar i tre skeden och se hur människors val flyttar sannolikheterna.'
 stage: v2
 status: publicerad
 filmChapter: chatgpt
 ---
 
-En förtränad modell fortsätter bara text. För att bli en assistent finjusteras den på exempel på bra samtal och tränas med återkoppling om vilka svar människor föredrar.
+Efter förträningen kan modellen bara fortsätta text. Ställer man en fråga är det lika troligt att den svarar med fler frågor. Därför tränas den vidare på exempel på samtal, där en fråga följs av ett bra svar.
+
+Sedan får människor jämföra svar och välja det bästa. Av deras val lär sig modellen vilka sorters svar folk vill ha.

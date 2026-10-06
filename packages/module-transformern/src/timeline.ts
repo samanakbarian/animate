@@ -23,12 +23,17 @@ export const PARAMS: ParamSpec[] = [
 ];
 
 export const CHAPTERS: Chapter[] = [
-  { id: '2017', start: 0, title: '2017', caption: 'År 2017 kom en ny arkitektur: transformern. Dess knep heter uppmärksamhet.' },
+  {
+    id: '2017',
+    start: 0,
+    title: '2017',
+    caption: 'År 2017 kom en ny sorts nätverk, transformern. Det viktigaste i den kallas uppmärksamhet.',
+  },
   {
     id: 'titta',
     start: 10,
     title: 'Alla tittar på alla',
-    caption: 'Varje ord tittar på alla andra ord och väger hur viktiga de är – just för det ordet.',
+    caption: 'Varje ord tittar på alla andra ord och väger hur viktiga de är för just det ordet.',
   },
   {
     id: 'den',
@@ -40,7 +45,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'mjuk',
     start: 38,
     title: 'Ett ord ändrar allt',
-    caption: 'Byt ”trött” mot ”mjuk” – och samma ”den” tittar nu på mattan. Sammanhanget styr.',
+    caption: 'Byt ”trött” mot ”mjuk”, så tittar samma ”den” i stället på mattan. Det är sammanhanget som avgör.',
   },
   {
     id: 'huvuden',
@@ -52,7 +57,8 @@ export const CHAPTERS: Chapter[] = [
     id: 'matris',
     start: 62,
     title: 'Allt på en gång',
-    caption: 'Alla ord gör detta samtidigt. Det blir en tabell av vikter – och tabeller räknar grafikkort blixtsnabbt.',
+    caption:
+      'Alla ord gör det här samtidigt, så resultatet blir en tabell med vikter. Sådana tabeller är grafikkort väldigt snabba på att räkna.',
   },
   { id: 'din-tur', start: 72, title: 'Din tur', caption: 'Välj mening, ord och huvud. Dra upp skärpan och se uppmärksamheten samlas.' },
 ];

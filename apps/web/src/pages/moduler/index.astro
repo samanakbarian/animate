@@ -8,12 +8,15 @@ import { STAGES } from '../../content.config';
 const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base title="Moduler" description="Tio korta, interaktiva filmer som förklarar AI från neuron till agent.">
+<Base title="Moduler" description="Korta filmer som förklarar hur AI fungerar, från en enda neuron till agenter.">
   <div class="wrap page">
     <header class="prose">
-      <p class="eyebrow">Moduler</p>
-      <h1>Tio steg från neuron till agent.</h1>
-      <p>Varje modul tar 2–4 minuter. Den börjar som film och slutar med att du styr modellen själv.</p>
+      <p class="eyebrow">{modules.length} moduler</p>
+      <h1>Moduler</h1>
+      <p>
+        Varje modul tar ett par minuter. Den börjar som en film, och när den är slut kan du dra i reglagen själv. Du kan också pausa när som
+        helst.
+      </p>
     </header>
     {STAGES.map((stage) => (
       <section aria-label={STAGE_LABEL[stage]}>
