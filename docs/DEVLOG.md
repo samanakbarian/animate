@@ -5,6 +5,25 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-06 (2) – Ljusare filmslut, kornfix och textgenomgång
+
+**Vad**
+
+- Filmkornet lades i linjärt rum, så nästan svarta pixlar hoppade upp till ~14 % i sRGB. På hög kvalitet (full
+  pixeltäthet) såg hela bilden ut som brus. Nu läggs kornet i sRGB, är svagare och har fast storlek (~720 rader).
+- Slutet (`scenes/ending.ts`): lampan slocknar 137,25 och tänds igen 138,5 (jämnt antal `LAMP_TOGGLES`). Ingen
+  förstening eller upplösning. Människan sjunker ihop i mörkret och lyfter sedan blicken. Regnet tonar ut
+  139–143,5, ljuset blir varmare och ljusare. Musiken: D-durpad + pianofras i stället för den fallande tonen.
+  Ny text: ”Nästa steg är vårt att ta.” / ”Vart det leder är inte bestämt.”
+- Texter: modul-md, sidor, ordlista och modulernas berättartexter är omskrivna (färre tankstreck, tretal och slagord).
+  `STAGE_LABEL`/`STATUS_LABEL` är inte längre interna ord, och status visas bara när en modul inte är klar.
+
+**Fällor**
+
+- Berättartexten på mobil rymmer ungefär 145 tecken. Längre text täcker scenen.
+
+---
+
 ## 2026-10-06 – Version 2-modulerna (fem st)
 
 **Vad**

@@ -19,6 +19,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Alla fem v2-moduler är publicerade:** Träning (gradientnedstigning i ett fellandskap), Ord som tal (tokens,
   inbäddningar, PCA-karta, analogier), Transformern (uppmärksamhet med tre huvuden), Resonerande modeller
   (tankesteg och kontroller, andel rätt mot budget) och Från förträning till assistent (tre skeden, återkoppling).
+- Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
+- Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
 - 70 tester gröna. CI kör format, lint, typecheck, test och bygge.
 
@@ -27,8 +29,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
 2. Driftsättning: välj värd (t.ex. Cloudflare Pages eller Netlify) och peka nastasteg.se dit.
-3. **Pågår:** ett varmare slut på filmen och en genomgång av all text (mindre ”AI-ton”).
-4. Ljud i modulerna (ett `Score` per modul, återanvänd `AudioEngine`).
+3. Ljud i modulerna (ett `Score` per modul, återanvänd `AudioEngine`).
 
 ## Kända problem och fällor
 
