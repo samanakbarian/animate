@@ -185,7 +185,7 @@ export class Film {
 
     // Strukturen
     const reveal = ending ? 1 : smoothstep(114, 120, t);
-    const pulse = ending ? Math.exp(-Math.max(0, t - END_T.pulse) * 4) * (t >= END_T.pulse ? 1 : 0) * 1.5 + 0.1 : bassPulse(t);
+    const pulse = ending ? 0.1 : bassPulse(t);
     const rays = ending ? 0 : smoothstep(120, 124, t);
     this.structure.update(t, reveal, pulse, rays, flashAt(t) * (t > 140 ? 1.5 : 0));
 
@@ -209,7 +209,10 @@ export class Film {
 
     // Värld
     const flash = flashAt(t);
-    const dim = ending ? 1 - 0.78 * smoothstep(END_T.headDown[0], END_T.headDown[1] + 0.5, t) : 1;
+    // Slutet: mörkare medan lampan är släckt, sedan ljusare än förut.
+    const dark = smoothstep(END_T.lampOff - 0.1, END_T.lampOff + 0.1, t) * (1 - smoothstep(END_T.lampBack, END_T.lampBack + 1, t));
+    const dawn = smoothstep(END_T.lookUp[0], END_T.lookUp[1] + 2, t);
+    const dim = ending ? 1 - 0.6 * dark + 0.15 * dawn : 1;
     const focusX = ending ? BENCH_POS.x : info.pos.x;
     const focusZ = ending ? BENCH_POS.z : 0;
     this.world.update(
@@ -237,7 +240,7 @@ export class Film {
     ru.uCenter.value.set(cam.position.x, 0, cam.position.z);
     ru.uSplash.value = clamp(rainSpeed(t));
     ru.uUp.value = t >= 105 && t < 130 ? smoothstep(106, 110, t) : 0;
-    ru.uAlpha.value = ending ? 1 - smoothstep(145.5, 146.5, t) * 0.7 : t >= 105 ? 1 - 0.4 * smoothstep(118, 125, t) : 1;
+    ru.uAlpha.value = ending ? 1 - smoothstep(139, 143.5, t) : t >= 105 ? 1 - 0.4 * smoothstep(118, 125, t) : 1;
     const lamps = ending ? [this.ending.lampLight] : this.world.lampLights;
     for (let i = 0; i < 3; i++) {
       const L = lamps[i];
@@ -251,12 +254,12 @@ export class Film {
     // Efterbehandling
     const c = this.post.cinema;
     c.set('uTime', t);
-    c.set('uWarmth', ending ? 0.25 * (1 - smoothstep(137.5, 140, t)) : info.warmth);
+    c.set('uWarmth', ending ? 0.25 * (1 - dark) + 0.45 * dawn : info.warmth);
     c.set('uGlitch', glitchAt(t));
     c.set('uFlash', flash);
     c.set('uFade', fadeAt(t) * (t >= 147.5 ? 0 : 1));
     c.set('uCA', 0.02 + glitchAt(t) * 0.05);
-    c.set('uExposure', ending ? 1.1 : 1.12 + info.agiGlow * 0.1 + smoothstep(119, 126, t) * 0.1);
+    c.set('uExposure', ending ? 1.1 + 0.08 * dawn : 1.12 + info.agiGlow * 0.1 + smoothstep(119, 126, t) * 0.1);
     if (this.post.dof) {
       this.post.dof.target = shot.focus;
       this.post.dof.bokehScale = shot.bokeh;

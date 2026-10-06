@@ -192,7 +192,6 @@ export function flashAt(t: number): number {
   let f = 0;
   if (t >= 108) f = Math.max(f, Math.exp(-(t - 108) * 3.2) * (t < 108.05 ? 1 : 0.95));
   if (t >= 107.9 && t < 108) f = Math.max(f, (t - 107.9) * 10 * 0.6);
-  if (t >= 143) f = Math.max(f, Math.exp(-(t - 143) * 5) * 0.14);
   return f;
 }
 
@@ -201,7 +200,7 @@ export function fadeAt(t: number): number {
   return 1 - smoothstep(146, 147.5, t);
 }
 
-/** Regnhastighet: normal, saktar in och svävar uppåt (ASI), fryser (slutet). */
+/** Regnhastighet: normal, saktar in och svävar uppåt (ASI), faller igen i slutet tills det upphör. */
 export function rainSpeed(t: number): number {
   if (t < 105) return 1;
   if (t < 130) {
@@ -209,7 +208,7 @@ export function rainSpeed(t: number): number {
     const k2 = smoothstep(107.6, 110, t);
     return lerp(lerp(1, 0, k1), -0.22, k2);
   }
-  return 1 - smoothstep(139, 142, t);
+  return 1;
 }
 export const rainPhase = (() => {
   const I = new Integral(rainSpeed, 0, 150, 1 / 240);

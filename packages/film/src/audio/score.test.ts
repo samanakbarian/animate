@@ -19,8 +19,10 @@ describe('partituret', () => {
   it('har glitch-ljud vid stegbytena', () => {
     expect(events.some((e) => e.inst === 'glitch' && Math.abs(e.time - (10 - 0.12)) < 1e-9)).toBe(true);
   });
-  it('har ett slutslag vid 147,5 s', () => {
-    expect(events.some((e) => e.inst === 'hit' && e.time === 147.5)).toBe(true);
+  it('slutar i dur: D-durackord när lampan tänds igen och vid titeln', () => {
+    const pad = events.find((e) => e.inst === 'pad' && e.time === 138.5);
+    expect(pad?.notes).toContain(66); // F♯ = durters
+    expect(events.filter((e) => e.inst === 'piano' && e.time === 147.5).length).toBeGreaterThanOrEqual(3);
   });
   it('exporterar ett komplett Score', () => {
     const s = filmScore();
@@ -31,10 +33,11 @@ describe('partituret', () => {
 });
 
 describe('lampan och basens puls', () => {
-  it('slocknar för gott efter sista klicket', () => {
-    expect(LAMP_TOGGLES.length % 2).toBe(1);
+  it('slocknar och tänds igen', () => {
+    expect(LAMP_TOGGLES.length % 2).toBe(0);
     expect(lampOn(134)).toBe(true);
-    expect(lampOn(140)).toBe(false);
+    expect(lampOn(138)).toBe(false);
+    expect(lampOn(140)).toBe(true);
   });
   it('pulserar inom [0, 1]', () => {
     for (let t = 0; t < DURATION; t += 0.25) {

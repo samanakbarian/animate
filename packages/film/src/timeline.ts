@@ -293,8 +293,7 @@ export function yearText(t: number): string {
 
 export const END_LINES: { at: number; text: string }[] = [
   { at: 130, text: 'Fortfarande här.' },
-  { at: 135, text: 'Inte längre nödvändig.' },
-  { at: 143, text: 'Utfasad.' },
+  { at: 139.2, text: 'Nästa steg är vårt att ta.' },
 ];
 
 export function subText(t: number): { text: string; since: number } {

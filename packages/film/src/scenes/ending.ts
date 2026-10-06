@@ -1,23 +1,24 @@
 // Slutet (130–150 s): en ensam människa på en parkbänk under en gatlykta i
-// regnet. Lyktan flimrar och slocknar, människan förstenas och vittrar bort.
+// regnet. Lyktan flimrar och slocknar – och tänds igen. Regnet upphör, ljuset
+// blir varmare och människan lyfter blicken.
 
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { Figure, restPose } from '@nastasteg/engine/figure/rig';
 import { LOOKS } from '../characters/looks';
 import type { FxMaterial } from '@nastasteg/engine/fx/figureMaterial';
-import { Disintegrate } from '@nastasteg/engine/fx/particles';
 import { bake, coneGeometry, coneMaterial, lanternGeometry, merge } from '@nastasteg/engine/scene/props';
-import { clamp, lerp, smoothstep } from '@nastasteg/engine/core/math';
+import { lerp, smoothstep } from '@nastasteg/engine/core/math';
 import { lampOn } from '../audio/score';
 
 export const END_T = {
   start: 130,
   lampOff: 137.25,
-  headDown: [137.5, 140] as const,
-  stone: [139, 142] as const,
-  pulse: 143,
-  crumble: [143.2, 145.5] as const,
+  lampBack: 138.5,
+  /** Huvudet sjunker när det blir mörkt … */
+  headDown: [136.8, 138.2] as const,
+  /** … och lyfts mot ljuset när lampan tänds igen. */
+  lookUp: [139, 142] as const,
   fade: [146, 147.5] as const,
   title: 147.5,
 };
@@ -25,7 +26,6 @@ export const END_T = {
 export class Ending {
   readonly group = new THREE.Group();
   readonly human: Figure;
-  readonly dust: Disintegrate;
   readonly lampLight: THREE.PointLight;
   readonly bench = new THREE.Vector3();
   private cone: THREE.Mesh;
@@ -100,16 +100,6 @@ export class Ending {
     // Vänd mot strukturen (bort från kameran, lätt snett).
     this.human.root.rotation.y = Math.PI / 2 + 0.05;
     this.group.add(this.human.root);
-
-    this.dust = new Disintegrate(7000, 'wind', 17);
-    this.dust.uniforms.uT0.value = END_T.crumble[0];
-    this.dust.uniforms.uSweep.value = 1.6;
-    this.dust.uniforms.uFly.value = 2.6;
-    this.dust.uniforms.uColor.value.setRGB(0.26, 0.26, 0.25);
-    this.dust.uniforms.uSize.value = 20;
-    this.dust.uniforms.uWind.value.set(0.8, 0.3, -0.55);
-    this.dust.uniforms.uMode.value = 1;
-    this.group.add(this.dust.points);
   }
 
   private pose(t: number) {
@@ -127,11 +117,13 @@ export class Ending {
     }
     p.L.thigh = 1.46;
     const down = smoothstep(END_T.headDown[0], END_T.headDown[1], t);
-    const breathe = Math.sin(t * 1.4) * 0.015 * (1 - smoothstep(139, 140.5, t));
-    p.spineLean = lerp(0.02, 0.26, down) + breathe;
-    p.head = lerp(-0.55, 0.62, down);
-    p.neck = lerp(-0.25, 0.3, down);
-    p.headTurn = lerp(-0.12, 0, down);
+    const up = smoothstep(END_T.lookUp[0], END_T.lookUp[1], t);
+    const breathe = Math.sin(t * 1.4) * 0.015;
+    // vila (lätt nedböjt) → sjunker ihop i mörkret → rätar på sig och tittar upp
+    p.spineLean = lerp(lerp(0.1, 0.26, down), -0.04, up) + breathe;
+    p.head = lerp(lerp(0.2, 0.62, down), -0.6, up);
+    p.neck = lerp(lerp(0.05, 0.3, down), -0.28, up);
+    p.headTurn = lerp(lerp(-0.08, 0, down), -0.14, up);
     this.human.applyPose(p);
     // Sätt höften på sitsen.
     this.human.joints.hips.position.y = 0.5 + 0.02;
@@ -144,28 +136,15 @@ export class Ending {
     const fx = (this.human.mat as FxMaterial).fx;
     fx.uTime.value = t;
     this.pose(t);
-    // Förstening från fötterna.
-    const st = clamp((t - END_T.stone[0]) / (END_T.stone[1] - END_T.stone[0]));
-    fx.uStone.value = lerp(-0.2, 1.25, st);
-    // Vittring: kroppen löses upp nerifrån, damm blåser bort.
-    const cr = clamp((t - END_T.crumble[0]) / (END_T.crumble[1] - END_T.crumble[0]));
-    fx.uDisLo.value = cr > 0 ? lerp(-0.1, 1.2, cr) : -1;
-    fx.uEdgeColor.value.setRGB(0.25, 0.25, 0.25);
-    this.human.root.visible = cr < 1;
-    if (t >= END_T.crumble[0] - 0.3) {
-      if (!this.dust.isCaptured) {
-        this.group.updateMatrixWorld(true);
-        this.pose(END_T.crumble[0]);
-        this.dust.capture(this.human);
-        this.pose(t);
-      }
-      this.dust.points.visible = true;
-      this.dust.uniforms.uTime.value = t;
-    } else this.dust.points.visible = false;
+    // Ingen förstening eller upplösning – människan finns kvar.
+    fx.uStone.value = -0.2;
+    fx.uDisLo.value = -1;
+    this.human.root.visible = true;
 
-    // Lyktan flimrar och slocknar.
+    // Lyktan flimrar, slocknar och tänds igen – varmare.
     const lit = lampOn(t) ? 1 : 0;
-    this.lampLight.intensity = lit * 16;
+    const warm = smoothstep(END_T.lampBack, END_T.lampBack + 3, t);
+    this.lampLight.intensity = lit * (16 + 6 * warm);
     (this.cone.material as THREE.ShaderMaterial).uniforms.uStrength.value = lit * 0.55;
     (this.cone.material as THREE.ShaderMaterial).uniforms.uTime.value = t;
     this.bulbMat.color.setRGB(lit ? 5 : 0.03, lit ? 3.6 : 0.03, lit ? 2.2 : 0.03);

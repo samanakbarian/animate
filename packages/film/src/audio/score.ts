@@ -109,8 +109,8 @@ export const SECTIONS = {
 const inSec = (bar: number, s: readonly [number, number]) => bar >= s[0] && bar < s[1];
 
 /** Tider då lampan i slutet klickar (tänds/släcks). Delas med bilden. */
-// Udda antal växlingar → lampan är släckt efter sista klicket (137,25 s).
-export const LAMP_TOGGLES = [135.0, 135.1, 135.32, 135.4, 135.95, 136.08, 136.55, 136.62, 137.25];
+// Lampan flimrar, slocknar vid 137,25 och tänds igen vid 138,5. Jämnt antal växlingar → tänd på slutet.
+export const LAMP_TOGGLES = [135.0, 135.1, 135.32, 135.4, 135.95, 136.08, 136.55, 136.62, 137.25, 138.5];
 /** Lampan är tänd vid t? (före 135 tänd, sedan växlar den vid varje toggle.) */
 export function lampOn(t: number): boolean {
   let on = true;
@@ -291,10 +291,12 @@ export function buildScore(): NoteEvent[] {
   push({ time: 108, dur: 3, inst: 'crash', midi: 0, vel: 0.9 });
   // Lampklick.
   for (const x of LAMP_TOGGLES) push({ time: x, dur: 0.03, inst: 'click', midi: 0, vel: 0.9 });
-  // Vit puls + fallande ton när stenfiguren vittrar.
-  push({ time: 143, dur: 3.2, inst: 'fall', midi: 62, vel: 0.8 });
-  // Dovt slutslag vid svart.
-  push({ time: 147.5, dur: 4, inst: 'hit', midi: 0, vel: 1 });
+  // Ljuset tillbaka: ett varmt D-durackord (filmen har gått i moll) och en enkel
+  // pianofras uppåt medan människan lyfter blicken.
+  push({ time: 138.5, dur: 8.2, inst: 'pad', midi: 0, vel: 0.9, p: 2, notes: [50, 57, 62, 66, 69] });
+  [62, 66, 69, 74, 73, 74].forEach((m, i) => push({ time: 139.4 + i * 0.95, dur: 3, inst: 'piano', midi: m, vel: 0.42 - i * 0.02 }));
+  // Mjukt slutackord vid titeln.
+  for (const m of [38, 50, 57, 62, 66]) push({ time: 147.5, dur: 4, inst: 'piano', midi: m, vel: 0.35 });
 
   ev.sort((a, b) => a.time - b.time);
   cache = ev;

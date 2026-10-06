@@ -152,7 +152,7 @@ export class Hud {
       this.card.style.display = 'flex';
       this.card.style.opacity = String(smoothstep(147.5, 147.9, t));
       this.set(this.cardTitle, typed('NÄSTA STEG', 147.6, t, 16));
-      this.set(this.cardSub, typed('Evolutionen väntar inte på någon.', 148.2, t, 36));
+      this.set(this.cardSub, typed('Vart det leder är inte bestämt.', 148.2, t, 36));
     } else this.card.style.display = 'none';
   }
 }
