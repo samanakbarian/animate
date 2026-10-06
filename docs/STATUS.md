@@ -38,6 +38,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Astro 7:s `astro preview` körs som en delad demon (`astro preview stop`). `pnpm module-frames` har därför en egen statisk server.
 - Node:s `fetch` mot localhost kan få ett felsvar från proxyn. Kontrollera status 200, inte bara att anropet lyckas.
 - Moduler har inget ljud än (filmen har).
+- Spelaren erbjuder bara låg och mellan. Hög (full pixeltäthet, 4× MSAA) gav trasig bild hos användaren, orsaken är
+  okänd (troligen minne eller MSAA på halvflyttal). Hög används bara vid export.
 - `trainingRun(H, lr)` cachar per (H, steglängd); första anropet för en ny kombination tar några ms.
 
 ## Länkar

@@ -21,8 +21,9 @@ export function detectQuality(): Quality {
   const name = String(ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER));
   if (/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)) return 'low';
   if (/swiftshader|llvmpipe|software/i.test(name)) return 'low';
-  if (/intel|iris|uhd|mali|adreno|powervr|apple gpu|radeon\(tm\) graphics|vega \d+ graphics/i.test(name)) return 'medium';
-  return 'high';
+  // Hög kvalitet (full pixeltäthet, 4× MSAA) gav trasig bild på vissa datorer och
+  // erbjuds inte längre i spelaren. Den används bara vid export (mountRenderTarget).
+  return 'medium';
 }
 
 /** Har webbläsaren WebGL2? Annars ska sidan visa MP4-reserven. */
@@ -57,7 +58,6 @@ const START_HTML = `
     <span>kvalitet:</span>
     <label><input type="radio" name="ns-q" value="low" /> låg</label>
     <label><input type="radio" name="ns-q" value="medium" /> mellan</label>
-    <label><input type="radio" name="ns-q" value="high" /> hög</label>
   </div>
   <p class="status" aria-live="polite"></p>`;
 
@@ -71,7 +71,7 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
   const status = startEl.querySelector('.status') as HTMLElement;
   const radios = startEl.querySelectorAll<HTMLInputElement>('input[name=ns-q]');
 
-  let quality: Quality = !opts.quality || opts.quality === 'auto' ? detectQuality() : opts.quality;
+  let quality: Quality = !opts.quality || opts.quality === 'auto' || opts.quality === 'high' ? detectQuality() : opts.quality;
   radios.forEach((r) => (r.checked = r.value === quality));
 
   let film: Film | null = null;
