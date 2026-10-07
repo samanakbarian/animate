@@ -38,5 +38,13 @@
     "summary": "Klipp orden i bitar som en tokeniserare gör. Färre bitar är bättre.",
     "teaches": "Att en språkmodell läser tokens, inte ord, och varför långa svenska ord, tal och stavfel blir många bitar.",
     "module": "sprakmodellen"
+  },
+  {
+    "id": "vem-ar-den",
+    "title": "Vem är ”den”?",
+    "order": 6,
+    "summary": "Klicka på ordet som ”den” syftar på. Se sedan var uppmärksamheten hamnade.",
+    "teaches": "Hur uppmärksamheten i en transformer kopplar ihop ord, och varför vissa meningar kräver kunskap om världen.",
+    "module": "transformern"
   }
 ]

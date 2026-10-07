@@ -23,6 +23,7 @@
     "@nastasteg/game-hallucinationsjakten": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
     "@nastasteg/game-tokenjakten": "workspace:*",
+    "@nastasteg/game-vem-ar-den": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",
     "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",

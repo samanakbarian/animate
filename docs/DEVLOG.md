@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (10) – Spelet Vem är ”den”?
+
+**Vad**
+
+- `packages/game-vem-ar-den`: klicka på ordet som ett pronomen syftar på. Efter valet visas ett tänkt
+  uppmärksamhetshuvud som staplar ovanför orden. Tre banor: grammatiken hjälper, Winograd-par (”ett ord ändrar
+  allt”, blandas inte så att paren står ihop) och långt bort. I två av paren väljer huvudet fel (`headWrong`), testat.
+- Datan i `sentences.ts`: `[rätt ord]` och `{pronomen}` markeras i texten, `attn` ger vikter för några ord.
+
+**Fällor**
+
+- Klassen `.after` användes både för ord efter pronomenet och för svarsrutan; `querySelector('.after')` tog fel element.
+- `.ns-game button:hover` (0,2,1) slår `.vd .vd-word` (0,2,0). Använd `.vd button.vd-word`.
+
+---
+
 ## 2026-10-07 (9) – Spelet Tokenjakten
 
 **Vad**

@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/game-vem-ar-den",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Vem är ”den”?: klicka på ordet som pronomenet syftar på och jämför med uppmärksamheten.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

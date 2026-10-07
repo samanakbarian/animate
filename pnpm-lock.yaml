@@ -74,6 +74,9 @@ importers:
       '@nastasteg/game-tokenjakten':
         specifier: workspace:*
         version: link:../../packages/game-tokenjakten
+      '@nastasteg/game-vem-ar-den':
+        specifier: workspace:*
+        version: link:../../packages/game-vem-ar-den
       '@nastasteg/module-agenten':
         specifier: workspace:*
         version: link:../../packages/module-agenten
@@ -183,6 +186,12 @@ importers:
         version: link:../module-sprakmodellen
 
   packages/game-tokenjakten:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/game-vem-ar-den:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

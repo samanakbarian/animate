@@ -19,8 +19,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,
   antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
   tänk/agera/observera med verktyg. Reglage för fel (rummet upptaget) och människa i loopen.
-- **Spel (R2 påbörjad):** spelramverket finns (`engine/game`, ADR 0007). Fem spel på `/spel`: Gradientgolf (4 banor),
-  Slå maskinen (2), Dra gränsen (4), Hallucinationsjakten (3) och Tokenjakten (4). Modulsidorna länkar till spelen.
+- **Spel (R2 påbörjad):** spelramverket finns (`engine/game`, ADR 0007). Sex spel på `/spel`: Gradientgolf (4 banor),
+  Slå maskinen (2), Dra gränsen (4), Hallucinationsjakten (3), Tokenjakten (4) och Vem är ”den”? (3). Modulsidorna länkar till spelen.
 - **Alla tio moduler är publicerade och interaktiva**, med ljud (lugnt syntat partitur per modul, knapp för av/på).
 - Alla tre MVP-modulerna är publicerade.
 - **Alla fem v2-moduler är publicerade:** Träning (gradientnedstigning i ett fellandskap), Ord som tal (tokens,
@@ -29,16 +29,17 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
 - Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 117 tester gröna. CI kör format, lint, typecheck, test och bygge.
+- 121 tester gröna. CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
-2. Fler spel enligt backloggen (R2): Vem är ”den”?, AI-tidslinjen och quiz i modulerna.
+2. Fler spel enligt backloggen (R2): AI-tidslinjen och quiz i modulerna.
    Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 3. Driftsättning: `netlify.toml` finns. Sajten är driftsatt som eget Netlify-projekt (gren master, apps/web).
-   ilearnai.se pekar på Netlify (Netlify DNS via Loopia, verifierat).
+   ilearnai.se pekar på Netlify (Netlify DNS via Loopia). Vissa resolvrar visade fortfarande Loopias
+   parkering samma dag. Lösning: A-post 75.2.60.5 för @ och www även i Loopias DNS-editor.
 4. Besöksstatistik utan kakor.
 5. Backend: **avvaktar** (ADR 0011 föreslår Firebase i Google Cloud). Bygg inget förrän grundaren bestämt riktning.
 
