@@ -9,7 +9,7 @@ interface Props {
   description?: string;
 }
 const { title, description = SITE.description } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} – AI förklarat från grunden`;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} – film, moduler och spel om hur AI fungerar`;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const canonical = new URL(path, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
@@ -86,7 +86,7 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${SITE.name} – AI förklarat från grunden`} />
+    <meta property="og:image:alt" content={`${SITE.name}: film, moduler och spel om hur AI fungerar`} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
@@ -115,7 +115,7 @@ const jsonLd = {
     <footer class="site-footer">
       <div class="wrap bar">
         <span class="mono">{SITE.domain}</span>
-        <span>AI förklarat från grunden.</span>
+        <a href="/om">Om sajten och kontakt</a>
       </div>
     </footer>
   </body>

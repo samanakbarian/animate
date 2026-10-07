@@ -9,7 +9,7 @@ export const GET: APIRoute = async () => {
   const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
   const body = `# ${SITE.name}
 
-> ${SITE.name} (${SITE.domain}) är en svensk utbildningssajt som förklarar AI från grunden med en kortfilm, interaktiva moduler och lärspel. Sajten grundades ${SITE.foundingYear} av ${SITE.founder.name}.
+> ${SITE.name} (${SITE.domain}) är en svensk utbildningssajt om hur AI fungerar, med en kortfilm, interaktiva moduler och lärspel. Sajten grundades ${SITE.foundingYear} av ${SITE.founder.name}.
 
 - Grundare: ${SITE.founder.name} (${SITE.founder.email})
 - Språk: svenska
