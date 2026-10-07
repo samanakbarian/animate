@@ -5,6 +5,24 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (11) – Paus i filmen och en enklare början på modul 1
+
+**Vad**
+
+- Filmen går att pausa för alla: knapp och tid nere till höger, klick i bilden eller mellanslag (bara när filmen
+  syns). Pausen fanns förut bara i dev-läget och tog fel tid: `now()` lästes efter att `paused` satts.
+- Modul 1 har en ny del 1, ”Ett enkelt beslut” (`beslut.ts`, `timeline-beslut.ts`, `scene-beslut.ts`): ska du gå ut
+  och spela fotboll? Sol och läxor ger poäng via vikter, biasen är hur sugen du är, och en lampa tänds om summan
+  är över noll. En tallinje visar nej/ja. Grundaren tyckte att ”en rak linje som tänder saker” var svår att förstå.
+- Den gamla del 1 är nu del 2, ”Samma neuron som en karta”, med texter som bygger vidare på lampan och förklarar
+  att linjen är där summan är noll. Nätverket är del 3. Modul-id:n är oförändrade (`neuralt-natverk-1`, `-2`).
+
+**Fällor**
+
+- `formatNumber(-0)` ger ”−0,0”. Scenen skriver 0 utan tecken.
+
+---
+
 ## 2026-10-07 (10) – Spelet Vem är ”den”?
 
 **Vad**

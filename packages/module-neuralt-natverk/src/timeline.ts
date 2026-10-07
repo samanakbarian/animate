@@ -1,4 +1,4 @@
-// Filmens manus: kapitel med berättartext och nyckelrutor för parametrarna.
+// Del 2 – samma neuron som en karta. Manus: kapitel med berättartext och nyckelrutor.
 // Ändra tider och texter här – scenen läser bara (t, params).
 
 import type { Chapter, Keyframe, ParamSpec } from '@nastasteg/engine/module/types';
@@ -14,7 +14,12 @@ export const PARAMS: ParamSpec[] = [
 ];
 
 export const CHAPTERS: Chapter[] = [
-  { id: 'neuron', start: 0, title: 'En neuron', caption: 'En artificiell neuron tar emot tal. Här två: x₁ och x₂.' },
+  {
+    id: 'neuron',
+    start: 0,
+    title: 'En neuron',
+    caption: 'Samma neuron som i del 1. Nu heter insignalerna x₁ och x₂ och kan vara allt från −1 till 1.',
+  },
   {
     id: 'vikter',
     start: 9,
@@ -25,23 +30,23 @@ export const CHAPTERS: Chapter[] = [
     id: 'bias',
     start: 23,
     title: 'Summa och bias',
-    caption: 'Neuronen summerar och lägger till en bias. Ju större summa, desto starkare tänds den.',
+    caption: 'Neuronen lägger ihop allt och lägger till biasen. Ju större summa, desto starkare tänds den, precis som lampan i del 1.',
   },
   {
     id: 'planet',
     start: 35,
     title: 'Hela planet',
-    caption: 'Varje punkt i planet är ett par insignaler. Ljust betyder att neuronen tänds, mörkt att den inte gör det.',
+    caption: 'Nu provar vi alla par av x₁ och x₂ på en gång. Varje punkt i rutan är ett par. Ljust betyder att neuronen tänds.',
   },
   {
     id: 'linjen',
     start: 50,
     title: 'En rak linje',
-    caption: 'En enda neuron kan bara dela planet med en rak linje. Att lära sig betyder att hitta vikterna som lägger linjen rätt.',
+    caption: 'Den orange linjen är där summan är exakt noll. På den ljusa sidan tänds neuronen. Att lära sig är att flytta linjen rätt.',
   },
 ];
 
-export const EXPLORE_CAPTION = 'Dra i vikterna och biasen och se linjen flytta sig. Flytta insignalerna och se när neuronen tänds.';
+export const EXPLORE_CAPTION = 'Dra i vikterna och biasen och se gränsen flytta sig. Flytta insignalerna och se när neuronen tänds.';
 
 const k = (t: number, v: number, ease?: Keyframe['ease']): Keyframe => ({ t, v, ease });
 

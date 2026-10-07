@@ -1,4 +1,4 @@
-// Del 2 – ett nätverk lär sig. Manus: kapitel och nyckelrutor.
+// Del 3 – ett nätverk lär sig. Manus: kapitel och nyckelrutor.
 
 import type { Chapter, Keyframe, ParamSpec } from '@nastasteg/engine/module/types';
 import { MAX_STEPS } from './network';

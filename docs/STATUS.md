@@ -14,7 +14,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
 - **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
   scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
-- **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 en neuron (64 s), del 2 ett
+- **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 ett vardagsbeslut med lampa (56 s,
+  ingen matematik utöver plus och minus), del 2 samma neuron som karta med linje (64 s), del 3 ett
   2–H–1-nätverk som tränas deterministiskt i webbläsaren (74 s, reglage för dolda neuroner, steg, steglängd).
 - **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,
   antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
@@ -29,7 +30,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
 - Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 121 tester gröna. CI kör format, lint, typecheck, test och bygge.
+- 124 tester gröna. Filmen går att pausa (knapp, klick i bilden, mellanslag). CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 

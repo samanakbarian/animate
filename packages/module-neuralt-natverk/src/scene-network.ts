@@ -1,4 +1,4 @@
-// Del 2: scenen för ett nätverk som tränas. Till vänster nätverket 2 → H → 1
+// Del 3: scenen för ett nätverk som tränas. Till vänster nätverket 2 → H → 1
 // (ledningarnas tjocklek och färg = vikterna), till höger planet med datapunkter,
 // nätverkets svar och beslutsgränsen, och under den felkurvan.
 
