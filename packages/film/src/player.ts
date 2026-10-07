@@ -39,7 +39,7 @@ export interface PlayerOptions {
   quality?: Quality | 'auto';
   /** Starttid i sekunder (dev). */
   startAt?: number;
-  /** Visa t/fps och aktivera tangenterna ←/→/mellanslag. */
+  /** Visa t/fps och aktivera tangenterna ←/→ (hoppa 5 s). */
   dev?: boolean;
   /** Bygg scenen direkt i stället för vid klick (dev-sidan). */
   preload?: boolean;
@@ -126,8 +126,44 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
     const devEl = opts.dev ? Object.assign(document.createElement('div'), { className: 'ns-dev' }) : null;
     if (devEl) root.appendChild(devEl);
     const now = () => (paused ? pausedAt : audio.currentTime - engine.origin);
+
+    // Paus: knapp nere till höger, klick i bilden eller mellanslag.
+    const ctrl = document.createElement('div');
+    ctrl.className = 'ns-ctrl';
+    ctrl.innerHTML = `<span class="ns-time"></span><button type="button" class="ns-pp" aria-label="Pausa">❚❚</button>`;
+    const pausedEl = Object.assign(document.createElement('div'), { className: 'ns-paused', textContent: 'PAUS' });
+    root.append(ctrl, pausedEl);
+    const ppBtn = ctrl.querySelector<HTMLButtonElement>('.ns-pp')!;
+    const timeEl = ctrl.querySelector<HTMLSpanElement>('.ns-time')!;
+    const togglePause = () => {
+      const t = now();
+      paused = !paused;
+      if (paused) {
+        pausedAt = t;
+        void audio.suspend();
+      } else void audio.resume();
+      root.classList.toggle('is-paused', paused);
+      ppBtn.textContent = paused ? '▶' : '❚❚';
+      ppBtn.setAttribute('aria-label', paused ? 'Spela' : 'Pausa');
+    };
+    ppBtn.addEventListener('click', togglePause);
+    const onStageClick = (e: MouseEvent) => {
+      if (ctrl.contains(e.target as Node) || startEl.contains(e.target as Node)) return;
+      togglePause();
+    };
+    root.addEventListener('click', onStageClick);
+    const inView = () => {
+      const r = root.getBoundingClientRect();
+      return r.bottom > 0 && r.top < innerHeight;
+    };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === ' ' && inView() && (tag !== 'BUTTON' || e.target === ppBtn)) {
+        e.preventDefault();
+        if (e.target !== ppBtn) togglePause();
+      }
+      if (opts.dev && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
         // Hoppa: tysta den gamla motorn och schemalägg om från nya t.
         const t = Math.max(0, Math.min(DURATION - 0.01, now() + (e.key === 'ArrowRight' ? 5 : -5)));
         engine.stopAll();
@@ -135,16 +171,10 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
         engine.begin(t, audio.currentTime + 0.05);
         if (paused) pausedAt = t;
       }
-      if (e.key === ' ') {
-        e.preventDefault();
-        paused = !paused;
-        if (paused) {
-          pausedAt = now();
-          void audio.suspend();
-        } else void audio.resume();
-      }
     };
-    if (opts.dev) window.addEventListener('keydown', onKey);
+    window.addEventListener('keydown', onKey);
+    const mmss = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+    let shownSec = -1;
 
     // Adaptiv kvalitet: sänk upplösningen om bildrutorna tar för lång tid.
     let acc = 0,
@@ -167,11 +197,18 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
           acc = n = 0;
         }
       }
+      if (Math.floor(tc) !== shownSec) {
+        shownSec = Math.floor(tc);
+        timeEl.textContent = `${mmss(tc)} / ${mmss(DURATION)}`;
+      }
       if (devEl)
         devEl.textContent = `t ${tc.toFixed(2)}  ${(1000 / Math.max(1, dt)).toFixed(0)} fps  q=${quality} scale=${f.dynamicScale.toFixed(2)}`;
       if (tc < DURATION) raf = requestAnimationFrame(loop);
       else {
         window.removeEventListener('keydown', onKey);
+        root.removeEventListener('click', onStageClick);
+        ctrl.remove();
+        pausedEl.remove();
         devEl?.remove();
         void audio.close();
         startEl.classList.remove('hidden');

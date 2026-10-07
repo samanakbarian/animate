@@ -230,3 +230,67 @@
   pointer-events: none;
   white-space: pre;
 }
+
+/* Paus: tid och knapp nere till höger. Syns när musen är över filmen, vid fokus och i paus. */
+.ns-player .ns-ctrl {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 12px var(--mono);
+  color: var(--dim);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.ns-player:hover .ns-ctrl,
+.ns-player.is-paused .ns-ctrl,
+.ns-player .ns-ctrl:focus-within {
+  opacity: 1;
+}
+@media (hover: none) {
+  .ns-player .ns-ctrl {
+    opacity: 0.7;
+  }
+}
+.ns-player .ns-pp {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font: 13px var(--mono);
+  letter-spacing: -0.1em;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(232, 235, 238, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ns-player .ns-pp:hover {
+  background: rgba(232, 235, 238, 0.12);
+}
+.ns-player .ns-time {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.ns-player .ns-paused {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  place-items: center;
+  font: 300 clamp(18px, 3vw, 30px) var(--sans);
+  letter-spacing: 0.5em;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.ns-player.is-paused .ns-paused {
+  display: grid;
+}
+.ns-player .ns-stage {
+  cursor: pointer;
+}
