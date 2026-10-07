@@ -1,7 +1,9 @@
 # Roadmap
 
-Den fullständiga featurelistan är ett levande dokument:
-https://claude.ai/code/artifact/a2829a1a-c962-40fe-b66b-3f2b7b33ddd1
+Backloggen med featurelista och releaseplan (levande dokument):
+https://claude.ai/code/artifact/8fc1d0da-e959-46f2-9e61-5362ab172aae
+
+Den första featurelistan: https://claude.ai/code/artifact/a2829a1a-c962-40fe-b66b-3f2b7b33ddd1
 
 Här spåras det som är byggt. Bocka av och länka till devloggen.
 
@@ -14,7 +16,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
 - [x] Modul 5 – Språkmodellen (liten seedad trigrammodell, temperatur, slumpfrö)
 - [x] Modul 8 – Agenten (simulerad agent: tänk/agera/observera, fel och människa i loopen)
-- [ ] Driftsättning (nastasteg.se var upptagen – välj domän)
+- [x] Domän: learnai.se (ADR 0006)
+- [ ] Driftsättning på learnai.se
 
 ## Version 2
 

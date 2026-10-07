@@ -1,6 +1,6 @@
-# nastasteg.se
+# learnai.se
 
-AI förklarat från grunden. Ingången är kortfilmen **NÄSTA STEG**, en mörk 3D-film i kod om vägen
+AI förklarat från grunden (sajten heter LearnAI). Ingången är kortfilmen **NÄSTA STEG**, en mörk 3D-film i kod om vägen
 från människa till språkmodeller, AGI och ASI. Runt den byggs korta, interaktiva förklarmoduler.
 
 ```bash

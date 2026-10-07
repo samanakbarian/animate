@@ -36,7 +36,7 @@ const canonical = new URL(path, Astro.site);
     <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href="/">
-          NÄSTA STEG
+          {SITE.name}
         </a>
         <nav aria-label="Huvudmeny">
           {SITE.nav.map((n) => (

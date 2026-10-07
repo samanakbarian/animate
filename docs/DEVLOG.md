@@ -5,6 +5,19 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 – LearnAI på learnai.se, backlogg
+
+**Vad**
+
+- Nytt namn och ny domän: LearnAI på learnai.se (ADR 0006). `SITE`, `astro.config.mjs`, om-sidan, sidhuvudet,
+  README och AGENTS är uppdaterade. Filmen heter fortfarande NÄSTA STEG, och paketen heter fortfarande `@nastasteg/*`.
+- Backlogg med featurelista och releaseplan som levande dokument (länk i STATUS och ROADMAP). Fyra releaser:
+  R1 lansering, R2 spel (14 spelidéer, 8 i första omgången), R3 lärvägar, R4 skola. 32 rader med prio och status.
+
+**Återstår**: R1, alltså driftsättning på learnai.se, statistik och test på riktiga enheter.
+
+---
+
 ## 2026-10-06 (3) – Modul 9 och 10, ljud i modulerna
 
 **Vad**

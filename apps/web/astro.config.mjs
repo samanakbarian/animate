@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://nastasteg.se',
+  site: 'https://learnai.se',
   trailingSlash: 'never',
   build: { format: 'file' },
   vite: {

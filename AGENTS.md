@@ -1,6 +1,6 @@
 # AGENTS.md – orientering för AI-agenter och utvecklare
 
-**nastasteg.se**: en sajt som förklarar AI från grunden. Ingången är kortfilmen NÄSTA STEG
+**learnai.se** (LearnAI): en sajt som förklarar AI från grunden. Ingången är kortfilmen NÄSTA STEG
 (2 min 30 s, Three.js, syntad musik). Runt den finns förklarmoduler (neuralt nätverk,
 språkmodell, agent …), en ordlista och artiklar. Allt innehåll är på svenska.
 

@@ -2,7 +2,7 @@
   "name": "@nastasteg/web",
   "version": "0.1.0",
   "private": true,
-  "description": "nastasteg.se – hemsidan (Astro).",
+  "description": "learnai.se – hemsidan (Astro).",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

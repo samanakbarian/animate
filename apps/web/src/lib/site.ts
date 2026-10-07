@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Nästa steg',
-  domain: 'nastasteg.se',
+  name: 'LearnAI',
+  domain: 'learnai.se',
   description: 'Så fungerar AI, förklarat med korta filmer som du kan pausa och prova själv.',
   nav: [
     { href: '/', label: 'Filmen' },

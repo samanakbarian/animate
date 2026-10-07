@@ -2,9 +2,12 @@
 
 _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
-**Senast uppdaterad:** 2026-10-06
+**Senast uppdaterad:** 2026-10-07
 
 ## Nuläge
+
+- Sajten heter **LearnAI** och ska ligga på **learnai.se** (ADR 0006). Målet: en stor utbildningssajt om AI med
+  moduler, spel, lärvägar och skolmaterial. Se backloggen.
 
 - Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (10 st), `tools/render`.
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
@@ -29,7 +32,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
-2. Driftsättning: välj domän (nastasteg.se är upptagen, förslag: aiforklarat.se, nastasteg.org) och värd (t.ex. Cloudflare Pages).
+2. Driftsättning på **learnai.se** (Cloudflare Pages, se backloggen R1). Sedan R2: spelramverk och spel.
 3. Besöksstatistik utan kakor och delningsbilder (og:image).
 
 ## Kända problem och fällor
@@ -44,6 +47,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 ## Länkar
 
-- Featurelista (levande dokument): https://claude.ai/code/artifact/a2829a1a-c962-40fe-b66b-3f2b7b33ddd1
+- **Backlogg och releaseplan (levande dokument): https://claude.ai/code/artifact/8fc1d0da-e959-46f2-9e61-5362ab172aae**
+- Första featurelistan: https://claude.ai/code/artifact/a2829a1a-c962-40fe-b66b-3f2b7b33ddd1
 - Förhandsvisning av sajten: https://claude.ai/artifact/DuRSaG1eVQ1VdJxCRfKPXG
 - Roadmap i repot: `docs/ROADMAP.md`
