@@ -33,7 +33,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Gradientgolf
 - [x] Slå maskinen
 - [x] Dra gränsen
-- [ ] Hallucinationsjakten, Spärrvakten, Tokenjakten, Vem är ”den”?, AI-tidslinjen
+- [x] Hallucinationsjakten
+- [ ] Spärrvakten, Tokenjakten, Vem är ”den”?, AI-tidslinjen
 
 ## Senare
 

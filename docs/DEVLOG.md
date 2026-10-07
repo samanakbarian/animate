@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (5) – Hallucinationsjakten och loggförslag
+
+**Vad**
+
+- `game-hallucinationsjakten`: tre banor (fakta, påhittade detaljer, falska premisser) med åtta frågor var.
+  Svaren ligger som data i `items.ts`, med en förklaring per fråga. Ordningen blandas med `api.rng`.
+- Sex loggförslag (A–F) på en designyta (länk i STATUS): neuron-i, brickan, lager, nästa steg, monogram iA
+  och två prickar. Inget är valt än. Sajten använder fortfarande A.
+
+**Fällor**
+
+- Fakta i spelet måste vara kontrollerbara. Undvik tvetydiga frågor (t.ex. hur många ben en ”bläckfisk” har,
+  eller OS i Stockholm, där 1956 också räknas). Testet kräver att `why` börjar med Stämmer eller Påhittat.
+
+---
+
 ## 2026-10-07 (4) – iLearnAI: namn, logga, grundare och sitemap
 
 **Vad**
