@@ -37,7 +37,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
    för webbläsare utan WebGL2 och för svaga mobiler.
 2. Fler spel enligt backloggen (R2): Spärrvakten, Tokenjakten, Vem är ”den”?,
    AI-tidslinjen, och quiz i modulerna.
-3. Driftsättning på **ilearnai.se** när domänen är köpt (Cloudflare Pages).
+3. Driftsättning: `netlify.toml` finns. Användaren har redan Netlify (sida377.se). Koppla repot där och lägg till
+   ilearnai.se när domänen är köpt.
 4. Besöksstatistik utan kakor och delningsbilder (og:image).
 
 - Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, handskrivna anteckningar
