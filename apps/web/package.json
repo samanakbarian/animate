@@ -17,6 +17,7 @@
     "@nastasteg/film": "workspace:*",
     "@nastasteg/game-dra-gransen": "workspace:*",
     "@nastasteg/game-gradientgolf": "workspace:*",
+    "@nastasteg/game-hallucinationsjakten": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",

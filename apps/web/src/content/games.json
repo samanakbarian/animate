@@ -22,5 +22,13 @@
     "summary": "Dra en rak linje som skiljer de blå prickarna från de orange. Det är vad en enda neuron gör.",
     "teaches": "Vad en neurons vikter och bias gör, och varför en rak linje inte alltid räcker.",
     "module": "neuralt-natverk"
+  },
+  {
+    "id": "hallucinationsjakten",
+    "title": "Hallucinationsjakten",
+    "order": 4,
+    "summary": "En AI svarar lika säkert på allt. Avgör vilka svar som stämmer och vilka som är påhittade.",
+    "teaches": "Hur hallucinationer ser ut: påhittade källor, fel detaljer och svar på frågor som förutsätter något falskt.",
+    "module": "risker-och-sakerhet"
   }
 ]
