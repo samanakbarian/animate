@@ -22,6 +22,7 @@
     "@nastasteg/game-gradientgolf": "workspace:*",
     "@nastasteg/game-hallucinationsjakten": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
+    "@nastasteg/game-tokenjakten": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",
     "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",

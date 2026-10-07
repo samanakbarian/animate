@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/game-tokenjakten",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Tokenjakten: dela upp ord i så få tokens som möjligt, som en tokeniserare.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

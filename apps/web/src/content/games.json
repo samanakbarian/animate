@@ -30,5 +30,13 @@
     "summary": "En AI svarar lika säkert på allt. Avgör vilka svar som stämmer och vilka som är påhittade.",
     "teaches": "Hur hallucinationer ser ut: påhittade källor, fel detaljer och svar på frågor som förutsätter något falskt.",
     "module": "risker-och-sakerhet"
+  },
+  {
+    "id": "tokenjakten",
+    "title": "Tokenjakten",
+    "order": 5,
+    "summary": "Klipp orden i bitar som en tokeniserare gör. Färre bitar är bättre.",
+    "teaches": "Att en språkmodell läser tokens, inte ord, och varför långa svenska ord, tal och stavfel blir många bitar.",
+    "module": "sprakmodellen"
   }
 ]

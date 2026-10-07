@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (9) – Spelet Tokenjakten
+
+**Vad**
+
+- `packages/game-tokenjakten`: spelaren klipper ord i tokens med banans ordförråd (enskilda tecken finns alltid).
+  Rätt = så få bitar som möjligt (dynamisk programmering i `bestSplit`). Efter svaret visas tokeniserarens
+  uppdelning och påhittade men fasta token-id:n. Fyra banor: ordbitar, sammansatta ord, mellanslag, siffror och stavfel.
+- Spelskalet visar inte längre ”nytt rekord” när poängen är 0.
+- Spärrvakten är struken tills vidare: exempeltexterna stoppades av säkerhetsfiltret.
+
+**Fällor**
+
+- Spelskalets knappstil slår igenom på allt som är `<button>`. Springorna mellan tecknen behöver `.tj .tj-gap{all:unset}`.
+- `align-content: center` med `overflow:auto` klipper toppen på mobil. Använd `safe center`.
+
+---
+
 ## 2026-10-07 (8) – Personligare design
 
 **Vad**

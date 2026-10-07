@@ -105,7 +105,7 @@ export function mountGame(root: HTMLElement, def: GameDefinition, opts: { module
     overlay.hidden = false;
     overlay.innerHTML = `
       <div class="nsg-stars" aria-label="${r.stars} av 3 stjärnor">${'★'.repeat(r.stars)}${'☆'.repeat(3 - r.stars)}</div>
-      <h3>${r.score} ${esc(def.scoreLabel)}${record ? ' · nytt rekord' : ''}</h3>
+      <h3>${r.score} ${esc(def.scoreLabel)}${record && (r.score > 0 || def.lowerIsBetter) ? ' · nytt rekord' : ''}</h3>
       <p>${esc(r.message)}</p>
       <div class="nsg-actions">
         ${hasNext ? '<button type="button" class="nsg-primary" data-act="next">Nästa bana</button>' : ''}
