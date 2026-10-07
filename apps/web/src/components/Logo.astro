@@ -27,10 +27,16 @@ import '@fontsource/nunito/800.css';
     letter-spacing: -0.015em;
     color: var(--logo-ink);
   }
+  /* Ringarna gör märket bredare än stapeln. Negativ högermarginal drar in ordet så att
+     avståndet i–L blir som mellan bokstäver, och glöden hamnar svagt bakom L:et. */
   svg {
     width: 1.5em;
     height: 1.5em;
     margin-bottom: -0.02em;
+    margin-right: -0.5em;
+  }
+  .word {
+    position: relative;
   }
   .glow {
     fill: var(--logo-accent);
