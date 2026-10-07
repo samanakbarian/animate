@@ -1,0 +1,25 @@
+# Netlify: bygger hemsidan (apps/web) från monorepots rot med pnpm.
+# Koppla repot i Netlify (Add new site → Import from Git) och välj grenen master.
+# Inställningarna nedan gäller före det som står i Netlifys gränssnitt.
+
+[build]
+  command = "pnpm build"
+  publish = "apps/web/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # tools/render använder Playwright för export, men bygget behöver inga webbläsare.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+# Filer med hash i namnet ändras aldrig – låt webbläsaren spara dem länge.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
