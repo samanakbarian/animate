@@ -26,6 +26,13 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [ ] Tidslinje 1943–2026
 - [ ] Engelska
 
+## Spel (R2)
+
+- [x] Spelramverk (ADR 0007), spelsida och länkar till modulerna
+- [x] Gradientgolf
+- [x] Slå maskinen
+- [ ] Dra gränsen, Hallucinationsjakten, Spärrvakten, Tokenjakten, Vem är ”den”?, AI-tidslinjen
+
 ## Senare
 
 - [x] Moduler: Flera agenter, Risker och säkerhet (två delar)

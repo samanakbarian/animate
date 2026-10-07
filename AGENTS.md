@@ -2,7 +2,7 @@
 
 **learnai.se** (LearnAI): en sajt som förklarar AI från grunden. Ingången är kortfilmen NÄSTA STEG
 (2 min 30 s, Three.js, syntad musik). Runt den finns förklarmoduler (neuralt nätverk,
-språkmodell, agent …), en ordlista och artiklar. Allt innehåll är på svenska.
+språkmodell, agent …), lärspel och en ordlista. Allt innehåll är på svenska.
 
 ## Börja här (läs i den här ordningen, sluta när du vet nog)
 
@@ -24,6 +24,8 @@ Läs inte hela kodbasen. Gå direkt till filen som kartan nedan pekar på.
 | `packages/film`                      | Kortfilmen NÄSTA STEG (tidslinje, regi, scener, partitur, HUD, spelare)       | filmen                                   |
 | `packages/module-<slug>`             | En förklarmodul: manus (`timeline.ts`) + scen (`scene.ts`), se ADR 0004       | en moduls film eller interaktion         |
 | `apps/web/src/lib/interactive.ts`    | Register: vilka moduler som har film + reglage                                | ny modul ska synas på sajten             |
+| `packages/game-<slug>`               | Ett lärspel (`game: GameDefinition`), se ADR 0007                             | ett spel                                 |
+| `apps/web/src/content/games.json`    | Spelen på sajten + registret `apps/web/src/lib/games.ts`                      | nytt spel ska synas på sajten            |
 | `tools/render`                       | Export till MP4 och stillbilder (Playwright + ffmpeg)                         | exportkedjan                             |
 | `docs/`                              | Status, devlogg, arkitektur, ADR:er, roadmap                                  | efter varje arbetspass                   |
 

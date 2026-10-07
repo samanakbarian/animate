@@ -5,8 +5,10 @@
 ```
 apps/web ──┬──▶ packages/film ─────────────────┬──▶ packages/engine
 (Astro)    │    (en film: data + regi)          │    (generisk motor, inga film-/modulberoenden)
-           └──▶ packages/module-<slug> ─────────┘
-                (en förklarmodul: manus + scen)
+           ├──▶ packages/module-<slug> ─────────┤
+           │    (en förklarmodul: manus + scen)  │
+           └──▶ packages/game-<slug> ───────────┘
+                (ett lärspel; får läsa logik från en modul, ADR 0007)
 tools/render ── bygger och styr packages/film/dist via Playwright
 ```
 
@@ -16,18 +18,19 @@ tools/render ── bygger och styr packages/film/dist via Playwright
 
 ## packages/engine – vad hör hemma här
 
-| Modul                            | Ansvar                                                                              |
-| -------------------------------- | ----------------------------------------------------------------------------------- |
-| `core/math`                      | Seedad slump (`Rng`, `hash*`), brus, easing, `Integral` (position = ∫ hastighet)    |
-| `figure/rig`, `figure/animation` | Procedurell humanoid med leder, gångcykel och stilar                                |
-| `fx/figureMaterial`              | PBR-material med effekter via `onBeforeCompile` (dissolve, glitch, fresnel, sten …) |
-| `fx/particles`                   | Partikelupplösning av en figur                                                      |
-| `scene/*`                        | Mark med planar reflection, regn, himmel, miljökarta, rekvisita och shaderbitar     |
-| `render/post`                    | Efterbehandling: ACES, 3D-LUT, bloom, skärpedjup, kromatisk aberration, korn        |
-| `audio/*`                        | `Score`-typer, syntinstrument, sequencer (realtid + offline) och WAV                |
-| `module/*`                       | Modulramverket: typer, nyckelrutor, `ModuleController`, `mountModulePlayer` + CSS   |
-| `module/canvas`                  | Palett, typsnitt och `createSurface` (canvas med pixeltäthet) för modulscener       |
-| `module/sound`                   | `moduleScore(def)` (syntat partitur ur id + kapitel) och `ModuleSound` (spelar det) |
+| Modul                            | Ansvar                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| `core/math`                      | Seedad slump (`Rng`, `hash*`), brus, easing, `Integral` (position = ∫ hastighet)      |
+| `figure/rig`, `figure/animation` | Procedurell humanoid med leder, gångcykel och stilar                                  |
+| `fx/figureMaterial`              | PBR-material med effekter via `onBeforeCompile` (dissolve, glitch, fresnel, sten …)   |
+| `fx/particles`                   | Partikelupplösning av en figur                                                        |
+| `scene/*`                        | Mark med planar reflection, regn, himmel, miljökarta, rekvisita och shaderbitar       |
+| `render/post`                    | Efterbehandling: ACES, 3D-LUT, bloom, skärpedjup, kromatisk aberration, korn          |
+| `audio/*`                        | `Score`-typer, syntinstrument, sequencer (realtid + offline) och WAV                  |
+| `module/*`                       | Modulramverket: typer, nyckelrutor, `ModuleController`, `mountModulePlayer` + CSS     |
+| `module/canvas`                  | Palett, typsnitt och `createSurface` (canvas med pixeltäthet) för modulscener         |
+| `module/sound`                   | `moduleScore(def)` (syntat partitur ur id + kapitel) och `ModuleSound` (spelar det)   |
+| `game/*`                         | Spelramverket: `GameDefinition`, `mountGame`, bästa resultat, ljudeffekter (ADR 0007) |
 
 Tumregel: flytta något till motorn först när en **andra** film eller modul behöver det.
 

@@ -5,6 +5,29 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (2) – Spelramverk, Gradientgolf och Slå maskinen
+
+**Vad**
+
+- `engine/game`: `GameDefinition` och `mountGame` (startskärm med banor och bästa resultat, poäng och status,
+  resultat med stjärnor och länk till modulen). Bästa resultat sparas i localStorage, med reserv i minnet.
+  Ljudeffekterna syntas direkt i `sfx.ts`. ADR 0007.
+- `game-gradientgolf`: ett slag är tio steg gradientnedstigning, och spelaren väljer bara steglängden. Fyra banor,
+  där bana 3 och 4 kräver att man byter steglängd för att komma ur gropen. Landskapet ritas av
+  `module-traning/landscape.ts`, som modulen också använder nu.
+- `game-sla-maskinen`: åtta rundor ur språkmodellens egen text. Bara lägen där modellen är osäker (under 75 %)
+  eller har fel väljs. Maskinen väljer alltid sitt troligaste alternativ.
+- Sajten: `content/games.json`, `lib/games.ts`, sidorna `/spel` och `/spel/<slug>`, spel på startsidan, länkar
+  från modulsidorna och ”Spel” i menyn. 100 tester.
+
+**Fällor**
+
+- Gradientgolf bana 3: samma steglängd hela vägen fastnar alltid i gropen. Testerna låser det, så ändra inte
+  `HOLES` utan att köra dem.
+- Spelen ritar med väggklockan för animation, men utfallet räknas fram direkt vid slaget. Lägg inte spellogik i ritloopen.
+
+---
+
 ## 2026-10-07 – LearnAI på learnai.se, backlogg
 
 **Vad**
