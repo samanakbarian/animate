@@ -15,7 +15,7 @@ besökare, sökmotorer och AI-modeller.
   `apps/web/public`: `mark.svg`, `logo.svg`, `favicon.svg`, `apple-touch-icon.png` och delningsbilden `og.png`
   (1200 × 630). I sidhuvudet ritas loggan av `components/Logo.astro` i sajtens eget typsnitt.
 - Grundaren (Saman Akbarian) och sajtens fakta ligger i `SITE` (`apps/web/src/lib/site.ts`). De syns på
-  om-sidan och i sidfoten, i JSON-LD (schema.org Organization, Person och WebSite) på varje sida, i
+  om-sidan, i JSON-LD (schema.org Organization, Person och WebSite) på varje sida, i
   `meta author`, `/humans.txt` och `/llms.txt`. `/sitemap.xml` och `/robots.txt` byggs ur innehållet.
 
 ## Konsekvenser
