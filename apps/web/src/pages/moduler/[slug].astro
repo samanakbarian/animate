@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { STAGE_LABEL, STATUS_LABEL, moduleColor } from '../../lib/site';
+import { STAGE_LABEL, STATUS_LABEL } from '../../lib/site';
 import ModuleStage from '../../components/ModuleStage.astro';
 
 export async function getStaticPaths() {
@@ -18,9 +18,7 @@ const games = (await getCollection('games')).filter((g) => g.data.module === m.i
 <Base title={m.data.title} description={m.data.summary}>
   <article class="wrap page">
     <header class="prose">
-      <p class="eyebrow" style={`color: ${moduleColor(m.data.order)}`}>
-        modul nr {m.data.order}
-      </p>
+      <p class="eyebrow">modul nr {m.data.order}</p>
       <h1>{m.data.title}</h1>
       <p class="lead">{m.data.summary}</p>
       <p class="chips">

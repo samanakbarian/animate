@@ -1,11 +1,10 @@
 /* Rubriker i Fraunces (mjuk serif med lite personlighet), brödtext i Atkinson Hyperlegible
-   (gjord för läsbarhet) och anteckningar i Caveat (handskrift). Inter finns kvar för filmen
+   (gjord för läsbarhet). Små anteckningar i kursiv Fraunces. Inter finns kvar för filmen
    och modulernas scener, mono för siffror och kod. */
 @import '@fontsource-variable/fraunces/full.css';
 @import '@fontsource/atkinson-hyperlegible/400.css';
 @import '@fontsource/atkinson-hyperlegible/400-italic.css';
 @import '@fontsource/atkinson-hyperlegible/700.css';
-@import '@fontsource/caveat/600.css';
 @import '@fontsource/inter/300.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/jetbrains-mono/300.css';
@@ -26,7 +25,6 @@
   --warm: #c8643f;
   --font-sans: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-hand: 'Caveat', 'Segoe Print', cursive;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --measure: 68ch;
   --gutter: clamp(16px, 4vw, 40px);
@@ -63,7 +61,6 @@
   --warm: #ffb02e;
   --font-sans: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --font-display: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
-  --font-hand: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --logo-ink: #b6ffc8;
   --logo-accent: #3dff7f;
   --logo-word: #3dff7f;
@@ -153,17 +150,12 @@ p {
   gap: 0.35em;
 }
 
-/* En handskriven anteckning ovanför rubriker och etiketter, lite snett, som i marginalen. */
-.eyebrow {
-  display: inline-block;
-  font: 600 1.45rem / 1.1 var(--font-hand);
-  color: var(--warm);
-  transform: rotate(-1.5deg);
-  transform-origin: left center;
-}
-:root[data-theme='hacker'] .eyebrow {
-  font-size: var(--step--1);
-  transform: none;
+/* En liten kursiv anteckning ovanför rubriker och etiketter. */
+.eyebrow,
+.note {
+  font: italic 500 1.08rem / 1.3 var(--font-display);
+  font-variation-settings: 'SOFT' 100;
+  color: var(--dim);
 }
 /* Handritad vågig understrykning under ett ord. */
 .scribble {

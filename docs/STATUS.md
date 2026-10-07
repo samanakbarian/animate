@@ -37,12 +37,11 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
    för webbläsare utan WebGL2 och för svaga mobiler.
 2. Fler spel enligt backloggen (R2): Spärrvakten, Tokenjakten, Vem är ”den”?,
    AI-tidslinjen, och quiz i modulerna.
-3. Driftsättning: `netlify.toml` finns. Användaren har redan Netlify (sida377.se). Koppla repot där och lägg till
-   ilearnai.se när domänen är köpt.
+3. Driftsättning: `netlify.toml` finns. Sajten är driftsatt som eget Netlify-projekt (gren master, apps/web).
+   Lägg till ilearnai.se där när domänen är köpt.
 4. Besöksstatistik utan kakor och delningsbilder (og:image).
 
-- Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, handskrivna anteckningar
-  (Caveat), en färg per modul, rundade kort och prickat papper i ljust tema.
+- Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, kursiva anteckningar, en färg per modul, rundade kort och prickat papper i ljust tema.
 - Tre teman: mörk, ljus och hacker (ADR 0009). Knapp i sidhuvudet, valet sparas, annars följer sajten systemet.
 - Loggan är ”Glöd” (S2): ett i vars prick glöder. Loggförslag på designytan: https://claude.ai/artifact/GyYAeyEsuZEHTN8KAcN1x7.
 

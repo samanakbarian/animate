@@ -1,4 +1,4 @@
-# 0010 – Personligare stil: serif, handskrift och färg per modul
+# 0010 – Personligare stil: serif, kursiva anteckningar och färg per modul
 
 - **Status:** beslutad
 - **Datum:** 2026-10-07
@@ -9,13 +9,14 @@ Sajten kändes AI-genererad: Inter överallt, små etiketter i versaler med stor
 
 ## Beslut
 
-- Typsnitt: rubriker i Fraunces (variabel, `SOFT` 100), brödtext i Atkinson Hyperlegible och anteckningar i Caveat.
-  Variablerna heter `--font-display`, `--font-sans` och `--font-hand`. Inter finns kvar för filmen och modulscenerna.
-- `.eyebrow` är en handskriven anteckning (lite snett, i accentfärg), inte versaler. `.scribble` ger en handritad
+- Typsnitt: rubriker i Fraunces (variabel, `SOFT` 100) och brödtext i Atkinson Hyperlegible (`--font-display`,
+  `--font-sans`). Inter finns kvar för filmen och modulscenerna.
+- `.eyebrow` och `.note` är små anteckningar i kursiv Fraunces, i grått, inte versaler. (Handskriften Caveat
+  provades först men kändes konstig och togs bort.) `.scribble` ger en handritad
   understrykning. Menyn har vanlig text, och sidan du är på markeras med en vågig understrykning.
 - Varje modul har en egen färg (`MODULE_COLORS` i `lib/site.ts`), som syns i ”nr N” och i en färgklick på kortet.
   Kort, modulspelare och spel har 16 px rundade hörn. Ljust tema har ett svagt prickat papper.
-- Hacker-temat skriver över alla tre typsnitten med mono.
+- Hacker-temat skriver över typsnitten med mono.
 
 ## Konsekvenser
 
