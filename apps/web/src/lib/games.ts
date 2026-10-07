@@ -6,4 +6,5 @@ import type { GameDefinition } from '@nastasteg/engine/game/types';
 export const GAMES: Record<string, () => Promise<{ game: GameDefinition }>> = {
   gradientgolf: () => import('@nastasteg/game-gradientgolf'),
   'sla-maskinen': () => import('@nastasteg/game-sla-maskinen'),
+  'dra-gransen': () => import('@nastasteg/game-dra-gransen'),
 };

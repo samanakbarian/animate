@@ -15,6 +15,7 @@
     "@fontsource/jetbrains-mono": "^5.2.0",
     "@nastasteg/engine": "workspace:*",
     "@nastasteg/film": "workspace:*",
+    "@nastasteg/game-dra-gransen": "workspace:*",
     "@nastasteg/game-gradientgolf": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",

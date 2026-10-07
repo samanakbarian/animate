@@ -14,5 +14,13 @@
     "summary": "Gissa nästa ord i meningen före en liten språkmodell. Vem har rätt oftast?",
     "teaches": "Att en språkmodell gissar nästa ord utifrån vad som brukar följa i texten den läst.",
     "module": "sprakmodellen"
+  },
+  {
+    "id": "dra-gransen",
+    "title": "Dra gränsen",
+    "order": 3,
+    "summary": "Dra en rak linje som skiljer de blå prickarna från de orange. Det är vad en enda neuron gör.",
+    "teaches": "Vad en neurons vikter och bias gör, och varför en rak linje inte alltid räcker.",
+    "module": "neuralt-natverk"
   }
 ]
