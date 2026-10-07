@@ -1,7 +1,7 @@
 {
   "name": "nastasteg",
   "private": true,
-  "description": "learnai.se – AI förklarat från grunden, med kortfilmen NÄSTA STEG som ingång.",
+  "description": "ilearnai.se – AI förklarat från grunden, med kortfilmen NÄSTA STEG som ingång.",
   "type": "module",
   "engines": {
     "node": ">=22"

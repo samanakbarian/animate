@@ -1,6 +1,10 @@
 export const SITE = {
-  name: 'LearnAI',
-  domain: 'learnai.se',
+  name: 'iLearnAI',
+  domain: 'ilearnai.se',
+  url: 'https://ilearnai.se',
+  /** Grundaren – visas på om-sidan och i strukturerad data, llms.txt och humans.txt. */
+  founder: { name: 'Saman Akbarian', role: 'Grundare', email: 'saman.akbarian@gmail.com' },
+  foundingYear: '2026',
   description: 'Så fungerar AI, förklarat med korta filmer som du kan pausa och prova själv.',
   nav: [
     { href: '/', label: 'Filmen' },

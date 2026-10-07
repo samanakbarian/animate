@@ -1,14 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
 ---
 
-<Base title="Om" description="Vad learnai.se är och hur filmerna är gjorda.">
+<Base title="Om" description={`Vad ${SITE.name} är, vem som grundade sajten och hur filmerna är gjorda.`}>
   <article class="wrap page prose">
-    <p class="eyebrow">learnai.se</p>
-    <h1>Om LearnAI</h1>
+    <p class="eyebrow">{SITE.domain}</p>
+    <h1>Om {SITE.name}</h1>
     <p>
       AI dyker upp på jobbet, i skolan och i telefonen, men det är svårt att hitta förklaringar av hur tekniken fungerar som inte antingen
       är fulla av formler eller så förenklade att de blir fel. Den här sajten försöker ligga någonstans mittemellan.
+    </p>
+    <h2>Grundare</h2>
+    <p>
+      {SITE.name} grundades {SITE.foundingYear} av <strong>{SITE.founder.name}</strong>, som också står för innehållet och utvecklingen av
+      sajten.
     </p>
     <h2>Så är filmerna gjorda</h2>
     <p>
@@ -21,8 +27,8 @@ import Base from '../layouts/Base.astro';
     </p>
     <h2>Kontakt</h2>
     <p>
-      Har du frågor eller idéer, eller vill du använda materialet i undervisningen? Mejla
-      <a href="mailto:saman.akbarian@gmail.com">saman.akbarian@gmail.com</a>.
+      Har du frågor eller idéer, eller vill du använda materialet i undervisningen? Mejla {SITE.founder.name} på
+      <a href={`mailto:${SITE.founder.email}`}>{SITE.founder.email}</a>.
     </p>
   </article>
 </Base>

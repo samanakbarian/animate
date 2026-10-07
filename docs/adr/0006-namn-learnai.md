@@ -1,6 +1,6 @@
 # 0006 – Sajten heter LearnAI och ligger på learnai.se
 
-- **Status:** beslutad
+- **Status:** ersatt av 0008
 - **Datum:** 2026-10-07
 
 ## Sammanhang

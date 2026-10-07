@@ -5,7 +5,7 @@
 
 ## Sammanhang
 
-LearnAI ska ha korta lärspel utöver modulerna (backloggen, R2). Modulerna är filmer som är en ren funktion
+iLearnAI ska ha korta lärspel utöver modulerna (backloggen, R2). Modulerna är filmer som är en ren funktion
 av tiden (ADR 0003, 0004). Ett spel styrs i stället av spelarens drag, och behöver banor, poäng och resultat.
 
 ## Beslut

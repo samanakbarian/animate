@@ -5,6 +5,24 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (4) – iLearnAI: namn, logga, grundare och sitemap
+
+**Vad**
+
+- Nytt namn: iLearnAI på ilearnai.se (ADR 0008 ersätter 0006).
+- Logga: ett ”i” vars prick är en neuron. `public/mark.svg`, `logo.svg`, `favicon.svg`, `apple-touch-icon.png`
+  och `og.png`. Sidhuvudet använder `components/Logo.astro`.
+- Grundaren Saman Akbarian finns i `SITE.founder`. Uppgiften syns på om-sidan, i sidfoten, i JSON-LD
+  (Organization, Person och WebSite), i `meta author` och i endpoints för `humans.txt` och `llms.txt`.
+  `sitemap.xml` och `robots.txt` byggs ur innehållssamlingarna, så nya moduler och spel kommer med automatiskt.
+
+**Fällor**
+
+- PNG-bilderna renderades med Playwright från en HTML-mall med sajtens typsnitt (fontsource-filerna i
+  node_modules). Mallen ligger inte i repot. Gör om den efter `og.png` om loggan ändras.
+
+---
+
 ## 2026-10-07 (3) – Spelet Dra gränsen
 
 **Vad**

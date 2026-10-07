@@ -16,8 +16,9 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
 - [x] Modul 5 – Språkmodellen (liten seedad trigrammodell, temperatur, slumpfrö)
 - [x] Modul 8 – Agenten (simulerad agent: tänk/agera/observera, fel och människa i loopen)
-- [x] Domän: learnai.se (ADR 0006)
-- [ ] Driftsättning på learnai.se
+- [x] Namn och domän: iLearnAI på ilearnai.se (ADR 0008)
+- [x] Logga, delningsbild, sitemap, robots.txt, llms.txt och grundare i strukturerad data
+- [ ] Driftsättning på ilearnai.se
 
 ## Version 2
 

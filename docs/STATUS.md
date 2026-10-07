@@ -6,7 +6,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 ## Nuläge
 
-- Sajten heter **LearnAI** och ska ligga på **learnai.se** (ADR 0006). Målet: en stor utbildningssajt om AI med
+- Sajten heter **iLearnAI** och ska ligga på **ilearnai.se** (ADR 0008). Logga, delningsbild, JSON-LD med grundaren
+  Saman Akbarian, `sitemap.xml`, `robots.txt`, `llms.txt` och `humans.txt` finns. Målet: en stor utbildningssajt om AI med
   moduler, spel, lärvägar och skolmaterial. Se backloggen.
 
 - Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (10 st), `tools/render`.
@@ -36,7 +37,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
    för webbläsare utan WebGL2 och för svaga mobiler.
 2. Fler spel enligt backloggen (R2): Hallucinationsjakten, Spärrvakten, Tokenjakten, Vem är ”den”?,
    AI-tidslinjen, och quiz i modulerna.
-3. Driftsättning på **learnai.se** när domänen är köpt (Cloudflare Pages).
+3. Driftsättning på **ilearnai.se** när domänen är köpt (Cloudflare Pages).
 4. Besöksstatistik utan kakor och delningsbilder (og:image).
 
 ## Kända problem och fällor
