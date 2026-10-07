@@ -17,3 +17,18 @@ export const SITE = {
 
 export const STATUS_LABEL = { planerad: 'Kommer senare', 'under-arbete': 'Under arbete', publicerad: 'Klar' } as const;
 export const STAGE_LABEL = { mvp: 'Grunderna', v2: 'Fördjupning', senare: 'På gång' } as const;
+
+/** En egen färg per modul (efter ordning), så att korten inte ser likadana ut. Fungerar i alla teman. */
+export const MODULE_COLORS = [
+  '#e07a52',
+  '#4f8fbf',
+  '#6fa35a',
+  '#c99a2e',
+  '#9a6bc0',
+  '#d0607a',
+  '#3c9d97',
+  '#b87a4b',
+  '#6a7fd6',
+  '#8c9a3c',
+] as const;
+export const moduleColor = (order: number) => MODULE_COLORS[(order - 1 + MODULE_COLORS.length) % MODULE_COLORS.length];

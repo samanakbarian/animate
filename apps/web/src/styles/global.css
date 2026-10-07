@@ -1,3 +1,11 @@
+/* Rubriker i Fraunces (mjuk serif med lite personlighet), brödtext i Atkinson Hyperlegible
+   (gjord för läsbarhet) och anteckningar i Caveat (handskrift). Inter finns kvar för filmen
+   och modulernas scener, mono för siffror och kod. */
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource/atkinson-hyperlegible/400.css';
+@import '@fontsource/atkinson-hyperlegible/400-italic.css';
+@import '@fontsource/atkinson-hyperlegible/700.css';
+@import '@fontsource/caveat/600.css';
 @import '@fontsource/inter/300.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/jetbrains-mono/300.css';
@@ -16,7 +24,9 @@
   --dim: #9aa5b0;
   --cold: #9db6d6;
   --warm: #c8643f;
-  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-hand: 'Caveat', 'Segoe Print', cursive;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --measure: 68ch;
   --gutter: clamp(16px, 4vw, 40px);
@@ -52,6 +62,8 @@
   --cold: #3dff7f;
   --warm: #ffb02e;
   --font-sans: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --font-hand: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --logo-ink: #b6ffc8;
   --logo-accent: #3dff7f;
   --logo-word: #3dff7f;
@@ -74,8 +86,13 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 300 var(--step-0) / 1.65 var(--font-sans);
+  font: 400 1.0625rem / 1.65 var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+/* Ljust tema: svagt prickat papper, som i ett anteckningsblock. */
+:root[data-theme='ljus'] body {
+  background-image: radial-gradient(rgba(27, 33, 40, 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 a {
   color: var(--cold);
@@ -91,21 +108,26 @@ a:hover {
 h1,
 h2,
 h3 {
-  font-weight: 300;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-variation-settings:
+    'SOFT' 100,
+    'WONK' 0;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   text-wrap: balance;
   margin: 0;
 }
 h1 {
   font-size: var(--step-3);
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 h2 {
   font-size: var(--step-2);
 }
 h3 {
   font-size: var(--step-1);
-  font-weight: 500;
 }
 p {
   margin: 0;
@@ -131,11 +153,23 @@ p {
   gap: 0.35em;
 }
 
+/* En handskriven anteckning ovanför rubriker och etiketter, lite snett, som i marginalen. */
 .eyebrow {
-  font: 400 var(--step--1) / 1.4 var(--font-mono);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--dim);
+  display: inline-block;
+  font: 600 1.45rem / 1.1 var(--font-hand);
+  color: var(--warm);
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+:root[data-theme='hacker'] .eyebrow {
+  font-size: var(--step--1);
+  transform: none;
+}
+/* Handritad vågig understrykning under ett ord. */
+.scribble {
+  background: no-repeat left 100% / 100% 0.32em
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 30 2, 50 11, 80 6 S 140 2, 198 7' fill='none' stroke='%23e07a52' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  padding-bottom: 0.12em;
 }
 .mono {
   font-family: var(--font-mono);
@@ -144,15 +178,14 @@ p {
 
 .chip {
   display: inline-block;
-  font: 400 0.72rem / 1 var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.4em 0.6em;
-  border: 1px solid var(--line);
+  font: 400 0.82rem / 1 var(--font-sans);
+  padding: 0.35em 0.75em;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
   color: var(--dim);
 }
 .chip[data-stage='mvp'] {
-  border-color: var(--warm);
+  background: color-mix(in srgb, var(--warm) 16%, transparent);
   color: var(--ink);
 }
 

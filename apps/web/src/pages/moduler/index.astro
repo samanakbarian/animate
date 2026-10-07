@@ -20,7 +20,7 @@ const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b
     </header>
     {STAGES.map((stage) => (
       <section aria-label={STAGE_LABEL[stage]}>
-        <h2 class="eyebrow">{STAGE_LABEL[stage]}</h2>
+        <h2 class="stage">{STAGE_LABEL[stage]}</h2>
         <div class="grid">
           {modules
             .filter((m) => m.data.stage === stage)
@@ -38,6 +38,9 @@ const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b
     display: grid;
     gap: 3rem;
     padding-block: 4rem;
+  }
+  .stage {
+    font-size: var(--step-2);
   }
   .grid {
     display: grid;

@@ -69,4 +69,9 @@ const interactive = hasInteractive(slug);
     border: 1px solid var(--line);
     color: var(--dim);
   }
+  /* Rundade hörn som korten, så att spelaren hör ihop med resten av sidan. */
+  :global(.ns-module) {
+    border-radius: 16px;
+    overflow: hidden;
+  }
 </style>

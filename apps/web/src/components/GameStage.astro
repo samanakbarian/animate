@@ -37,4 +37,9 @@ const { slug, moduleHref, moduleTitle } = Astro.props;
     padding: 2rem;
     color: var(--dim);
   }
+  /* Rundade hörn som korten, så att spelaren hör ihop med resten av sidan. */
+  :global(.ns-game) {
+    border-radius: 16px;
+    overflow: hidden;
+  }
 </style>

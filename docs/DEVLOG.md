@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (8) – Personligare design
+
+**Vad**
+
+- Ny typografi och känsla (ADR 0010): Fraunces, Atkinson Hyperlegible och Caveat (fontsource). Handskrivna
+  anteckningar i stället för etiketter i versaler, handritad understrykning i startsidans rubrik, vågig markering
+  i menyn, färg och ”nr N” per modul, streckade spelkort, rundade hörn och prickat papper i ljust tema.
+- Startsidan: avsnittsrubrikerna ”Börja här” och ”Eller lär dig genom att spela” har handskrivna kommentarer.
+
+**Fällor**
+
+- `.eyebrow` används på många ställen (sidhuvuden och `dt`). Ändringen slår igenom överallt, även i modulernas
+  delrubriker (`ModuleStage.astro`).
+
+---
+
 ## 2026-10-07 (7) – Loggan Glöd och tre teman
 
 **Vad**

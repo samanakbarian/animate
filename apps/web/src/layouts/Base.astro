@@ -174,18 +174,19 @@ const jsonLd = {
     gap: 0.4rem 1.4rem;
   }
   nav a {
-    font: 400 var(--step--1) / 1 var(--font-mono);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font: 400 1rem / 1 var(--font-sans);
     color: var(--dim);
     text-decoration: none;
-    padding-block: 0.3rem;
-    border-bottom: 1px solid transparent;
+    padding-block: 0.35rem;
   }
-  nav a:hover,
+  nav a:hover {
+    color: var(--ink);
+  }
+  /* Sidan du är på: en vågig, handritad understrykning. */
   nav a[aria-current='page'] {
     color: var(--ink);
-    border-bottom-color: var(--warm);
+    text-decoration: underline wavy var(--warm) 1.5px;
+    text-underline-offset: 0.35em;
   }
   .site-footer {
     border-top: 1px solid var(--line);

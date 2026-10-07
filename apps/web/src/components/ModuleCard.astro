@@ -1,52 +1,69 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { STAGE_LABEL, STATUS_LABEL } from '../lib/site';
+import { STATUS_LABEL, moduleColor } from '../lib/site';
 
 interface Props {
   module: CollectionEntry<'modules'>;
 }
 const { module: m } = Astro.props;
+const color = moduleColor(m.data.order);
 ---
 
-<a class="card" href={`/moduler/${m.id}`}>
-  <span class="num mono">{String(m.data.order).padStart(2, '0')}</span>
+<a class="card" href={`/moduler/${m.id}`} style={`--c: ${color}`}>
+  <span class="num">nr {m.data.order}</span>
   <h3>{m.data.title}</h3>
   <p>{m.data.summary}</p>
-  <span class="meta">
-    <span class="chip" data-stage={m.data.stage}>
-      {STAGE_LABEL[m.data.stage]}
-    </span>
-    {m.data.status !== 'publicerad' && <span class="chip">{STATUS_LABEL[m.data.status]}</span>}
-  </span>
+  {m.data.status !== 'publicerad' && <span class="chip">{STATUS_LABEL[m.data.status]}</span>}
 </a>
 
 <style>
   .card {
+    position: relative;
     display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: 0.6rem;
-    padding: 1.4rem;
+    align-content: start;
+    gap: 0.5rem;
+    padding: 1.3rem 1.4rem 1.4rem;
     min-width: 0;
     background: var(--surface);
     border: 1px solid var(--line);
+    border-radius: 16px;
     color: var(--ink);
     text-decoration: none;
-    transition: border-color 0.2s;
+    overflow: hidden;
+    transition:
+      transform 0.2s,
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  /* En färgklick i hörnet, modulens egen färg. */
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -2.2rem;
+    right: -2.2rem;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background: var(--c);
+    opacity: 0.16;
+    transition: opacity 0.2s;
   }
   .card:hover {
-    border-color: var(--cold);
+    transform: translateY(-3px) rotate(-0.4deg);
+    border-color: var(--c);
+    box-shadow: 0 14px 28px -18px rgba(0, 0, 0, 0.45);
+  }
+  .card:hover::after {
+    opacity: 0.3;
   }
   .num {
-    color: var(--dim);
-    font-size: var(--step--1);
-    letter-spacing: 0.1em;
+    font: 600 1.6rem / 1 var(--font-hand);
+    color: var(--c);
   }
   p {
     color: var(--dim);
   }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+  .chip {
+    justify-self: start;
   }
 </style>

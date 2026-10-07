@@ -8,34 +8,43 @@ const { game: g } = Astro.props;
 ---
 
 <a class="card" href={`/spel/${g.id}`}>
-  <span class="kind mono">Spel</span>
+  <span class="kind">spel</span>
   <h3>{g.data.title}</h3>
   <p>{g.data.summary}</p>
+  <span class="play" aria-hidden="true">
+    Spela →
+  </span>
 </a>
 
 <style>
   .card {
     display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 0.6rem;
-    padding: 1.4rem;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.5rem;
+    padding: 1.3rem 1.4rem 1.4rem;
     min-width: 0;
     background: var(--surface);
-    border: 1px solid var(--line);
+    border: 1px dashed color-mix(in srgb, var(--warm) 55%, var(--line));
+    border-radius: 16px;
     color: var(--ink);
     text-decoration: none;
-    transition: border-color 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
   .card:hover {
-    border-color: var(--warm);
+    transform: translateY(-3px) rotate(0.4deg);
+    box-shadow: 0 14px 28px -18px rgba(0, 0, 0, 0.45);
   }
   .kind {
+    font: 600 1.5rem / 1 var(--font-hand);
     color: var(--warm);
-    font-size: var(--step--1);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
   }
   p {
     color: var(--dim);
+  }
+  .play {
+    font-weight: 700;
+    color: var(--warm);
   }
 </style>

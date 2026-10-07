@@ -15,7 +15,9 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
 
   <section class="wrap intro">
     <p class="eyebrow">2 min 30 s · från −300 000 till ∞</p>
-    <h1>Hur fungerar AI egentligen?</h1>
+    <h1>
+      Hur fungerar AI <span class="scribble">egentligen</span>?
+    </h1>
     <div class="prose">
       <p>
         Filmen ovan tar dig från de första människorna till dagens språkmodeller och vidare mot det som kanske kommer, på två och en halv
@@ -26,9 +28,10 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
   </section>
 
   <section class="wrap" aria-labelledby="start-har">
-    <h2 id="start-har" class="eyebrow">
-      Börja här
-    </h2>
+    <div class="sec-head">
+      <h2 id="start-har">Börja här</h2>
+      <span class="note">tre korta moduler att börja med ↓</span>
+    </div>
     <div class="grid">
       {launch.map((m) => (
         <ModuleCard module={m} />
@@ -40,9 +43,10 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
   </section>
 
   <section class="wrap games" aria-labelledby="spela">
-    <h2 id="spela" class="eyebrow">
-      Spela
-    </h2>
+    <div class="sec-head">
+      <h2 id="spela">Eller lär dig genom att spela</h2>
+      <span class="note">några minuter per spel ↓</span>
+    </div>
     <div class="grid">
       {games.map((g) => (
         <GameCard game={g} />
@@ -69,9 +73,19 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
   .games {
     padding-top: 3rem;
   }
+  .sec-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 1rem;
+  }
+  .note {
+    font: 600 1.35rem / 1.1 var(--font-hand);
+    color: var(--warm);
+    transform: rotate(-2deg);
+  }
   .more {
     margin-top: 1.5rem;
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
+    font-weight: 700;
   }
 </style>

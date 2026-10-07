@@ -40,6 +40,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 3. Driftsättning på **ilearnai.se** när domänen är köpt (Cloudflare Pages).
 4. Besöksstatistik utan kakor och delningsbilder (og:image).
 
+- Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, handskrivna anteckningar
+  (Caveat), en färg per modul, rundade kort och prickat papper i ljust tema.
 - Tre teman: mörk, ljus och hacker (ADR 0009). Knapp i sidhuvudet, valet sparas, annars följer sajten systemet.
 - Loggan är ”Glöd” (S2): ett i vars prick glöder. Loggförslag på designytan: https://claude.ai/artifact/GyYAeyEsuZEHTN8KAcN1x7.
 
