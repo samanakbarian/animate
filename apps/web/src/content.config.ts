@@ -1,4 +1,4 @@
-// Innehållssamlingar: förklarmoduler (Markdown) och ordlista (JSON).
+// Innehållssamlingar: förklarmoduler (Markdown), ordlista och spel (JSON).
 // Schemat är kontraktet – lägg till en modul genom att skapa en ny .md-fil.
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
@@ -34,4 +34,17 @@ const glossary = defineCollection({
   }),
 });
 
-export const collections = { modules, glossary };
+const games = defineCollection({
+  loader: file('./src/content/games.json'),
+  schema: z.object({
+    title: z.string(),
+    order: z.number().int(),
+    summary: z.string().max(160),
+    /** Vad spelet lär ut, i en mening. */
+    teaches: z.string(),
+    /** Slug för modulen som förklarar samma sak. */
+    module: z.string(),
+  }),
+});
+
+export const collections = { modules, glossary, games };

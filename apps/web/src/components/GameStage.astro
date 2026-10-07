@@ -1,0 +1,40 @@
+---
+// Spelet (klient-ö). Laddar spelpaketet och monterar spelskalet.
+interface Props {
+  slug: string;
+  moduleHref?: string;
+  moduleTitle?: string;
+}
+const { slug, moduleHref, moduleTitle } = Astro.props;
+---
+
+<div class="game-host" data-game={slug} data-module-href={moduleHref} data-module-title={moduleTitle}>
+  <p class="loading mono">Laddar spelet …</p>
+</div>
+
+<script>
+  import '@nastasteg/engine/game/game.css';
+  import { mountGame } from '@nastasteg/engine/game/shell';
+  import { GAMES } from '../lib/games';
+
+  for (const host of document.querySelectorAll<HTMLElement>('[data-game]')) {
+    const load = GAMES[host.dataset.game ?? ''];
+    if (!load) continue;
+    load()
+      .then(({ game }) => {
+        host.innerHTML = '';
+        mountGame(host, game, { moduleHref: host.dataset.moduleHref, moduleTitle: host.dataset.moduleTitle });
+      })
+      .catch((e) => {
+        console.error(e);
+        host.innerHTML = '<p class="loading">Spelet kunde inte laddas.</p>';
+      });
+  }
+</script>
+
+<style>
+  .loading {
+    padding: 2rem;
+    color: var(--dim);
+  }
+</style>

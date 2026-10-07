@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/game-gradientgolf",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Gradientgolf: slå bollen nedför felet med rätt steglängd.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*",
+    "@nastasteg/module-traning": "workspace:*"
+  }
+}

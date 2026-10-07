@@ -1,0 +1,67 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GameStage from '../../components/GameStage.astro';
+
+export async function getStaticPaths() {
+  const games = await getCollection('games');
+  return games.map((g) => ({ params: { slug: g.id }, props: { game: g } }));
+}
+
+const { game: g } = Astro.props;
+const mod = await getEntry('modules', g.data.module);
+---
+
+<Base title={g.data.title} description={g.data.summary}>
+  <article class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">Spel</p>
+      <h1>{g.data.title}</h1>
+      <p class="lead">{g.data.summary}</p>
+    </header>
+
+    <GameStage slug={g.id} moduleHref={mod ? `/moduler/${mod.id}` : undefined} moduleTitle={mod?.data.title} />
+
+    <dl class="facts">
+      <div>
+        <dt class="eyebrow">Du lär dig</dt>
+        <dd>{g.data.teaches}</dd>
+      </div>
+      {mod && (
+        <div>
+          <dt class="eyebrow">Mer i modulen</dt>
+          <dd>
+            <a href={`/moduler/${mod.id}`}>{mod.data.title} →</a>
+          </dd>
+        </div>
+      )}
+    </dl>
+    <p class="mono back">
+      <a href="/spel">← Alla spel</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1.5rem;
+    margin: 0;
+  }
+  .facts dd {
+    margin: 0.4rem 0 0;
+  }
+  .back {
+    font-size: var(--step--1);
+  }
+</style>

@@ -1,0 +1,9 @@
+// Register över spel. Lägg till en rad här när ett nytt spelpaket finns
+// (packages/game-<slug>) och en post i content/games.json.
+// Varje spel blir en egen chunk som bara laddas på sin sida.
+import type { GameDefinition } from '@nastasteg/engine/game/types';
+
+export const GAMES: Record<string, () => Promise<{ game: GameDefinition }>> = {
+  gradientgolf: () => import('@nastasteg/game-gradientgolf'),
+  'sla-maskinen': () => import('@nastasteg/game-sla-maskinen'),
+};

@@ -7,6 +7,7 @@
   "sideEffects": false,
   "exports": {
     "./module/player.css": "./src/module/player.css",
+    "./game/game.css": "./src/game/game.css",
     "./*": "./src/*.ts"
   },
   "scripts": {

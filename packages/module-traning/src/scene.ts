@@ -1,14 +1,14 @@
 // Scenen: fellandskapet som höjdkarta med en boll som rullar nedför, banan den
 // tagit och nästa steg som pil. Bredvid (under på mobil) felkurvan per steg.
 
-import { clamp, fract, lerp, smoothstep } from '@nastasteg/engine/core/math';
+import { clamp, lerp, smoothstep } from '@nastasteg/engine/core/math';
 import { PALETTE as C, createSurface, rgba } from '@nastasteg/engine/module/canvas';
 import { formatNumber } from '@nastasteg/engine/module/params';
 import type { Mode, ModuleScene, Params } from '@nastasteg/engine/module/types';
 import { DOMAIN, MAX_STEPS, STARTS, gradient, loss, run } from './descent';
+import { paintLandscape } from './landscape';
 
 const LOSS_MAX = 8;
-const BG = [7, 9, 11];
 
 export function createDescentScene(host: HTMLElement): ModuleScene {
   const S = createSurface(host);
@@ -21,24 +21,7 @@ export function createDescentScene(host: HTMLElement): ModuleScene {
     const key = `${w}x${h}`;
     if (key === heatKey) return;
     heatKey = key;
-    heat.width = w;
-    heat.height = h;
-    const hc = heat.getContext('2d')!;
-    const img = hc.createImageData(w, h);
-    for (let j = 0; j < h; j++) {
-      for (let i = 0; i < w; i++) {
-        const x = lerp(DOMAIN.x0, DOMAIN.x1, (i + 0.5) / w);
-        const y = lerp(DOMAIN.y1, DOMAIN.y0, (j + 0.5) / h);
-        const v = Math.sqrt(Math.max(loss(x, y) + 0.4, 0)) / 3.8;
-        const band = Math.floor(clamp(v) * 14) / 14;
-        const edge = fract(v * 14) < 0.07 ? 0.12 : 0;
-        const m = 0.04 + 0.42 * band + edge;
-        const o = (j * w + i) * 4;
-        for (let c = 0; c < 3; c++) img.data[o + c] = lerp(BG[c], C.cold[c], m);
-        img.data[o + 3] = 255;
-      }
-    }
-    hc.putImageData(img, 0, 0);
+    paintLandscape(heat, w, h);
   }
 
   return {

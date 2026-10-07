@@ -5,6 +5,7 @@ export const SITE = {
   nav: [
     { href: '/', label: 'Filmen' },
     { href: '/moduler', label: 'Moduler' },
+    { href: '/spel', label: 'Spel' },
     { href: '/ordlista', label: 'Ordlista' },
     { href: '/om', label: 'Om' },
   ],

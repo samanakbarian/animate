@@ -5,7 +5,9 @@
   "description": "Modul 2 – Träning: gradientnedstigning i ett fellandskap.",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./descent": "./src/descent.ts",
+    "./landscape": "./src/landscape.ts"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json"

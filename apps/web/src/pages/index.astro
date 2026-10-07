@@ -3,9 +3,11 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
 import ModuleCard from '../components/ModuleCard.astro';
+import GameCard from '../components/GameCard.astro';
 
 const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
 const launch = modules.filter((m) => m.data.stage === 'mvp');
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base>
@@ -36,6 +38,20 @@ const launch = modules.filter((m) => m.data.stage === 'mvp');
       <a href="/moduler">Alla {modules.length} moduler →</a>
     </p>
   </section>
+
+  <section class="wrap games" aria-labelledby="spela">
+    <h2 id="spela" class="eyebrow">
+      Spela
+    </h2>
+    <div class="grid">
+      {games.map((g) => (
+        <GameCard game={g} />
+      ))}
+    </div>
+    <p class="more">
+      <a href="/spel">Alla spel →</a>
+    </p>
+  </section>
 </Base>
 
 <style>
@@ -49,6 +65,9 @@ const launch = modules.filter((m) => m.data.stage === 'mvp');
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: 1rem;
     margin-top: 1rem;
+  }
+  .games {
+    padding-top: 3rem;
   }
   .more {
     margin-top: 1.5rem;

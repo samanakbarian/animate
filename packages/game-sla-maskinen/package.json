@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/game-sla-maskinen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Slå maskinen: gissa nästa ord före språkmodellen.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*",
+    "@nastasteg/module-sprakmodellen": "workspace:*"
+  }
+}

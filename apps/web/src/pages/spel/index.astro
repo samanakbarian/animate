@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import GameCard from '../../components/GameCard.astro';
+
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Spel" description="Korta spel där du lär dig hur AI fungerar genom att prova själv.">
+  <div class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">{games.length} spel</p>
+      <h1>Spel</h1>
+      <p>Varje spel tar några minuter och handlar om en idé från modulerna. Fler spel kommer.</p>
+    </header>
+    <div class="grid">
+      {games.map((g) => (
+        <GameCard game={g} />
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 4rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+  }
+</style>

@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 const { module: m, next } = Astro.props;
 const { Content } = await render(m);
 const terms = (await getCollection('glossary')).filter((g) => g.data.module === m.id);
+const games = (await getCollection('games')).filter((g) => g.data.module === m.id);
 ---
 
 <Base title={m.data.title} description={m.data.summary}>
@@ -40,6 +41,14 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
         <dd>{m.data.interactive}</dd>
       </div>
     </dl>
+
+    {games.length > 0 && (
+      <p class="play">
+        {games.map((g) => (
+          <a href={`/spel/${g.id}`}>Spela {g.data.title} →</a>
+        ))}
+      </p>
+    )}
 
     <div class="prose">
       <Content />
@@ -92,5 +101,14 @@ const terms = (await getCollection('glossary')).filter((g) => g.data.module === 
   }
   .next {
     font-size: var(--step--1);
+  }
+  .play {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+  }
+  .play a {
+    color: var(--warm);
   }
 </style>

@@ -1,0 +1,126 @@
+/* Spelskalet. All stil är avgränsad till .ns-game. */
+.ns-game {
+  --g-bg: #07090b;
+  --g-surface: #0e1216;
+  --g-line: #222a32;
+  --g-ink: #e8ebee;
+  --g-dim: #9aa5b0;
+  --g-cold: #9db6d6;
+  --g-warm: #c8643f;
+  --g-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  display: grid;
+  background: var(--g-bg);
+  border: 1px solid var(--g-line);
+  color: var(--g-ink);
+  container-type: inline-size;
+}
+.ns-game * {
+  box-sizing: border-box;
+}
+.ns-game .nsg-head,
+.ns-game .nsg-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  font: 400 0.8rem / 1.3 var(--g-mono);
+  color: var(--g-dim);
+}
+.ns-game .nsg-head {
+  border-bottom: 1px solid var(--g-line);
+}
+.ns-game .nsg-foot {
+  border-top: 1px solid var(--g-line);
+  min-height: 2.6rem;
+}
+.ns-game .nsg-score {
+  color: var(--g-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ns-game .nsg-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.ns-game .nsg-host {
+  position: absolute;
+  inset: 0;
+}
+.ns-game .nsg-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(7, 9, 11, 0.94);
+  text-align: center;
+}
+.ns-game .nsg-overlay[hidden] {
+  display: none;
+}
+.ns-game .nsg-overlay h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 4cqi, 2rem);
+  font-weight: 500;
+}
+.ns-game .nsg-overlay p {
+  margin: 0 auto;
+  max-width: 34em;
+  color: var(--g-dim);
+  line-height: 1.5;
+}
+.ns-game .nsg-levels {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 30rem;
+  margin: 0 auto;
+  width: 100%;
+}
+.ns-game .nsg-level-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+.ns-game .nsg-level-btn small {
+  color: var(--g-dim);
+  font-family: var(--g-mono);
+}
+.ns-game button {
+  font: inherit;
+  color: var(--g-ink);
+  background: transparent;
+  border: 1px solid var(--g-line);
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+.ns-game button:hover {
+  border-color: var(--g-cold);
+}
+.ns-game button.nsg-primary {
+  border-color: var(--g-warm);
+  background: rgba(200, 100, 63, 0.15);
+}
+.ns-game :focus-visible {
+  outline: 2px solid var(--g-cold);
+  outline-offset: 2px;
+}
+.ns-game .nsg-stars {
+  font-size: 2rem;
+  letter-spacing: 0.2em;
+  color: var(--g-warm);
+}
+.ns-game .nsg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+/* Smal behållare (mobil): stående spelyta. */
+@container (max-width: 560px) {
+  .ns-game .nsg-stage {
+    aspect-ratio: 4 / 5;
+  }
+}
