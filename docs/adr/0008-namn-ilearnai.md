@@ -11,7 +11,8 @@ besökare, sökmotorer och AI-modeller.
 ## Beslut
 
 - Namn **iLearnAI**, domän **ilearnai.se**. Kortfilmen heter fortfarande NÄSTA STEG, och paketen `@nastasteg/*`.
-- Logga: märket är ett gement ”i” vars prick är en neuron (orange) med två ingångar (kalla). Filer i
+- Logga: märket är ett gement ”i” vars prick är en neuron (orange) med två mjukt böjda ingångar (ljusblå).
+  Ordbilden är satt i det rundade typsnittet Nunito 800 (”mjuk neuron”, S1 på designytan). Filer i
   `apps/web/public`: `mark.svg`, `logo.svg`, `favicon.svg`, `apple-touch-icon.png` och delningsbilden `og.png`
   (1200 × 630). I sidhuvudet ritas loggan av `components/Logo.astro` i sajtens eget typsnitt.
 - Grundaren (Saman Akbarian) och sajtens fakta ligger i `SITE` (`apps/web/src/lib/site.ts`). De syns på

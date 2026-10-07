@@ -5,6 +5,18 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (6) – Mjukare logga
+
+**Vad**
+
+- Loggan blev mjukare (S1 på designytan): böjda ingångar, rundare former, varmare orange (#e07a52), ljusare blå
+  (#a9c4e4) och Nunito 800 i ordbilden (`@fontsource/nunito`, importeras bara i `Logo.astro`). Favicon, mark,
+  logo, apple-touch-icon och og.png är omgjorda. ”Grundad av” är borttaget ur sidfoten. Grundaren finns kvar i
+  JSON-LD, meta author, llms.txt, humans.txt och på om-sidan.
+- Alternativen S2 (glöd) och S3 (pratbubbla) ligger på designytan.
+
+---
+
 ## 2026-10-07 (5) – Hallucinationsjakten och loggförslag
 
 **Vad**
