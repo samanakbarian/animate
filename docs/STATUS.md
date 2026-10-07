@@ -39,7 +39,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
    AI-tidslinjen, och quiz i modulerna.
 3. Driftsättning: `netlify.toml` finns. Sajten är driftsatt som eget Netlify-projekt (gren master, apps/web).
    Lägg till ilearnai.se där när domänen är köpt.
-4. Besöksstatistik utan kakor och delningsbilder (og:image).
+4. Besöksstatistik utan kakor.
+5. Backend: **avvaktar** (ADR 0011 föreslår Firebase i Google Cloud). Bygg inget förrän grundaren bestämt riktning.
 
 - Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, kursiva anteckningar, en färg per modul, rundade kort och prickat papper i ljust tema.
 - Tre teman: mörk, ljus och hacker (ADR 0009). Knapp i sidhuvudet, valet sparas, annars följer sajten systemet.
