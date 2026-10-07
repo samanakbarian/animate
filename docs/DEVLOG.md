@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (3) – Spelet Dra gränsen
+
+**Vad**
+
+- `game-dra-gransen`: spelaren drar en rak linje (två handtag, pekstyrning) som delar planet, precis som en neuron.
+  ”Byt sida” vänder vilken sida som är blå. Fyra banor: två grupper, smal glipa, överlapp och ringen.
+- `bestAccuracy` söker över vinklar (0,5°) med exakt tröskel per vinkel. Stjärnorna räknas mot den bästa
+  möjliga linjen, så att även ringen (bäst under 80 %) kan ge tre stjärnor.
+- Prickarna har ett fast frö per bana (`new Rng(100 + bana)`), inte `api.rng`, så att testerna gäller exakt
+  de prickar spelaren ser. 107 tester.
+
+**Fällor**
+
+- Den blå sidan ritas som ett halvplan i världskoordinater och konverteras sedan. Ett rutnät gav synliga skarvar.
+
+---
+
 ## 2026-10-07 (2) – Spelramverk, Gradientgolf och Slå maskinen
 
 **Vad**

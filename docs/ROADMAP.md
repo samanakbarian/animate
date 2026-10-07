@@ -31,7 +31,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Spelramverk (ADR 0007), spelsida och länkar till modulerna
 - [x] Gradientgolf
 - [x] Slå maskinen
-- [ ] Dra gränsen, Hallucinationsjakten, Spärrvakten, Tokenjakten, Vem är ”den”?, AI-tidslinjen
+- [x] Dra gränsen
+- [ ] Hallucinationsjakten, Spärrvakten, Tokenjakten, Vem är ”den”?, AI-tidslinjen
 
 ## Senare
 
