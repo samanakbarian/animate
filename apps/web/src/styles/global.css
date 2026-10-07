@@ -4,7 +4,9 @@
 @import '@fontsource/jetbrains-mono/400.css';
 
 /* Layout: en smal läskolumn (~68 tecken) under en filmisk 2,39:1-yta.
-   Samma mörka, kalla värld som filmen – ett varmt terrakotta används sparsamt. */
+   Tre teman (data-theme på <html>, sätts av ett skript i <head> före första målningen):
+   mörk (standard, samma kalla värld som filmen), ljus och hacker (grönt på svart, allt i mono).
+   Filmen, modulerna och spelen behåller sin mörka bildyta i alla teman, som en bioduk. */
 :root {
   color-scheme: dark;
   --bg: #07090b;
@@ -23,6 +25,43 @@
   --step-1: 1.25rem;
   --step-2: 1.6rem;
   --step-3: clamp(2rem, 5vw, 3.2rem);
+  --logo-ink: #eef0f2;
+  --logo-accent: #e07a52;
+  --logo-word: #a9c4e4;
+}
+:root[data-theme='ljus'] {
+  color-scheme: light;
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --line: #e0dad0;
+  --ink: #1b2128;
+  --dim: #5a6470;
+  --cold: #355d8c;
+  --warm: #b4532f;
+  --logo-ink: #1b2128;
+  --logo-accent: #e07a52;
+  --logo-word: #355d8c;
+}
+:root[data-theme='hacker'] {
+  color-scheme: dark;
+  --bg: #020604;
+  --surface: #06110a;
+  --line: #123a1f;
+  --ink: #b6ffc8;
+  --dim: #4cc06c;
+  --cold: #3dff7f;
+  --warm: #ffb02e;
+  --font-sans: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+  --logo-ink: #b6ffc8;
+  --logo-accent: #3dff7f;
+  --logo-word: #3dff7f;
+}
+:root[data-theme='hacker'] body {
+  text-shadow: 0 0 6px rgba(61, 255, 127, 0.18);
+}
+:root[data-theme='hacker'] ::selection {
+  background: #3dff7f;
+  color: #020604;
 }
 
 * {

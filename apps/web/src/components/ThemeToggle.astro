@@ -1,0 +1,73 @@
+---
+// Temaväljare: mörk → ljus → hacker. Valet sparas i webbläsaren. Utan val följer
+// sajten systemets ljust/mörkt (se skriptet i Base.astro).
+---
+
+<button type="button" class="theme" data-theme-toggle aria-live="polite">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="label">Tema</span>
+</button>
+
+<script>
+  const THEMES = [
+    ['mork', 'Mörk'],
+    ['ljus', 'Ljus'],
+    ['hacker', 'Hacker'],
+  ] as const;
+  const COLORS: Record<string, string> = { mork: '#07090b', ljus: '#f6f3ee', hacker: '#020604' };
+
+  function apply(theme: string, save: boolean) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name=theme-color]')?.setAttribute('content', COLORS[theme] ?? COLORS.mork);
+    if (save) {
+      try {
+        localStorage.setItem('ns-theme', theme);
+      } catch {
+        // ingen lagring: valet gäller bara den här sidan
+      }
+    }
+    const i = THEMES.findIndex(([id]) => id === theme);
+    const next = THEMES[(i + 1) % THEMES.length];
+    for (const b of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+      b.querySelector('.label')!.textContent = THEMES[Math.max(0, i)][1];
+      b.setAttribute('aria-label', `Tema: ${THEMES[Math.max(0, i)][1].toLowerCase()}. Byt till ${next[1].toLowerCase()}.`);
+    }
+  }
+
+  apply(document.documentElement.dataset.theme ?? 'mork', false);
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+    b.addEventListener('click', () => {
+      const cur = document.documentElement.dataset.theme ?? 'mork';
+      const i = THEMES.findIndex(([id]) => id === cur);
+      apply(THEMES[(i + 1) % THEMES.length][0], true);
+    });
+  }
+</script>
+
+<style>
+  .theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font: 400 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45em 0.8em;
+    cursor: pointer;
+  }
+  .theme:hover {
+    color: var(--ink);
+    border-color: var(--cold);
+  }
+  .dot {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--ink) 50%, var(--bg) 50%);
+    border: 1px solid var(--ink);
+  }
+</style>

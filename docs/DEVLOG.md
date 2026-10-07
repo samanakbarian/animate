@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-07 (7) – Loggan Glöd och tre teman
+
+**Vad**
+
+- Loggan är ”Glöd” (S2): i-pricken med två mjuka ringar och Nunito i ordbilden. Färgerna i `Logo.astro` kommer från
+  temat. Mark, favicon, logo.svg, apple-touch-icon och og.png är omgjorda.
+- Teman (ADR 0009): `mork`, `ljus` och `hacker` som CSS-variabler. Ett inline-skript i `<head>` sätter temat före
+  första målningen, och knappen `ThemeToggle.astro` växlar och sparar. På mobil ligger knappen bredvid loggan och
+  menyn på raden under.
+
+**Fällor**
+
+- Inline-skriptet i Base.astro lintas: `let`/`const` och `catch {}` med kommentar, annars blir `pnpm check` rött.
+- Filmen, modulerna och spelen är alltid mörka. Det är avsiktligt (ADR 0009).
+
+---
+
 ## 2026-10-07 (6) – Mjukare logga
 
 **Vad**
