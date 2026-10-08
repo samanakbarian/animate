@@ -7,30 +7,46 @@ interactive: 'Dela upp långa ord i tokens och räkna med ord på en karta: kung
 stage: v2
 status: publicerad
 quiz:
-  - q: 'Varför delas text upp i tokens?'
-    right: 'Datorn räknar med tal, och varje bit får ett eget nummer'
+  - kind: 'förståelse'
+    see: 'ord-som-tal#tokens'
+    q: 'Varför görs text om till tal?'
+    right: 'Ett neuralt nätverk kan bara räkna med tal'
+    why: 'Varje token får ett nummer och sedan en lista med tal som nätverket räknar med.'
     wrong:
-      - 'För att rätta stavfel'
-      - 'För att texten ska ta mindre plats på skärmen'
-    why: 'En token är en bit text, ofta ett ord eller en del av ett ord, som får ett nummer.'
-  - q: 'Vad är en inbäddning?'
-    right: 'En lista med tal som beskriver en token'
-    wrong:
-      - 'En bild av ordet'
-      - 'En översättning till engelska'
-    why: 'Inbäddningen placerar ordet i ett rum där närhet betyder liknande användning.'
-  - q: 'Vilka ord får liknande inbäddningar?'
+      - text: 'För att texten ska ta mindre plats'
+        why: 'Det handlar inte om plats. Tal är det enda nätverket kan arbeta med.'
+      - text: 'För att dölja texten för modellen'
+        why: 'Inget döljs. Talen bär information om orden.'
+  - kind: 'förståelse'
+    see: 'ord-som-tal#karta'
+    q: 'Vilka ord får liknande inbäddningar?'
     right: 'Ord som används i liknande sammanhang'
-    wrong:
-      - 'Ord som börjar på samma bokstav'
-      - 'Ord som är lika långa'
     why: '”Hund” och ”katt” förekommer i liknande meningar och hamnar därför nära varandra.'
-  - q: 'Kung minus man plus kvinna hamnar nära …'
-    right: 'drottning'
     wrong:
-      - 'prinsessa'
-      - 'slott'
-    why: 'Skillnaden mellan man och kvinna blir en riktning i rummet som man kan räkna med.'
+      - text: 'Ord som stavas nästan likadant'
+        why: '”Hund” och ”hundra” stavas nästan likadant men används helt olika. Det är användningen som räknas.'
+      - text: 'Ord som är lika långa'
+        why: 'Längden spelar ingen roll. Det är sammanhangen orden förekommer i som avgör.'
+  - kind: 'tillämpning'
+    see: 'ord-som-tal#karta'
+    q: 'En modell har läst mycket text om husdjur. Var på kartan hamnar troligen ordet ”valp”?'
+    right: 'Nära ”hund”'
+    why: '”Valp” används i ungefär samma meningar som ”hund”.'
+    wrong:
+      - text: 'Nära ”vagn”, eftersom båda börjar på v'
+        why: 'Bokstäverna spelar ingen roll för var ordet hamnar. Sammanhanget gör det.'
+      - text: 'Långt från alla andra ord, eftersom det är ovanligt'
+        why: 'Även ovanliga ord hamnar nära ord som används på liknande sätt.'
+  - kind: 'förutsägelse'
+    see: 'ord-som-tal#rakna'
+    q: 'Du räknar kung − man + kvinna. Var hamnar pilen?'
+    right: 'Nära drottning'
+    why: 'Steget från man till kvinna är en riktning. Lägger man den till kung hamnar man vid drottning.'
+    wrong:
+      - text: 'Nära kvinna'
+        why: 'Man drar bara bort det som skiljer man från kvinna. Det kungliga finns kvar.'
+      - text: 'Tillbaka vid kung'
+        why: 'Steget från man till kvinna flyttar pilen, så den hamnar inte på samma ställe.'
 ---
 
 En dator kan bara räkna med tal. Därför delas texten först upp i bitar, så kallade tokens. Sedan får varje bit en lista med tal, en inbäddning. Ord som brukar förekomma i liknande sammanhang får liknande tal.

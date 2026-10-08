@@ -6,6 +6,7 @@ import { z } from 'astro/zod';
 
 export const STAGES = ['mvp', 'v2', 'senare'] as const;
 export const STATUSES = ['planerad', 'under-arbete', 'publicerad'] as const;
+export const QUIZ_KINDS = ['förståelse', 'tillämpning', 'förutsägelse'] as const;
 
 const modules = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/modules' }),
@@ -21,14 +22,20 @@ const modules = defineCollection({
     status: z.enum(STATUSES),
     /** Kapitel i filmen som modulen fördjupar (StepId i @nastasteg/film). */
     filmChapter: z.string().optional(),
-    /** Quiz i slutet av modulen: ett rätt svar, några fel och en förklaring. */
+    /**
+     * Quiz i slutet av modulen: två frågor om förståelse, en tillämpning och en där
+     * man förutsäger vad simuleringen gör. Varje fel svar förklarar missförståndet.
+     * `see` pekar på ett kapitel i modulens film: ”<del-id>#<kapitel-id>”.
+     */
     quiz: z
       .array(
         z.object({
+          kind: z.enum(QUIZ_KINDS),
+          see: z.string().regex(/^[a-z0-9-]+#[a-z0-9-]+$/),
           q: z.string(),
           right: z.string(),
-          wrong: z.array(z.string()).min(1),
           why: z.string().max(160),
+          wrong: z.array(z.object({ text: z.string(), why: z.string().max(160) })).min(2),
         }),
       )
       .optional(),

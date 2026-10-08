@@ -1,50 +1,70 @@
 ---
 // Quiz i slutet av en modul. Frågorna kommer från modulens frontmatter.
-// Svarsalternativen blandas i en fast ordning (hash av frågan), så att rätt
-// svar inte alltid står först men sidan ser likadan ut varje gång.
-interface Question {
-  q: string;
-  right: string;
-  wrong: string[];
-  why: string;
-}
+// Varje alternativ har en egen förklaring, och fel svar länkar tillbaka till
+// kapitlet i modulens film där saken visas (data-seek, se ModuleStage.astro).
+import { INTERACTIVE_MODULES } from '../lib/interactive';
+import { KIND_LABEL, type QuizQuestion, orderedOptions, parseSee } from '../lib/quiz';
+
 interface Props {
   slug: string;
-  quiz: Question[];
+  quiz: QuizQuestion[];
 }
 const { slug, quiz } = Astro.props;
 
-const hash = (s: string) => [...s].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) | 0, 7) >>> 0;
-const questions = quiz.map((x) => {
-  const options = [x.right, ...x.wrong];
-  const at = hash(x.q) % options.length;
-  [options[0], options[at]] = [options[at], options[0]];
-  return { ...x, options, rightIndex: at };
-});
+// Kapitlens namn hämtas från modulens manus vid bygget.
+const load = INTERACTIVE_MODULES[slug];
+const parts = load ? (await load()).parts : [];
+const chapterTitle = (see: string) => {
+  const { part, chapter } = parseSee(see);
+  return parts.find((p) => p.id === part)?.chapters.find((c) => c.id === chapter)?.title;
+};
+
+const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: chapterTitle(x.see) }));
 ---
 
 <section class="quiz" data-quiz={slug} aria-labelledby={`quiz-${slug}`}>
   <h2 id={`quiz-${slug}`}>Testa dig själv</h2>
-  <p class="note">{questions.length} frågor om modulen. Välj ett svar per fråga.</p>
+  <p class="note">
+    {questions.length} frågor. Två om grunderna, en där du använder det du lärt dig och en där du förutsäger vad som händer.
+  </p>
   <ol>
-    {questions.map((x) => (
-      <li class="q" data-right={x.rightIndex}>
-        <p class="qt">{x.q}</p>
-        <div class="opts">
-          {x.options.map((o, i) => (
-            <button type="button" data-i={i}>
-              {o}
-            </button>
-          ))}
+    {questions.map((x, qi) => (
+      <li class="q">
+        <fieldset>
+          <legend>
+            <span class="kind">
+              Fråga {qi + 1} av {questions.length} · {KIND_LABEL[x.kind]}
+            </span>
+            <span class="qt">{x.q}</span>
+          </legend>
+          <div class="opts">
+            {x.options.map((o) => (
+              <button type="button" data-right={o.right ? '1' : '0'} data-why={o.why}>
+                {o.text}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        <div class="why" id={`quiz-${slug}-why-${qi}`} hidden>
+          <p>
+            <b class="verdict" /> <span class="explain" />
+          </p>
+          <p class="right-was" hidden>
+            Rätt svar: <span />. {x.why}
+          </p>
+          {x.chapter && (
+            <p class="back" hidden>
+              <a href={`#del-${parseSee(x.see).part}`} data-seek={x.see}>
+                Se kapitlet ”{x.chapter}” i filmen igen ↑
+              </a>
+            </p>
+          )}
         </div>
-        <p class="why" hidden>
-          <b class="verdict" /> {x.why}
-        </p>
       </li>
     ))}
   </ol>
-  <div class="result" aria-live="polite" hidden>
-    <p class="score"></p>
+  <div class="result" hidden>
+    <p class="score" role="status"></p>
     <button type="button" class="again">
       Gör om
     </button>
@@ -68,17 +88,28 @@ const questions = quiz.map((x) => {
     };
 
     items.forEach((li) => {
-      const correct = Number(li.dataset.right);
-      li.querySelectorAll<HTMLButtonElement>('button').forEach((b) =>
+      const buttons = [...li.querySelectorAll<HTMLButtonElement>('.opts button')];
+      const why = li.querySelector<HTMLDivElement>('.why')!;
+      buttons.forEach((b) =>
         b.addEventListener('click', () => {
           if (li.classList.contains('done')) return;
-          const ok = Number(b.dataset.i) === correct;
+          const ok = b.dataset.right === '1';
+          const correct = buttons.find((x) => x.dataset.right === '1')!;
           li.classList.add('done');
           b.classList.add(ok ? 'right' : 'wrong');
-          li.querySelectorAll<HTMLButtonElement>('button')[correct].classList.add('right');
-          li.querySelectorAll<HTMLButtonElement>('button').forEach((x) => (x.disabled = true));
-          const why = li.querySelector<HTMLParagraphElement>('.why')!;
+          b.setAttribute('aria-pressed', 'true');
+          correct.classList.add('right');
+          buttons.forEach((x) => {
+            x.disabled = true;
+            x.setAttribute('aria-describedby', why.id);
+          });
           why.querySelector('.verdict')!.textContent = ok ? 'Rätt.' : 'Inte riktigt.';
+          why.querySelector('.explain')!.textContent = b.dataset.why ?? '';
+          const rightWas = why.querySelector<HTMLParagraphElement>('.right-was')!;
+          rightWas.hidden = ok;
+          rightWas.querySelector('span')!.textContent = correct.textContent?.trim() ?? '';
+          const back = why.querySelector<HTMLParagraphElement>('.back');
+          if (back) back.hidden = ok;
           why.classList.toggle('ok', ok);
           why.hidden = false;
           answered++;
@@ -93,6 +124,7 @@ const questions = quiz.map((x) => {
             const tail = right === items.length ? ' Alla rätt!' : best > right ? ` Ditt bästa: ${best}.` : '';
             scoreEl.textContent = `${right} av ${items.length} rätt.${tail}`;
             result.hidden = false;
+            root.dispatchEvent(new CustomEvent('quiz:done', { bubbles: true, detail: { right, total: items.length } }));
           }
         }),
       );
@@ -103,10 +135,11 @@ const questions = quiz.map((x) => {
       result.hidden = true;
       items.forEach((li) => {
         li.classList.remove('done');
-        li.querySelector<HTMLParagraphElement>('.why')!.hidden = true;
-        li.querySelectorAll<HTMLButtonElement>('button').forEach((x) => {
+        li.querySelector<HTMLDivElement>('.why')!.hidden = true;
+        li.querySelectorAll<HTMLButtonElement>('.opts button').forEach((x) => {
           x.disabled = false;
           x.classList.remove('right', 'wrong');
+          x.removeAttribute('aria-pressed');
         });
       });
       items[0]?.querySelector('button')?.focus();
@@ -131,12 +164,30 @@ const questions = quiz.map((x) => {
   }
   ol {
     display: grid;
-    gap: 1.6rem;
+    gap: 1.8rem;
     margin: 0;
-    padding-left: 1.4rem;
+    padding: 0;
+    list-style: none;
+  }
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  legend {
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: 0.6rem;
+    padding: 0;
+  }
+  .kind {
+    font: 400 0.72rem var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
   }
   .qt {
-    margin: 0 0 0.6rem;
     font-weight: 700;
   }
   .opts {
@@ -150,10 +201,12 @@ const questions = quiz.map((x) => {
     background: transparent;
     border: 1px solid var(--line);
     border-radius: 10px;
+    min-height: 44px;
     padding: 0.6rem 0.9rem;
     cursor: pointer;
   }
-  .opts button:hover:not(:disabled) {
+  .opts button:hover:not(:disabled),
+  .opts button:focus-visible {
     border-color: var(--cold);
   }
   .opts button:disabled {
@@ -165,20 +218,32 @@ const questions = quiz.map((x) => {
     border-width: 2px;
     opacity: 1;
   }
+  .opts button.right::after {
+    content: ' ✓';
+  }
   .opts button.wrong {
     border-color: var(--warm);
     border-style: dashed;
     opacity: 1;
   }
+  .opts button.wrong::after {
+    content: ' ✗';
+  }
   .why {
-    margin: 0.6rem 0 0;
+    margin-top: 0.6rem;
     color: var(--dim);
+  }
+  .why p {
+    margin: 0 0 0.35rem;
   }
   .why .verdict {
     color: var(--warm);
   }
   .why.ok .verdict {
     color: var(--cold);
+  }
+  .back a {
+    font-weight: 700;
   }
   .result {
     display: flex;
@@ -197,6 +262,7 @@ const questions = quiz.map((x) => {
     background: transparent;
     border: 1px solid var(--line);
     border-radius: 10px;
+    min-height: 44px;
     padding: 0.5rem 1rem;
     cursor: pointer;
   }

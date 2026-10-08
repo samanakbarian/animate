@@ -23,7 +23,25 @@ const interactive = hasInteractive(slug);
 <script>
   import '@nastasteg/engine/module/player.css';
   import { INTERACTIVE_MODULES } from '../lib/interactive';
-  import { mountModulePlayer } from '@nastasteg/engine/module/player';
+  import { type ModulePlayerHandle, mountModulePlayer } from '@nastasteg/engine/module/player';
+  import type { ModuleDefinition } from '@nastasteg/engine/module/types';
+
+  // Länkar med data-seek="<del-id>#<kapitel-id>" (t.ex. från quizet) hoppar till kapitlet.
+  const players = new Map<string, { def: ModuleDefinition; handle: ModulePlayerHandle; section: HTMLElement }>();
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element | null)?.closest<HTMLElement>('[data-seek]');
+    if (!a) return;
+    const [part, chapter] = (a.dataset.seek ?? '').split('#');
+    const p = players.get(part);
+    const ch = p?.def.chapters.find((c) => c.id === chapter);
+    if (!p || !ch) return;
+    e.preventDefault();
+    p.handle.controller.seek(ch.start);
+    p.handle.controller.pause();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    p.section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    p.section.querySelector<HTMLElement>('.nsm-play')?.focus({ preventScroll: true });
+  });
 
   for (const host of document.querySelectorAll<HTMLElement>('[data-module]')) {
     const load = INTERACTIVE_MODULES[host.dataset.module ?? ''];
@@ -34,13 +52,14 @@ const interactive = hasInteractive(slug);
         for (const def of parts) {
           const section = document.createElement('section');
           section.className = 'module-part';
+          section.id = `del-${def.id}`;
           const h = document.createElement('h2');
           h.className = 'eyebrow';
           h.textContent = def.title;
           const el = document.createElement('div');
           section.append(h, el);
           host.appendChild(section);
-          mountModulePlayer(el, def);
+          players.set(def.id, { def, handle: mountModulePlayer(el, def), section });
         }
       })
       .catch((e) => {
