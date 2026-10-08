@@ -59,6 +59,9 @@ importers:
       '@nastasteg/film':
         specifier: workspace:*
         version: link:../../packages/film
+      '@nastasteg/game-ai-tidslinjen':
+        specifier: workspace:*
+        version: link:../../packages/game-ai-tidslinjen
       '@nastasteg/game-dra-gransen':
         specifier: workspace:*
         version: link:../../packages/game-dra-gransen
@@ -154,6 +157,12 @@ importers:
       vite:
         specifier: ^7.1.0
         version: 7.3.6(lightningcss@1.33.0)(yaml@2.9.1)
+
+  packages/game-ai-tidslinjen:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
 
   packages/game-dra-gransen:
     dependencies:

@@ -36,7 +36,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Hallucinationsjakten
 - [x] Tokenjakten
 - [x] Vem är ”den”?
-- [ ] Spärrvakten (pausad), AI-tidslinjen
+- [x] AI-tidslinjen
+- [ ] Spärrvakten (pausad)
 
 ## Senare
 

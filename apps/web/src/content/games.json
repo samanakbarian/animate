@@ -46,5 +46,13 @@
     "summary": "Klicka på ordet som ”den” syftar på. Se sedan var uppmärksamheten hamnade.",
     "teaches": "Hur uppmärksamheten i en transformer kopplar ihop ord, och varför vissa meningar kräver kunskap om världen.",
     "module": "transformern"
+  },
+  {
+    "id": "ai-tidslinjen",
+    "title": "AI-tidslinjen",
+    "order": 7,
+    "summary": "Lägg händelser i AI:s historia i rätt ordning, från den första artificiella neuronen 1943 till i dag.",
+    "teaches": "Att AI har en lång historia med genombrott och bakslag, och att dagens AI bygger på idéer som är decennier gamla.",
+    "module": "neuralt-natverk"
   }
 ]

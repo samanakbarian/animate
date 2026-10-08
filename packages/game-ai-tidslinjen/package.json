@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/game-ai-tidslinjen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – AI-tidslinjen: placera händelser i AI:s historia i rätt ordning.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

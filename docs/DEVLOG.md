@@ -5,6 +5,21 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 (2) – Spelet AI-tidslinjen
+
+**Vad**
+
+- `packages/game-ai-tidslinjen`: lägg händelser i AI:s historia i rätt ordning, ett kort i taget (som kortspelet
+  Timeline). Första kortet ligger redan. Fel placering läggs ändå på rätt plats så att tidslinjen alltid stämmer.
+  Tre banor: milstolpar 1943–2022, upp och ner (AI-vintrar) och det senaste 2009–2024. Lodrät lista, fungerar på mobil.
+- Årtalen i `events.ts` är kontrollerade; inom en bana får två händelser inte ha samma år (testat).
+
+**Återstår**
+
+- Spelet täcker roadmap-punkten ”Tidslinje 1943–2026” delvis. En egen tidslinjesida kan återanvända `events.ts`.
+
+---
+
 ## 2026-10-08 – Liknelsen med hjärnan i modul 1
 
 **Vad**
