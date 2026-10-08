@@ -43,6 +43,12 @@ export interface PlayerOptions {
   dev?: boolean;
   /** Bygg scenen direkt i stället för vid klick (dev-sidan). */
   preload?: boolean;
+  /** Starta direkt utan startskärm (sidan har redan visat en egen och fått ett klick). */
+  autostart?: boolean;
+  /** Ljudkontext skapad i användarens klick. Krävs för autostart på iOS. */
+  audioContext?: AudioContext;
+  /** Anropas när något går fel, med en text som går att visa för besökaren. */
+  onError?: (message: string) => void;
   onEnded?: () => void;
 }
 
@@ -105,18 +111,34 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
 
   function fail(e: unknown) {
     console.error(e);
-    status.textContent = 'Kunde inte starta filmen: ' + ((e as Error)?.message ?? e);
+    const msg = 'Filmen kunde inte startas. Försök igen, eller välj låg kvalitet.';
+    status.textContent = msg;
+    startEl.classList.remove('hidden');
+    btn.textContent = 'FÖRSÖK IGEN';
     btn.disabled = false;
+    opts.onError?.(msg);
   }
 
+  let givenCtx = opts.audioContext ?? null;
   const play = async () => {
     btn.disabled = true;
     // AudioContext måste skapas direkt i klickhändelsen (webbläsarnas autoplay-regler).
-    ctx = new AudioContext({ latencyHint: 'playback' });
+    // Sidan kan ha skapat den redan, innan filmpaketet laddades.
+    ctx = givenCtx ?? new AudioContext({ latencyHint: 'playback' });
+    givenCtx = null;
     void ctx.resume();
     const f = await build();
     if (destroyed) return;
     startEl.classList.add('hidden');
+    // Om grafikkortet tappar sammanhanget (vanligt på svaga mobiler) stannar vi och
+    // erbjuder ett nytt försök i stället för att visa en svart ruta.
+    let lost = false;
+    const canvas = f.renderer.domElement;
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      lost = true;
+    };
+    canvas.addEventListener('webglcontextlost', onLost, { once: true });
     const audio = ctx;
     let engine = new AudioEngine(audio, filmScore());
     engine.begin(startAt, audio.currentTime + 0.12);
@@ -182,6 +204,19 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
       last = performance.now();
     const loop = () => {
       if (destroyed) return;
+      if (lost) {
+        window.removeEventListener('keydown', onKey);
+        root.removeEventListener('click', onStageClick);
+        ctrl.remove();
+        pausedEl.remove();
+        devEl?.remove();
+        void audio.close();
+        film?.dispose();
+        film = null;
+        builtFor = null;
+        fail(new Error('WebGL-sammanhanget tappades'));
+        return;
+      }
       const tc = Math.max(0, Math.min(DURATION, now()));
       engine.scheduleUntil(tc + 0.4);
       f.renderAt(tc);
@@ -220,6 +255,10 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
     raf = requestAnimationFrame(loop);
   };
   btn.addEventListener('click', () => void play().catch(fail));
+  if (opts.autostart) {
+    startEl.classList.add('hidden');
+    void play().catch(fail);
+  }
 
   return {
     destroy() {

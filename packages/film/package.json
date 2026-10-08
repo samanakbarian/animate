@@ -6,6 +6,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./timeline": "./src/timeline.ts",
     "./style.css": "./src/style.css"
   },
   "scripts": {

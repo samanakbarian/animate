@@ -1,35 +1,128 @@
 ---
-// Filmen som klient-ö. Paketet (~700 kB) laddas först när webbläsaren är ledig,
-// så sidan i övrigt blir snabb. Utan WebGL2 visas en textreserv (MP4 senare).
+// Filmen på startsidan. Startskärmen är vanlig HTML; 3D-motorn (~700 kB) laddas
+// först när besökaren trycker på Spela. Saknas WebGL2, eller är enheten svag,
+// visas videoversionen om den finns (FILM_VIDEO), annars ett meddelande och
+// filmen i text. Allt som kan gå fel får en begriplig text och ett nytt försök.
+import { STEPS } from '@nastasteg/film/timeline';
+
 interface Props {
   startAt?: number;
 }
 const { startAt = 0 } = Astro.props;
+
+/** Videoversionen. Renderas med `pnpm render` och läggs i apps/web/public/film/ (se docs/STATUS.md). */
+const FILM_VIDEO = '/film/nasta-steg.mp4';
+
+const yearOf = (s: (typeof STEPS)[number]) =>
+  s.year ?? (s.id === 'human' ? (s.start === 0 ? 'För 300 000 år sedan' : 'Sedan') : s.id === 'asi' ? 'Någon gång' : 'Sedan');
 ---
 
 <section class="film" aria-label="Kortfilmen NÄSTA STEG">
-  <div class="frame" data-film data-start={startAt}>
-    <noscript>
-      <p class="fallback">Filmen kräver JavaScript.</p>
-    </noscript>
+  <div class="frame" data-film data-start={startAt} data-video={FILM_VIDEO}>
+    <div class="poster" data-poster>
+      <p class="kicker">Kortfilm · 2 min 30 s · ljud på</p>
+      <p class="title">NÄSTA STEG</p>
+      <button type="button" class="play" data-play>
+        Spela filmen
+      </button>
+      <p class="msg" data-msg role="status"></p>
+    </div>
   </div>
+  <details class="as-text wrap">
+    <summary>Filmen i text</summary>
+    <ol>
+      {STEPS.map((s) => (
+        <li>
+          <span class="y">{yearOf(s)}</span> <b>{s.title}.</b> {s.sub}
+        </li>
+      ))}
+      <li>
+        <b>Slut.</b> Nästa steg är vårt att ta.
+      </li>
+    </ol>
+  </details>
 </section>
 
 <script>
-  import '@nastasteg/film/style.css';
-
   const host = document.querySelector<HTMLElement>('[data-film]');
-  const boot = async () => {
-    if (!host) return;
-    const film = await import('@nastasteg/film');
-    if (!film.supportsRealtime()) {
-      host.innerHTML = '<p class="fallback">Din webbläsare saknar WebGL2. En videoversion av filmen kommer här.</p>';
-      return;
+  const poster = host?.querySelector<HTMLElement>('[data-poster]');
+  const btn = host?.querySelector<HTMLButtonElement>('[data-play]');
+  const msg = host?.querySelector<HTMLElement>('[data-msg]');
+
+  const hasWebGL2 = () => {
+    try {
+      return !!document.createElement('canvas').getContext('webgl2');
+    } catch {
+      return false;
     }
-    film.mountPlayer(host, { quality: 'auto', startAt: Number(host.dataset.start) || 0 });
   };
-  if ('requestIdleCallback' in window) requestIdleCallback(() => void boot(), { timeout: 1500 });
-  else setTimeout(() => void boot(), 200);
+  /** Svag enhet: lite minne eller få kärnor. Då är videon ett bättre val om den finns. */
+  const isWeak = () => {
+    const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    return (mem !== undefined && mem <= 2) || (navigator.hardwareConcurrency || 4) <= 2;
+  };
+  const videoExists = async (url: string) => {
+    try {
+      const r = await fetch(url, { method: 'HEAD' });
+      return r.ok && (r.headers.get('content-type') ?? '').startsWith('video');
+    } catch {
+      return false;
+    }
+  };
+
+  function showVideo(url: string) {
+    if (!host) return;
+    host.innerHTML = '';
+    const v = document.createElement('video');
+    Object.assign(v, { src: url, controls: true, playsInline: true, autoplay: true, preload: 'metadata' });
+    v.className = 'video';
+    host.appendChild(v);
+  }
+
+  function showError(text: string, retry: boolean) {
+    if (!btn || !msg || !poster) return;
+    poster.hidden = false;
+    msg.textContent = text;
+    btn.textContent = retry ? 'Försök igen' : 'Spela filmen';
+    btn.hidden = !retry;
+    btn.disabled = false;
+  }
+
+  async function start() {
+    if (!host || !btn || !msg || !poster) return;
+    const video = host.dataset.video!;
+    if (!hasWebGL2() || isWeak()) {
+      if (await videoExists(video)) return showVideo(video);
+      if (!hasWebGL2())
+        return showError(
+          'Din webbläsare kan inte visa 3D-grafik (WebGL2), och videoversionen är inte klar än. Läs filmen i text nedanför.',
+          false,
+        );
+    }
+    // Ljudet måste startas i klicket, innan något laddas (iOS).
+    const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const audioContext = new AC({ latencyHint: 'playback' });
+    void audioContext.resume();
+    btn.disabled = true;
+    msg.textContent = 'Laddar filmen …';
+    try {
+      const [film] = await Promise.all([import('@nastasteg/film'), import('@nastasteg/film/style.css')]);
+      poster.hidden = true;
+      film.mountPlayer(host, {
+        quality: 'auto',
+        startAt: Number(host.dataset.start) || 0,
+        autostart: true,
+        audioContext,
+        onEnded: () => document.querySelector('[data-after-film]')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      });
+    } catch (e) {
+      console.error(e);
+      void audioContext.close();
+      showError('Filmen kunde inte laddas. Kontrollera anslutningen och försök igen.', true);
+    }
+  }
+
+  btn?.addEventListener('click', () => void start());
 </script>
 
 <style>
@@ -49,13 +142,89 @@ const { startAt = 0 } = Astro.props;
       aspect-ratio: 0.85 / 1;
     }
   }
-  .fallback {
+  .poster {
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
     padding: var(--gutter);
-    color: var(--dim);
+    color: #e8ebee;
     text-align: center;
+    background: radial-gradient(ellipse at 50% 60%, #151b21 0%, #000 70%);
+  }
+  .poster[hidden] {
+    display: none;
+  }
+  .kicker {
+    margin: 0;
+    font: 400 0.8rem var(--font-mono);
+    letter-spacing: 0.08em;
+    color: #9aa5b0;
+  }
+  .title {
+    margin: 0;
+    font: 300 clamp(1.6rem, 6vw, 3.4rem) var(--font-mono);
+    letter-spacing: 0.42em;
+    margin-right: -0.42em;
+  }
+  .play {
+    font: 400 0.95rem var(--font-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    min-height: 48px;
+    padding: 0.8rem 2rem;
+    color: #e8ebee;
+    background: transparent;
+    border: 1px solid rgba(232, 235, 238, 0.7);
+    cursor: pointer;
+  }
+  .play:hover,
+  .play:focus-visible {
+    background: rgba(232, 235, 238, 0.1);
+  }
+  .play:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  .msg {
+    margin: 0;
+    max-width: 36rem;
+    min-height: 1.4em;
+    font-size: 0.95rem;
+    color: #c5ccd3;
+  }
+  .frame :global(.video) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
+  .as-text {
+    padding-block: 0.6rem;
+    color: var(--dim);
+    background: var(--bg);
+  }
+  .as-text summary {
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .as-text ol {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.4rem 0 1rem;
+    padding-left: 1.2rem;
+    max-width: var(--measure);
+  }
+  .as-text .y {
+    font-family: var(--font-mono);
+    color: var(--ink);
   }
 </style>
