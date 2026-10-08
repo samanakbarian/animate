@@ -1,39 +1,76 @@
 ---
-import { getCollection } from 'astro:content';
+// Startsidan: först vad du kan lära dig och en tydlig väg in (lärvägen), sedan
+// kortfilmen, sedan moduler och ett urval spel för den som vill välja själv.
+import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
 import ModuleCard from '../components/ModuleCard.astro';
 import GameCard from '../components/GameCard.astro';
 
 const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
-const launch = modules.filter((m) => m.data.stage === 'mvp');
-const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+const basics = modules.filter((m) => m.data.stage === 'mvp');
+/** Tre spel som hör till grunderna. Resten finns på /spel. */
+const FEATURED_GAMES = ['dra-gransen', 'sla-maskinen', 'hallucinationsjakten'];
+const games = (await getCollection('games')).filter((g) => FEATURED_GAMES.includes(g.id));
+const allGames = await getCollection('games');
+const path = (await getEntry('paths', 'forsta-ai'))!;
 ---
 
 <Base>
-  <FilmPlayer />
-
-  <section class="wrap intro">
-    <p class="eyebrow">2 min 30 s · från −300 000 till ∞</p>
+  <section class="wrap hero">
+    <p class="eyebrow">Gratis · på svenska · inget konto</p>
     <h1>
       Hur fungerar AI <span class="scribble">egentligen</span>?
     </h1>
-    <div class="prose">
-      <p>
-        Filmen ovan tar dig från de första människorna till dagens språkmodeller och vidare mot det som kanske kommer, på två och en halv
-        minut. Resten av sajten tar det lugnare. Varje modul är en kort film som du kan stoppa när du vill och prova själv.
-      </p>
-      <p>Är du ny kan du börja med de tre första: hur ett neuralt nätverk fungerar, vad en språkmodell gör och vad en agent är.</p>
+    <p class="lead">
+      Här ser du hur det fungerar inuti, och provar själv. Börja med en kort väg genom grunderna. Den tar ungefär {path.data.minutes}{' '}
+      minuter.
+    </p>
+    <div class="cta">
+      <a
+        class="button primary"
+        href={`/lar/${path.id}`}
+        data-path-cta={path.id}
+        data-step-ids={JSON.stringify(path.data.steps.map((s) => s.id))}
+      >
+        Börja lärvägen
+      </a>
+      <a class="button" href="#filmen">
+        Se kortfilmen först
+      </a>
+    </div>
+    <p class="resume note" data-resume hidden></p>
+    <div class="learn">
+      <h2 class="eyebrow">Efter lärvägen kan du förklara</h2>
+      <ol>
+        {path.data.insights.map((t) => (
+          <li>{t}</li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section class="wrap" aria-labelledby="start-har">
+  <section id="filmen" class="film-sec" aria-labelledby="film-rubrik">
+    <div class="wrap film-head">
+      <h2 id="film-rubrik">Kortfilmen NÄSTA STEG</h2>
+      <p class="note">2 min 30 s · från de första människorna till dagens språkmodeller, och vidare mot det som kanske kommer</p>
+    </div>
+    <FilmPlayer />
+    <div class="wrap after-film" data-after-film>
+      <p>
+        Filmen visar <em>vart</em> det har gått. Resten av sajten visar <em>hur</em> det fungerar. Nästa steg:
+        <a href={`/lar/${path.id}`}>lärvägen</a>, eller direkt till modulen <a href="/moduler/neuralt-natverk">Neuralt nätverk</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="sjalv">
     <div class="sec-head">
-      <h2 id="start-har">Börja här</h2>
-      <span class="note">tre korta moduler att börja med ↓</span>
+      <h2 id="sjalv">Eller välj själv</h2>
+      <span class="note">grunderna, en modul i taget ↓</span>
     </div>
     <div class="grid">
-      {launch.map((m) => (
+      {basics.map((m) => (
         <ModuleCard module={m} />
       ))}
     </div>
@@ -44,7 +81,7 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
 
   <section class="wrap games" aria-labelledby="spela">
     <div class="sec-head">
-      <h2 id="spela">Eller lär dig genom att spela</h2>
+      <h2 id="spela">Lär dig genom att spela</h2>
       <span class="note">några minuter per spel ↓</span>
     </div>
     <div class="grid">
@@ -53,16 +90,103 @@ const games = (await getCollection('games')).sort((a, b) => a.data.order - b.dat
       ))}
     </div>
     <p class="more">
-      <a href="/spel">Alla spel →</a>
+      <a href="/spel">Alla {allGames.length} spel →</a>
     </p>
   </section>
 </Base>
 
+<script>
+  import { isComplete, parseProgress, resumeStep, storageKey } from '../lib/path';
+
+  // Har besökaren börjat lärvägen? Visa då var hen kan fortsätta.
+  const cta = document.querySelector<HTMLAnchorElement>('[data-path-cta]');
+  const note = document.querySelector<HTMLElement>('[data-resume]');
+  try {
+    const raw = cta ? localStorage.getItem(storageKey(cta.dataset.pathCta!)) : null;
+    if (raw && cta && note) {
+      const ids = JSON.parse(cta.dataset.stepIds!) as string[];
+      const p = parseProgress(raw, ids);
+      if (isComplete(p, ids)) {
+        cta.textContent = 'Gå lärvägen igen';
+        note.textContent = 'Du har gått hela lärvägen. Fördjupa dig i modulerna nedanför.';
+        note.hidden = false;
+      } else if (p.done.length || p.current) {
+        cta.textContent = `Fortsätt lärvägen (steg ${ids.indexOf(resumeStep(p, ids)) + 1} av ${ids.length})`;
+        note.textContent = `${p.done.length} av ${ids.length} steg klara.`;
+        note.hidden = false;
+      }
+    }
+  } catch {
+    // utan lagring visas bara den vanliga knappen
+  }
+</script>
+
 <style>
-  .intro {
+  .hero {
     display: grid;
-    gap: 1.4rem;
-    padding-block: 4rem 3rem;
+    gap: 1.2rem;
+    padding-block: 3.5rem 3rem;
+  }
+  .hero h1 {
+    margin: 0;
+  }
+  .lead {
+    margin: 0;
+    max-width: var(--measure);
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.6rem 1.3rem;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .button:hover,
+  .button:focus-visible {
+    border-color: var(--cold);
+  }
+  .button.primary {
+    color: var(--bg);
+    background: var(--warm);
+    border-color: var(--warm);
+  }
+  .resume {
+    margin: 0;
+  }
+  .learn {
+    max-width: var(--measure);
+  }
+  .learn ol {
+    margin: 0.4rem 0 0;
+  }
+  .film-sec {
+    scroll-margin-top: 1rem;
+  }
+  .film-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 1rem;
+    padding-block: 1rem;
+  }
+  .film-head h2 {
+    margin: 0;
+  }
+  .after-film {
+    padding-block: 1rem 2.5rem;
+    max-width: var(--measure);
+    scroll-margin-top: 2rem;
   }
   .grid {
     display: grid;

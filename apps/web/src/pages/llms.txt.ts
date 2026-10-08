@@ -5,6 +5,7 @@ import type { APIRoute } from 'astro';
 import { SITE } from '../lib/site';
 
 export const GET: APIRoute = async () => {
+  const paths = await getCollection('paths');
   const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
   const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
   const body = `# ${SITE.name}
@@ -14,6 +15,10 @@ export const GET: APIRoute = async () => {
 - Grundare: ${SITE.founder.name} (${SITE.founder.email})
 - Språk: svenska
 - Kortfilmen NÄSTA STEG (2 min 30 s) är ingången på startsidan.
+
+## Kom igång
+
+${paths.map((p) => `- [${p.data.title}](${SITE.url}/lar/${p.id}): ${p.data.summary}`).join('\n')}
 
 ## Moduler
 

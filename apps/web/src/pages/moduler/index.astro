@@ -17,6 +17,9 @@ const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b
         Varje modul tar ett par minuter. Den börjar som en film, och när den är slut kan du dra i reglagen själv. Du kan också pausa när som
         helst.
       </p>
+      <p>
+        Ny här? <a href="/lar/forsta-ai">Gå lärvägen ”Förstå hur AI fungerar på 20 minuter”</a>, så väljer vi ordningen åt dig.
+      </p>
     </header>
     {STAGES.map((stage) => (
       <section aria-label={STAGE_LABEL[stage]}>

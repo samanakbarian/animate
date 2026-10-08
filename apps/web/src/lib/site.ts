@@ -7,7 +7,7 @@ export const SITE = {
   foundingYear: '2026',
   description: 'Så fungerar AI, förklarat med korta filmer som du kan pausa och prova själv.',
   nav: [
-    { href: '/', label: 'Filmen' },
+    { href: '/lar/forsta-ai', label: 'Kom igång' },
     { href: '/moduler', label: 'Moduler' },
     { href: '/spel', label: 'Spel' },
     { href: '/ordlista', label: 'Ordlista' },
@@ -16,7 +16,11 @@ export const SITE = {
 } as const;
 
 export const STATUS_LABEL = { planerad: 'Kommer senare', 'under-arbete': 'Under arbete', publicerad: 'Klar' } as const;
-export const STAGE_LABEL = { mvp: 'Grunderna', v2: 'Fördjupning', senare: 'På gång' } as const;
+/**
+ * `stage` i modulernas frontmatter är releaseplanen (mvp, v2, senare). Besökaren ser
+ * i stället en nivå. Alla tre grupperna är publicerade – ”på gång” får inte stå här.
+ */
+export const STAGE_LABEL = { mvp: 'Grunderna', v2: 'Fördjupning', senare: 'Agenter och säkerhet' } as const;
 
 /** En egen färg per modul (efter ordning), så att korten inte ser likadana ut. Fungerar i alla teman. */
 export const MODULE_COLORS = [

@@ -6,8 +6,10 @@ import { SITE } from '../lib/site';
 export const GET: APIRoute = async () => {
   const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
   const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+  const learningPaths = await getCollection('paths');
   const paths = [
     '/',
+    ...learningPaths.map((p) => `/lar/${p.id}`),
     '/moduler',
     ...modules.map((m) => `/moduler/${m.id}`),
     '/spel',
