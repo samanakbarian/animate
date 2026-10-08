@@ -65,6 +65,9 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
   </ol>
   <div class="result" hidden>
     <p class="score" role="status"></p>
+    <p class="badge-new" hidden>
+      <span></span>. <a href="/framsteg">Se dina framsteg</a>
+    </p>
     <button type="button" class="again">
       Gör om
     </button>
@@ -73,6 +76,9 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
 
 <script>
   import { track } from '../lib/track';
+  import badgesJson from '../content/badges.json';
+  import pathsJson from '../content/paths.json';
+  import { type Badge, newBadges, readSnapshot } from '../lib/progress';
 
   document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((root) => {
     const key = `ilearnai-quiz-${root.dataset.quiz}`;
@@ -118,6 +124,7 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
           if (ok) right++;
           if (answered === items.length) {
             const best = Math.max(readBest(), right);
+            const before = readSnapshot();
             try {
               localStorage.setItem(key, String(best));
             } catch {
@@ -125,6 +132,12 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
             }
             const tail = right === items.length ? ' Alla rätt!' : best > right ? ` Ditt bästa: ${best}.` : '';
             scoreEl.textContent = `${right} av ${items.length} rätt.${tail}`;
+            const fresh = newBadges(badgesJson as Badge[], before, readSnapshot(), pathsJson);
+            const badgeEl = result.querySelector<HTMLParagraphElement>('.badge-new')!;
+            badgeEl.hidden = fresh.length === 0;
+            if (fresh.length)
+              badgeEl.querySelector('span')!.textContent =
+                (fresh.length === 1 ? 'Nytt märke: ' : 'Nya märken: ') + fresh.map((b) => `”${b.title}”`).join(' och ');
             result.hidden = false;
             track('quiz_done', { module: root.dataset.quiz ?? '', right });
             root.dispatchEvent(new CustomEvent('quiz:done', { bubbles: true, detail: { right, total: items.length } }));
@@ -253,6 +266,12 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
+  }
+  .badge-new {
+    margin: 0;
+    flex-basis: 100%;
+    font-weight: 700;
+    color: var(--warm);
   }
   .score {
     margin: 0;

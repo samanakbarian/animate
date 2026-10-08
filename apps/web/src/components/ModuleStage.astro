@@ -26,6 +26,7 @@ const interactive = hasInteractive(slug);
   import { type ModulePlayerHandle, mountModulePlayer } from '@nastasteg/engine/module/player';
   import type { ModuleDefinition } from '@nastasteg/engine/module/types';
   import { track } from '../lib/track';
+  import { exploredKey } from '../lib/progress';
 
   // Länkar med data-seek="<del-id>#<kapitel-id>" (t.ex. från quizet) hoppar till kapitlet.
   const players = new Map<string, { def: ModuleDefinition; handle: ModulePlayerHandle; section: HTMLElement }>();
@@ -61,7 +62,16 @@ const interactive = hasInteractive(slug);
           section.append(h, el);
           host.appendChild(section);
           const handle = mountModulePlayer(el, def, {
-            onEvent: (ev) => track(`module_${ev}`, { module: def.id }),
+            onEvent: (ev) => {
+              track(`module_${ev}`, { module: def.id });
+              // Utforskad modul (för framsteg och märken): rört reglagen eller sett klart.
+              if (ev !== 'start')
+                try {
+                  localStorage.setItem(exploredKey(host.dataset.module ?? ''), '1');
+                } catch {
+                  // utan lagring räknas inga framsteg
+                }
+            },
           });
           players.set(def.id, { def, handle, section });
         }

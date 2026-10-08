@@ -1,0 +1,246 @@
+---
+// Dina framsteg: lärvägen, modulerna, spelen och märkena. Allt läses ur det som
+// sparats i webbläsaren (lib/progress.ts) – inget konto och inget skickas någonstans.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import badgeOrder from '../content/badges.json';
+
+const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+// samma ordning som i badges.json (samlingen sorteras annars efter id)
+const order = badgeOrder.map((b) => b.id);
+const badges = (await getCollection('badges')).sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+const paths = await getCollection('paths');
+---
+
+<Base title="Dina framsteg" description="Vad du har gjort på iLearnAI och vilka märken du har fått. Sparas bara i din webbläsare.">
+  <article class="wrap page" data-progress>
+    <header class="prose">
+      <p class="eyebrow">Sparas bara i den här webbläsaren · inget konto</p>
+      <h1>Dina framsteg</h1>
+      <p class="lead" data-summary>
+        Du har inte börjat än. <a href="/lar/forsta-ai">Gå lärvägen</a>, så fylls sidan på.
+      </p>
+    </header>
+
+    <section aria-labelledby="markena">
+      <h2 id="markena">Märken</h2>
+      <ul class="badges">
+        {badges.map((b) => (
+          <li class="badge" data-badge={b.id}>
+            <span class="medal" aria-hidden="true">
+              ★
+            </span>
+            <span class="b-title">{b.data.title}</span>
+            <span class="b-desc">{b.data.description}</span>
+            <span class="b-state">Inte än</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="lararvagar">
+      <h2 id="lararvagar">Lärvägar</h2>
+      <ul class="rows">
+        {paths.map((p) => (
+          <li data-path={p.id}>
+            <a href={`/lar/${p.id}`}>{p.data.title}</a>
+            <span class="state">inte påbörjad</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="modulerna">
+      <h2 id="modulerna">Moduler</h2>
+      <ul class="rows">
+        {modules.map((m) => (
+          <li data-module={m.id}>
+            <a href={`/moduler/${m.id}`}>{m.data.title}</a>
+            <span class="state">
+              <span class="seen">inte utforskad</span> · <span class="quiz">quiz inte gjort</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="spelen">
+      <h2 id="spelen">Spel</h2>
+      <ul class="rows">
+        {games.map((g) => (
+          <li data-game={g.id}>
+            <a href={`/spel/${g.id}`}>{g.data.title}</a>
+            <span class="state">inte spelat</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="prose" aria-labelledby="rensa">
+      <h2 id="rensa">Börja om</h2>
+      <p>Allt här sparas bara i den här webbläsaren. Byter du dator eller rensar webbläsaren försvinner det.</p>
+      <p>
+        <button type="button" data-clear>
+          Rensa mina framsteg
+        </button>
+      </p>
+    </section>
+  </article>
+</Base>
+
+<script>
+  import badgesJson from '../content/badges.json';
+  import pathsJson from '../content/paths.json';
+  import { type Badge, explored, gamesPlayed, hasBadge, pathDone, quizResults, readSnapshot, QUIZ_LENGTH } from '../lib/progress';
+
+  const root = document.querySelector<HTMLElement>('[data-progress]')!;
+  const badges = badgesJson as Badge[];
+
+  function render() {
+    const s = readSnapshot();
+    const quiz = quizResults(s);
+    const played = gamesPlayed(s);
+    const seen = new Set(explored(s));
+    let earned = 0;
+
+    for (const b of badges) {
+      const el = root.querySelector<HTMLElement>(`[data-badge="${b.id}"]`)!;
+      const ok = hasBadge(b, s, pathsJson);
+      if (ok) earned++;
+      el.classList.toggle('earned', ok);
+      el.querySelector('.b-state')!.textContent = ok ? 'Klart' : 'Inte än';
+    }
+    for (const p of pathsJson) {
+      const el = root.querySelector(`[data-path="${p.id}"] .state`);
+      const d = pathDone(s, p);
+      if (el) el.textContent = d.complete ? 'klar ✓' : d.done ? `${d.done} av ${d.total} steg` : 'inte påbörjad';
+    }
+    root.querySelectorAll<HTMLElement>('[data-module]').forEach((li) => {
+      const slug = li.dataset.module!;
+      li.querySelector('.seen')!.textContent = seen.has(slug) ? 'utforskad ✓' : 'inte utforskad';
+      li.querySelector('.quiz')!.textContent = slug in quiz ? `quiz ${quiz[slug]} av ${QUIZ_LENGTH}` : 'quiz inte gjort';
+    });
+    root.querySelectorAll<HTMLElement>('[data-game]').forEach((li) => {
+      const n = played[li.dataset.game!];
+      li.querySelector('.state')!.textContent = n ? `spelat (${n} ${n === 1 ? 'bana' : 'banor'})` : 'inte spelat';
+    });
+
+    const nQuiz = Object.keys(quiz).length;
+    const nGames = Object.keys(played).length;
+    const summary = root.querySelector<HTMLElement>('[data-summary]')!;
+    if (nQuiz || nGames || seen.size || earned)
+      summary.textContent =
+        [
+          `${earned} av ${badges.length} märken`,
+          `${nQuiz} quiz ${nQuiz === 1 ? 'gjort' : 'gjorda'}`,
+          `${seen.size} ${seen.size === 1 ? 'modul utforskad' : 'moduler utforskade'}`,
+          `${nGames} spel ${nGames === 1 ? 'spelat' : 'spelade'}`,
+        ].join(' · ') + '.';
+  }
+
+  root.querySelector('[data-clear]')!.addEventListener('click', () => {
+    if (!confirm('Rensa alla dina framsteg på iLearnAI i den här webbläsaren?')) return;
+    try {
+      for (const k of Object.keys(readSnapshot())) localStorage.removeItem(k);
+    } catch {
+      // ingen lagring att rensa
+    }
+    location.reload();
+  });
+
+  render();
+</script>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 3rem 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .badge {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem;
+    border: 1px dashed var(--line);
+    border-radius: 16px;
+    color: var(--dim);
+  }
+  .badge .medal {
+    font-size: 1.6rem;
+    line-height: 1;
+    opacity: 0.35;
+  }
+  .badge .b-title {
+    font-weight: 700;
+  }
+  .badge .b-desc {
+    font-size: 0.9rem;
+  }
+  .badge .b-state {
+    font: 400 0.75rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .badge.earned {
+    border-style: solid;
+    border-color: var(--warm);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .badge.earned .medal {
+    opacity: 1;
+    color: var(--warm);
+  }
+  .badge.earned .b-state {
+    color: var(--warm);
+  }
+  .rows {
+    display: grid;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .rows li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.2rem 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rows a {
+    font-weight: 700;
+  }
+  .state {
+    color: var(--dim);
+    font-size: 0.95rem;
+  }
+  button {
+    font: inherit;
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:hover,
+  button:focus-visible {
+    border-color: var(--warm);
+  }
+</style>

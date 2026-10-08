@@ -94,4 +94,20 @@ const paths = defineCollection({
   }),
 });
 
-export const collections = { modules, glossary, games, paths };
+const badges = defineCollection({
+  loader: file('./src/content/badges.json'),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    /** Se BadgeRule i lib/progress.ts. */
+    rule: z.discriminatedUnion('type', [
+      z.object({ type: z.literal('quizzes'), count: z.number().int() }),
+      z.object({ type: z.literal('perfect'), count: z.number().int() }),
+      z.object({ type: z.literal('explored'), count: z.number().int() }),
+      z.object({ type: z.literal('games'), count: z.number().int() }),
+      z.object({ type: z.literal('path'), path: z.string() }),
+    ]),
+  }),
+});
+
+export const collections = { modules, glossary, games, paths, badges };

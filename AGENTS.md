@@ -21,6 +21,7 @@ Läs inte hela kodbasen. Gå direkt till filen som kartan nedan pekar på.
 | `apps/web/src/content/modules/*.md`  | En fil per förklarmodul (frontmatter = schema)                                | lägga till/ändra en modul                |
 | `apps/web/src/content/glossary.json` | Ordlistan                                                                     | lägga till begrepp                       |
 | `apps/web/src/content/paths.json`    | Lärvägar (`/lar/<id>`), steg av moduldelar, spel och quizfrågor               | ändra eller lägga till en lärväg         |
+| `apps/web/src/content/badges.json`   | Märken på `/framsteg`, regler i `lib/progress.ts`                             | ändra eller lägga till ett märke         |
 | `packages/engine`                    | Delad motor: tid, figurrigg, material, mark, regn, efterbehandling, ljudmotor | något som fler än en film behöver        |
 | `packages/film`                      | Kortfilmen NÄSTA STEG (tidslinje, regi, scener, partitur, HUD, spelare)       | filmen                                   |
 | `packages/module-<slug>`             | En förklarmodul: manus (`timeline.ts`) + scen (`scene.ts`), se ADR 0004       | en moduls film eller interaktion         |

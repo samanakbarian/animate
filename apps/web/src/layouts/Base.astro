@@ -115,7 +115,10 @@ const jsonLd = {
     <footer class="site-footer">
       <div class="wrap bar">
         <span class="mono">{SITE.domain}</span>
-        <a href="/om">Om sajten och kontakt</a>
+        <span class="foot-links">
+          <a href="/framsteg">Dina framsteg</a>
+          <a href="/om">Om sajten och kontakt</a>
+        </span>
       </div>
     </footer>
   </body>
@@ -197,5 +200,10 @@ const jsonLd = {
   .site-footer a {
     display: inline-block;
     padding-block: 0.7rem;
+  }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.2rem;
   }
 </style>

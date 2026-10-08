@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 (5) – Framsteg och märken (B-19)
+
+**Vad**
+
+- `/framsteg`: lärvägar, moduler (utforskad, quizresultat), spel (banor med resultat) och åtta märken. Allt läses
+  ur `localStorage` (`lib/progress.ts`, rena funktioner med tester). Knapp för att rensa.
+- Märkena är data (`content/badges.json`, samling `badges`) med regeltyper: quizzes, perfect, explored, games, path.
+  Ett test kontrollerar att alla märken går att få med innehållet som finns.
+- Modul räknas som utforskad (`ilearnai-seen-<slug>`) när besökaren rör ett reglage eller ser klart.
+- Quizet visar ”Nytt märke: …” genom att jämföra lagringen före och efter.
+
+**Fällor**
+
+- `getCollection('badges')` sorterar efter id. Sidan sorterar om efter ordningen i JSON-filen.
+
+---
+
 ## 2026-10-08 (4) – Granskningen: läranderesa, korrekthet, film, tillgänglighet
 
 **Vad**

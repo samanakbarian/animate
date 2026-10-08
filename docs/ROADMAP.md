@@ -44,7 +44,8 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Quiz i varje modul: förstå, använd, förutsäg, med länk tillbaka till kapitlet
 - [x] Lärväg ”Förstå hur AI fungerar på 20 minuter” med framsteg i webbläsaren
 - [x] ”Vad vi förenklar här” i alla moduler
-- [ ] Fler lärvägar, märken (B-19)
+- [x] Framsteg och märken i webbläsaren (B-19)
+- [ ] Fler lärvägar
 - [ ] Skolmaterial (förslag i `docs/SKOLMATERIAL.md`)
 - [ ] Statistik påslagen (ADR 0012, väntar på val av tjänst)
 
