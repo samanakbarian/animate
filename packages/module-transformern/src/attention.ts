@@ -61,8 +61,11 @@ function key(tok: Token): number[] {
   return k;
 }
 
-/** Frågevektorn: vad ordet letar efter, beroende på huvud. */
-function query(sentence: Token[], i: number, head: number): number[] {
+/**
+ * Frågevektorn: vad ordet letar efter, beroende på huvud. Med `causal` får ordet
+ * bara använda sig självt och orden före – som i en språkmodell som skriver ett ord i taget.
+ */
+function query(sentence: Token[], i: number, head: number, causal: boolean): number[] {
   const q = new Array(DIM).fill(0);
   const tok = sentence[i];
   if (head === 0) {
@@ -71,7 +74,9 @@ function query(sentence: Token[], i: number, head: number): number[] {
     // om det ska vara något levande eller en sak.
     if (tok.tag === 'pron' || tok.tag === 'adj') {
       q[0] = 2.2;
-      const hint = sentence.slice(tok.tag === 'pron' ? i + 1 : i).find((s) => s.tag !== 'noun' && s.trait !== null);
+      // Pronomenet hämtar ledtråden från orden efter sig. Det går bara när hela meningen syns.
+      const ahead = tok.tag === 'pron' ? (causal ? [] : sentence.slice(i + 1)) : [tok];
+      const hint = ahead.find((s) => s.tag !== 'noun' && s.trait !== null);
       const trait = hint?.trait ?? null;
       if (trait === 'levande') q[5] = 3.2;
       if (trait === 'sak') q[6] = 3.2;
@@ -85,20 +90,25 @@ function query(sentence: Token[], i: number, head: number): number[] {
   return q;
 }
 
-/** Uppmärksamhetsvikter (rad = ord som tittar, kolumn = ord som tittas på). Varje rad summerar till 1. */
-export function attention(sentence: Token[], head: number, sharpness = 1): number[][] {
+/**
+ * Uppmärksamhetsvikter (rad = ord som tittar, kolumn = ord som tittas på). Varje rad summerar till 1.
+ * `causal`: framtida ord är maskerade (vikt 0), som i GPT-liknande språkmodeller. Utan den ser
+ * varje ord hela meningen, som i modeller som läser en färdig text (t.ex. BERT).
+ */
+export function attention(sentence: Token[], head: number, sharpness = 1, causal = false): number[][] {
   const n = sentence.length;
   const keys = sentence.map(key);
   return sentence.map((_, i) => {
-    const q = query(sentence, i, head);
+    const q = query(sentence, i, head, causal);
     const scores = keys.map((k, j) => {
+      if (causal && j > i) return -Infinity;
       if (head === 1) return 2.4 - 1.3 * Math.abs(i - j); // närhet: rent positionsberoende
       let s = 0;
       for (let d = 0; d < DIM; d++) s += q[d] * k[d];
       return (s / Math.sqrt(DIM)) * 2;
     });
     const m = Math.max(...scores);
-    const e = scores.map((s) => Math.exp((s - m) * sharpness));
+    const e = scores.map((s) => (s === -Infinity ? 0 : Math.exp((s - m) * sharpness)));
     const sum = e.reduce((a, b) => a + b, 0);
     return e.map((v) => v / sum).slice(0, n);
   });

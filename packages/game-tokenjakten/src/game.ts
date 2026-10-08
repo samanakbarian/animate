@@ -1,6 +1,6 @@
 // Spelytan för Tokenjakten (DOM): ordförrådet som brickor överst, ordet i
 // mitten med klickbara springor mellan tecknen, och en knapp för att lämna in.
-// Efter svaret visas tokeniserarens uppdelning och de tal modellen faktiskt ser.
+// Efter svaret visas uppdelningen med färst bitar och påhittade token-id:n.
 
 import type { GameApi, GameSession } from '@nastasteg/engine/game/types';
 import { LEVELS, bestSplit, isToken, judge, pieces, shuffled, starsFor, tokenId } from './tokens';
@@ -56,7 +56,7 @@ export function startTokens(host: HTMLElement, level: number, api: GameApi): Gam
     api.setStatus(`Ord ${i + 1} av ${words.length}. ${L.goal}`);
     el.innerHTML = `
       <div style="display:grid;gap:.45rem">
-        <p class="tj-lbl">TOKENISERARENS ORDFÖRRÅD (+ ALLA ENSKILDA TECKEN)</p>
+        <p class="tj-lbl">ORDFÖRRÅDET I DEN HÄR BANAN (+ ALLA ENSKILDA TECKEN)</p>
         <div class="tj-vocab">${L.vocab.map((v) => `<span class="tj-chip">${esc(show(v))}</span>`).join('')}</div>
       </div>
       <p class="tj-lbl">ORD ${i + 1} / ${words.length} · KLICKA MELLAN TECKNEN FÖR ATT KLIPPA</p>
@@ -132,9 +132,9 @@ export function startTokens(host: HTMLElement, level: number, api: GameApi): Gam
       const last = i >= words.length;
       const after = el.querySelector('.after')!;
       after.innerHTML = `
-        <p style="margin:0 0 .4rem;line-height:1.5">${head} Tokeniseraren delar så här:
+        <p style="margin:0 0 .4rem;line-height:1.5">${head} Med färst bitar blir det:
           <span style="font-family:var(--g-mono)">${best.map((b) => esc(show(b))).join(' | ')}</span></p>
-        <p style="margin:0 0 .8rem;line-height:1.5">Modellen ser bara talen: <span class="tj-ids">${best.map(tokenId).join(' · ')}</span></p>
+        <p style="margin:0 0 .8rem;line-height:1.5">Modellen ser bara tal, ungefär så här (påhittade): <span class="tj-ids">${best.map(tokenId).join(' · ')}</span></p>
         <button type="button" class="nsg-primary">${last ? 'Se resultatet' : 'Nästa ord'}</button>`;
       const next = after.querySelector('button')!;
       next.focus();

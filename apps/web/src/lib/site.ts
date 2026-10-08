@@ -39,6 +39,9 @@ export const moduleColor = (order: number) => MODULE_COLORS[(order - 1 + MODULE_
  * Netlify serverar samma sidor utan `.html`, och det är de adresserna som ska synas utåt.
  */
 export function canonicalPath(pathname: string): string {
-  const p = pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '');
+  const p = pathname
+    .replace(/\/index\.html$/, '/')
+    .replace(/\.html$/, '')
+    .replace(/\/$/, '');
   return p || '/';
 }

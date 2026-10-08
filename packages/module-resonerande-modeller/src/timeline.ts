@@ -31,7 +31,8 @@ export const CHAPTERS: Chapter[] = [
     id: 'kurva',
     start: 27,
     title: 'Mer tanke, fler rätt',
-    caption: 'På hundra liknande uppgifter: utan tankesteg blir ungefär hälften rätt. Med fler steg blir nästan alla rätt.',
+    caption:
+      'I den här förenklade modellen, på hundra liknande uppgifter: utan tankesteg blir ungefär hälften rätt, med fler steg blir fler rätt.',
   },
   {
     id: 'slarv',
@@ -49,12 +50,12 @@ export const CHAPTERS: Chapter[] = [
     id: 'pris',
     start: 62,
     title: 'Priset',
-    caption: 'Varje tankesteg kostar tid och beräkning. Därför tänker resonerande modeller länge på svåra frågor och kort på lätta.',
+    caption: 'Varje tankesteg kostar tid och beräkning. Fler steg hjälper mest på uppgifter i flera led, men garanterar aldrig rätt svar.',
   },
   { id: 'din-tur', start: 72, title: 'Din tur', caption: 'Välj en uppgift och hur många tankesteg modellen får.' },
 ];
 
-export const EXPLORE_CAPTION = 'Välj en uppgift och hur många tankesteg modellen får. Följ stegen och diagrammet.';
+export const EXPLORE_CAPTION = 'En förenklad modell: välj en uppgift och hur många tankesteg den får. Följ stegen och diagrammet.';
 
 const k = (t: number, v: number, ease?: Keyframe['ease']): Keyframe => ({ t, v, ease });
 

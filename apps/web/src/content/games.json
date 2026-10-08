@@ -35,8 +35,8 @@
     "id": "tokenjakten",
     "title": "Tokenjakten",
     "order": 5,
-    "summary": "Klipp orden i bitar som en tokeniserare gör. Färre bitar är bättre.",
-    "teaches": "Att en språkmodell läser tokens, inte ord, och varför långa svenska ord, tal och stavfel blir många bitar.",
+    "summary": "Klipp orden i tokens med så få bitar som möjligt, ungefär som en tokeniserare gör.",
+    "teaches": "Att en språkmodell läser tokens, inte ord, och varför långa svenska ord, tal och stavfel ofta blir många bitar.",
     "module": "sprakmodellen"
   },
   {

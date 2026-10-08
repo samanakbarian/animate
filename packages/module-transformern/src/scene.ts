@@ -21,7 +21,9 @@ export function createAttentionScene(host: HTMLElement): ModuleScene {
       const n = sentence.length;
       const focus = Math.round(clamp(params.focus, 0, n - 1));
       const head = Math.round(clamp(params.head, 0, HEADS.length - 1));
-      const A = attention(sentence, head, params.sharp);
+      const causal = Math.round(params.causal ?? 0) === 1;
+      const A = attention(sentence, head, params.sharp, causal);
+      const hidden = (i: number, j: number) => causal && j > i;
       const row = A[focus];
       S.clear();
       const s = tall ? W / 58 : Math.min(W, H * 1.78) / 100;
@@ -50,6 +52,7 @@ export function createAttentionScene(host: HTMLElement): ModuleScene {
         cx += w + gap * (fs / ((tall ? 1.8 : 1.9) * s));
       }
       sentence.forEach((tok, i) => {
+        if (hidden(focus, i)) return;
         const w = row[i];
         // båge från ordet som tittar
         ctx.strokeStyle = rgba(C.warm, 0.15 + 0.85 * clamp(w * 1.6));
@@ -73,10 +76,20 @@ export function createAttentionScene(host: HTMLElement): ModuleScene {
           );
         }
         const w = row[i];
+        if (hidden(focus, i)) {
+          // ord som inte skrivits än: en tom ruta i stället för ordet
+          const tw = ctx.measureText(tok.text).width;
+          ctx.strokeStyle = rgba([232, 235, 238], 0.25);
+          ctx.setLineDash([3, 3]);
+          ctx.strokeRect(xs[i] - tw / 2, yBot - fs * 0.7, tw, fs * 1.4);
+          ctx.setLineDash([]);
+          S.text('dold', xs[i], yBot + fs * 1.4, fs * 0.72, C.dim, 'center');
+          return;
+        }
         S.text(tok.text, xs[i], yBot, fs, rgba([232, 235, 238], 0.35 + 0.65 * clamp(w * 2)), 'center');
         S.text(`${Math.round(w * 100)} %`, xs[i], yBot + fs * 1.4, fs * 0.72, C.dim, 'center');
       });
-      S.text(`huvud: ${HEADS[head]}`, x0, yTop - 3 * s, 1.5 * s, C.dim);
+      S.text(`huvud: ${HEADS[head]} · ${causal ? 'bara bakåt (språkmodell)' : 'hela meningen'}`, x0, yTop - 3 * s, 1.5 * s, C.dim);
 
       // --- uppmärksamhetstabellen
       const emphasis = mode === 'film' ? 0.45 + 0.55 * smoothstep(60, 64, t) : 1;
@@ -88,6 +101,16 @@ export function createAttentionScene(host: HTMLElement): ModuleScene {
       for (let i = 0; i < n; i++)
         for (let j = 0; j < n; j++) {
           const w = A[i][j];
+          if (hidden(i, j)) {
+            // maskerad ruta: framtida ord
+            ctx.strokeStyle = rgba(C.cold, 0.18);
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(mx + j * cell + 3, my + (i + 1) * cell - 3);
+            ctx.lineTo(mx + (j + 1) * cell - 3, my + i * cell + 3);
+            ctx.stroke();
+            continue;
+          }
           ctx.fillStyle = i === focus ? rgba(C.warm, 0.12 + 0.88 * clamp(w * 1.4)) : rgba(C.cold, 0.06 + 0.8 * clamp(w * 1.4));
           ctx.fillRect(mx + j * cell + 1, my + i * cell + 1, cell - 2, cell - 2);
         }
