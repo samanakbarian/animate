@@ -5,6 +5,19 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 – Liknelsen med hjärnan i modul 1
+
+**Vad**
+
+- Del 1 i modul 1 börjar nu med en nervcell (0–14 s): dendriter, cellkropp och axon, signaler som färdas in och
+  cellen som skjuter var 2,5 s. Kapitlet ”En förenklad kopia” visar vad delarna motsvarar (tal in, summa, signal ut).
+  Nervcellen tonar sedan över i beslutsdiagrammet på samma plats. Del 1 är nu 70 s; beslutsdelens tider ligger
+  efter `BIO_END` i `timeline-beslut.ts`.
+- Modultexten förklarar att sajten handlar om artificiella neurala nätverk, och att liknelsen gäller idén, inte biologin.
+  Ordlistan har ett nytt begrepp, ”Artificiellt neuralt nätverk”.
+
+---
+
 ## 2026-10-07 (11) – Paus i filmen och en enklare början på modul 1
 
 **Vad**

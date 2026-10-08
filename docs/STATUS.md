@@ -2,7 +2,7 @@
 
 _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
-**Senast uppdaterad:** 2026-10-07
+**Senast uppdaterad:** 2026-10-08
 
 ## Nuläge
 
@@ -14,7 +14,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
 - **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
   scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
-- **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 ett vardagsbeslut med lampa (56 s,
+- **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 från nervcell till ett vardagsbeslut med lampa (70 s,
   ingen matematik utöver plus och minus), del 2 samma neuron som karta med linje (64 s), del 3 ett
   2–H–1-nätverk som tränas deterministiskt i webbläsaren (74 s, reglage för dolda neuroner, steg, steglängd).
 - **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,

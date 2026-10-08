@@ -1,8 +1,14 @@
 [
   {
+    "id": "neuralt-natverk",
+    "term": "Artificiellt neuralt nätverk",
+    "definition": "Många artificiella neuroner ordnade i lager, där varje lager räknar vidare på det förra. Idén är lånad från hjärnan, men nätverket är ren matematik. Nästan all AI i dag bygger på sådana nätverk.",
+    "module": "neuralt-natverk"
+  },
+  {
     "id": "neuron",
-    "term": "Neuron",
-    "definition": "Den minsta räknedelen i ett neuralt nätverk. Den tar emot tal, väger dem, summerar och skickar vidare ett nytt tal.",
+    "term": "Neuron (artificiell)",
+    "definition": "Den minsta räknedelen i ett neuralt nätverk. Den tar emot tal, väger dem, summerar och skickar vidare ett nytt tal. Namnet kommer från hjärnans nervceller, men den är mycket enklare.",
     "module": "neuralt-natverk"
   },
   {

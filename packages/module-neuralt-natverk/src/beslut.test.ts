@@ -27,10 +27,10 @@ describe('del 1: ett beslut', () => {
       const v = evaluateParams({ params: PARAMS_0, tracks: TRACKS_0 }, t);
       return decide({ sun: v.sun, homework: v.homework, wSun: v.wSun, wHomework: v.wHomework, b: v.b }).yes;
     };
-    expect(at(4)).toBe(true); // sol, inga läxor
-    expect(at(16)).toBe(false); // läxorna drar ner
-    expect(at(27)).toBe(false); // mulet
-    expect(at(35)).toBe(false); // lite sol, lite läxor
-    expect(at(41)).toBe(true); // biasen höjd
+    expect(at(14 + 4)).toBe(true); // sol, inga läxor
+    expect(at(14 + 16)).toBe(false); // läxorna drar ner
+    expect(at(14 + 27)).toBe(false); // mulet
+    expect(at(14 + 35)).toBe(false); // lite sol, lite läxor
+    expect(at(14 + 41)).toBe(true); // biasen höjd
   });
 });
