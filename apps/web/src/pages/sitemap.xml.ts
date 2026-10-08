@@ -9,6 +9,7 @@ export const GET: APIRoute = async () => {
   const learningPaths = await getCollection('paths');
   const paths = [
     '/',
+    '/lar',
     ...learningPaths.map((p) => `/lar/${p.id}`),
     '/moduler',
     ...modules.map((m) => `/moduler/${m.id}`),

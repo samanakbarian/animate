@@ -52,7 +52,7 @@ describe('framsteg och märken', () => {
       all[`ilearnai-seen-${m}`] = '1';
     }
     for (const g of games) all[`ns-game-${g.id}-0`] = '1';
-    all['ilearnai-path-forsta-ai'] = JSON.stringify({ done: paths[0].steps.map((s) => s.id), current: null });
+    for (const p of paths) all[`ilearnai-path-${p.id}`] = JSON.stringify({ done: p.steps.map((s) => s.id), current: null });
     expect(earnedBadges(badges, all, paths)).toHaveLength(badges.length);
   });
 });

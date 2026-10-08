@@ -122,7 +122,7 @@ const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ 
 
     <section class="done-panel" data-complete hidden aria-labelledby="klar">
       <h2 id="klar" tabindex="-1">
-        Klart! Nu vet du hur AI fungerar i grunden.
+        {path.data.doneTitle}
       </h2>
       <p data-score></p>
       <p>Det här är de tre sakerna att komma ihåg:</p>
@@ -131,28 +131,53 @@ const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ 
           <li>{t}</li>
         ))}
       </ol>
+
+      <div class="diploma-form">
+        <h3>Ditt diplom</h3>
+        <p>Skriv ut diplomet eller spara det som PDF. Namnet sparas bara på diplomet, ingen annanstans.</p>
+        <label for="diplom-namn">Namn på diplomet</label>
+        <div class="row">
+          <input id="diplom-namn" type="text" autocomplete="name" maxlength="60" data-diploma-name />
+          <button type="button" class="primary" data-diploma>
+            Skriv ut eller spara som PDF
+          </button>
+        </div>
+      </div>
+
       <h3>Vill du veta mer?</h3>
       <ul class="next-links">
+        {path.data.next.map((n) => (
+          <li>
+            <a href={n.href}>{n.label}</a>: {n.why}
+          </li>
+        ))}
         <li>
-          <a href="/moduler/traning">Träning</a>: hur vikterna faktiskt hittas.
-        </li>
-        <li>
-          <a href="/moduler/transformern">Transformern</a>: hur modellen vet vilka ord som hör ihop.
-        </li>
-        <li>
-          <a href="/moduler/risker-och-sakerhet">Risker och säkerhet</a>: varför AI kan låta säker och ändå ha fel.
-        </li>
-        <li>
-          <a href="/moduler">Alla moduler</a> och <a href="/spel">alla spel</a>.
-        </li>
-        <li>
-          <a href="/framsteg">Dina framsteg och märken</a>.
+          <a href="/lar">Alla lärvägar</a> · <a href="/framsteg">Dina framsteg och märken</a>
         </li>
       </ul>
       <p>
         <button type="button" data-restart>
           Börja om lärvägen
         </button>
+      </p>
+    </section>
+
+    <section class="diploma" aria-hidden="true" data-diploma-sheet>
+      <p class="d-brand">iLearnAI</p>
+      <p class="d-kicker">Diplom</p>
+      <p class="d-name" data-d-name>
+        &nbsp;
+      </p>
+      <p class="d-text">har gått lärvägen</p>
+      <p class="d-title">{path.data.title}</p>
+      <p class="d-text">och kan förklara att</p>
+      <ul class="d-insights">
+        {path.data.insights.map((t) => (
+          <li>{t}</li>
+        ))}
+      </ul>
+      <p class="d-foot">
+        <span data-d-date></span> · ilearnai.se
       </p>
     </section>
   </article>
@@ -302,7 +327,7 @@ const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ 
   root.addEventListener('quiz:done', (e) => {
     const { right, total } = (e as CustomEvent<{ right: number; total: number }>).detail;
     complete.querySelector('[data-score]')!.textContent = `Du hade ${right} av ${total} rätt på testet.`;
-    next('test');
+    next(steps.find((x) => x.kind === 'test')!.id);
   });
   root.querySelector('[data-restart]')!.addEventListener('click', () => {
     progress = parseProgress(null, ids);
@@ -313,6 +338,21 @@ const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ 
   // Lämnar besökaren mitt i lärvägen räknas det som avbrutet (för statistiken).
   addEventListener('pagehide', () => {
     if (current && !isComplete(progress, ids)) track('path_leave', { path: pathId, step: current });
+  });
+
+  // Diplomet: fyll i namn och datum, skriv sedan ut bara diplomet (print-CSS nedan).
+  root.querySelector('[data-diploma]')!.addEventListener('click', () => {
+    const name = root.querySelector<HTMLInputElement>('[data-diploma-name]')!.value.trim();
+    root.querySelector('[data-d-name]')!.textContent = name || '\u00a0';
+    root.querySelector('[data-d-date]')!.textContent = new Date().toLocaleDateString('sv-SE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    document.body.classList.add('print-diploma');
+    const done = () => document.body.classList.remove('print-diploma');
+    addEventListener('afterprint', done, { once: true });
+    print();
   });
 
   renderNav();
@@ -490,6 +530,88 @@ const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ 
   @media (prefers-reduced-motion: reduce) {
     .bar span {
       transition: none;
+    }
+  }
+  .diploma-form {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem 1.2rem;
+    border: 1px dashed var(--warm);
+    border-radius: 12px;
+  }
+  .diploma-form h3,
+  .diploma-form p {
+    margin: 0;
+  }
+  .diploma-form .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .diploma-form input {
+    flex: 1 1 14rem;
+    min-height: 44px;
+    padding: 0.5rem 0.8rem;
+    font: inherit;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .diploma {
+    display: none;
+  }
+  @media print {
+    :global(body.print-diploma > *:not(main)),
+    :global(body.print-diploma [data-path] > *:not(.diploma)) {
+      display: none !important;
+    }
+    :global(body.print-diploma) {
+      background: #fff !important;
+      color: #111 !important;
+    }
+    .diploma {
+      display: grid !important;
+      gap: 0.6rem;
+      justify-items: center;
+      padding: 3rem 2.5rem;
+      border: 6px double #b4532f;
+      color: #111;
+      text-align: center;
+      font-family: var(--font-sans);
+      break-inside: avoid;
+    }
+    .diploma p {
+      margin: 0;
+    }
+    .d-brand {
+      font: 800 1.2rem var(--font-sans);
+      color: #355d8c;
+    }
+    .d-kicker {
+      font: 600 2.6rem var(--font-display);
+      letter-spacing: 0.04em;
+    }
+    .d-name {
+      min-width: 60%;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid #999;
+      font: 600 1.8rem var(--font-display);
+    }
+    .d-title {
+      font: 600 1.5rem var(--font-display);
+      color: #b4532f;
+    }
+    .d-insights {
+      max-width: 34rem;
+      margin: 0.4rem 0;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .d-foot {
+      margin-top: 1rem;
+      color: #555;
+      font-size: 0.9rem;
     }
   }
 </style>

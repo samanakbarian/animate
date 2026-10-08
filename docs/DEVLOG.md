@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 (6) – Två lärvägar till och diplom (B-18, B-28)
+
+**Vad**
+
+- Lärvägarna ”Hur skriver en chattbot?” och ”Kan man lita på AI?” i `content/paths.json`, sidan `/lar` med alla
+  lärvägar och hur långt man kommit. Slutrubrik (`doneTitle`) och länkar vidare (`next`) är nu data, inte kod.
+- Diplom: namn (sparas inte), lärvägens titel, de tre insikterna och datum. Utskrift via `print()` med en klass på
+  `body` som döljer allt utom diplomet. Webbläsaren sparar som PDF.
+- Två nya märken (Inifrån, Källkritisk). Testerna kontrollerar alla lärvägar: minuter, moduldelar, spel och frågor.
+
+**Fällor**
+
+- I Astro försvinner mellanslaget mellan text och ett `{uttryck}` på nästa rad. Skriv `{' '}`.
+
+---
+
 ## 2026-10-08 (5) – Framsteg och märken (B-19)
 
 **Vad**

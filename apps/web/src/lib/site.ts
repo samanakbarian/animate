@@ -7,7 +7,7 @@ export const SITE = {
   foundingYear: '2026',
   description: 'Så fungerar AI, förklarat med korta filmer som du kan pausa och prova själv.',
   nav: [
-    { href: '/lar/forsta-ai', label: 'Kom igång' },
+    { href: '/lar', label: 'Lärvägar' },
     { href: '/moduler', label: 'Moduler' },
     { href: '/spel', label: 'Spel' },
     { href: '/ordlista', label: 'Ordlista' },

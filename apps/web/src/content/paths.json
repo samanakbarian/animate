@@ -68,6 +68,215 @@
         "takeaway": "",
         "questions": ["neuralt-natverk:1", "neuralt-natverk:2", "sprakmodellen:1", "sprakmodellen:2", "agenten:0", "agenten:2"]
       }
+    ],
+    "doneTitle": "Klart! Nu vet du hur AI fungerar i grunden.",
+    "next": [
+      {
+        "href": "/lar/chattbot",
+        "label": "Lärvägen Hur skriver en chattbot?",
+        "why": "tokens, uppmärksamhet och hur svaret växer fram."
+      },
+      {
+        "href": "/lar/lita-pa-ai",
+        "label": "Lärvägen Kan man lita på AI?",
+        "why": "varför AI kan låta säker och ändå ha fel."
+      },
+      {
+        "href": "/moduler/traning",
+        "label": "Träning",
+        "why": "hur vikterna faktiskt hittas."
+      }
+    ]
+  },
+  {
+    "id": "chattbot",
+    "title": "Hur skriver en chattbot?",
+    "minutes": 25,
+    "summary": "Från text till tal, via uppmärksamhet, till ett svar som växer fram en token i taget. För dig som vill veta vad som händer inuti.",
+    "doneTitle": "Klart! Nu vet du vad som händer när en chattbot svarar.",
+    "insights": [
+      "Texten delas i tokens, och varje token blir en lista med tal där liknande ord hamnar nära varandra.",
+      "Uppmärksamheten låter varje ord väga in de andra orden. I en språkmodell får orden bara titta bakåt.",
+      "Svaret skrivs en token i taget, och träningen på samtal gör en textgissare till en assistent."
+    ],
+    "steps": [
+      {
+        "id": "tokens",
+        "kind": "module",
+        "module": "ord-som-tal",
+        "part": "ord-som-tal",
+        "minutes": 5,
+        "title": "Text blir tal",
+        "why": "En dator räknar bara. Se hur text delas i bitar och hur varje bit får en plats på en karta över betydelser.",
+        "takeaway": "Tokens är bitar av text. Inbäddningar är listor med tal, och ord som används likadant hamnar nära varandra."
+      },
+      {
+        "id": "tokenjakten",
+        "kind": "game",
+        "game": "tokenjakten",
+        "minutes": 3,
+        "title": "Spela: Tokenjakten",
+        "why": "Klipp orden i tokens själv. Spela en bana, sedan går du vidare.",
+        "takeaway": "Långa svenska ord, tal och stavfel blir ofta många tokens."
+      },
+      {
+        "id": "uppmarksamhet",
+        "kind": "module",
+        "module": "transformern",
+        "part": "transformern",
+        "minutes": 5,
+        "title": "Orden tittar på varandra",
+        "why": "Transformern är byggstenen i alla stora språkmodeller. Se hur ”den” hittar vad det syftar på.",
+        "takeaway": "Uppmärksamhet väger ihop orden. En språkmodell som skriver får bara titta bakåt."
+      },
+      {
+        "id": "vem-ar-den",
+        "kind": "game",
+        "game": "vem-ar-den",
+        "minutes": 3,
+        "title": "Spela: Vem är ”den”?",
+        "why": "Hitta själv vad pronomenet syftar på och jämför med uppmärksamheten.",
+        "takeaway": "Ibland räcker grammatiken. Ibland krävs kunskap om världen."
+      },
+      {
+        "id": "nasta-ord",
+        "kind": "module",
+        "module": "sprakmodellen",
+        "part": "sprakmodellen",
+        "minutes": 4,
+        "title": "Nästa token, och nästa",
+        "why": "Se hur svaret växer fram och vad temperaturen gör.",
+        "takeaway": "Modellen väljer nästa token bland de troliga, med lite slump."
+      },
+      {
+        "id": "assistent",
+        "kind": "module",
+        "module": "fran-fortraning-till-assistent",
+        "part": "fran-fortraning-till-assistent",
+        "minutes": 3,
+        "title": "Från textgissare till assistent",
+        "why": "Varför svarar chattboten på frågor i stället för att bara fortsätta texten?",
+        "takeaway": "Finjustering lär ut formen på ett bra svar, och människors val styr vilka svar som blir troliga."
+      },
+      {
+        "id": "test",
+        "kind": "test",
+        "minutes": 2,
+        "title": "Testa dig själv",
+        "why": "Sex frågor om det du sett. Fel svar förklaras.",
+        "takeaway": "",
+        "questions": [
+          "ord-som-tal:1",
+          "ord-som-tal:3",
+          "transformern:1",
+          "transformern:3",
+          "sprakmodellen:2",
+          "fran-fortraning-till-assistent:0"
+        ]
+      }
+    ],
+    "next": [
+      {
+        "href": "/lar/lita-pa-ai",
+        "label": "Lärvägen Kan man lita på AI?",
+        "why": "varför svaren ibland är fel."
+      },
+      {
+        "href": "/moduler/resonerande-modeller",
+        "label": "Resonerande modeller",
+        "why": "när modellen skriver mellansteg innan den svarar."
+      },
+      {
+        "href": "/moduler/agenten",
+        "label": "Agenten",
+        "why": "när modellen får verktyg och ett mål."
+      }
+    ]
+  },
+  {
+    "id": "lita-pa-ai",
+    "title": "Kan man lita på AI?",
+    "minutes": 20,
+    "summary": "Varför en AI kan låta säker och ändå ha fel, vad träningen gör med svaren och hur spärrar fungerar. Med övningar i att avslöja påhittade svar.",
+    "doneTitle": "Klart! Nu vet du när du ska dubbelkolla.",
+    "insights": [
+      "En AI kan låta säker och ändå ha fel. Tonen säger ingenting om sanningen.",
+      "En assistent är tränad att ge svar som människor gillar, inte svar som garanterat stämmer.",
+      "Spärrar minskar riskerna men är aldrig perfekta. Kontrollera det som är viktigt."
+    ],
+    "steps": [
+      {
+        "id": "saker-men-fel",
+        "kind": "module",
+        "module": "risker-och-sakerhet",
+        "part": "risker-1",
+        "minutes": 5,
+        "title": "Säker men fel",
+        "why": "Se skillnaden mellan när modellen vet och när den gissar, och varför du inte ser den i texten.",
+        "takeaway": "Osäkerheten finns i sannolikheterna, men svaret låter lika säkert ändå."
+      },
+      {
+        "id": "jakten",
+        "kind": "game",
+        "game": "hallucinationsjakten",
+        "minutes": 4,
+        "title": "Spela: Hallucinationsjakten",
+        "why": "Avgör vilka svar som stämmer. Spela en bana, sedan går du vidare.",
+        "takeaway": "Påhittade källor och detaljer ser ut precis som riktiga. Kontrollera i källan."
+      },
+      {
+        "id": "traningen",
+        "kind": "module",
+        "module": "fran-fortraning-till-assistent",
+        "part": "fran-fortraning-till-assistent",
+        "minutes": 5,
+        "title": "Vad träningen gör med svaren",
+        "why": "Assistenten är tränad på människors val. Vad betyder det för hur pålitlig den är?",
+        "takeaway": "Modellen lär sig formen på ett bra svar. Ett självsäkert fel har samma form."
+      },
+      {
+        "id": "sparrar",
+        "kind": "module",
+        "module": "risker-och-sakerhet",
+        "part": "risker-2",
+        "minutes": 4,
+        "title": "Spärrar och hur de luras",
+        "why": "Hur stoppar man skadliga förfrågningar, och varför går det aldrig helt?",
+        "takeaway": "En strikt spärr stoppar även vanliga frågor, en slapp släpper igenom mer. Det är alltid en avvägning."
+      },
+      {
+        "id": "test",
+        "kind": "test",
+        "minutes": 2,
+        "title": "Testa dig själv",
+        "why": "Sex frågor om det du sett. Fel svar förklaras.",
+        "takeaway": "",
+        "questions": [
+          "risker-och-sakerhet:0",
+          "risker-och-sakerhet:1",
+          "risker-och-sakerhet:2",
+          "risker-och-sakerhet:3",
+          "fran-fortraning-till-assistent:1",
+          "fran-fortraning-till-assistent:2"
+        ]
+      }
+    ],
+    "next": [
+      {
+        "href": "/lar/chattbot",
+        "label": "Lärvägen Hur skriver en chattbot?",
+        "why": "vad som händer inuti när svaret skrivs."
+      },
+      {
+        "href": "/moduler/flera-agenter",
+        "label": "Flera agenter",
+        "why": "varför granskning och människor i loopen behövs."
+      },
+      {
+        "href": "/spel/hallucinationsjakten",
+        "label": "Hallucinationsjakten",
+        "why": "alla tre banorna."
+      }
     ]
   }
 ]

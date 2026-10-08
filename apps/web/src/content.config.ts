@@ -73,6 +73,10 @@ const paths = defineCollection({
     summary: z.string().max(200),
     /** Det besökaren ska kunna förklara efteråt. */
     insights: z.array(z.string()).min(1),
+    /** Rubriken när lärvägen är klar. */
+    doneTitle: z.string(),
+    /** Vart besökaren kan gå sedan. */
+    next: z.array(z.object({ href: z.string(), label: z.string(), why: z.string() })),
     steps: z
       .array(
         z.object({

@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import paths from '../content/paths.json';
+import { GAMES } from './games';
+import { INTERACTIVE_MODULES } from './interactive';
 import { isComplete, markDone, minutesLeft, parseProgress, resumeStep } from './path';
 
 const ids = ['a', 'b', 'c'];
@@ -31,10 +33,40 @@ describe('lärvägens framsteg', () => {
     expect(minutesLeft({ done: ['a'], current: null }, steps)).toBe(3);
   });
 
-  it('lärvägen ”förstå AI” tar 20 minuter och slutar med ett test', () => {
-    const p = paths.find((x) => x.id === 'forsta-ai')!;
-    expect(p.steps.reduce((a, s) => a + s.minutes, 0)).toBe(p.minutes);
-    expect(p.steps.at(-1)!.kind).toBe('test');
-    expect(new Set(p.steps.map((s) => s.id)).size).toBe(p.steps.length);
+  it('varje lärväg: minuterna summerar, slutar med ett test och stegen har unika id', () => {
+    for (const p of paths) {
+      expect(
+        p.steps.reduce((a, s) => a + s.minutes, 0),
+        p.id,
+      ).toBe(p.minutes);
+      expect(p.steps.at(-1)!.kind, p.id).toBe('test');
+      expect(new Set(p.steps.map((s) => s.id)).size, p.id).toBe(p.steps.length);
+    }
+  });
+
+  it('varje steg pekar på en moduldel, ett spel eller quizfrågor som finns', async () => {
+    const md = import.meta.glob<string>('../content/modules/*.md', { query: '?raw', import: 'default', eager: true });
+    const quizLength = (slug: string) =>
+      (
+        Object.entries(md)
+          .find(([f]) => f.endsWith(`/${slug}.md`))?.[1]
+          .match(/^\s+- kind: /gm) ?? []
+      ).length;
+    for (const p of paths)
+      for (const s of p.steps) {
+        if (s.kind === 'module') {
+          const { parts } = await INTERACTIVE_MODULES[s.module!]!();
+          expect(
+            parts.some((x) => x.id === s.part),
+            `${p.id}/${s.id}`,
+          ).toBe(true);
+        }
+        if (s.kind === 'game') expect(GAMES[s.game!], `${p.id}/${s.id}`).toBeDefined();
+        if (s.kind === 'test')
+          for (const ref of s.questions!) {
+            const [slug, i] = ref.split(':');
+            expect(Number(i), `${p.id}: ${ref}`).toBeLessThan(quizLength(slug));
+          }
+      }
   });
 });

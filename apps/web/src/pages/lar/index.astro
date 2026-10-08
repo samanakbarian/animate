@@ -1,0 +1,124 @@
+---
+// Alla lärvägar. Den första är vägen in för nybörjare.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const paths = await getCollection('paths');
+const first = paths.find((p) => p.id === 'forsta-ai') ?? paths[0];
+const rest = paths.filter((p) => p.id !== first.id);
+---
+
+<Base title="Lärvägar" description="Färdiga vägar genom moduler, spel och quiz. Välj ett mål, följ stegen och testa dig själv.">
+  <div class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">{paths.length} lärvägar · inget konto behövs</p>
+      <h1>Lärvägar</h1>
+      <p class="lead">
+        En lärväg är en färdig ordning genom moduler och spel, med ett test på slutet. Framstegen sparas i din webbläsare så att du kan
+        fortsätta en annan dag.
+      </p>
+    </header>
+
+    <a
+      class="card first"
+      href={`/lar/${first.id}`}
+      data-path-card={first.id}
+      data-steps={JSON.stringify(first.data.steps.map((s) => s.id))}
+    >
+      <span class="tag">Börja här</span>
+      <h2>{first.data.title}</h2>
+      <p>{first.data.summary}</p>
+      <span class="meta">
+        ca {first.data.minutes} min · {first.data.steps.length} steg <span data-state></span>
+      </span>
+    </a>
+
+    <div class="grid">
+      {rest.map((p) => (
+        <a class="card" href={`/lar/${p.id}`} data-path-card={p.id} data-steps={JSON.stringify(p.data.steps.map((s) => s.id))}>
+          <h2>{p.data.title}</h2>
+          <p>{p.data.summary}</p>
+          <span class="meta">
+            ca {p.data.minutes} min · {p.data.steps.length} steg <span data-state />
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { isComplete, parseProgress, storageKey } from '../../lib/path';
+
+  // Visa hur långt besökaren har kommit på varje lärväg.
+  document.querySelectorAll<HTMLElement>('[data-path-card]').forEach((card) => {
+    const ids = JSON.parse(card.dataset.steps!) as string[];
+    let raw: string | null;
+    try {
+      raw = localStorage.getItem(storageKey(card.dataset.pathCard!));
+    } catch {
+      return;
+    }
+    if (!raw) return;
+    const p = parseProgress(raw, ids);
+    const el = card.querySelector('[data-state]')!;
+    if (isComplete(p, ids)) el.textContent = '· klar ✓';
+    else if (p.done.length) el.textContent = `· ${p.done.length} av ${ids.length} klara`;
+  });
+</script>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3rem 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1rem;
+  }
+  .card {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding: 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .card:hover,
+  .card:focus-visible {
+    border-color: var(--cold);
+  }
+  .card h2 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+  .card p {
+    margin: 0;
+    color: var(--dim);
+  }
+  .card.first {
+    border: 2px solid var(--warm);
+  }
+  .tag {
+    justify-self: start;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--warm);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+  .meta {
+    font: 400 0.85rem var(--font-mono);
+    color: var(--dim);
+  }
+</style>

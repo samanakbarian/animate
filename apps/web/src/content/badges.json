@@ -1,25 +1,92 @@
 [
-  { "id": "forsta-steget", "title": "Första steget", "description": "Gör ditt första quiz.", "rule": { "type": "quizzes", "count": 1 } },
+  {
+    "id": "forsta-steget",
+    "title": "Första steget",
+    "description": "Gör ditt första quiz.",
+    "rule": {
+      "type": "quizzes",
+      "count": 1
+    }
+  },
   {
     "id": "grunderna",
     "title": "Grunderna",
     "description": "Gå hela lärvägen ”Förstå hur AI fungerar på 20 minuter”.",
-    "rule": { "type": "path", "path": "forsta-ai" }
+    "rule": {
+      "type": "path",
+      "path": "forsta-ai"
+    }
   },
-  { "id": "allt-ratt", "title": "Allt rätt", "description": "Fyra av fyra rätt på ett quiz.", "rule": { "type": "perfect", "count": 1 } },
-  { "id": "skarpt", "title": "Skarpt", "description": "Allt rätt på tre olika quiz.", "rule": { "type": "perfect", "count": 3 } },
+  {
+    "id": "inifran",
+    "title": "Inifrån",
+    "description": "Gå lärvägen ”Hur skriver en chattbot?”.",
+    "rule": {
+      "type": "path",
+      "path": "chattbot"
+    }
+  },
+  {
+    "id": "kallkritisk",
+    "title": "Källkritisk",
+    "description": "Gå lärvägen ”Kan man lita på AI?”.",
+    "rule": {
+      "type": "path",
+      "path": "lita-pa-ai"
+    }
+  },
+  {
+    "id": "allt-ratt",
+    "title": "Allt rätt",
+    "description": "Fyra av fyra rätt på ett quiz.",
+    "rule": {
+      "type": "perfect",
+      "count": 1
+    }
+  },
+  {
+    "id": "skarpt",
+    "title": "Skarpt",
+    "description": "Allt rätt på tre olika quiz.",
+    "rule": {
+      "type": "perfect",
+      "count": 3
+    }
+  },
   {
     "id": "utforskare",
     "title": "Utforskare",
     "description": "Dra i reglagen eller se klart i fem moduler.",
-    "rule": { "type": "explored", "count": 5 }
+    "rule": {
+      "type": "explored",
+      "count": 5
+    }
   },
-  { "id": "spelare", "title": "Spelare", "description": "Spela tre olika spel.", "rule": { "type": "games", "count": 3 } },
-  { "id": "spelmastare", "title": "Spelmästare", "description": "Spela alla sju spel.", "rule": { "type": "games", "count": 7 } },
+  {
+    "id": "spelare",
+    "title": "Spelare",
+    "description": "Spela tre olika spel.",
+    "rule": {
+      "type": "games",
+      "count": 3
+    }
+  },
+  {
+    "id": "spelmastare",
+    "title": "Spelmästare",
+    "description": "Spela alla sju spel.",
+    "rule": {
+      "type": "games",
+      "count": 7
+    }
+  },
   {
     "id": "hela-kartan",
     "title": "Hela kartan",
     "description": "Gör quizet i alla tio moduler.",
-    "rule": { "type": "quizzes", "count": 10 }
+    "rule": {
+      "type": "quizzes",
+      "count": 10
+    }
   }
 ]
