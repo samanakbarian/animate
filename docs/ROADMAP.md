@@ -11,14 +11,14 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 
 - [x] Kortfilmen NÄSTA STEG (realtid i webbläsaren, MP4-export)
 - [x] Hemsidans skal: startsida med filmen, moduler, ordlista (22 begrepp), om
-- [ ] MP4-reserv för filmen (mobil, utan WebGL2)
+- [ ] MP4-reserv för filmen (spelaren är klar, videofilen återstår – kräver GPU, se STATUS)
 - [x] Modulramverk: film som kan pausas och styras (ADR 0004)
 - [x] Modul 1 – Neuralt nätverk (del 1: en neuron, del 2: ett nätverk som tränas i webbläsaren)
 - [x] Modul 5 – Språkmodellen (liten seedad trigrammodell, temperatur, slumpfrö)
 - [x] Modul 8 – Agenten (simulerad agent: tänk/agera/observera, fel och människa i loopen)
 - [x] Namn och domän: iLearnAI på ilearnai.se (ADR 0008)
 - [x] Logga, delningsbild, sitemap, robots.txt, llms.txt och grundare i strukturerad data
-- [ ] Driftsättning på ilearnai.se
+- [x] Driftsättning på ilearnai.se (Netlify, HTTPS, www → apex)
 
 ## Version 2
 
@@ -38,6 +38,15 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 - [x] Vem är ”den”?
 - [x] AI-tidslinjen
 - [ ] Spärrvakten (pausad)
+
+## Lärande (R3)
+
+- [x] Quiz i varje modul: förstå, använd, förutsäg, med länk tillbaka till kapitlet
+- [x] Lärväg ”Förstå hur AI fungerar på 20 minuter” med framsteg i webbläsaren
+- [x] ”Vad vi förenklar här” i alla moduler
+- [ ] Fler lärvägar, märken (B-19)
+- [ ] Skolmaterial (förslag i `docs/SKOLMATERIAL.md`)
+- [ ] Statistik påslagen (ADR 0012, väntar på val av tjänst)
 
 ## Senare
 

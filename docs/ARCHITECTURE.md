@@ -58,18 +58,30 @@ och att modulerna senare kan pausas och scrubbas.
 
 ## apps/web
 
-- Astro, helt statisk (`output: static`). Varje sida är HTML, och filmen är en klient-ö som laddas när
-  sidan är ledig (`requestIdleCallback`). Spelaren bygger scenen först vid klick på SPELA.
+- Astro, helt statisk (`output: static`). Varje sida är HTML. Filmens startskärm är vanlig HTML
+  (`FilmPlayer.astro`); filmpaketet (3D-motorn) laddas först vid klick på Spela. Ljudkontexten skapas i
+  klicket och skickas till spelaren (`autostart`, `audioContext`). Saknas WebGL2 eller är enheten svag visas
+  videon `/film/nasta-steg.mp4` om den finns, annars ett meddelande. Filmen finns också som text.
 - Innehåll i content collections (`src/content.config.ts` är schemat):
   - `modules`: en Markdown-fil per modul, med frontmatter för titel, ordning, mål, interaktion,
     `stage` (`mvp`/`v2`/`senare`) och `status`.
   - `glossary`: JSON. Varje begrepp kan peka på en modul.
+  - `games`: JSON, spelen på `/spel`.
+  - `paths`: JSON, lärvägar på `/lar/<id>`. Ett steg är en moduldel (`part` = `ModuleDefinition.id`), ett spel
+    eller ett test (frågor ur modulernas quiz, `"<modul>:<index>"`). Framsteg i `localStorage` (`lib/path.ts`).
+  - Modulernas `quiz` i frontmatter: två förstå, en använd, en förutsäg. Varje fel svar har en egen förklaring
+    och `see: "<del-id>#<kapitel-id>"`, som `ModuleStage.astro` gör till ett hopp i modulens film (`data-seek`).
+- `lib/track.ts`: statistik utan kakor (ADR 0012), avstängd tills `PUBLIC_STATS_URL` sätts. Modulspelaren
+  skickar `onEvent` (start, interact, end).
+- Canonical-URL:er skrivs utan `.html` (`canonicalPath` i `lib/site.ts`), eftersom bygget skriver filer.
 - Designtokens finns i `src/styles/global.css` (mörk, kall palett och sparsam terrakotta).
 
 ## Lägga till …
 
 - **ett begrepp:** en post i `glossary.json` (`id`, `term`, `definition`, valfri `module`).
-- **en modul (text):** en ny `.md` i `content/modules`. Sidan genereras automatiskt.
+- **en modul (text):** en ny `.md` i `content/modules`. Sidan genereras automatiskt. Skriv fyra quizfrågor
+  och ett avsnitt ”Vad vi förenklar här”.
+- **en lärväg:** en post i `content/paths.json`. Testet `lib/path.test.ts` kontrollerar att minuterna summerar.
 - **en modul med film/interaktion:** kopiera `packages/module-neuralt-natverk` (manus i `timeline.ts`,
   scen i `scene.ts` med `createSurface`, ren logik med tester), exportera `parts: ModuleDefinition[]`, lägg till paketet
   som beroende i `apps/web` och en rad i `apps/web/src/lib/interactive.ts`. Se ADR 0004.

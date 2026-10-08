@@ -5,6 +5,27 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 (4) – Granskningen: läranderesa, korrekthet, film, tillgänglighet
+
+**Vad**
+
+- Driftsättning kontrollerad (HTTPS, www, robots, sitemap, 404). Fel hittat och rättat: canonical slutade på `.html`.
+  Repots standardgren är `ccr-f401e4bd-y1vmji`, inte `master` – grundaren behöver byta i GitHub.
+- Filmen: statisk startskärm, filmpaketet laddas vid klick, ljud skapas i klicket (iOS), fel och tappat WebGL-
+  sammanhang ger ”Försök igen”, videoreserv förberedd men filen saknas, filmen i text.
+- Korrekthet: kausal uppmärksamhet (Transformern, ”Vem är den”), Tokenjakten, Resonerande modeller, Agenten,
+  Gradientgolf (riktning/lutning stod omvänt). ”Vad vi förenklar här” i alla tio moduler.
+- Quiz: 40 nya frågor (förstå, förstå, använd, förutsäg), förklaring per alternativ, hopp till kapitlet.
+- Lärväg `/lar/forsta-ai` och ny startsida. ”På gång” stod över publicerade moduler (STAGE_LABEL), rättat.
+- Tillgänglighet och statistik (ADR 0012, avstängd). Skolmaterial: förslag i `docs/SKOLMATERIAL.md`.
+
+**Fällor**
+
+- Mjuk scroll avbryts när en modul laddas in och sidan växer. Lärvägen scrollar direkt.
+- Webbappen saknar Node-typer: tester i `apps/web` läser filer med `import.meta.glob`, inte `node:fs`.
+
+---
+
 ## 2026-10-08 (3) – Quiz i modulerna, kortare om-sida
 
 **Vad**

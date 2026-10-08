@@ -6,61 +6,42 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
 ## Nuläge
 
-- Sajten heter **iLearnAI** och ska ligga på **ilearnai.se** (ADR 0008). Logga, delningsbild, JSON-LD med grundaren
-  Saman Akbarian, `sitemap.xml`, `robots.txt`, `llms.txt` och `humans.txt` finns. Målet: en stor utbildningssajt om AI med
-  moduler, spel, lärvägar och skolmaterial. Se backloggen.
-
-- Monorepo med pnpm: `apps/web` (Astro), `packages/engine`, `packages/film`, `packages/module-*` (10 st), `tools/render`.
-- Kortfilmen NÄSTA STEG spelas på startsidan (laddas lat).
-- **Modulramverket finns** (`@nastasteg/engine/module/*`, ADR 0004): film med kapitel och berättartext,
-  scrubbning, och reglage som pausar och låter besökaren styra. Stående layout på mobil.
-- **Modul 1 är klar** (`/moduler/neuralt-natverk`, status publicerad): del 1 från nervcell till ett vardagsbeslut med lampa (70 s,
-  ingen matematik utöver plus och minus), del 2 samma neuron som karta med linje (64 s), del 3 ett
-  2–H–1-nätverk som tränas deterministiskt i webbläsaren (74 s, reglage för dolda neuroner, steg, steglängd).
-- **Modul 5 – Språkmodellen** (80 s): en liten seedad trigrammodell på egen svensk text. Reglage för början,
-  antal ord, temperatur och slumpfrö. **Modul 8 – Agenten** (84 s): en simulerad agent bokar ett möte i loopen
-  tänk/agera/observera med verktyg. Reglage för fel (rummet upptaget) och människa i loopen.
-- **Spel (R2 påbörjad):** spelramverket finns (`engine/game`, ADR 0007). Sju spel på `/spel`: Gradientgolf (4 banor),
-  Slå maskinen (2), Dra gränsen (4), Hallucinationsjakten (3), Tokenjakten (4), Vem är ”den”? (3) och AI-tidslinjen (3). Modulsidorna länkar till spelen.
-- **Alla tio moduler är publicerade och interaktiva**, med ljud (lugnt syntat partitur per modul, knapp för av/på).
-- Alla tre MVP-modulerna är publicerade.
-- **Alla fem v2-moduler är publicerade:** Träning (gradientnedstigning i ett fellandskap), Ord som tal (tokens,
-  inbäddningar, PCA-karta, analogier), Transformern (uppmärksamhet med tre huvuden), Resonerande modeller
-  (tankesteg och kontroller, andel rätt mot budget) och Från förträning till assistent (tre skeden, återkoppling).
-- Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
-- Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
-- Om-sidan har kontakt: saman.akbarian@gmail.com.
-- Varje modul har ett quiz med fyra frågor (frontmatter `quiz` i modulens .md). 127 tester gröna. Filmen går att pausa (knapp, klick i bilden, mellanslag). CI kör format, lint, typecheck, test och bygge.
+- **iLearnAI** på https://ilearnai.se (Netlify, gren master, HTTPS, www → ilearnai.se). Monorepo: `apps/web` (Astro),
+  `packages/engine`, `packages/film`, `packages/module-*` (10), `packages/game-*` (7), `tools/render`.
+- **Väg in:** startsidan leder till lärvägen `/lar/forsta-ai` (”Förstå hur AI fungerar på 20 minuter”, sex steg:
+  neuron, nätverk, språkmodell, spelet Slå maskinen, agent, slutprov). Framsteg sparas lokalt; startsidan visar
+  ”Fortsätt lärvägen”. Kortfilmen ligger under hjälten, med länk vidare efter filmen. Tre spel visas, resten på `/spel`.
+- **Tio moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
+  använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
+- Pedagogiska rättelser: kausal uppmärksamhet i Transformern (reglaget ”Får titta”), Tokenjakten säger att färst
+  bitar är en förenkling, Resonerande modeller lovar ingen garanti, Agenten jämför samtal och agent i en tabell.
+- **Filmen:** statisk startskärm, 3D-motorn laddas först vid klick, fel visas med ”Försök igen”, paus, filmen i text.
+- Tillgänglighet: 32 px reglage, kapiteltext till skärmläsare en gång (inte tecken för tecken), reducerad rörelse,
+  tangentbord i Dra gränsen. Statistik utan kakor finns men är **avstängd** (ADR 0012).
+- 139 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
 
 ## Nästa (i prioritetsordning)
 
-1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
-   för webbläsare utan WebGL2 och för svaga mobiler.
-2. Lärvägar (R3, B-18) och framsteg i webbläsaren (B-19). Quizresultaten sparas redan per modul.
-   Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
-3. Driftsättning: `netlify.toml` finns. Sajten är driftsatt som eget Netlify-projekt (gren master, apps/web).
-   ilearnai.se pekar på Netlify (Netlify DNS via Loopia). Vissa resolvrar visade fortfarande Loopias
-   parkering samma dag. Lösning: A-post 75.2.60.5 för @ och www även i Loopias DNS-editor.
-4. Besöksstatistik utan kakor.
-5. Backend: **avvaktar** (ADR 0011 föreslår Firebase i Google Cloud). Bygg inget förrän grundaren bestämt riktning.
-
-- Personligare stil (ADR 0010): Fraunces i rubriker, Atkinson Hyperlegible i brödtext, kursiva anteckningar, en färg per modul, rundade kort och prickat papper i ljust tema.
-- Tre teman: mörk, ljus och hacker (ADR 0009). Knapp i sidhuvudet, valet sparas, annars följer sajten systemet.
-- Loggan är ”Glöd” (S2): ett i vars prick glöder. Loggförslag på designytan: https://claude.ai/artifact/GyYAeyEsuZEHTN8KAcN1x7.
+1. **Videoreserven:** på en dator med GPU, kör
+   `pnpm render -- --w 1280 --h 720 --crf 26 --out apps/web/public/film/nasta-steg.mp4` och committa filen
+   (~20 MB). Spelaren använder den automatiskt utan WebGL2 och på svaga enheter. Filen finns **inte** än.
+2. **Grundaren:** välj statistiktjänst (ADR 0012) och sätt `PUBLIC_STATS_URL` i Netlify. Byt repots standardgren
+   till `master` på GitHub (i dag `ccr-f401e4bd-y1vmji`, CI körs bara på master).
+3. Testa lärvägen med riktiga nybörjare. Mät avhopp per steg när statistiken är på.
+4. Fler lärvägar och märken (B-19). Skolmaterial: förslag i `docs/SKOLMATERIAL.md`.
+5. Backend avvaktar (ADR 0011). Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 
 ## Kända problem och fällor
 
-- Byggmiljön för agenter saknar GPU: filmen renderas i mjukvara (~0,4 bilder/s). Använd `pnpm frames` sparsamt.
-- 60 fps på integrerad grafik är inte uppmätt på riktig hårdvara.
-- Astro 7:s `astro preview` körs som en delad demon (`astro preview stop`). `pnpm module-frames` har därför en egen statisk server.
-- Node:s `fetch` mot localhost kan få ett felsvar från proxyn. Kontrollera status 200, inte bara att anropet lyckas.
-- Spelaren erbjuder bara låg och mellan. Hög (full pixeltäthet, 4× MSAA) gav trasig bild hos användaren, orsaken är
-  okänd (troligen minne eller MSAA på halvflyttal). Hög används bara vid export.
-- `trainingRun(H, lr)` cachar per (H, steglängd); första anropet för en ny kombination tar några ms.
+- Byggmiljön för agenter saknar GPU: filmen renderas i mjukvara (~0,4 bilder/s). Ingen MP4 kan göras här.
+- Uppspelning på riktiga iOS- och Android-enheter är inte provad, bara i Chromium (desktop och mobil-viewport).
+- Spelaren erbjuder bara låg och mellan kvalitet. Hög används bara vid export.
+- `[hidden]` har `display: none !important` globalt; komponenter med `display: grid` döljs annars inte.
+- Quizets `see` måste peka på ett kapitel som finns; `lib/quiz.test.ts` kontrollerar det.
+- `.ns-game button:hover` (0,2,1) slår enkla klassväljare i spel; använd `.x button.y`.
+- Astro 7:s `astro preview` är en delad demon. `pnpm module-frames` har egen statisk server.
 
 ## Länkar
 
-- **Backlogg och releaseplan (levande dokument): https://claude.ai/code/artifact/8fc1d0da-e959-46f2-9e61-5362ab172aae**
-- Första featurelistan: https://claude.ai/code/artifact/a2829a1a-c962-40fe-b66b-3f2b7b33ddd1
-- Förhandsvisning av sajten: https://claude.ai/artifact/DuRSaG1eVQ1VdJxCRfKPXG
-- Roadmap i repot: `docs/ROADMAP.md`
+- **Backlogg och releaseplan:** https://claude.ai/code/artifact/8fc1d0da-e959-46f2-9e61-5362ab172aae
+- Roadmap i repot: `docs/ROADMAP.md` · Skolmaterial: `docs/SKOLMATERIAL.md` · Statistik: `docs/adr/0012-statistik.md`
