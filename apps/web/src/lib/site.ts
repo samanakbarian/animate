@@ -32,3 +32,13 @@ export const MODULE_COLORS = [
   '#8c9a3c',
 ] as const;
 export const moduleColor = (order: number) => MODULE_COLORS[(order - 1 + MODULE_COLORS.length) % MODULE_COLORS.length];
+
+/**
+ * Kanonisk sökväg utan filändelse. Bygget skriver filer (`build.format: 'file'`), så
+ * `Astro.url.pathname` blir t.ex. `/moduler/agenten.html` eller `/index.html`.
+ * Netlify serverar samma sidor utan `.html`, och det är de adresserna som ska synas utåt.
+ */
+export function canonicalPath(pathname: string): string {
+  const p = pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '');
+  return p || '/';
+}

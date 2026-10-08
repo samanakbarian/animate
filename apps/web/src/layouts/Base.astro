@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE } from '../lib/site';
+import { SITE, canonicalPath } from '../lib/site';
 import Logo from '../components/Logo.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 const { title, description = SITE.description } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} – film, moduler och spel om hur AI fungerar`;
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const path = canonicalPath(Astro.url.pathname);
 const canonical = new URL(path, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 // Strukturerad data (schema.org): vem som står bakom sajten, så att sökmotorer och AI-modeller ser det.
