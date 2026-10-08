@@ -25,6 +25,7 @@ const interactive = hasInteractive(slug);
   import { INTERACTIVE_MODULES } from '../lib/interactive';
   import { type ModulePlayerHandle, mountModulePlayer } from '@nastasteg/engine/module/player';
   import type { ModuleDefinition } from '@nastasteg/engine/module/types';
+  import { track } from '../lib/track';
 
   // Länkar med data-seek="<del-id>#<kapitel-id>" (t.ex. från quizet) hoppar till kapitlet.
   const players = new Map<string, { def: ModuleDefinition; handle: ModulePlayerHandle; section: HTMLElement }>();
@@ -59,7 +60,10 @@ const interactive = hasInteractive(slug);
           const el = document.createElement('div');
           section.append(h, el);
           host.appendChild(section);
-          players.set(def.id, { def, handle: mountModulePlayer(el, def), section });
+          const handle = mountModulePlayer(el, def, {
+            onEvent: (ev) => track(`module_${ev}`, { module: def.id }),
+          });
+          players.set(def.id, { def, handle, section });
         }
       })
       .catch((e) => {

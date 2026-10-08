@@ -1,0 +1,73 @@
+[
+  {
+    "id": "forsta-ai",
+    "title": "Förstå hur AI fungerar på 20 minuter",
+    "minutes": 20,
+    "summary": "En väg genom grunderna: från en enda neuron till språkmodeller och agenter. Du ser, provar och testar dig själv.",
+    "insights": [
+      "AI lär sig av exempel genom att justera vikter, inte genom regler som någon har skrivit.",
+      "En språkmodell skriver genom att gissa nästa token, om och om igen.",
+      "En agent är en språkmodell som får ett mål och verktyg och arbetar i en loop. Den kan också göra fel."
+    ],
+    "steps": [
+      {
+        "id": "neuron",
+        "kind": "module",
+        "module": "neuralt-natverk",
+        "part": "neuralt-natverk-0",
+        "minutes": 4,
+        "title": "En neuron fattar ett beslut",
+        "why": "Allt börjar med en enkel räknedel: tal in, en vikt för varje, en summa och ett beslut.",
+        "takeaway": "En neuron väger ihop tal. Vikterna avgör vad som räknas mest."
+      },
+      {
+        "id": "natverk",
+        "kind": "module",
+        "module": "neuralt-natverk",
+        "part": "neuralt-natverk-2",
+        "minutes": 4,
+        "title": "Ett nätverk lär sig",
+        "why": "En neuron räcker inte långt. Se hur några tillsammans lär sig av exempel, steg för steg.",
+        "takeaway": "Träning betyder att flytta vikterna lite i taget så att felet blir mindre. Ingen skriver regler."
+      },
+      {
+        "id": "sprak",
+        "kind": "module",
+        "module": "sprakmodellen",
+        "part": "sprakmodellen",
+        "minutes": 4,
+        "title": "En språkmodell gissar nästa ord",
+        "why": "Chattbotar bygger på språkmodeller. Se hur en text växer fram en token i taget.",
+        "takeaway": "En språkmodell väljer nästa token bland de troliga, med lite slump. Så skrivs hela svaret."
+      },
+      {
+        "id": "spel",
+        "kind": "game",
+        "game": "sla-maskinen",
+        "minutes": 3,
+        "title": "Spela: Slå maskinen",
+        "why": "Gissa nästa ord själv och tävla mot en liten språkmodell. Spela en bana, sedan går du vidare.",
+        "takeaway": "Du gissar också nästa ord utifrån vad som brukar följa. Modellen gör samma sak med statistik."
+      },
+      {
+        "id": "agent",
+        "kind": "module",
+        "module": "agenten",
+        "part": "agenten",
+        "minutes": 3,
+        "title": "En agent arbetar mot ett mål",
+        "why": "Nästa steg efter chatten: en språkmodell som själv tar flera steg med verktyg.",
+        "takeaway": "En agent tänker, agerar och tittar på resultatet. Steg som inte går att ångra behöver en människa."
+      },
+      {
+        "id": "test",
+        "kind": "test",
+        "minutes": 2,
+        "title": "Testa dig själv",
+        "why": "Sex frågor om det du sett. Fel svar förklaras, så du lär dig något även där.",
+        "takeaway": "",
+        "questions": ["neuralt-natverk:1", "neuralt-natverk:2", "sprakmodellen:1", "sprakmodellen:2", "agenten:0", "agenten:2"]
+      }
+    ]
+  }
+]

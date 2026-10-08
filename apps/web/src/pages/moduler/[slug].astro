@@ -72,11 +72,20 @@ const games = (await getCollection('games')).filter((g) => g.data.module === m.i
 
     {next && (
       <p class="next">
-        <a href={`/moduler/${next.id}`}>Nästa: {next.data.title} →</a>
+        <a href={`/moduler/${next.id}`} data-next-module={m.id}>
+          Nästa: {next.data.title} →
+        </a>
       </p>
     )}
   </article>
 </Base>
+
+<script>
+  import { track } from '../../lib/track';
+  document
+    .querySelector<HTMLAnchorElement>('[data-next-module]')
+    ?.addEventListener('click', (e) => track('module_next', { module: (e.currentTarget as HTMLElement).dataset.nextModule ?? '' }));
+</script>
 
 <style>
   .page {

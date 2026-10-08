@@ -65,4 +65,33 @@ const games = defineCollection({
   }),
 });
 
-export const collections = { modules, glossary, games };
+const paths = defineCollection({
+  loader: file('./src/content/paths.json'),
+  schema: z.object({
+    title: z.string(),
+    minutes: z.number().int(),
+    summary: z.string().max(200),
+    /** Det besökaren ska kunna förklara efteråt. */
+    insights: z.array(z.string()).min(1),
+    steps: z
+      .array(
+        z.object({
+          id: z.string(),
+          kind: z.enum(['module', 'game', 'test']),
+          /** Modulens slug och vilken del (ModuleDefinition.id) som visas. */
+          module: z.string().optional(),
+          part: z.string().optional(),
+          game: z.string().optional(),
+          minutes: z.number().int(),
+          title: z.string(),
+          why: z.string(),
+          takeaway: z.string(),
+          /** För test: frågor ur modulernas quiz, ”<modul>:<index>”. */
+          questions: z.array(z.string()).optional(),
+        }),
+      )
+      .min(2),
+  }),
+});
+
+export const collections = { modules, glossary, games, paths };

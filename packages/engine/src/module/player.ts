@@ -18,14 +18,28 @@ const fmtTime = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60
 /** Skriver fram texten tecken för tecken (deterministiskt av tiden sedan start). */
 const typed = (text: string, since: number, now: number, cps = 45) => text.slice(0, Math.max(0, Math.floor((now - since) * cps)));
 
-export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts: { clock?: () => number } = {}): ModulePlayerHandle {
+/** Händelser för statistik: filmen startade, besökaren rörde ett reglage, filmen spelades klart. */
+export type ModuleEvent = 'start' | 'interact' | 'end';
+
+export function mountModulePlayer(
+  root: HTMLElement,
+  def: ModuleDefinition,
+  opts: { clock?: () => number; onEvent?: (e: ModuleEvent) => void } = {},
+): ModulePlayerHandle {
+  const emitted = new Set<ModuleEvent>();
+  const emit = (e: ModuleEvent) => {
+    if (emitted.has(e)) return;
+    emitted.add(e);
+    opts.onEvent?.(e);
+  };
   const clock = opts.clock ?? (() => performance.now() / 1000);
   const ctl = new ModuleController(def, clock);
   root.classList.add('ns-module');
   root.innerHTML = `
     <div class="nsm-stage" aria-label="${def.title} – klicka för att spela eller pausa">
       <div class="nsm-canvas"></div>
-      <div class="nsm-caption" aria-live="polite"><div class="nsm-chapter"></div><p class="nsm-text"></p></div>
+      <div class="nsm-caption" aria-hidden="true"><div class="nsm-chapter"></div><p class="nsm-text"></p></div>
+      <p class="nsm-sr" aria-live="polite"></p>
       <button type="button" class="nsm-bigplay" aria-label="Spela filmen">▶</button>
     </div>
     <div class="nsm-bar">
@@ -59,6 +73,9 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
   const host = q<HTMLDivElement>('.nsm-canvas');
   const chapterEl = q<HTMLDivElement>('.nsm-chapter');
   const textEl = q<HTMLParagraphElement>('.nsm-text');
+  // Skärmläsare får hela kapiteltexten en gång, inte varje tecken som skrivs fram.
+  const srEl = q<HTMLParagraphElement>('.nsm-sr');
+  let srKey = '';
   const bigPlay = q<HTMLButtonElement>('.nsm-bigplay');
   const playBtn = q<HTMLButtonElement>('.nsm-play');
   const timeEl = q<HTMLSpanElement>('.nsm-time');
@@ -103,7 +120,11 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
     showSound();
   });
   scrub.addEventListener('input', () => ctl.seek(Number(scrub.value)));
-  for (const s of sliders) s.addEventListener('input', () => ctl.setParam(s.dataset.param!, Number(s.value)));
+  for (const s of sliders)
+    s.addEventListener('input', () => {
+      ctl.setParam(s.dataset.param!, Number(s.value));
+      emit('interact');
+    });
   q<HTMLButtonElement>('.nsm-resume').addEventListener('click', () => {
     sound.unlock();
     ctl.play();
@@ -146,6 +167,10 @@ export function mountModulePlayer(root: HTMLElement, def: ModuleDefinition, opts
     const text = mode === 'explore' ? def.exploreCaption : typed(ch.caption, ch.start, t);
     if (chapterEl.textContent !== title) chapterEl.textContent = title;
     if (text !== lastText) textEl.textContent = lastText = text;
+    const full = mode === 'explore' ? `Utforska. ${def.exploreCaption}` : `${ch.title}. ${ch.caption}`;
+    if (full !== srKey && (ctl.isPlaying || mode === 'explore')) srEl.textContent = srKey = full;
+    if (ctl.isPlaying) emit('start');
+    if (mode === 'film' && t >= def.duration - 0.05) emit('end');
 
     // uppspelningsrad
     const playing = ctl.isPlaying;

@@ -1,0 +1,492 @@
+---
+// En lärväg: en bestämd ordning genom befintliga moduldelar, spel och ett
+// avslutande test. Ett steg visas i taget. Framstegen sparas i webbläsaren
+// (lib/path.ts) så att besökaren kan fortsätta där hen slutade, utan konto.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ModuleQuiz from '../../components/ModuleQuiz.astro';
+import type { QuizQuestion } from '../../lib/quiz';
+
+export async function getStaticPaths() {
+  const paths = await getCollection('paths');
+  return paths.map((p) => ({ params: { id: p.id }, props: { path: p } }));
+}
+
+const { path } = Astro.props;
+const modules = await getCollection('modules');
+const games = await getCollection('games');
+
+/** ”agenten:2” → fråga 3 i agentmodulens quiz. */
+const questionsFor = (refs: string[] = []): QuizQuestion[] =>
+  refs.map((ref) => {
+    const [slug, i] = ref.split(':');
+    const q = modules.find((m) => m.id === slug)?.data.quiz?.[Number(i)];
+    if (!q) throw new Error(`Lärvägen ${path.id}: frågan ${ref} finns inte`);
+    return q;
+  });
+
+const steps = path.data.steps.map((s) => ({
+  ...s,
+  moduleTitle: s.module ? modules.find((m) => m.id === s.module)?.data.title : undefined,
+  gameTitle: s.game ? games.find((g) => g.id === s.game)?.data.title : undefined,
+  quiz: s.kind === 'test' ? questionsFor(s.questions) : [],
+}));
+const clientSteps = steps.map(({ id, kind, module, part, game, minutes }) => ({ id, kind, module, part, game, minutes }));
+---
+
+<Base title={path.data.title} description={path.data.summary}>
+  <article class="wrap page" data-path={path.id} data-steps={JSON.stringify(clientSteps)}>
+    <header class="prose head">
+      <p class="eyebrow">Lärväg · ca {path.data.minutes} minuter · inget konto behövs</p>
+      <h1>{path.data.title}</h1>
+      <p class="lead">{path.data.summary}</p>
+      <div class="goal">
+        <h2 class="eyebrow">Efteråt kan du förklara</h2>
+        <ol>
+          {path.data.insights.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ol>
+      </div>
+      <p class="start-row">
+        <button type="button" class="primary" data-start>
+          Börja
+        </button>
+        <span class="note" data-resume-note></span>
+      </p>
+    </header>
+
+    <nav class="progress" aria-label="Lärvägens steg">
+      <p class="progress-text" data-progress-text>
+        0 av {steps.length} steg klara
+      </p>
+      <div class="bar" role="progressbar" aria-label="Framsteg" aria-valuemin="0" aria-valuemax={steps.length} aria-valuenow="0">
+        <span data-bar></span>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li>
+            <button type="button" data-goto={s.id}>
+              <span class="num">{i + 1}</span>
+              <span class="t">{s.title}</span>
+              <span class="m">{s.minutes} min</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    {steps.map((s, i) => (
+      <section class="step" data-step={s.id} hidden aria-labelledby={`steg-${s.id}`}>
+        <header class="prose">
+          <p class="eyebrow">
+            Steg {i + 1} av {steps.length} · ca {s.minutes} min
+            {s.moduleTitle && <> · ur modulen {s.moduleTitle}</>}
+          </p>
+          <h2 id={`steg-${s.id}`} tabindex="-1">
+            {s.title}
+          </h2>
+          <p>{s.why}</p>
+        </header>
+        {s.kind === 'test' ? <ModuleQuiz slug={`lar-${path.id}`} quiz={s.quiz} /> : <div class="host" data-host />}
+        {s.takeaway && (
+          <aside class="takeaway">
+            <h3 class="eyebrow">Ta med dig</h3>
+            <p>{s.takeaway}</p>
+          </aside>
+        )}
+        <p class="nav-row">
+          {i > 0 && (
+            <button type="button" data-prev>
+              ← Föregående
+            </button>
+          )}
+          {s.kind !== 'test' && (
+            <button type="button" class="primary" data-next>
+              Klar, nästa steg →
+            </button>
+          )}
+          {s.module && (
+            <a class="more" href={`/moduler/${s.module}`}>
+              Hela modulen {s.moduleTitle} →
+            </a>
+          )}
+          {s.game && (
+            <a class="more" href={`/spel/${s.game}`}>
+              Alla banor i {s.gameTitle} →
+            </a>
+          )}
+        </p>
+      </section>
+    ))}
+
+    <section class="done-panel" data-complete hidden aria-labelledby="klar">
+      <h2 id="klar" tabindex="-1">
+        Klart! Nu vet du hur AI fungerar i grunden.
+      </h2>
+      <p data-score></p>
+      <p>Det här är de tre sakerna att komma ihåg:</p>
+      <ol>
+        {path.data.insights.map((t) => (
+          <li>{t}</li>
+        ))}
+      </ol>
+      <h3>Vill du veta mer?</h3>
+      <ul class="next-links">
+        <li>
+          <a href="/moduler/traning">Träning</a>: hur vikterna faktiskt hittas.
+        </li>
+        <li>
+          <a href="/moduler/transformern">Transformern</a>: hur modellen vet vilka ord som hör ihop.
+        </li>
+        <li>
+          <a href="/moduler/risker-och-sakerhet">Risker och säkerhet</a>: varför AI kan låta säker och ändå ha fel.
+        </li>
+        <li>
+          <a href="/moduler">Alla moduler</a> och <a href="/spel">alla spel</a>.
+        </li>
+      </ul>
+      <p>
+        <button type="button" data-restart>
+          Börja om lärvägen
+        </button>
+      </p>
+    </section>
+  </article>
+</Base>
+
+<script>
+  import '@nastasteg/engine/module/player.css';
+  import '@nastasteg/engine/game/game.css';
+  import { mountModulePlayer } from '@nastasteg/engine/module/player';
+  import { mountGame } from '@nastasteg/engine/game/shell';
+  import { INTERACTIVE_MODULES } from '../../lib/interactive';
+  import { GAMES } from '../../lib/games';
+  import { type PathProgress, isComplete, markDone, minutesLeft, parseProgress, resumeStep, storageKey } from '../../lib/path';
+  import { track } from '../../lib/track';
+
+  interface ClientStep {
+    id: string;
+    kind: 'module' | 'game' | 'test';
+    module?: string;
+    part?: string;
+    game?: string;
+    minutes: number;
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-path]')!;
+  const pathId = root.dataset.path!;
+  const steps = JSON.parse(root.dataset.steps!) as ClientStep[];
+  const ids = steps.map((s) => s.id);
+  const key = storageKey(pathId);
+
+  const load = (): PathProgress => {
+    try {
+      return parseProgress(localStorage.getItem(key), ids);
+    } catch {
+      return parseProgress(null, ids);
+    }
+  };
+  let progress = load();
+  const save = () => {
+    try {
+      localStorage.setItem(key, JSON.stringify(progress));
+    } catch {
+      // utan lagring fungerar lärvägen ändå, men minns inte var man var
+    }
+  };
+
+  const panels = new Map([...root.querySelectorAll<HTMLElement>('[data-step]')].map((el) => [el.dataset.step!, el]));
+  const complete = root.querySelector<HTMLElement>('[data-complete]')!;
+  let current: string | null = null;
+  let handle: { destroy(): void } | null = null;
+
+  function renderNav() {
+    const n = progress.done.length;
+    root.querySelector('[data-progress-text]')!.textContent =
+      `${n} av ${steps.length} steg klara` + (n < steps.length ? ` · ca ${minutesLeft(progress, steps)} min kvar` : '');
+    const bar = root.querySelector<HTMLElement>('.bar')!;
+    bar.setAttribute('aria-valuenow', String(n));
+    root.querySelector<HTMLElement>('[data-bar]')!.style.width = `${(n / steps.length) * 100}%`;
+    root.querySelectorAll<HTMLButtonElement>('[data-goto]').forEach((b) => {
+      const id = b.dataset.goto!;
+      b.classList.toggle('is-done', progress.done.includes(id));
+      if (id === current) b.setAttribute('aria-current', 'step');
+      else b.removeAttribute('aria-current');
+    });
+    const startBtn = root.querySelector<HTMLButtonElement>('[data-start]')!;
+    const note = root.querySelector<HTMLElement>('[data-resume-note]')!;
+    if (isComplete(progress, ids)) {
+      startBtn.textContent = 'Se sammanfattningen';
+      note.textContent = 'Du har gått hela lärvägen.';
+    } else if (progress.done.length || progress.current) {
+      const i = ids.indexOf(resumeStep(progress, ids));
+      startBtn.textContent = `Fortsätt med steg ${i + 1}`;
+      note.textContent = 'Dina framsteg sparas i den här webbläsaren.';
+    } else {
+      startBtn.textContent = 'Börja';
+      note.textContent = 'Dina framsteg sparas i den här webbläsaren.';
+    }
+  }
+
+  async function mountContent(step: ClientStep, host: HTMLElement) {
+    host.innerHTML = '<p class="loading">Laddar …</p>';
+    try {
+      if (step.kind === 'module' && step.module) {
+        const { parts } = await INTERACTIVE_MODULES[step.module]!();
+        const def = parts.find((p) => p.id === step.part) ?? parts[0];
+        if (current !== step.id) return;
+        host.innerHTML = '';
+        handle = mountModulePlayer(host, def);
+      } else if (step.kind === 'game' && step.game) {
+        const { game } = await GAMES[step.game]!();
+        if (current !== step.id) return;
+        host.innerHTML = '';
+        handle = mountGame(host, game);
+      }
+    } catch (e) {
+      console.error(e);
+      host.innerHTML = '<p class="loading">Det gick inte att ladda. <button type="button" data-retry>Försök igen</button></p>';
+      host.querySelector('[data-retry]')?.addEventListener('click', () => void mountContent(step, host));
+    }
+  }
+
+  function show(id: string | 'complete', focus = true) {
+    handle?.destroy();
+    handle = null;
+    panels.forEach((el) => (el.hidden = true));
+    complete.hidden = id !== 'complete';
+    if (id === 'complete') {
+      current = null;
+      renderNav();
+      complete.scrollIntoView({ block: 'start' });
+      if (focus) complete.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+      return;
+    }
+    current = id;
+    progress = { ...progress, current: id };
+    save();
+    renderNav();
+    const el = panels.get(id)!;
+    el.hidden = false;
+    const step = steps.find((s) => s.id === id)!;
+    const host = el.querySelector<HTMLElement>('[data-host]');
+    if (host) void mountContent(step, host);
+    track('path_step', { path: pathId, step: id });
+    el.scrollIntoView({ block: 'start' });
+    if (focus) el.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+  }
+
+  function next(id: string) {
+    progress = markDone(progress, id);
+    save();
+    const i = ids.indexOf(id);
+    if (isComplete(progress, ids)) {
+      track('path_complete', { path: pathId });
+      show('complete');
+    } else show(ids[i + 1] ?? resumeStep(progress, ids));
+  }
+
+  root.querySelector('[data-start]')!.addEventListener('click', () => {
+    if (progress.done.length === 0 && !progress.current) track('path_start', { path: pathId });
+    show(isComplete(progress, ids) ? 'complete' : resumeStep(progress, ids));
+  });
+  root.querySelectorAll<HTMLButtonElement>('[data-goto]').forEach((b) => b.addEventListener('click', () => show(b.dataset.goto!)));
+  panels.forEach((el, id) => {
+    el.querySelector('[data-next]')?.addEventListener('click', () => next(id));
+    el.querySelector('[data-prev]')?.addEventListener('click', () => show(ids[ids.indexOf(id) - 1]));
+  });
+  root.addEventListener('quiz:done', (e) => {
+    const { right, total } = (e as CustomEvent<{ right: number; total: number }>).detail;
+    complete.querySelector('[data-score]')!.textContent = `Du hade ${right} av ${total} rätt på testet.`;
+    next('test');
+  });
+  root.querySelector('[data-restart]')!.addEventListener('click', () => {
+    progress = parseProgress(null, ids);
+    save();
+    show(ids[0]);
+  });
+
+  // Lämnar besökaren mitt i lärvägen räknas det som avbrutet (för statistiken).
+  addEventListener('pagehide', () => {
+    if (current && !isComplete(progress, ids)) track('path_leave', { path: pathId, step: current });
+  });
+
+  renderNav();
+</script>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3rem 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .goal ol {
+    margin: 0.4rem 0 0;
+  }
+  .start-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    align-items: center;
+  }
+  button {
+    font: inherit;
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:hover,
+  button:focus-visible {
+    border-color: var(--cold);
+  }
+  button.primary {
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--warm);
+    border-color: var(--warm);
+  }
+  .progress {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .progress-text {
+    margin: 0;
+    font: 400 0.85rem var(--font-mono);
+    color: var(--dim);
+  }
+  .bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--warm);
+    transition: width 0.4s ease;
+  }
+  .steps {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+  }
+  .steps button {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+  }
+  .steps .num {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    font: 400 0.75rem var(--font-mono);
+  }
+  .steps .m {
+    color: var(--dim);
+    font-size: 0.75rem;
+  }
+  .steps button.is-done .num {
+    background: var(--cold);
+    border-color: var(--cold);
+    color: var(--bg);
+  }
+  .steps button.is-done .num::after {
+    content: '✓';
+    font-size: 0;
+  }
+  .steps button[aria-current='step'] {
+    border-color: var(--warm);
+    border-width: 2px;
+  }
+  @media (max-width: 720px) {
+    .steps .t,
+    .steps .m {
+      display: none;
+    }
+    .steps button[aria-current='step'] .t {
+      display: inline;
+    }
+  }
+  .step {
+    display: grid;
+    gap: 1.2rem;
+    scroll-margin-top: 7rem;
+  }
+  .step h2:focus,
+  .done-panel h2:focus {
+    outline: none;
+  }
+  .takeaway {
+    padding: 1rem 1.2rem;
+    border-left: 4px solid var(--warm);
+    background: var(--surface);
+    border-radius: 0 12px 12px 0;
+  }
+  .takeaway h3 {
+    margin: 0 0 0.3rem;
+  }
+  .takeaway p {
+    margin: 0;
+  }
+  .nav-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    align-items: center;
+  }
+  .nav-row .more {
+    font-weight: 700;
+  }
+  .host :global(.loading) {
+    padding: 2rem;
+    color: var(--dim);
+  }
+  .host :global(.ns-module),
+  .host :global(.ns-game) {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .done-panel {
+    display: grid;
+    gap: 0.6rem;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    scroll-margin-top: 7rem;
+  }
+  .done-panel h2 {
+    margin: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar span {
+      transition: none;
+    }
+  }
+</style>

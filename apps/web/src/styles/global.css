@@ -76,6 +76,11 @@
 * {
   box-sizing: border-box;
 }
+
+/* hidden ska alltid dölja, även när en komponent sätter display: grid/flex. */
+[hidden] {
+  display: none !important;
+}
 html {
   background: var(--bg);
 }

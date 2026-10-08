@@ -72,6 +72,8 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
 </section>
 
 <script>
+  import { track } from '../lib/track';
+
   document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((root) => {
     const key = `ilearnai-quiz-${root.dataset.quiz}`;
     const items = [...root.querySelectorAll<HTMLLIElement>('.q')];
@@ -124,6 +126,7 @@ const questions = quiz.map((x) => ({ ...x, options: orderedOptions(x), chapter: 
             const tail = right === items.length ? ' Alla rätt!' : best > right ? ` Ditt bästa: ${best}.` : '';
             scoreEl.textContent = `${right} av ${items.length} rätt.${tail}`;
             result.hidden = false;
+            track('quiz_done', { module: root.dataset.quiz ?? '', right });
             root.dispatchEvent(new CustomEvent('quiz:done', { bubbles: true, detail: { right, total: items.length } }));
           }
         }),
