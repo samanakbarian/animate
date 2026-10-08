@@ -13,12 +13,19 @@ export function startBoundary(host: HTMLElement, level: number, api: GameApi): G
   const S = createSurface(host);
   const { ctx, canvas } = S;
   canvas.style.touchAction = 'none';
+  // Tangentbord: pilar flyttar ena änden, Skift + pilar den andra, B byter sida.
+  canvas.tabIndex = 0;
+  canvas.setAttribute('role', 'application');
+  canvas.setAttribute(
+    'aria-label',
+    'Spelplan med blå och orange prickar och en linje. Flytta linjens ena ände med piltangenterna och den andra med Skift och piltangenterna. B byter sida.',
+  );
   const line: Line = { p1: [-0.8, -0.6], p2: [0.8, -0.2], flip: false };
 
   const controls = document.createElement('div');
   controls.style.cssText =
     'position:absolute;left:0;right:0;bottom:0;display:flex;gap:.6rem;justify-content:flex-end;align-items:center;padding:.6rem .8rem;background:rgba(7,9,11,.85);border-top:1px solid #222a32';
-  controls.innerHTML = `<span class="acc" style="margin-right:auto;font-family:var(--g-mono);font-size:.9rem"></span>
+  controls.innerHTML = `<span class="acc" aria-live="polite" style="margin-right:auto;font-family:var(--g-mono);font-size:.9rem"></span>
     <button type="button" data-act="flip">Byt sida</button>
     <button type="button" class="nsg-primary" data-act="done">Klar</button>`;
   host.appendChild(controls);
@@ -87,6 +94,22 @@ export function startBoundary(host: HTMLElement, level: number, api: GameApi): G
     if (dragging) api.sound('tick');
     dragging = null;
   };
+  canvas.addEventListener('keydown', (e) => {
+    if (finished) return;
+    const d: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] };
+    if (e.key === 'b' || e.key === 'B') {
+      line.flip = !line.flip;
+      api.sound('tick');
+      e.preventDefault();
+      return;
+    }
+    const v = d[e.key];
+    if (!v) return;
+    e.preventDefault();
+    const end = e.shiftKey ? 'p2' : 'p1';
+    const c = (x: number) => Math.max(-1, Math.min(1, x));
+    line[end] = [c(line[end][0] + v[0] * 0.05), c(line[end][1] + v[1] * 0.05)];
+  });
   canvas.addEventListener('pointerup', up);
   canvas.addEventListener('pointercancel', up);
 
@@ -187,6 +210,7 @@ export function startBoundary(host: HTMLElement, level: number, api: GameApi): G
   }
   api.setStatus(L.goal);
   raf = requestAnimationFrame(frame);
+  canvas.focus({ preventScroll: true });
 
   return {
     resize: S.resize,

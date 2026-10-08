@@ -15,8 +15,10 @@ export interface ModulePlayerHandle {
 
 const fmtTime = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-/** Skriver fram texten tecken för tecken (deterministiskt av tiden sedan start). */
-const typed = (text: string, since: number, now: number, cps = 45) => text.slice(0, Math.max(0, Math.floor((now - since) * cps)));
+/** Skriver fram texten tecken för tecken (deterministiskt av tiden sedan start). Med reducerad rörelse visas hela texten direkt. */
+const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const typed = (text: string, since: number, now: number, cps = 45) =>
+  reducedMotion() ? text : text.slice(0, Math.max(0, Math.floor((now - since) * cps)));
 
 /** Händelser för statistik: filmen startade, besökaren rörde ett reglage, filmen spelades klart. */
 export type ModuleEvent = 'start' | 'interact' | 'end';
@@ -37,7 +39,7 @@ export function mountModulePlayer(
   root.classList.add('ns-module');
   root.innerHTML = `
     <div class="nsm-stage" aria-label="${def.title} – klicka för att spela eller pausa">
-      <div class="nsm-canvas"></div>
+      <div class="nsm-canvas" role="img" aria-label="${def.title}: animerad illustration. Kapitlens text läses upp, och reglagen nedanför styr den."></div>
       <div class="nsm-caption" aria-hidden="true"><div class="nsm-chapter"></div><p class="nsm-text"></p></div>
       <p class="nsm-sr" aria-live="polite"></p>
       <button type="button" class="nsm-bigplay" aria-label="Spela filmen">▶</button>
