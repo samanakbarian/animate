@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-08 (3) – Quiz i modulerna, kortare om-sida
+
+**Vad**
+
+- Quiz i slutet av varje modul (B-17): `quiz` i modulens frontmatter (fråga, rätt svar, fel svar, förklaring, max
+  160 tecken), `ModuleQuiz.astro` på modulsidan. Alternativen blandas med en hash av frågan, så ordningen är fast.
+  Bästa resultat sparas i `localStorage` (`ilearnai-quiz-<slug>`), tänkt för framsteg (B-19).
+- Om-sidan berättar inte längre hur sajten är byggd, och filmens startskärm säger inte ”i kod”. Grundaren vill att
+  texterna handlar om AI, inte om tekniken bakom sajten.
+
+**Fällor**
+
+- Rätt svar hamnade sällan först med hashen (7 av 40). Det gör inget, men byt hash om fördelningen blir skev.
+
+---
+
 ## 2026-10-08 (2) – Spelet AI-tidslinjen
 
 **Vad**

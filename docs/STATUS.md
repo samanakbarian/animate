@@ -30,13 +30,13 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - Filmen har ett ljusare slut (lampan tänds igen, regnet upphör, D-dur). Filmkornet är fixat (gav brus i hög kvalitet).
 - Texten på sajten, i modulerna och i ordlistan är genomgången: enklare språk, och beskrivningarna stämmer med modulerna.
 - Om-sidan har kontakt: saman.akbarian@gmail.com.
-- 127 tester gröna. Filmen går att pausa (knapp, klick i bilden, mellanslag). CI kör format, lint, typecheck, test och bygge.
+- Varje modul har ett quiz med fyra frågor (frontmatter `quiz` i modulens .md). 127 tester gröna. Filmen går att pausa (knapp, klick i bilden, mellanslag). CI kör format, lint, typecheck, test och bygge.
 
 ## Nästa (i prioritetsordning)
 
 1. **MP4-reserv för filmen:** rendera `out/nasta-steg.mp4` på en dator med GPU och visa den i `FilmPlayer.astro`
    för webbläsare utan WebGL2 och för svaga mobiler.
-2. Quiz i slutet av varje modul (B-17), sedan lärvägar (R3).
+2. Lärvägar (R3, B-18) och framsteg i webbläsaren (B-19). Quizresultaten sparas redan per modul.
    Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 3. Driftsättning: `netlify.toml` finns. Sajten är driftsatt som eget Netlify-projekt (gren master, apps/web).
    ilearnai.se pekar på Netlify (Netlify DNS via Loopia). Vissa resolvrar visade fortfarande Loopias

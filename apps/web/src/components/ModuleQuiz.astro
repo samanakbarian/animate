@@ -1,0 +1,203 @@
+---
+// Quiz i slutet av en modul. Frågorna kommer från modulens frontmatter.
+// Svarsalternativen blandas i en fast ordning (hash av frågan), så att rätt
+// svar inte alltid står först men sidan ser likadan ut varje gång.
+interface Question {
+  q: string;
+  right: string;
+  wrong: string[];
+  why: string;
+}
+interface Props {
+  slug: string;
+  quiz: Question[];
+}
+const { slug, quiz } = Astro.props;
+
+const hash = (s: string) => [...s].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) | 0, 7) >>> 0;
+const questions = quiz.map((x) => {
+  const options = [x.right, ...x.wrong];
+  const at = hash(x.q) % options.length;
+  [options[0], options[at]] = [options[at], options[0]];
+  return { ...x, options, rightIndex: at };
+});
+---
+
+<section class="quiz" data-quiz={slug} aria-labelledby={`quiz-${slug}`}>
+  <h2 id={`quiz-${slug}`}>Testa dig själv</h2>
+  <p class="note">{questions.length} frågor om modulen. Välj ett svar per fråga.</p>
+  <ol>
+    {questions.map((x) => (
+      <li class="q" data-right={x.rightIndex}>
+        <p class="qt">{x.q}</p>
+        <div class="opts">
+          {x.options.map((o, i) => (
+            <button type="button" data-i={i}>
+              {o}
+            </button>
+          ))}
+        </div>
+        <p class="why" hidden>
+          <b class="verdict" /> {x.why}
+        </p>
+      </li>
+    ))}
+  </ol>
+  <div class="result" aria-live="polite" hidden>
+    <p class="score"></p>
+    <button type="button" class="again">
+      Gör om
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((root) => {
+    const key = `ilearnai-quiz-${root.dataset.quiz}`;
+    const items = [...root.querySelectorAll<HTMLLIElement>('.q')];
+    const result = root.querySelector<HTMLDivElement>('.result')!;
+    const scoreEl = result.querySelector<HTMLParagraphElement>('.score')!;
+    let answered = 0,
+      right = 0;
+    const readBest = () => {
+      try {
+        return Number(localStorage.getItem(key)) || 0;
+      } catch {
+        return 0;
+      }
+    };
+
+    items.forEach((li) => {
+      const correct = Number(li.dataset.right);
+      li.querySelectorAll<HTMLButtonElement>('button').forEach((b) =>
+        b.addEventListener('click', () => {
+          if (li.classList.contains('done')) return;
+          const ok = Number(b.dataset.i) === correct;
+          li.classList.add('done');
+          b.classList.add(ok ? 'right' : 'wrong');
+          li.querySelectorAll<HTMLButtonElement>('button')[correct].classList.add('right');
+          li.querySelectorAll<HTMLButtonElement>('button').forEach((x) => (x.disabled = true));
+          const why = li.querySelector<HTMLParagraphElement>('.why')!;
+          why.querySelector('.verdict')!.textContent = ok ? 'Rätt.' : 'Inte riktigt.';
+          why.classList.toggle('ok', ok);
+          why.hidden = false;
+          answered++;
+          if (ok) right++;
+          if (answered === items.length) {
+            const best = Math.max(readBest(), right);
+            try {
+              localStorage.setItem(key, String(best));
+            } catch {
+              // sparat resultat är bara en bekvämlighet
+            }
+            const tail = right === items.length ? ' Alla rätt!' : best > right ? ` Ditt bästa: ${best}.` : '';
+            scoreEl.textContent = `${right} av ${items.length} rätt.${tail}`;
+            result.hidden = false;
+          }
+        }),
+      );
+    });
+
+    result.querySelector('.again')!.addEventListener('click', () => {
+      answered = right = 0;
+      result.hidden = true;
+      items.forEach((li) => {
+        li.classList.remove('done');
+        li.querySelector<HTMLParagraphElement>('.why')!.hidden = true;
+        li.querySelectorAll<HTMLButtonElement>('button').forEach((x) => {
+          x.disabled = false;
+          x.classList.remove('right', 'wrong');
+        });
+      });
+      items[0]?.querySelector('button')?.focus();
+    });
+  });
+</script>
+
+<style>
+  .quiz {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+  .quiz h2 {
+    margin: 0;
+  }
+  .quiz .note {
+    margin: 0;
+  }
+  ol {
+    display: grid;
+    gap: 1.6rem;
+    margin: 0;
+    padding-left: 1.4rem;
+  }
+  .qt {
+    margin: 0 0 0.6rem;
+    font-weight: 700;
+  }
+  .opts {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .opts button {
+    font: inherit;
+    text-align: left;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    cursor: pointer;
+  }
+  .opts button:hover:not(:disabled) {
+    border-color: var(--cold);
+  }
+  .opts button:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .opts button.right {
+    border-color: var(--cold);
+    border-width: 2px;
+    opacity: 1;
+  }
+  .opts button.wrong {
+    border-color: var(--warm);
+    border-style: dashed;
+    opacity: 1;
+  }
+  .why {
+    margin: 0.6rem 0 0;
+    color: var(--dim);
+  }
+  .why .verdict {
+    color: var(--warm);
+  }
+  .why.ok .verdict {
+    color: var(--cold);
+  }
+  .result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .score {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .again {
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+</style>

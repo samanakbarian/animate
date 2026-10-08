@@ -21,6 +21,17 @@ const modules = defineCollection({
     status: z.enum(STATUSES),
     /** Kapitel i filmen som modulen fördjupar (StepId i @nastasteg/film). */
     filmChapter: z.string().optional(),
+    /** Quiz i slutet av modulen: ett rätt svar, några fel och en förklaring. */
+    quiz: z
+      .array(
+        z.object({
+          q: z.string(),
+          right: z.string(),
+          wrong: z.array(z.string()).min(1),
+          why: z.string().max(160),
+        }),
+      )
+      .optional(),
   }),
 });
 

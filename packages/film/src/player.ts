@@ -52,7 +52,7 @@ export interface PlayerHandle {
 
 const START_HTML = `
   <h1>NÄSTA STEG</h1>
-  <p>en kortfilm i kod · 2 min 30 s · ljud på</p>
+  <p>en kortfilm · 2 min 30 s · ljud på</p>
   <button type="button">SPELA</button>
   <div class="q" role="radiogroup" aria-label="Kvalitet">
     <span>kvalitet:</span>

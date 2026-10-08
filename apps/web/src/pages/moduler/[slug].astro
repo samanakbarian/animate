@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { STAGE_LABEL, STATUS_LABEL } from '../../lib/site';
 import ModuleStage from '../../components/ModuleStage.astro';
+import ModuleQuiz from '../../components/ModuleQuiz.astro';
 
 export async function getStaticPaths() {
   const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
@@ -66,6 +67,8 @@ const games = (await getCollection('games')).filter((g) => g.data.module === m.i
         </ul>
       </aside>
     )}
+
+    {m.data.quiz && m.data.quiz.length > 0 && <ModuleQuiz slug={m.id} quiz={m.data.quiz} />}
 
     {next && (
       <p class="next">

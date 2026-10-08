@@ -7,6 +7,31 @@ interactive: 'Bestäm om du ska gå ut med hjälp av en neuron. Dra sedan i vikt
 stage: mvp
 status: publicerad
 filmChapter: human
+quiz:
+  - q: 'Vad gör en artificiell neuron med talen den får in?'
+    right: 'Multiplicerar varje tal med en vikt och lägger ihop'
+    wrong:
+      - 'Sparar dem i ett minne till senare'
+      - 'Sorterar dem i storleksordning'
+    why: 'Varje tal gånger sin vikt, sedan summan plus biasen. Är summan stor nog tänds neuronen.'
+  - q: 'Var sitter det ett neuralt nätverk ”kan”?'
+    right: 'I vikterna'
+    wrong:
+      - 'I antalet lager'
+      - 'I färdiga svar som sparats i förväg'
+    why: 'Träning ändrar vikterna. Två nätverk med samma form men olika vikter gör helt olika saker.'
+  - q: 'Hur kan en ensam neuron dela upp planet?'
+    right: 'Med en rak linje'
+    wrong:
+      - 'Med en cirkel'
+      - 'Med vilken form som helst'
+    why: 'En neuron drar bara raka gränser. För böjda gränser behövs fler neuroner i lager.'
+  - q: 'Hur lik är en artificiell neuron en nervcell i hjärnan?'
+    right: 'Den lånar idén men är mycket enklare'
+    wrong:
+      - 'Den är en exakt kopia'
+      - 'De har ingenting gemensamt'
+    why: 'Signaler in, en summa och en signal ut är idén. Riktiga nervceller är mycket mer komplicerade.'
 ---
 
 Det som kallas AI i dag bygger nästan alltid på **artificiella neurala nätverk**. Namnet kommer från hjärnan. En nervcell tar emot signaler från andra celler genom sina dendriter. Blir signalerna tillsammans tillräckligt starka skickar cellen en egen signal vidare genom axonet.
@@ -25,4 +50,4 @@ Ett neuralt nätverk är många sådana neuroner ordnade i lager. Allt nätverke
 
 ## Du provar själv
 
-Nätverket räknas fram i din webbläsare medan du tittar. Ändra antalet neuroner eller steglängden och se vad som händer.
+Ändra antalet neuroner eller steglängden och se vad som händer med träningen.

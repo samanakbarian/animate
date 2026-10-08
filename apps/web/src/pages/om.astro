@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../lib/site';
 ---
 
-<Base title="Om" description={`Vad ${SITE.name} är, vem som grundade sajten och hur filmerna är gjorda.`}>
+<Base title="Om" description={`Vad ${SITE.name} är och vem som grundade sajten.`}>
   <article class="wrap page prose">
     <p class="eyebrow">{SITE.domain}</p>
     <h1>Om {SITE.name}</h1>
@@ -11,19 +11,14 @@ import { SITE } from '../lib/site';
       AI dyker upp på jobbet, i skolan och i telefonen, men det är svårt att hitta förklaringar av hur tekniken fungerar som inte antingen
       är fulla av formler eller så förenklade att de blir fel. Den här sajten försöker ligga någonstans mittemellan.
     </p>
+    <p>
+      Kortfilmen NÄSTA STEG är en berättelse om vart det här kan leda, inte en förutsägelse. Modulerna och spelen handlar om hur tekniken
+      fungerar i dag, så att du kan göra din egen bedömning.
+    </p>
     <h2>Grundare</h2>
     <p>
       {SITE.name} grundades {SITE.foundingYear} av <strong>{SITE.founder.name}</strong>, som också står för innehållet och utvecklingen av
       sajten.
-    </p>
-    <h2>Så är filmerna gjorda</h2>
-    <p>
-      Allt är skrivet i kod och räknas fram i din webbläsare medan du tittar, både 3D-grafiken, musiken och modellerna i modulerna. Inget är
-      inspelat i förväg. Därför kan du stoppa en förklaring mitt i och ändra på saker själv.
-    </p>
-    <p>
-      Kortfilmen NÄSTA STEG är en berättelse om vart det här kan leda, inte en förutsägelse. Modulerna handlar om hur tekniken fungerar i
-      dag, så att du kan göra din egen bedömning.
     </p>
     <h2>Kontakt</h2>
     <p>
