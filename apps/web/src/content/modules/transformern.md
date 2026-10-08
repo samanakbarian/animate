@@ -34,6 +34,18 @@ quiz:
     why: 'Ett huvud kan följa grammatik, ett annat vem som gör vad. Tillsammans fångar de mer.'
 ---
 
-Äldre modeller läste text ett ord i taget, från vänster till höger. En transformer låter i stället varje ord jämföra sig med alla andra ord i texten och väga in de som verkar viktiga. Det kallas uppmärksamhet.
+Äldre modeller läste text ett ord i taget och fick bära med sig allt de läst i ett slags minne. En transformer låter i stället varje ord jämföra sig direkt med de andra orden och väga in dem som verkar viktiga. Det kallas uppmärksamhet.
 
 I meningen "katten låg på mattan, för den var trött" behöver modellen lista ut att "den" syftar på katten. Uppmärksamheten är hur den gör det.
+
+## Full uppmärksamhet och bara bakåt
+
+Det finns två sätt att låta orden titta på varandra. Med **full uppmärksamhet** ser varje ord hela meningen, även orden efter. Så fungerar modeller som läser en färdig text, till exempel för att sortera eller söka.
+
+En **språkmodell** som skriver ett ord i taget kan inte titta framåt, för de orden finns inte än. Därför döljs (maskeras) framtida ord. Det kallas kausal uppmärksamhet. Då kan ”den” inte veta vad det syftar på förrän ”trött” eller ”mjuk” har kommit. Det är ordet som kommer sedan som tittar tillbaka och reder ut det. Prova reglaget ”Får titta” i modulen.
+
+## Vad vi förenklar här
+
+- Vikterna i modulen är handgjorda så att de går att förstå. En riktig modell lär sig dem, och huvudenas roller är sällan så tydliga.
+- Riktiga modeller har många lager och dussintals huvuden per lager, och de arbetar med tokens snarare än hela ord.
+- Uppmärksamhet visar vad modellen väger in, men den ger inte hela förklaringen till varför modellen svarar som den gör.

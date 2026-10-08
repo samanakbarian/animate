@@ -35,3 +35,9 @@ quiz:
 ---
 
 En modell kan låta säker och ändå ha fel. Den kan återge fördomar från texten den tränats på, och den kan användas för att skada. Modulen visar hur sådana fel uppstår och hur man testar modeller för att hitta dem.
+
+## Vad vi förenklar här
+
+- Frågorna, svaren och sannolikheterna är påhittade för att visa idén.
+- Spärren i del 2 är ett enkelt riskvärde med en gräns. Riktiga skydd består av flera lager: träning, regler, filter och människor som granskar.
+- Att en modell anger hur säker den är betyder inte att den vet. Säkerheten kan själv vara fel.

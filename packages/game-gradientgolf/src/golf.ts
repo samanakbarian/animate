@@ -20,7 +20,7 @@ export interface Hole {
 export const HOLES: Hole[] = [
   {
     title: 'Lätt nedför',
-    goal: 'Välj steglängd och slå. Riktningen bestämmer lutningen, du väljer bara hur långt.',
+    goal: 'Välj steglängd och slå. Lutningen bestämmer riktningen, du väljer bara hur långt.',
     lesson: 'Så tränas ett nätverk: lutningen ger riktningen, och steglängden avgör hur fort det går.',
     start: [2.6, 1.9],
     par: 3,
@@ -42,7 +42,7 @@ export const HOLES: Hole[] = [
   {
     title: 'Ur gropen',
     goal: 'Bollen ligger i en grop. Korta steg tar dig ingenstans.',
-    lesson: 'Ett långt steg tog bollen ur gropen. Större steg, och lite slump, hjälper träningen att inte fastna.',
+    lesson: 'Ett långt steg tog bollen ur gropen. Större steg, och lite slump, kan hjälpa träningen att inte fastna.',
     start: [-2.08, -0.5],
     par: 3,
   },

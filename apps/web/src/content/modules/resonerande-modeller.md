@@ -34,4 +34,10 @@ quiz:
     why: 'Enkla svar blir inte bättre av långa resonemang, svåra uppgifter blir det.'
 ---
 
-En resonerande modell skriver ner mellansteg innan den svarar, ungefär som man gör på papper när huvudräkningen inte räcker. Varje steg blir enklare, och modellen hinner upptäcka och rätta fel. Priset är tid: fler steg betyder längre väntan.
+En resonerande modell skriver ner mellansteg innan den svarar, ungefär som man gör på papper när huvudräkningen inte räcker. Varje steg blir enklare, och modellen hinner upptäcka och rätta fel. Priset är tid: fler steg betyder längre väntan. Och fler steg är ingen garanti för rätt svar.
+
+## Vad vi förenklar här
+
+- Modellen i modulen är en leksaksmodell med påhittade felrisker. Den visar idén, inte hur en riktig modell räknar.
+- Många tjänster visar inte modellens resonemang, eller bara en kort sammanfattning. Det som visas speglar inte alltid exakt hur modellen kom fram till svaret.
+- Fler tankesteg hjälper oftast på uppgifter i flera led, men det är ingen garanti. En modell kan också resonera sig fram till fel svar.

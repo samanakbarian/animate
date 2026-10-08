@@ -35,3 +35,8 @@ quiz:
 ---
 
 Flera agenter kan arbeta med olika delar av en uppgift samtidigt och granska varandras arbete. Då blir frågan var en människa behövs, och vad som händer när ingen tittar.
+
+## Vad vi förenklar här
+
+- Laget och felen är simulerade, med fasta sannolikheter för slarvfel och blinda fläckar.
+- I verkligheten är det svårt att veta hur ofta en granskande agent missar något. Därför behövs tester och människor som tar ansvar.

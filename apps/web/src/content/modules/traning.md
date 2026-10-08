@@ -36,3 +36,9 @@ quiz:
 Ett otränat nätverk gissar på måfå. Träning går ut på att mäta hur fel gissningen blev och sedan flytta varje vikt en liten bit åt det håll där felet minskar. Det görs om och om igen, i stora modeller miljontals gånger.
 
 Steglängden spelar stor roll. För korta steg och träningen tar evigheter. För långa steg och man studsar förbi målet.
+
+## Vad vi förenklar här
+
+- Fellandskapet har två vikter, så att det går att rita. En riktig modell har miljontals eller miljarder, och landskapet går inte att se.
+- Här räknas felet på alla exempel varje steg. Stora modeller tränas på små högar av exempel i taget, vilket gör stegen lite skakiga.
+- Moderna metoder ändrar steglängden under träningens gång. Här är den fast.

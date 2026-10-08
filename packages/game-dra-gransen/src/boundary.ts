@@ -44,7 +44,7 @@ export const LEVELS: Level[] = [
   {
     title: 'Ringen',
     goal: 'De blå ligger i mitten och de orange runt om. Gör så gott det går.',
-    lesson: 'Ingen rak linje kan ringa in mitten. Därför har nätverk flera neuroner i lager: fyra linjer tillsammans klarar det.',
+    lesson: 'Ingen rak linje kan ringa in mitten. Därför har nätverk flera neuroner i lager: några linjer tillsammans kan ringa in den.',
   },
 ];
 

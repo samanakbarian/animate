@@ -45,3 +45,9 @@ En språkmodell är ett stort neuralt nätverk som har tränats på väldigt myc
 ## Du provar själv
 
 Modulen kör en liten modell som tränats på en kort svensk text. Välj början, antal ord och temperatur, och byt slumpfrö för att få en ny text.
+
+## Vad vi förenklar här
+
+- Modellen i modulen är inget neuralt nätverk. Den räknar hur ofta ord följer på varandra i en kort text. Den gissar nästa ord precis som stora modeller, men den förstår mycket mindre.
+- Den arbetar med hela ord. Stora modeller arbetar med tokens, som ofta är delar av ord.
+- Stora modeller tittar på tusentals tokens bakåt, inte bara de två senaste orden.

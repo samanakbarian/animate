@@ -37,3 +37,9 @@ quiz:
 Efter förträningen kan modellen bara fortsätta text. Ställer man en fråga är det lika troligt att den svarar med fler frågor. Därför tränas den vidare på exempel på samtal, där en fråga följs av ett bra svar.
 
 Sedan får människor jämföra svar och välja det bästa. Av deras val lär sig modellen vilka sorters svar folk vill ha.
+
+## Vad vi förenklar här
+
+- Svaren och sannolikheterna är påhittade för att visa idén. Det är ingen riktig modell som tränas.
+- Här finns fyra sorters svar. En riktig modell kan svara på oändligt många sätt.
+- Återkopplingen kan göras på flera sätt. Ibland ersätts människorna delvis av andra modeller eller av skrivna regler.

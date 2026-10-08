@@ -51,3 +51,9 @@ Ett neuralt nätverk är många sådana neuroner ordnade i lager. Allt nätverke
 ## Du provar själv
 
 Ändra antalet neuroner eller steglängden och se vad som händer med träningen.
+
+## Vad vi förenklar här
+
+- Nätverket i modulen har en handfull neuroner. Stora modeller har miljarder vikter.
+- Lampan är antingen tänd eller släckt. Riktiga neuroner i ett nätverk ger oftast ett tal på en skala.
+- Liknelsen med hjärnan gäller idén. Hjärnans nervceller fungerar på många sätt som ett nätverk inte gör.

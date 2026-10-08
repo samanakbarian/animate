@@ -34,7 +34,7 @@ quiz:
     why: 'Ett mejl som skickats går inte att ta tillbaka. Därför är vissa steg värda en kontroll.'
 ---
 
-En agent är en språkmodell som får ett mål och tillgång till verktyg, till exempel kalender, sökning eller e-post. Den funderar på vad som behöver göras, gör det, tittar på resultatet och bestämmer nästa steg. Så fortsätter den tills målet är nått eller den behöver fråga någon.
+I en vanlig chatt ställer du en fråga och får ett svar. En agent är en språkmodell som i stället får ett mål och tillgång till verktyg, till exempel kalender, sökning eller e-post. Den funderar på vad som behöver göras, gör det, tittar på resultatet och bestämmer nästa steg. Så fortsätter den tills målet är nått eller den behöver fråga någon.
 
 ## Filmen visar
 
@@ -45,3 +45,20 @@ En agent är en språkmodell som får ett mål och tillgång till verktyg, till 
 ## Du provar själv
 
 Ändra förutsättningarna och följ varje beslut i agentens logg.
+
+## Samtal eller agent?
+
+|                    | Samtal                | Agent                                      |
+| ------------------ | --------------------- | ------------------------------------------ |
+| Utgångspunkt       | En fråga              | Ett mål                                    |
+| Verktyg            | Inga, eller ett fåtal | Kalender, sökning, e-post, filer …         |
+| Återkoppling       | Du läser svaret       | Agenten läser resultatet av sina egna steg |
+| Vem driver arbetet | Du, en fråga i taget  | Agenten, flera steg i rad                  |
+| Människans roll    | Ställer nästa fråga   | Godkänner viktiga steg, eller stoppar      |
+
+Ju mer agenten får göra på egen hand, desto viktigare är det att bestämma vilka steg som kräver ett godkännande.
+
+## Vad vi förenklar här
+
+- Agenten i modulen är simulerad. Den följer samma loop som riktiga agenter, men varje steg är förbestämt.
+- Riktiga agenter kan göra fel som är svårare att upptäcka, till exempel använda fel verktyg eller missförstå målet.

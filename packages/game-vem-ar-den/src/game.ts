@@ -80,8 +80,8 @@ export function startWho(host: HTMLElement, level: number, api: GameApi): GameSe
       const head = bare(p.words[p.headPick]);
       const headLine =
         p.headPick === p.answer
-          ? `Uppmärksamheten lade mest vikt på ”${esc(head)}”, alltså rätt ord.`
-          : `Uppmärksamheten lade mest vikt på ”${esc(head)}” och valde fel. Ett enda huvud räcker inte alltid, därför har modellerna många.`;
+          ? `Med hela meningen läst lade uppmärksamheten mest vikt på ”${esc(head)}”, alltså rätt ord.`
+          : `Med hela meningen läst lade uppmärksamheten mest vikt på ”${esc(head)}” och valde fel. Ett enda huvud räcker inte alltid, därför har modellerna många.`;
       const last = i >= items.length;
       const after = el.querySelector('.after')!;
       after.innerHTML = `

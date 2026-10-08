@@ -36,3 +36,10 @@ quiz:
 En dator kan bara räkna med tal. Därför delas texten först upp i bitar, så kallade tokens. Sedan får varje bit en lista med tal, en inbäddning. Ord som brukar förekomma i liknande sammanhang får liknande tal.
 
 Det gör att man kan räkna med betydelser. Tar man kung, drar bort man och lägger till kvinna hamnar man nära drottning.
+
+## Vad vi förenklar här
+
+- Inbäddningarna här är handgjorda och har några få tal per ord. En riktig modell lär sig sina själv och har hundratals eller tusentals tal per token.
+- Kartan visar en platt bild av något som har många fler dimensioner. Avstånd på kartan stämmer bara ungefär.
+- Analogier som kung − man + kvinna fungerar ofta men inte alltid i riktiga modeller.
+- Varje modell har sitt eget sätt att dela upp text i tokens.

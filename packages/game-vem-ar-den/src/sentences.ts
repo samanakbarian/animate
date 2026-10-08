@@ -3,6 +3,9 @@
 // `attn` är ett tänkt uppmärksamhetshuvud: hur mycket pronomenet ”tittar” på
 // vissa ord. Resten av vikten delas lika mellan de andra orden före pronomenet.
 // Huvudet är påhittat men typiskt; `headWrong` markerar meningar där det väljer fel.
+// Förenkling: vikterna gäller när hela meningen är läst. I en språkmodell som skriver
+// ett ord i taget kan pronomenet inte se ledtråden efter sig; det reds ut av senare ord
+// (se Transformern, kapitlet ”Bara bakåt”).
 
 import type { Rng } from '@nastasteg/engine/core/math';
 
