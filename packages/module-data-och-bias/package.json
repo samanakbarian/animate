@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-data-och-bias",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 12 – Data och bias: modellen lär sig det som finns i datan, även det du inte menade.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./learn": "./src/learn.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

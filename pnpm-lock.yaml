@@ -89,6 +89,9 @@ importers:
       '@nastasteg/module-att-prata-med-ai':
         specifier: workspace:*
         version: link:../../packages/module-att-prata-med-ai
+      '@nastasteg/module-data-och-bias':
+        specifier: workspace:*
+        version: link:../../packages/module-data-och-bias
       '@nastasteg/module-flera-agenter':
         specifier: workspace:*
         version: link:../../packages/module-flera-agenter
@@ -225,6 +228,12 @@ importers:
         version: link:../engine
 
   packages/module-att-prata-med-ai:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-data-och-bias:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

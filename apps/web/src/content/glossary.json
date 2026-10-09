@@ -141,5 +141,11 @@
     "term": "Prompt",
     "definition": "Det du skriver till en AI: din fråga eller instruktion. Ju tydligare den säger vad du vill ha, till vem och i vilket format, desto mindre behöver modellen gissa.",
     "module": "att-prata-med-ai"
+  },
+  {
+    "id": "bias",
+    "term": "Bias",
+    "definition": "Snedvridning. När en modell systematiskt gör fler fel för vissa fall eller grupper, ofta för att de var få eller annorlunda i träningsdatan.",
+    "module": "data-och-bias"
   }
 ]
