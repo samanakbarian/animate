@@ -7,7 +7,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 ## Nuläge
 
 - **iLearnAI** på https://ilearnai.se (Netlify, gren master, HTTPS, www → ilearnai.se). Monorepo: `apps/web` (Astro),
-  `packages/engine`, `packages/film`, `packages/module-*` (12), `packages/game-*` (12), `tools/render`.
+  `packages/engine`, `packages/film`, `packages/module-*` (13), `packages/game-*` (12), `tools/render`.
 - **Väg in:** startsidan leder till lärvägen `/lar/forsta-ai` (”Förstå hur AI fungerar på 20 minuter”, sex steg:
   neuron, nätverk, språkmodell, spelet Slå maskinen, agent, slutprov). Framsteg sparas lokalt; startsidan visar
   ”Fortsätt lärvägen”. Kortfilmen ligger under hjälten, med länk vidare efter filmen. Tre spel visas, resten på `/spel`.
@@ -18,11 +18,12 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Spelen Ordräknaren och Lär maskinen** (B-22): räkna nästa ord i en kort text som en språkmodell, och justera
   vikter för hand tills en neuron gör rätt (par uträknat med bredden-först-sökning). Elva spel totalt.
 - **Spelet Agentbyggaren** (B-29): ge en agent verktyg och bestäm vad den måste fråga om. Tolv spel totalt.
+- **Modul 13 – AI som gör bilder** (B-30): från brus till bild på 20 steg, texten styr och startbruset ger variation.
 - **Dagens AI-fråga** (B-24) på startsidan: en fråga per dag ur modulernas quiz (`lib/daily.ts`), svit i rad och
   märket Fem dagar i rad.
-- **För skolan** (B-25): `/skola` med sex lektioner på 50 minuter som täcker alla tolv moduler (`content/lessons.json`),
+- **För skolan** (B-25): `/skola` med sju lektioner på 50 minuter som täcker alla moduler (`content/lessons.json`),
   tidsplan, diskussionsfrågor och facit med vanliga missförstånd. Utskrivbara. Länk i sidfoten.
-- **Tio moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
+- **Alla moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
   använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
 - Pedagogiska rättelser: kausal uppmärksamhet i Transformern (reglaget ”Får titta”), Tokenjakten säger att färst
   bitar är en förenkling, Resonerande modeller lovar ingen garanti, Agenten jämför samtal och agent i en tabell.
@@ -33,7 +34,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   lita på AI? (20 min). Varje lärväg ger ett **diplom** att skriva ut eller spara som PDF (B-28). Menyn: Lärvägar.
 - **Framsteg och märken** på `/framsteg` (B-19): tio märken i `content/badges.json`, regler i `lib/progress.ts`,
   allt läst ur webbläsarens lagring. Quizet säger till när man får ett nytt märke. Länk i sidfoten.
-- 176 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
+- 182 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
 
 ## Nästa (i prioritetsordning)
 
@@ -43,7 +44,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 2. **Grundaren:** välj statistiktjänst (ADR 0012) och sätt `PUBLIC_STATS_URL` i Netlify. Byt repots standardgren
    till `master` på GitHub (i dag `ccr-f401e4bd-y1vmji`, CI körs bara på master).
 3. Testa lärvägen med riktiga nybörjare. Mät avhopp per steg när statistiken är på.
-4. B-30 nya moduler (en i taget). Lärare: testa en lektion med en riktig klass. Skolmaterial: `docs/SKOLMATERIAL.md`.
+4. B-30 nya moduler, en i taget (klar: bilder; kvar: datorseende, kontext, verktyg, arbete, rätt, klimat, framtid). Lärare: testa en lektion med en riktig klass. Skolmaterial: `docs/SKOLMATERIAL.md`.
 5. Backend avvaktar (ADR 0011). Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 
 ## Kända problem och fällor

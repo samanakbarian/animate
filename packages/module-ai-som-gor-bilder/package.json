@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-ai-som-gor-bilder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 13 – AI som gör bilder: från brus till bild, ett steg i taget.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./diffuse": "./src/diffuse.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

@@ -1,5 +1,5 @@
 ---
-// För lärare: sex lektioner som tillsammans täcker alla moduler. Ingen inloggning.
+// För lärare: lektioner som tillsammans täcker alla moduler. Ingen inloggning.
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
@@ -17,8 +17,8 @@ const title = (slug: string) => modules.find((m) => m.id === slug)?.data.title ?
       <p class="eyebrow">För lärare · gratis · ingen inloggning</p>
       <h1>För skolan</h1>
       <p class="lead">
-        Sex lektioner på 50 minuter som tillsammans går igenom allt på sajten. Varje lektion har mål, förberedelser, tidsplan,
-        diskussionsfrågor och facit till quizen. Skriv ut den eller visa den på skärmen.
+        Lektioner på 50 minuter som tillsammans går igenom allt på sajten. Varje lektion har mål, förberedelser, tidsplan, diskussionsfrågor
+        och facit till quizen. Skriv ut den eller visa den på skärmen.
       </p>
       <p>
         Eleverna behöver inget konto. Deras framsteg sparas bara i den webbläsare de använder. Lektionerna passar till exempel i teknik,

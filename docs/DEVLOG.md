@@ -5,6 +5,27 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (7) – Modul 13: AI som gör bilder (B-30, första av åtta)
+
+**Vad**
+
+- `packages/module-ai-som-gor-bilder`: en bild på 48 × 36 pixlar växer fram ur brus på 20 steg. Kapitel: brus,
+  lite i taget, grovt först, texten styr, nytt brus ger ny bild, träningen går baklänges, din tur.
+- `diffuse.ts` är ren logik: målbild per text och frö, lådoskärpa (så att det grova kommer först) och brus.
+  ”Brus kvar” är samma kurva som bilden använder. Tester låser manuset (annan text vid 46 s, nytt frö vid 58 s).
+- Modulsidan med quiz och ”Vad vi förenklar här” (målbilden finns redan i koden). Ordlistan: diffusionsmodell, brus.
+- Ny lektion 7 på `/skola` (testet kräver att lektionerna täcker alla moduler). Hela kartan kräver nu 13 quiz.
+
+**Fällor**
+
+- Mobilen: bild, stegrad och brusrad fick inte plats ovanför texten. På mobil står brus % i stegraden.
+
+**Återstår**
+
+- Sju moduler kvar i B-30: datorseende, kontext, verktyg, arbete, rätt, klimat, framtid.
+
+---
+
 ## 2026-10-09 (6) – Spelet Agentbyggaren (B-29)
 
 **Vad**

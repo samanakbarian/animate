@@ -147,5 +147,17 @@
     "term": "Bias",
     "definition": "Snedvridning. När en modell systematiskt gör fler fel för vissa fall eller grupper, ofta för att de var få eller annorlunda i träningsdatan.",
     "module": "data-och-bias"
+  },
+  {
+    "id": "diffusionsmodell",
+    "term": "Diffusionsmodell",
+    "definition": "En sorts bildmodell som börjar med brus och tar bort lite av det i många steg tills en bild finns kvar. Texten du skriver styr vad modellen letar fram. Den tränas genom att lägga brus på riktiga bilder och öva på att gissa bruset.",
+    "module": "ai-som-gor-bilder"
+  },
+  {
+    "id": "brus",
+    "term": "Brus",
+    "definition": "Slumpade värden utan mönster, som sprakande prickar i en bild. Bildmodeller börjar med brus, och olika startbrus ger olika bilder av samma text.",
+    "module": "ai-som-gor-bilder"
   }
 ]

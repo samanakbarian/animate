@@ -238,5 +238,48 @@
       "Vilka beslut ska en människa alltid fatta själv?",
       "Filmen är en berättelse, inte en förutsägelse. Vad tror ni händer härnäst?"
     ]
+  },
+  {
+    "id": "ai-som-gor-bilder",
+    "order": 7,
+    "title": "AI som gör bilder",
+    "goal": "Eleverna kan förklara hur en bildmodell går från brus till bild, och varför samma text ger olika bilder.",
+    "modules": ["ai-som-gor-bilder"],
+    "games": [],
+    "prep": [
+      "Gå igenom modulen AI som gör bilder och prova reglagen.",
+      "Ta fram några AI-gjorda bilder och några foton att jämföra, gärna med fel i händer eller text."
+    ],
+    "plan": [
+      {
+        "minutes": 5,
+        "what": "Start: Visa en AI-gjord bild. Hur tror ni att den blev till?"
+      },
+      {
+        "minutes": 10,
+        "what": "Visa AI som gör bilder tillsammans. Pausa efter ”Grovt först” och fråga vad som syns."
+      },
+      {
+        "minutes": 10,
+        "what": "Eleverna provar modulen i par: samma text med olika startbrus, och olika text med samma brus."
+      },
+      {
+        "minutes": 10,
+        "what": "Övning: Gissa vilka bilder som är AI-gjorda. Vad avslöjar dem, och går det alltid att se?"
+      },
+      {
+        "minutes": 10,
+        "what": "Diskussion."
+      },
+      {
+        "minutes": 5,
+        "what": "Avslut: quizet i AI som gör bilder."
+      }
+    ],
+    "discussion": [
+      "Vem äger en bild som en AI har gjort?",
+      "Bildmodeller har tränats på bilder som andra har gjort. Är det rättvist mot dem?",
+      "Hur kan en falsk bild ställa till skada, och hur kan man kontrollera en bild man ser?"
+    ]
   }
 ]
