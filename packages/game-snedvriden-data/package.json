@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/game-snedvriden-data",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Snedvriden data: välj träningsbilder så att modellen lär sig rätt sak.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*",
+    "@nastasteg/module-data-och-bias": "workspace:*"
+  }
+}

@@ -77,6 +77,9 @@ importers:
       '@nastasteg/game-sla-maskinen':
         specifier: workspace:*
         version: link:../../packages/game-sla-maskinen
+      '@nastasteg/game-snedvriden-data':
+        specifier: workspace:*
+        version: link:../../packages/game-snedvriden-data
       '@nastasteg/game-tokenjakten':
         specifier: workspace:*
         version: link:../../packages/game-tokenjakten
@@ -208,6 +211,15 @@ importers:
       '@nastasteg/module-sprakmodellen':
         specifier: workspace:*
         version: link:../module-sprakmodellen
+
+  packages/game-snedvriden-data:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@nastasteg/module-data-och-bias':
+        specifier: workspace:*
+        version: link:../module-data-och-bias
 
   packages/game-tokenjakten:
     dependencies:

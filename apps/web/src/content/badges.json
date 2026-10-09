@@ -74,10 +74,10 @@
   {
     "id": "spelmastare",
     "title": "Spelmästare",
-    "description": "Spela alla åtta spel.",
+    "description": "Spela alla nio spel.",
     "rule": {
       "type": "games",
-      "count": 8
+      "count": 9
     }
   },
   {

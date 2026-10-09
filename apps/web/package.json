@@ -24,6 +24,7 @@
     "@nastasteg/game-hallucinationsjakten": "workspace:*",
     "@nastasteg/game-promptpusslet": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
+    "@nastasteg/game-snedvriden-data": "workspace:*",
     "@nastasteg/game-tokenjakten": "workspace:*",
     "@nastasteg/game-vem-ar-den": "workspace:*",
     "@nastasteg/module-agenten": "workspace:*",

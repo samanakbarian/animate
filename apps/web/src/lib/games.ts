@@ -12,4 +12,5 @@ export const GAMES: Record<string, () => Promise<{ game: GameDefinition }>> = {
   'vem-ar-den': () => import('@nastasteg/game-vem-ar-den'),
   'ai-tidslinjen': () => import('@nastasteg/game-ai-tidslinjen'),
   promptpusslet: () => import('@nastasteg/game-promptpusslet'),
+  'snedvriden-data': () => import('@nastasteg/game-snedvriden-data'),
 };

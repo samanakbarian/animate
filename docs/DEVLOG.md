@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (2) – Modul Data och bias och spelet Snedvriden data (B-20)
+
+**Vad**
+
+- `packages/module-data-och-bias`: `learn.ts` är en riktig liten modell (logistisk regression, gradientnedstigning,
+  seedad data) med form och snö som egenskaper. Med 95 % vargar i snö: 97 % rätt på träningen, 32 % på svåra
+  testbilder. Balanserat: 96 %. Testerna låser siffrorna som manuset påstår. Del 2: förenklad inlärningskurva per dialekt.
+- `packages/game-snedvriden-data` importerar `@nastasteg/module-data-och-bias/learn` (spel → modul → motor).
+- Märken uppdaterade (12 moduler, 9 spel). Ordlistan: Bias.
+
+**Fällor**
+
+- Etiketter i sifferpanelen måste vara korta, annars krockar de med procenten på datorbredd.
+
+---
+
 ## 2026-10-09 – Modul Att prata med AI och spelet Promptpusslet (B-21)
 
 **Vad**

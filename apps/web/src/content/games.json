@@ -62,5 +62,13 @@
     "summary": "Bygg en fråga till en AI av färdiga bitar. Vad behövs, och vad låter bara bra?",
     "teaches": "Att en bra fråga säger vad du vill ha, ger sammanhang och ber om svar du kan kontrollera.",
     "module": "att-prata-med-ai"
+  },
+  {
+    "id": "snedvriden-data",
+    "title": "Snedvriden data",
+    "order": 9,
+    "summary": "Välj träningsbilder så att modellen lär sig skilja varg från hund, och inte bara snö från gräs.",
+    "teaches": "Att en modell lär sig genvägar i snedvriden data, och att sammansättningen av datan avgör vad den lär sig.",
+    "module": "data-och-bias"
   }
 ]
