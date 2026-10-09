@@ -5,6 +5,29 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (8) – Modul 14: Datorseende (B-30, andra av åtta)
+
+**Vad**
+
+- `packages/module-datorseende`: en form på 16 × 16 pixlar, fyra handskrivna kantfilter på 3 × 3 som glider över
+  bilden, en profil över hur mycket av varje sorts kant bilden har, och ett svar per form (jämförelse med fyra
+  förebilder). Kapitel: bild är tal, filtret glider, olika kanter, räkna ihop, svar, andra former, säker men fel.
+- `vision.ts` är ren logik med tester: alla former känns igen utan brus, och med 60 % brus svarar modellen
+  ”cirkel 98 %” på kvadraten. Det är poängen i kapitlet ”Säker, men fel”.
+- Lektion 7 heter nu ”AI och bilder” och täcker båda bildmodulerna. Ordlistan: datorseende, filter, faltningsnätverk.
+
+**Fällor**
+
+- Med vanlig summa av |svar| liknade alla former varandra, för varje filter svarar lite på alla vinklar. Varje
+  pixel räknas därför bara till det filter som svarar starkast.
+- Mobilen: talen i pixlarna går inte att läsa i liten bild, så bilden visas stor i första kapitlet.
+
+**Återstår**
+
+- Sex moduler kvar i B-30: kontext, verktyg, arbete, rätt, klimat, framtid.
+
+---
+
 ## 2026-10-09 (7) – Modul 13: AI som gör bilder (B-30, första av åtta)
 
 **Vad**

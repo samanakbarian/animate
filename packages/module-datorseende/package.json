@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-datorseende",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 14 – Datorseende: hur en dator hittar kanter och former i en bild.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./vision": "./src/vision.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

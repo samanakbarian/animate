@@ -159,5 +159,23 @@
     "term": "Brus",
     "definition": "Slumpade värden utan mönster, som sprakande prickar i en bild. Bildmodeller börjar med brus, och olika startbrus ger olika bilder av samma text.",
     "module": "ai-som-gor-bilder"
+  },
+  {
+    "id": "datorseende",
+    "term": "Datorseende",
+    "definition": "AI som tolkar bilder och film, till exempel för att känna igen ansikten, läsa skyltar eller hitta tumörer på röntgenbilder. För datorn är en bild bara ett rutnät av tal.",
+    "module": "datorseende"
+  },
+  {
+    "id": "filter",
+    "term": "Filter (i bildmodeller)",
+    "definition": "En liten ruta med vikter som glider över en bild och svarar starkt där ett visst mönster finns, till exempel en lodrät kant. Ett faltningsnätverk har tusentals filter som lärs in under träningen.",
+    "module": "datorseende"
+  },
+  {
+    "id": "faltningsnatverk",
+    "term": "Faltningsnätverk (CNN)",
+    "definition": "Ett neuralt nätverk för bilder där de första lagren är filter som hittar kanter, och senare lager kombinerar dem till former och föremål.",
+    "module": "datorseende"
   }
 ]

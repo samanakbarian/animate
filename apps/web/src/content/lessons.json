@@ -240,46 +240,50 @@
     ]
   },
   {
-    "id": "ai-som-gor-bilder",
+    "id": "ai-och-bilder",
     "order": 7,
-    "title": "AI som gör bilder",
-    "goal": "Eleverna kan förklara hur en bildmodell går från brus till bild, och varför samma text ger olika bilder.",
-    "modules": ["ai-som-gor-bilder"],
+    "title": "AI och bilder",
+    "goal": "Eleverna kan förklara hur en dator hittar former i en bild och hur en bildmodell går från brus till bild.",
+    "modules": ["datorseende", "ai-som-gor-bilder"],
     "games": [],
     "prep": [
-      "Gå igenom modulen AI som gör bilder och prova reglagen.",
-      "Ta fram några AI-gjorda bilder och några foton att jämföra, gärna med fel i händer eller text."
+      "Gå igenom modulerna Datorseende och AI som gör bilder och prova reglagen.",
+      "Ta fram några AI-gjorda bilder och några foton att jämföra."
     ],
     "plan": [
       {
         "minutes": 5,
-        "what": "Start: Visa en AI-gjord bild. Hur tror ni att den blev till?"
+        "what": "Start: Hur vet mobilen att det är ett ansikte i kameran?"
       },
       {
         "minutes": 10,
-        "what": "Visa AI som gör bilder tillsammans. Pausa efter ”Grovt först” och fråga vad som syns."
+        "what": "Visa Datorseende tillsammans. Pausa efter ”En bild är tal” och låt eleverna läsa av några pixlar."
+      },
+      {
+        "minutes": 5,
+        "what": "Eleverna provar brusreglaget i par. När svarar modellen fel, och hur säker är den då?"
       },
       {
         "minutes": 10,
-        "what": "Eleverna provar modulen i par: samma text med olika startbrus, och olika text med samma brus."
+        "what": "Visa AI som gör bilder. Pausa efter ”Grovt först” och fråga vad som syns."
       },
       {
         "minutes": 10,
         "what": "Övning: Gissa vilka bilder som är AI-gjorda. Vad avslöjar dem, och går det alltid att se?"
       },
       {
-        "minutes": 10,
+        "minutes": 5,
         "what": "Diskussion."
       },
       {
         "minutes": 5,
-        "what": "Avslut: quizet i AI som gör bilder."
+        "what": "Avslut: quizet i Datorseende eller AI som gör bilder."
       }
     ],
     "discussion": [
-      "Vem äger en bild som en AI har gjort?",
-      "Bildmodeller har tränats på bilder som andra har gjort. Är det rättvist mot dem?",
-      "Hur kan en falsk bild ställa till skada, och hur kan man kontrollera en bild man ser?"
+      "Var används datorseende i din vardag?",
+      "En modell kan vara säker och ändå ha fel. Vad betyder det för en självkörande bil?",
+      "Vem äger en bild som en AI har gjort, och är det rättvist mot dem vars bilder den tränats på?"
     ]
   }
 ]
