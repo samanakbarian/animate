@@ -37,6 +37,7 @@
     "@nastasteg/module-datorseende": "workspace:*",
     "@nastasteg/module-kontext": "workspace:*",
     "@nastasteg/module-verktyg": "workspace:*",
+    "@nastasteg/module-arbete": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",
     "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",
     "@nastasteg/module-neuralt-natverk": "workspace:*",

@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-arbete",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 17 – AI och arbete: AI tar uppgifter, inte hela jobb.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./jobs": "./src/jobs.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

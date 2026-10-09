@@ -294,5 +294,48 @@
       "En modell kan vara säker och ändå ha fel. Vad betyder det för en självkörande bil?",
       "Vem äger en bild som en AI har gjort, och är det rättvist mot dem vars bilder den tränats på?"
     ]
+  },
+  {
+    "id": "ai-och-samhallet",
+    "order": 8,
+    "title": "AI och samhället",
+    "goal": "Eleverna kan förklara att AI förändrar uppgifter snarare än hela jobb, och resonera om vem som bestämmer hur AI används.",
+    "modules": ["arbete"],
+    "games": [],
+    "prep": [
+      "Gå igenom modulen AI och arbete och prova alla fyra jobben.",
+      "Skriv ut eller visa en lista med några yrken eleverna känner till."
+    ],
+    "plan": [
+      {
+        "minutes": 5,
+        "what": "Start: Vilka jobb har vuxna ni känner? Vad gör de under en vanlig vecka?"
+      },
+      {
+        "minutes": 10,
+        "what": "Visa AI och arbete tillsammans. Pausa efter ”Någon måste granska”."
+      },
+      {
+        "minutes": 15,
+        "what": "Övning i grupp: välj ett yrke, dela upp en vecka i uppgifter och markera vad AI kan hjälpa med och vad den inte kan."
+      },
+      {
+        "minutes": 10,
+        "what": "Grupperna redovisar. Vilka uppgifter blev kvar för människan?"
+      },
+      {
+        "minutes": 7,
+        "what": "Diskussion."
+      },
+      {
+        "minutes": 3,
+        "what": "Avslut: quizet i AI och arbete."
+      }
+    ],
+    "discussion": [
+      "Vem bestämmer vad tiden som blir över används till?",
+      "Vilka nya jobb och uppgifter kan AI skapa?",
+      "Finns det uppgifter som en människa alltid ska göra, även om AI skulle klara dem?"
+    ]
   }
 ]

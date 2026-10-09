@@ -5,6 +5,27 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (11) – Modul 17: AI och arbete (B-30, femte av åtta)
+
+**Vad**
+
+- `packages/module-arbete`: fyra jobb (kundtjänst, lärare, sjuksköterska, snickare) som en vecka av uppgifter.
+  Varje uppgift har andel av veckan, hur svår den är för AI och sort (text, möten, händer). `jobs.ts` räknar vad
+  AI gör, den nya uppgiften att granska (30 % av sparad tid) och tid som blir över.
+- Kapitel: ett jobb är uppgifter, AI tar uppgifter, någon måste granska, olika jobb, bättre AI, din tur.
+  Siffrorna är påhittade och det står både i bild och på modulsidan.
+- Ny lektion 8 ”AI och samhället” på `/skola` (de kommande modulerna rätt, klimat och framtid kan läggas där).
+
+**Fällor**
+
+- Staplarna skalas mot den största uppgiften i alla jobb, annars sticker snickarens 60 % ut ur bild.
+
+**Återstår**
+
+- Tre moduler kvar i B-30: rätt, klimat, framtid.
+
+---
+
 ## 2026-10-09 (10) – Modul 16: Verktyg (B-30, fjärde av åtta)
 
 **Vad**
