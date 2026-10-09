@@ -75,7 +75,7 @@
     "id": "kontextfonster",
     "term": "Kontextfönster",
     "definition": "Hur mycket text modellen kan ta hänsyn till på en gång, mätt i tokens.",
-    "module": "sprakmodellen"
+    "module": "kontext"
   },
   {
     "id": "temperatur",
@@ -177,5 +177,11 @@
     "term": "Faltningsnätverk (CNN)",
     "definition": "Ett neuralt nätverk för bilder där de första lagren är filter som hittar kanter, och senare lager kombinerar dem till former och föremål.",
     "module": "datorseende"
+  },
+  {
+    "id": "minne",
+    "term": "Minne (i chattjänster)",
+    "definition": "Korta anteckningar som en tjänst sparar om dig och lägger in i kontextfönstret i nya samtal. Själva modellen ändras inte och lär sig inget av samtalet.",
+    "module": "kontext"
   }
 ]

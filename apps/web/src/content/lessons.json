@@ -163,8 +163,8 @@
     "id": "anvanda-ai-klokt",
     "order": 5,
     "title": "Använda AI klokt",
-    "goal": "Eleverna kan skriva en tydlig fråga till en AI, och vet varför de alltid ska läsa igenom svaret.",
-    "modules": ["att-prata-med-ai", "resonerande-modeller"],
+    "goal": "Eleverna kan skriva en tydlig fråga till en AI, vet att den bara ser det som får plats i fönstret, och varför de alltid ska läsa igenom svaret.",
+    "modules": ["att-prata-med-ai", "kontext", "resonerande-modeller"],
     "games": ["promptpusslet"],
     "prep": ["Testa Promptpusslet alla tre banorna.", "Bestäm om eleverna ska få prova en riktig AI-tjänst. Följ skolans riktlinjer."],
     "plan": [
@@ -177,24 +177,29 @@
         "what": "Visa Att prata med AI tillsammans."
       },
       {
-        "minutes": 15,
+        "minutes": 12,
         "what": "Promptpusslet i par."
       },
       {
-        "minutes": 10,
+        "minutes": 8,
+        "what": "Visa Kontext. Varför glömmer en chattbot det du sa i början av ett långt samtal?"
+      },
+      {
+        "minutes": 8,
         "what": "Visa Resonerande modeller. När hjälper det att be om mellansteg?"
       },
       {
-        "minutes": 5,
+        "minutes": 4,
         "what": "Diskussion."
       },
       {
-        "minutes": 5,
-        "what": "Avslut: quizet i Att prata med AI."
+        "minutes": 3,
+        "what": "Avslut: quizet i Att prata med AI eller Kontext."
       }
     ],
     "discussion": [
       "Vad är skillnaden mellan en vag och en tydlig fråga?",
+      "Vad betyder det att en chattbot ”minns” dig? Vad vill du att den ska få spara?",
       "Vilka uppgifter ska man aldrig skriva in i en AI-tjänst?",
       "När är det fusk att använda AI i skolan, och när är det ett bra verktyg?"
     ]

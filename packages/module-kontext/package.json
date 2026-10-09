@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-kontext",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 15 – Kontext: det modellen ser just nu, och vad som faller bort.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./context": "./src/context.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

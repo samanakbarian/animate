@@ -19,6 +19,7 @@ export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDe
   'data-och-bias': () => import('@nastasteg/module-data-och-bias'),
   'ai-som-gor-bilder': () => import('@nastasteg/module-ai-som-gor-bilder'),
   datorseende: () => import('@nastasteg/module-datorseende'),
+  kontext: () => import('@nastasteg/module-kontext'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;

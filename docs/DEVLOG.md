@@ -5,6 +5,28 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (9) – Modul 15: Kontext (B-30, tredje av åtta)
+
+**Vad**
+
+- `packages/module-kontext`: ett samtal på 14 meddelanden där det första säger att hunden heter Ture. Ramen visar
+  vad som ryms i kontextfönstret (räknat bakifrån). Kapitel: det modellen ser, tokens, samtalet växer, bortglömt,
+  större fönster, minne är en anteckning, din tur.
+- `context.ts` är ren logik; testerna låser manuset (glömt vid 40 s, minns med större fönster och med minne).
+- Lektionen ”Använda AI klokt” täcker nu också Kontext (tidsplanen omräknad till 50 min). Ordlistan: minne;
+  kontextfönster pekar nu på Kontext.
+
+**Fällor**
+
+- Frågan räknas bara in i fönstret när den syns, annars stämmer inte ”använt” med raderna.
+- För många rader slås ihop till ”… n meddelanden till”, men första meddelandet (hunden) visas alltid.
+
+**Återstår**
+
+- Fem moduler kvar i B-30: verktyg, arbete, rätt, klimat, framtid.
+
+---
+
 ## 2026-10-09 (8) – Modul 14: Datorseende (B-30, andra av åtta)
 
 **Vad**
