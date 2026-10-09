@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (6) – Spelet Agentbyggaren (B-29)
+
+**Vad**
+
+- `packages/game-agentbyggaren`: tre banor (boka middag, städa inkorgen, skriva en rapport). Spelaren kryssar för
+  vilka verktyg agenten får använda och vilka som kräver godkännande. Agenten kör sedan och loggen visar GÖR,
+  FRÅGAR, STOPPAD, OJ, FAST och ONÖDIGT.
+- Poäng: klart +5, något du inte ville −4, varje fråga −1, onödigt verktyg −1. `bestScore` prövar alla
+  kombinationer, så stjärnorna jämförs med det bästa möjliga. Tester i `scenario.test.ts`.
+- Kopplat till modulen Agenten, lektionen om AI som gör saker och märket Spelmästare (nu tolv spel).
+
+**Återstår**
+
+- Nästa: B-30, nya moduler, en i taget.
+
+---
+
 ## 2026-10-09 (5) – Lektioner för skolan (B-25)
 
 **Vad**

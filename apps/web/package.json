@@ -18,6 +18,7 @@
     "@fontsource/nunito": "^5.3.0",
     "@nastasteg/engine": "workspace:*",
     "@nastasteg/film": "workspace:*",
+    "@nastasteg/game-agentbyggaren": "workspace:*",
     "@nastasteg/game-ai-tidslinjen": "workspace:*",
     "@nastasteg/game-dra-gransen": "workspace:*",
     "@nastasteg/game-gradientgolf": "workspace:*",

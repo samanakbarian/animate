@@ -86,5 +86,13 @@
     "summary": "Var träningen själv: ändra vikterna tills neuronen gissar rätt på alla exempel.",
     "teaches": "Att träning betyder att justera vikter och bias efter felen, och varför det görs av en algoritm i stora nätverk.",
     "module": "neuralt-natverk"
+  },
+  {
+    "id": "agentbyggaren",
+    "title": "Agentbyggaren",
+    "order": 12,
+    "summary": "Ge en AI-agent verktyg och bestäm vad den måste fråga dig om. Klarar den uppdraget utan att ställa till det?",
+    "teaches": "Att en agent bara ska få de verktyg uppdraget kräver, och att steg som inte går att ångra behöver en människas godkännande.",
+    "module": "agenten"
   }
 ]
