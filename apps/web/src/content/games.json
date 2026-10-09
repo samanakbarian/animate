@@ -54,5 +54,13 @@
     "summary": "Lägg händelser i AI:s historia i rätt ordning, från den första artificiella neuronen 1943 till i dag.",
     "teaches": "Att AI har en lång historia med genombrott och bakslag, och att dagens AI bygger på idéer som är decennier gamla.",
     "module": "neuralt-natverk"
+  },
+  {
+    "id": "promptpusslet",
+    "title": "Promptpusslet",
+    "order": 8,
+    "summary": "Bygg en fråga till en AI av färdiga bitar. Vad behövs, och vad låter bara bra?",
+    "teaches": "Att en bra fråga säger vad du vill ha, ger sammanhang och ber om svar du kan kontrollera.",
+    "module": "att-prata-med-ai"
   }
 ]

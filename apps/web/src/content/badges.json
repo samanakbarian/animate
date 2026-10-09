@@ -74,19 +74,19 @@
   {
     "id": "spelmastare",
     "title": "Spelmästare",
-    "description": "Spela alla sju spel.",
+    "description": "Spela alla åtta spel.",
     "rule": {
       "type": "games",
-      "count": 7
+      "count": 8
     }
   },
   {
     "id": "hela-kartan",
     "title": "Hela kartan",
-    "description": "Gör quizet i alla tio moduler.",
+    "description": "Gör quizet i alla elva moduler.",
     "rule": {
       "type": "quizzes",
-      "count": 10
+      "count": 11
     }
   }
 ]

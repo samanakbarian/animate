@@ -5,6 +5,7 @@ import paths from '../content/paths.json';
 import { type Badge, earnedBadges, gamesPlayed, newBadges, pathDone, quizResults } from './progress';
 
 const badges = badgesJson as Badge[];
+const moduleSlugs = Object.keys(import.meta.glob('../content/modules/*.md')).map((f) => f.replace(/^.*\/|\.md$/g, ''));
 const ids = (b: Badge[]) => b.map((x) => x.id).sort();
 
 describe('framsteg och märken', () => {
@@ -36,18 +37,7 @@ describe('framsteg och märken', () => {
 
   it('alla märken går att få med innehållet som finns', () => {
     const all: Record<string, string> = {};
-    for (const m of [
-      'neuralt-natverk',
-      'traning',
-      'ord-som-tal',
-      'transformern',
-      'sprakmodellen',
-      'fran-fortraning-till-assistent',
-      'resonerande-modeller',
-      'agenten',
-      'flera-agenter',
-      'risker-och-sakerhet',
-    ]) {
+    for (const m of moduleSlugs) {
       all[`ilearnai-quiz-${m}`] = '4';
       all[`ilearnai-seen-${m}`] = '1';
     }

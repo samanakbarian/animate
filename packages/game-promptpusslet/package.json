@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/game-promptpusslet",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Promptpusslet: bygg en fråga av bitar så att AI:n förstår vad du vill.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/module-att-prata-med-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 11 – Att prata med AI: hur frågan (prompten) formar svaret.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

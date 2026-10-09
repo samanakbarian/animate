@@ -71,6 +71,9 @@ importers:
       '@nastasteg/game-hallucinationsjakten':
         specifier: workspace:*
         version: link:../../packages/game-hallucinationsjakten
+      '@nastasteg/game-promptpusslet':
+        specifier: workspace:*
+        version: link:../../packages/game-promptpusslet
       '@nastasteg/game-sla-maskinen':
         specifier: workspace:*
         version: link:../../packages/game-sla-maskinen
@@ -83,6 +86,9 @@ importers:
       '@nastasteg/module-agenten':
         specifier: workspace:*
         version: link:../../packages/module-agenten
+      '@nastasteg/module-att-prata-med-ai':
+        specifier: workspace:*
+        version: link:../../packages/module-att-prata-med-ai
       '@nastasteg/module-flera-agenter':
         specifier: workspace:*
         version: link:../../packages/module-flera-agenter
@@ -185,6 +191,12 @@ importers:
         specifier: workspace:*
         version: link:../engine
 
+  packages/game-promptpusslet:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
   packages/game-sla-maskinen:
     dependencies:
       '@nastasteg/engine':
@@ -207,6 +219,12 @@ importers:
         version: link:../engine
 
   packages/module-agenten:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-att-prata-med-ai:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

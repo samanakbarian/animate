@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 – Modul Att prata med AI och spelet Promptpusslet (B-21)
+
+**Vad**
+
+- `packages/module-att-prata-med-ai`: ett mejl till mentorn byggs upp av fyra delar i frågan. Svaren är förskrivna per
+  kombination (`prompt.ts`), med typerna ok, allmänt, påhittat, fyllnad och lucka. Kapitlet ”Läs igenom” tar bort
+  sammanhanget igen för att visa att påhittet kommer tillbaka. Order 11, stage mvp (syns under Grunderna).
+- `packages/game-promptpusslet`: välj bitar till en fråga; behövd bit +1, fälla −1, fluff 0. Genomgång bit för bit.
+- Märkena Hela kartan (11 moduler) och Spelmästare (8 spel) uppdaterade. Ordlistan: Prompt.
+
+**Fällor**
+
+- Etiketter inne i löptext på canvas krockar med raden ovanför. Använd en förklaring under texten i stället.
+- Testet för märken läser modulerna med `import.meta.glob`, så det behöver inte ändras när en modul läggs till.
+
+---
+
 ## 2026-10-08 (6) – Två lärvägar till och diplom (B-18, B-28)
 
 **Vad**
