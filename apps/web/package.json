@@ -22,6 +22,8 @@
     "@nastasteg/game-dra-gransen": "workspace:*",
     "@nastasteg/game-gradientgolf": "workspace:*",
     "@nastasteg/game-hallucinationsjakten": "workspace:*",
+    "@nastasteg/game-lar-maskinen": "workspace:*",
+    "@nastasteg/game-ordraknaren": "workspace:*",
     "@nastasteg/game-promptpusslet": "workspace:*",
     "@nastasteg/game-sla-maskinen": "workspace:*",
     "@nastasteg/game-snedvriden-data": "workspace:*",

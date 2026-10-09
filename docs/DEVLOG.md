@@ -5,6 +5,22 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (3) – Spelen Ordräknaren och Lär maskinen (B-22)
+
+**Vad**
+
+- `packages/game-ordraknaren`: en kort text i `counts.ts`, frågor om vanligaste nästa ord (ett och två ord bakåt) och
+  sannolikhet. Allt räknas ur texten; testet kräver entydiga svar.
+- `packages/game-lar-maskinen`: heltalsvikter och bias, alla kombinationer av insignaler som exempel, ledtråd enligt
+  perceptronregeln. Banans par räknas med bredden-först-sökning (1, 2, 4 drag). `lowerIsBetter`.
+
+**Fällor**
+
+- Små texter ger lätt oavgjort mellan nästa ord. Lägg hellre till en mening i texten än byt fråga gång på gång.
+- Långa etiketter i smala rutor täcker knapparna; lägg etiketten på egen rad.
+
+---
+
 ## 2026-10-09 (2) – Modul Data och bias och spelet Snedvriden data (B-20)
 
 **Vad**

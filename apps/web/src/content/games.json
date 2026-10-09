@@ -70,5 +70,21 @@
     "summary": "Välj träningsbilder så att modellen lär sig skilja varg från hund, och inte bara snö från gräs.",
     "teaches": "Att en modell lär sig genvägar i snedvriden data, och att sammansättningen av datan avgör vad den lär sig.",
     "module": "data-och-bias"
+  },
+  {
+    "id": "ordraknaren",
+    "title": "Ordräknaren",
+    "order": 10,
+    "summary": "Var språkmodellen själv: räkna vilket ord som brukar komma härnäst i en kort text.",
+    "teaches": "Att en språkmodell gissar nästa ord utifrån hur ofta ord följer på varandra, och att mer sammanhang ger säkrare gissningar.",
+    "module": "sprakmodellen"
+  },
+  {
+    "id": "lar-maskinen",
+    "title": "Lär maskinen",
+    "order": 11,
+    "summary": "Var träningen själv: ändra vikterna tills neuronen gissar rätt på alla exempel.",
+    "teaches": "Att träning betyder att justera vikter och bias efter felen, och varför det görs av en algoritm i stora nätverk.",
+    "module": "neuralt-natverk"
   }
 ]

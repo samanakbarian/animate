@@ -1,0 +1,16 @@
+{
+  "name": "@nastasteg/game-ordraknaren",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Spel – Ordräknaren: räkna vilket ord som brukar komma härnäst, som en språkmodell.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}
