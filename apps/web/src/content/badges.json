@@ -83,10 +83,10 @@
   {
     "id": "hela-kartan",
     "title": "Hela kartan",
-    "description": "Gör quizet i alla 15 moduler.",
+    "description": "Gör quizet i alla 16 moduler.",
     "rule": {
       "type": "quizzes",
-      "count": 15
+      "count": 16
     }
   },
   {

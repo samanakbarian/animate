@@ -5,6 +5,24 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (10) – Modul 16: Verktyg (B-30, fjärde av åtta)
+
+**Vad**
+
+- `packages/module-verktyg`: fyra frågor (stort tal, väder, Röda rummet, Malmö mot Kiruna) och två verktyg
+  (miniräknare, påhittat väder). `tools.ts` ger förloppet fråga → anrop → resultat → svar för varje val.
+  Scenen visar samtalet och ett diagram modellen → programmet → verktyget med pil för det som händer.
+- Kapitel: den gissar, ett anrop, programmet kör, svaret, modellen väljer, flera anrop, inget verktyg, din tur.
+  Testerna låser manuset per kapitel.
+- Lektionen ”AI som gör saker” börjar nu med Verktyg och har fått tid för Agentbyggaren (som saknades i
+  tidsplanen). Ordlistans verktygsanrop pekar hit.
+
+**Återstår**
+
+- Fyra moduler kvar i B-30: arbete, rätt, klimat, framtid.
+
+---
+
 ## 2026-10-09 (9) – Modul 15: Kontext (B-30, tredje av åtta)
 
 **Vad**

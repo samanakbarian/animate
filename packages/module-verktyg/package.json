@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-verktyg",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 16 – Verktyg: hur en språkmodell ber programmet om hjälp.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tools": "./src/tools.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

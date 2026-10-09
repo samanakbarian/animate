@@ -36,6 +36,7 @@
     "@nastasteg/module-ai-som-gor-bilder": "workspace:*",
     "@nastasteg/module-datorseende": "workspace:*",
     "@nastasteg/module-kontext": "workspace:*",
+    "@nastasteg/module-verktyg": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",
     "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",
     "@nastasteg/module-neuralt-natverk": "workspace:*",

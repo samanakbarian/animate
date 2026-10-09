@@ -208,18 +208,18 @@
     "id": "ai-som-gor-saker",
     "order": 6,
     "title": "AI som gör saker",
-    "goal": "Eleverna kan förklara skillnaden mellan en chatt och en agent, och varför människor behövs i loopen.",
-    "modules": ["agenten", "flera-agenter"],
+    "goal": "Eleverna kan förklara hur en språkmodell använder verktyg, skillnaden mellan en chatt och en agent, och varför människor behövs i loopen.",
+    "modules": ["verktyg", "agenten", "flera-agenter"],
     "games": ["ai-tidslinjen", "agentbyggaren"],
-    "prep": ["Se kortfilmen NÄSTA STEG på startsidan (2 min 30 s)."],
+    "prep": ["Se kortfilmen NÄSTA STEG på startsidan (2 min 30 s).", "Testa Agentbyggaren, bana 1. AI-tidslinjen passar som hemuppgift."],
     "plan": [
       {
         "minutes": 5,
         "what": "Start: Visa kortfilmen NÄSTA STEG."
       },
       {
-        "minutes": 10,
-        "what": "AI-tidslinjen i par, bana 1."
+        "minutes": 8,
+        "what": "Visa Verktyg. Vem räknar egentligen, modellen eller miniräknaren?"
       },
       {
         "minutes": 10,
@@ -227,15 +227,19 @@
       },
       {
         "minutes": 10,
+        "what": "Agentbyggaren i par."
+      },
+      {
+        "minutes": 7,
         "what": "Visa Flera agenter."
       },
       {
-        "minutes": 10,
+        "minutes": 7,
         "what": "Diskussion i grupp."
       },
       {
-        "minutes": 5,
-        "what": "Avslut: quizet i Agenten."
+        "minutes": 3,
+        "what": "Avslut: quizet i Verktyg eller Agenten."
       }
     ],
     "discussion": [

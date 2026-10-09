@@ -110,8 +110,8 @@
   {
     "id": "verktygsanrop",
     "term": "Verktygsanrop",
-    "definition": "När en modell ber om att få köra ett verktyg, till exempel en sökning eller ett program, och får tillbaka resultatet.",
-    "module": "agenten"
+    "definition": "När en modell skriver en begäran om att köra ett verktyg, till exempel en miniräknare eller en sökning. Programmet runt modellen kör verktyget och lägger in resultatet i samtalet.",
+    "module": "verktyg"
   },
   {
     "id": "hallucination",
