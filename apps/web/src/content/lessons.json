@@ -1,0 +1,137 @@
+[
+  {
+    "id": "hur-lar-sig-en-maskin",
+    "order": 1,
+    "title": "Hur lär sig en maskin?",
+    "goal": "Eleverna kan förklara vad en artificiell neuron gör, och att träning betyder att vikterna justeras efter felen.",
+    "modules": ["neuralt-natverk", "traning"],
+    "games": ["dra-gransen", "lar-maskinen"],
+    "prep": ["Testa modul 1 del 1 och spelet Lär maskinen själv.", "Projektor eller storskärm för den gemensamma genomgången."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Hur tror ni att en dator kan lära sig något? Skriv svaren på tavlan." },
+      {
+        "minutes": 10,
+        "what": "Visa Neuralt nätverk del 1 tillsammans. Pausa vid ”Vikter” och ”Bias” och låt eleverna gissa vad som händer."
+      },
+      { "minutes": 10, "what": "Eleverna spelar Lär maskinen i par, bana 1 och 2." },
+      { "minutes": 10, "what": "Visa Träning. Koppla steglängden till hur de själva justerade vikterna i spelet." },
+      { "minutes": 10, "what": "Diskussion i grupp." },
+      { "minutes": 5, "what": "Avslut: quizet i modul 1, var och en på egen enhet." }
+    ],
+    "discussion": [
+      "Vad är skillnaden mellan att skriva regler och att lära av exempel?",
+      "Varför gjorde ni ibland en ändring som gjorde det sämre i Lär maskinen?",
+      "Liknar en artificiell neuron en nervcell? På vilket sätt, och på vilket sätt inte?"
+    ]
+  },
+  {
+    "id": "fran-text-till-tal",
+    "order": 2,
+    "title": "Från text till tal",
+    "goal": "Eleverna kan förklara vad tokens och inbäddningar är, och hur uppmärksamheten kopplar ihop ord.",
+    "modules": ["ord-som-tal", "transformern"],
+    "games": ["tokenjakten", "vem-ar-den"],
+    "prep": ["Testa Tokenjakten bana 2 (sammansatta ord) själv."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Hur kan en dator räkna med ord? Låt eleverna föreslå." },
+      { "minutes": 10, "what": "Visa Ord som tal. Pausa vid kartan och låt eleverna gissa var nya ord hamnar." },
+      { "minutes": 10, "what": "Tokenjakten i par. Jämför hur många bitar långa svenska ord blir." },
+      { "minutes": 10, "what": "Visa Transformern, särskilt kapitlet ”Bara bakåt”." },
+      { "minutes": 10, "what": "Vem är ”den”? och diskussion." },
+      { "minutes": 5, "what": "Avslut: quizet i Transformern." }
+    ],
+    "discussion": [
+      "Varför blir svensk text ofta fler tokens än engelsk?",
+      "Hur vet du själv vad ”den” syftar på i en mening?",
+      "Vad betyder det att en språkmodell bara får titta bakåt?"
+    ]
+  },
+  {
+    "id": "hur-skriver-en-chattbot",
+    "order": 3,
+    "title": "Hur skriver en chattbot?",
+    "goal": "Eleverna kan förklara att en språkmodell gissar nästa ord, och hur den tränas till att bli en assistent.",
+    "modules": ["sprakmodellen", "fran-fortraning-till-assistent"],
+    "games": ["ordraknaren", "sla-maskinen"],
+    "prep": ["Testa Ordräknaren bana 1 och 3."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Låt eleverna fortsätta meningen ”Katten sover på …” och jämför svaren." },
+      { "minutes": 10, "what": "Ordräknaren i par. Diskutera varför vissa ord är vanligare." },
+      { "minutes": 10, "what": "Visa Språkmodellen, särskilt temperaturen." },
+      { "minutes": 10, "what": "Visa Från förträning till assistent." },
+      { "minutes": 10, "what": "Slå maskinen och diskussion." },
+      { "minutes": 5, "what": "Avslut: quizet i Språkmodellen." }
+    ],
+    "discussion": [
+      "Om modellen bara gissar nästa ord, hur kan den svara på frågor?",
+      "Varför kan samma fråga ge olika svar?",
+      "Vad lär sig modellen när människor väljer det svar de gillar bäst? Vad lär den sig inte?"
+    ]
+  },
+  {
+    "id": "kan-man-lita-pa-ai",
+    "order": 4,
+    "title": "Kan man lita på AI?",
+    "goal": "Eleverna kan förklara varför AI kan ha fel trots en säker ton, och hur snedvriden data ger snedvridna resultat.",
+    "modules": ["risker-och-sakerhet", "data-och-bias"],
+    "games": ["hallucinationsjakten", "snedvriden-data"],
+    "prep": ["Testa Hallucinationsjakten bana 1 och Snedvriden data bana 1."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Har ni fått ett svar från en AI som var fel? Hur märkte ni det?" },
+      { "minutes": 10, "what": "Hallucinationsjakten i par." },
+      { "minutes": 10, "what": "Visa Risker och säkerhet del 1." },
+      { "minutes": 10, "what": "Visa Data och bias del 1 och spela Snedvriden data." },
+      { "minutes": 10, "what": "Diskussion i grupp." },
+      { "minutes": 5, "what": "Avslut: quizet i Data och bias." }
+    ],
+    "discussion": [
+      "Hur kan du kontrollera ett svar från en AI?",
+      "Ge ett exempel på när ett bra snitt kan dölja att något fungerar sämre för vissa.",
+      "Vem ansvarar när en AI gör fel: den som byggde den, den som använder den eller båda?"
+    ]
+  },
+  {
+    "id": "anvanda-ai-klokt",
+    "order": 5,
+    "title": "Använda AI klokt",
+    "goal": "Eleverna kan skriva en tydlig fråga till en AI, och vet varför de alltid ska läsa igenom svaret.",
+    "modules": ["att-prata-med-ai", "resonerande-modeller"],
+    "games": ["promptpusslet"],
+    "prep": ["Testa Promptpusslet alla tre banorna.", "Bestäm om eleverna ska få prova en riktig AI-tjänst. Följ skolans riktlinjer."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Skriv ”Skriv ett mejl.” på tavlan. Vad saknas?" },
+      { "minutes": 10, "what": "Visa Att prata med AI tillsammans." },
+      { "minutes": 15, "what": "Promptpusslet i par." },
+      { "minutes": 10, "what": "Visa Resonerande modeller. När hjälper det att be om mellansteg?" },
+      { "minutes": 5, "what": "Diskussion." },
+      { "minutes": 5, "what": "Avslut: quizet i Att prata med AI." }
+    ],
+    "discussion": [
+      "Vad är skillnaden mellan en vag och en tydlig fråga?",
+      "Vilka uppgifter ska man aldrig skriva in i en AI-tjänst?",
+      "När är det fusk att använda AI i skolan, och när är det ett bra verktyg?"
+    ]
+  },
+  {
+    "id": "ai-som-gor-saker",
+    "order": 6,
+    "title": "AI som gör saker",
+    "goal": "Eleverna kan förklara skillnaden mellan en chatt och en agent, och varför människor behövs i loopen.",
+    "modules": ["agenten", "flera-agenter"],
+    "games": ["ai-tidslinjen"],
+    "prep": ["Se kortfilmen NÄSTA STEG på startsidan (2 min 30 s)."],
+    "plan": [
+      { "minutes": 5, "what": "Start: Visa kortfilmen NÄSTA STEG." },
+      { "minutes": 10, "what": "AI-tidslinjen i par, bana 1." },
+      { "minutes": 10, "what": "Visa Agenten. Slå på felet och människan i loopen." },
+      { "minutes": 10, "what": "Visa Flera agenter." },
+      { "minutes": 10, "what": "Diskussion i grupp." },
+      { "minutes": 5, "what": "Avslut: quizet i Agenten." }
+    ],
+    "discussion": [
+      "Vad är skillnaden mellan att fråga en chattbot och att ge en agent ett uppdrag?",
+      "Vilka beslut ska en människa alltid fatta själv?",
+      "Filmen är en berättelse, inte en förutsägelse. Vad tror ni händer härnäst?"
+    ]
+  }
+]

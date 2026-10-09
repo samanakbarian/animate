@@ -7,6 +7,7 @@ export const GET: APIRoute = async () => {
   const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
   const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
   const learningPaths = await getCollection('paths');
+  const lessons = await getCollection('lessons');
   const paths = [
     '/',
     '/lar',
@@ -17,6 +18,8 @@ export const GET: APIRoute = async () => {
     ...games.map((g) => `/spel/${g.id}`),
     '/ordlista',
     '/framsteg',
+    '/skola',
+    ...lessons.map((l) => `/skola/${l.id}`),
     '/om',
   ];
   const body = `<?xml version="1.0" encoding="UTF-8"?>

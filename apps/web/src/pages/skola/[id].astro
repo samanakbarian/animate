@@ -1,0 +1,193 @@
+---
+// En lektion: mål, förberedelser, tidsplan, länkar, diskussionsfrågor och facit.
+// Utskrivbar: sidhuvud, sidfot och knappar döljs vid utskrift och facit fälls ut.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { orderedOptions } from '../../lib/quiz';
+
+export async function getStaticPaths() {
+  const lessons = (await getCollection('lessons')).sort((a, b) => a.data.order - b.data.order);
+  return lessons.map((l, i) => ({ params: { id: l.id }, props: { lesson: l, next: lessons[i + 1] } }));
+}
+
+const { lesson: l, next } = Astro.props;
+const modules = await getCollection('modules');
+const games = await getCollection('games');
+const mods = l.data.modules.map((slug) => modules.find((m) => m.id === slug)!);
+const gs = l.data.games.map((id) => games.find((g) => g.id === id)!);
+let t = 0;
+const plan = l.data.plan.map((p) => {
+  const from = t;
+  t += p.minutes;
+  return { ...p, from, to: t };
+});
+---
+
+<Base title={`${l.data.title} – lektion`} description={l.data.goal}>
+  <article class="wrap page prose">
+    <p class="eyebrow no-print">
+      <a href="/skola">För skolan</a> · Lektion {l.data.order} · 50 minuter
+    </p>
+    <h1>{l.data.title}</h1>
+    <p class="lead">
+      <strong>Mål:</strong> {l.data.goal}
+    </p>
+    <p class="no-print">
+      <button type="button" onclick="print()">
+        Skriv ut lektionen
+      </button>
+    </p>
+
+    <h2>Förberedelser</h2>
+    <ul>
+      {l.data.prep.map((p) => (
+        <li>{p}</li>
+      ))}
+    </ul>
+
+    <h2>Tidsplan</h2>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Tid</th>
+          <th scope="col">Vad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {plan.map((p) => (
+          <tr>
+            <td class="mono">
+              {p.from}–{p.to} min
+            </td>
+            <td>{p.what}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2>På sajten</h2>
+    <ul>
+      {mods.map((m) => (
+        <li>
+          Modul: <a href={`/moduler/${m.id}`}>{m.data.title}</a> (ilearnai.se/moduler/{m.id})
+        </li>
+      ))}
+      {gs.map((g) => (
+        <li>
+          Spel: <a href={`/spel/${g.id}`}>{g.data.title}</a> (ilearnai.se/spel/{g.id})
+        </li>
+      ))}
+    </ul>
+
+    <h2>Diskussionsfrågor</h2>
+    <ol>
+      {l.data.discussion.map((d) => (
+        <li>{d}</li>
+      ))}
+    </ol>
+
+    <h2>Facit till quizen</h2>
+    {mods.map((m) => (
+      <details class="facit">
+        <summary>{m.data.title}</summary>
+        <ol>
+          {(m.data.quiz ?? []).map((q) => (
+            <li>
+              <p>
+                <strong>{q.q}</strong>
+              </p>
+              <p>
+                Rätt svar: {q.right}. {q.why}
+              </p>
+              <p class="dim">
+                Vanliga missförstånd:{' '}
+                {orderedOptions(q)
+                  .filter((o) => !o.right)
+                  .map((o) => `”${o.text}” – ${o.why}`)
+                  .join(' ')}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </details>
+    ))}
+
+    {next && (
+      <p class="next no-print">
+        <a href={`/skola/${next.id}`}>Nästa lektion: {next.data.title} →</a>
+      </p>
+    )}
+  </article>
+</Base>
+
+<script>
+  // vid utskrift: fäll ut facit
+  addEventListener('beforeprint', () => document.querySelectorAll('details.facit').forEach((d) => d.setAttribute('open', '')));
+</script>
+
+<style>
+  .page {
+    padding-block: 3rem 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    padding: 0.5rem 0.4rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  td.mono {
+    white-space: nowrap;
+  }
+  button {
+    font: inherit;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .facit summary {
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+  }
+  .facit p {
+    margin: 0.2rem 0;
+  }
+  .dim {
+    color: var(--dim);
+  }
+  .next {
+    font-weight: 700;
+  }
+  @media print {
+    :global(.site-header),
+    :global(.site-footer),
+    :global(.skip),
+    .no-print {
+      display: none !important;
+    }
+    .page {
+      padding: 0;
+    }
+    h2,
+    h3 {
+      break-after: avoid;
+    }
+    li {
+      break-inside: avoid;
+    }
+  }
+</style>

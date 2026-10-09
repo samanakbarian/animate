@@ -5,6 +5,21 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (5) – Lektioner för skolan (B-25)
+
+**Vad**
+
+- `content/lessons.json` (samling `lessons`): sex lektioner på 50 minuter. Test: varje lektion summerar till 50 minuter,
+  tillsammans täcker de alla moduler, och alla spel finns.
+- `/skola` och `/skola/<id>`: mål, förberedelser, tidsplan, länkar, diskussionsfrågor och facit (modulernas quiz med
+  förklaringar och vanliga missförstånd). Utskrift döljer sidhuvud och fäller ut facit.
+
+**Återstår**
+
+- Testa med en riktig klass. Klassläge och uppdrag (B-26, B-27) kräver backend.
+
+---
+
 ## 2026-10-09 (4) – Dagens AI-fråga (B-24)
 
 **Vad**

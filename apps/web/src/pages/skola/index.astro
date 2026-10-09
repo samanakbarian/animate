@@ -1,0 +1,89 @@
+---
+// För lärare: sex lektioner som tillsammans täcker alla moduler. Ingen inloggning.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const lessons = (await getCollection('lessons')).sort((a, b) => a.data.order - b.data.order);
+const modules = await getCollection('modules');
+const title = (slug: string) => modules.find((m) => m.id === slug)?.data.title ?? slug;
+---
+
+<Base
+  title="För skolan"
+  description="Sex färdiga lektioner om hur AI fungerar, med tidsplan, diskussionsfrågor och facit. Gratis och utan inloggning."
+>
+  <div class="wrap page">
+    <header class="prose">
+      <p class="eyebrow">För lärare · gratis · ingen inloggning</p>
+      <h1>För skolan</h1>
+      <p class="lead">
+        Sex lektioner på 50 minuter som tillsammans går igenom allt på sajten. Varje lektion har mål, förberedelser, tidsplan,
+        diskussionsfrågor och facit till quizen. Skriv ut den eller visa den på skärmen.
+      </p>
+      <p>
+        Eleverna behöver inget konto. Deras framsteg sparas bara i den webbläsare de använder. Lektionerna passar till exempel i teknik,
+        samhällskunskap och programmering från högstadiet och uppåt.
+      </p>
+    </header>
+    <ol class="list">
+      {lessons.map((l) => (
+        <li>
+          <a class="card" href={`/skola/${l.id}`}>
+            <span class="num">Lektion {l.data.order}</span>
+            <h2>{l.data.title}</h2>
+            <p>{l.data.goal}</p>
+            <span class="meta">50 min · {l.data.modules.map(title).join(', ')}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2rem;
+    padding-block: 3rem 4rem;
+  }
+  .lead {
+    font-size: var(--step-1);
+    color: var(--dim);
+  }
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .card {
+    display: grid;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 1.3rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .card:hover,
+  .card:focus-visible {
+    border-color: var(--cold);
+  }
+  .card h2 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+  .card p {
+    margin: 0;
+    color: var(--dim);
+  }
+  .num,
+  .meta {
+    font: 400 0.8rem var(--font-mono);
+    color: var(--dim);
+  }
+</style>

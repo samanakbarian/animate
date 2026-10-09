@@ -115,4 +115,19 @@ const badges = defineCollection({
   }),
 });
 
-export const collections = { modules, glossary, games, paths, badges };
+const lessons = defineCollection({
+  loader: file('./src/content/lessons.json'),
+  schema: z.object({
+    order: z.number().int(),
+    title: z.string(),
+    goal: z.string(),
+    /** Modulernas slugs. Tillsammans ska lektionerna täcka alla moduler. */
+    modules: z.array(z.string()).min(1),
+    games: z.array(z.string()),
+    prep: z.array(z.string()),
+    plan: z.array(z.object({ minutes: z.number().int(), what: z.string() })),
+    discussion: z.array(z.string()).min(1),
+  }),
+});
+
+export const collections = { modules, glossary, games, paths, badges, lessons };

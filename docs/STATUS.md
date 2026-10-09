@@ -19,6 +19,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   vikter för hand tills en neuron gör rätt (par uträknat med bredden-först-sökning). Elva spel totalt.
 - **Dagens AI-fråga** (B-24) på startsidan: en fråga per dag ur modulernas quiz (`lib/daily.ts`), svit i rad och
   märket Fem dagar i rad.
+- **För skolan** (B-25): `/skola` med sex lektioner på 50 minuter som täcker alla tolv moduler (`content/lessons.json`),
+  tidsplan, diskussionsfrågor och facit med vanliga missförstånd. Utskrivbara. Länk i sidfoten.
 - **Tio moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
   använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
 - Pedagogiska rättelser: kausal uppmärksamhet i Transformern (reglaget ”Får titta”), Tokenjakten säger att färst
@@ -40,7 +42,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 2. **Grundaren:** välj statistiktjänst (ADR 0012) och sätt `PUBLIC_STATS_URL` i Netlify. Byt repots standardgren
    till `master` på GitHub (i dag `ccr-f401e4bd-y1vmji`, CI körs bara på master).
 3. Testa lärvägen med riktiga nybörjare. Mät avhopp per steg när statistiken är på.
-4. B-25 lektionsupplägg, B-29 Agentbyggaren, B-30 nya moduler. Skolmaterial: `docs/SKOLMATERIAL.md`.
+4. B-29 Agentbyggaren, B-30 nya moduler (en i taget). Lärare: testa en lektion med en riktig klass. Skolmaterial: `docs/SKOLMATERIAL.md`.
 5. Backend avvaktar (ADR 0011). Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 
 ## Kända problem och fällor

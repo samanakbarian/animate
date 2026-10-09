@@ -1,6 +1,6 @@
 # Skolmaterial – möjlig fortsättning
 
-_Inget av detta är byggt. Det här är ett förslag att ta ställning till (B-20 och framåt i backloggen)._
+_Lektionerna finns nu på `/skola` (B-25, `content/lessons.json`). Det som står under ”Senare” är inte byggt._
 
 ## Idé: lektioner av befintligt innehåll
 
