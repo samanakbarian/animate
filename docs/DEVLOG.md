@@ -5,6 +5,21 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-09 (4) – Dagens AI-fråga (B-24)
+
+**Vad**
+
+- `DailyQuestion.astro` på startsidan. Alla quizfrågor skickas med som data och webbläsaren väljer dagens med
+  `lib/daily.ts` (dagnummer sedan 2026-01-01, fast blandad ordning, alla frågor innan någon upprepas).
+- Svit i `localStorage` (`ilearnai-daily`), dagens svar sparas så att det visas igen efter omladdning.
+- Ny regeltyp för märken: `streak`. Märket Fem dagar i rad.
+
+**Fällor**
+
+- Datumet används bara för att välja fråga på sajten. Determinismregeln gäller filmer och moduler.
+
+---
+
 ## 2026-10-09 (3) – Spelen Ordräknaren och Lär maskinen (B-22)
 
 **Vad**

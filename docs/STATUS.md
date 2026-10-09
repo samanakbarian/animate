@@ -17,6 +17,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   varg”), del 2 taligenkänning per dialekt (snittet döljer skillnaden). Spelet **Snedvriden data** (välj träningsbilder).
 - **Spelen Ordräknaren och Lär maskinen** (B-22): räkna nästa ord i en kort text som en språkmodell, och justera
   vikter för hand tills en neuron gör rätt (par uträknat med bredden-först-sökning). Elva spel totalt.
+- **Dagens AI-fråga** (B-24) på startsidan: en fråga per dag ur modulernas quiz (`lib/daily.ts`), svit i rad och
+  märket Fem dagar i rad.
 - **Tio moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
   använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
 - Pedagogiska rättelser: kausal uppmärksamhet i Transformern (reglaget ”Får titta”), Tokenjakten säger att färst
@@ -38,7 +40,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 2. **Grundaren:** välj statistiktjänst (ADR 0012) och sätt `PUBLIC_STATS_URL` i Netlify. Byt repots standardgren
    till `master` på GitHub (i dag `ccr-f401e4bd-y1vmji`, CI körs bara på master).
 3. Testa lärvägen med riktiga nybörjare. Mät avhopp per steg när statistiken är på.
-4. B-25 lektionsupplägg, B-24 Dagens AI-fråga, B-29 Agentbyggaren. Skolmaterial: `docs/SKOLMATERIAL.md`.
+4. B-25 lektionsupplägg, B-29 Agentbyggaren, B-30 nya moduler. Skolmaterial: `docs/SKOLMATERIAL.md`.
 5. Backend avvaktar (ADR 0011). Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 
 ## Kända problem och fällor

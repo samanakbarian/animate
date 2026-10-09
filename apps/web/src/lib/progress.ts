@@ -2,6 +2,7 @@
 // webbläsaren (quizresultat, spelrekord, lärvägar och utforskade moduler).
 // Funktionerna här tar en ögonblicksbild av lagringen och är rena, så att de går att testa.
 
+import { STREAK_KEY, parseStreak } from './daily';
 import { parseProgress, storageKey } from './path';
 
 /** Nyckel för en modul som besökaren har utforskat (rört reglagen eller sett klart). */
@@ -18,7 +19,8 @@ export type BadgeRule =
   | { type: 'perfect'; count: number }
   | { type: 'explored'; count: number }
   | { type: 'games'; count: number }
-  | { type: 'path'; path: string };
+  | { type: 'path'; path: string }
+  | { type: 'streak'; count: number };
 
 export interface Badge {
   id: string;
@@ -88,6 +90,8 @@ export function hasBadge(b: Badge, s: Snapshot, paths: PathInfo[]): boolean {
       return explored(s).length >= r.count;
     case 'games':
       return Object.keys(gamesPlayed(s)).length >= r.count;
+    case 'streak':
+      return (parseStreak(s[STREAK_KEY] ?? null)?.count ?? 0) >= r.count;
     case 'path': {
       const p = paths.find((x) => x.id === r.path);
       return !!p && pathDone(s, p).complete;

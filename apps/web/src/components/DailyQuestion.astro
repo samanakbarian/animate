@@ -1,0 +1,184 @@
+---
+// Dagens AI-fråga på startsidan. Alla modulers quizfrågor skickas med som data,
+// och webbläsaren väljer dagens (lib/daily.ts), så sidan kan vara statisk.
+import { getCollection } from 'astro:content';
+
+const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
+const pool = modules.flatMap((m) => (m.data.quiz ?? []).map((q) => ({ ...q, module: m.id, moduleTitle: m.data.title })));
+---
+
+<section class="daily" aria-labelledby="dagens-fraga" data-daily={JSON.stringify(pool)}>
+  <div class="head">
+    <h2 id="dagens-fraga">Dagens AI-fråga</h2>
+    <span class="note" data-streak></span>
+  </div>
+  <p class="q" data-q>
+    Laddar …
+  </p>
+  <div class="opts" data-opts></div>
+  <div class="after" data-after hidden></div>
+  <noscript>
+    <p>Dagens fråga kräver JavaScript.</p>
+  </noscript>
+</section>
+
+<script>
+  import { STREAK_KEY, dayNumber, parseStreak, questionForDay, updateStreak } from '../lib/daily';
+  import { type QuizQuestion, orderedOptions } from '../lib/quiz';
+
+  type Q = QuizQuestion & { module: string; moduleTitle: string };
+  const root = document.querySelector<HTMLElement>('[data-daily]');
+  if (root) {
+    const pool = JSON.parse(root.dataset.daily!) as Q[];
+    const today = dayNumber(new Date());
+    const q =
+      pool[
+        questionForDay(
+          today,
+          pool.map((x) => x.q),
+        )
+      ];
+    const options = orderedOptions(q);
+    const answerKey = `${STREAK_KEY}-svar`;
+    const read = (k: string) => {
+      try {
+        return localStorage.getItem(k);
+      } catch {
+        return null;
+      }
+    };
+    const write = (k: string, v: string) => {
+      try {
+        localStorage.setItem(k, v);
+      } catch {
+        // utan lagring räknas ingen svit
+      }
+    };
+    const streakEl = root.querySelector<HTMLElement>('[data-streak]')!;
+    const showStreak = () => {
+      const s = parseStreak(read(STREAK_KEY));
+      const alive = s && s.last >= today - 1;
+      streakEl.textContent = alive && s.count > 1 ? `${s.count} dagar i rad` : 'en ny fråga varje dag';
+    };
+    showStreak();
+
+    root.querySelector('[data-q]')!.textContent = q.q;
+    const optsEl = root.querySelector<HTMLElement>('[data-opts]')!;
+    const after = root.querySelector<HTMLElement>('[data-after]')!;
+    optsEl.innerHTML = '';
+    const buttons = options.map((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = o.text;
+      b.addEventListener('click', () => answer(i, true));
+      optsEl.appendChild(b);
+      return b;
+    });
+
+    function answer(i: number, fresh: boolean) {
+      const o = options[i];
+      buttons.forEach((b, j) => {
+        b.disabled = true;
+        if (options[j].right) b.classList.add('right');
+        else if (j === i) b.classList.add('wrong');
+      });
+      const rightText = options.find((x) => x.right)!.text;
+      after.hidden = false;
+      after.innerHTML = '';
+      const p = document.createElement('p');
+      const v = document.createElement('b');
+      v.textContent = o.right ? 'Rätt. ' : 'Inte riktigt. ';
+      v.className = o.right ? 'ok' : 'no';
+      p.append(v, o.why);
+      if (!o.right) p.append(` Rätt svar: ${rightText}.`);
+      const more = document.createElement('p');
+      const a = document.createElement('a');
+      a.href = `/moduler/${q.module}`;
+      a.textContent = `Läs mer i modulen ${q.moduleTitle} →`;
+      more.append(a, ' · Ny fråga i morgon.');
+      after.append(p, more);
+      if (fresh) {
+        write(answerKey, JSON.stringify({ day: today, choice: i }));
+        write(STREAK_KEY, JSON.stringify(updateStreak(parseStreak(read(STREAK_KEY)), today)));
+        showStreak();
+      }
+    }
+
+    // redan svarat i dag: visa svaret igen
+    try {
+      const prev = JSON.parse(read(answerKey) ?? 'null') as { day: number; choice: number } | null;
+      if (prev && prev.day === today && options[prev.choice]) answer(prev.choice, false);
+    } catch {
+      // trasigt sparat svar: visa frågan som vanligt
+    }
+  }
+</script>
+
+<style>
+  .daily {
+    display: grid;
+    gap: 0.8rem;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 1rem;
+  }
+  .head h2 {
+    margin: 0;
+  }
+  .q {
+    margin: 0;
+    font-weight: 700;
+    font-size: var(--step-1);
+  }
+  .opts {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .opts :global(button) {
+    font: inherit;
+    text-align: left;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    min-height: 44px;
+    padding: 0.6rem 0.9rem;
+    cursor: pointer;
+  }
+  .opts :global(button:hover:not(:disabled)),
+  .opts :global(button:focus-visible) {
+    border-color: var(--cold);
+  }
+  .opts :global(button:disabled) {
+    cursor: default;
+    opacity: 0.6;
+  }
+  .opts :global(button.right) {
+    border: 2px solid var(--cold);
+    opacity: 1;
+  }
+  .opts :global(button.wrong) {
+    border: 1px dashed var(--warm);
+    opacity: 1;
+  }
+  .after :global(p) {
+    margin: 0 0 0.4rem;
+    color: var(--dim);
+  }
+  .after :global(.ok) {
+    color: var(--cold);
+  }
+  .after :global(.no) {
+    color: var(--warm);
+  }
+  .after :global(a) {
+    font-weight: 700;
+  }
+</style>

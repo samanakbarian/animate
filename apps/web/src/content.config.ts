@@ -110,6 +110,7 @@ const badges = defineCollection({
       z.object({ type: z.literal('explored'), count: z.number().int() }),
       z.object({ type: z.literal('games'), count: z.number().int() }),
       z.object({ type: z.literal('path'), path: z.string() }),
+      z.object({ type: z.literal('streak'), count: z.number().int() }),
     ]),
   }),
 });

@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
 import FilmPlayer from '../components/FilmPlayer.astro';
 import ModuleCard from '../components/ModuleCard.astro';
 import GameCard from '../components/GameCard.astro';
+import DailyQuestion from '../components/DailyQuestion.astro';
 
 const modules = (await getCollection('modules')).sort((a, b) => a.data.order - b.data.order);
 const basics = modules.filter((m) => m.data.stage === 'mvp');
@@ -59,6 +60,10 @@ const otherPaths = (await getCollection('paths')).filter((p) => p.id !== path.id
       </ol>
     </div>
   </section>
+
+  <div class="wrap daily-wrap">
+    <DailyQuestion />
+  </div>
 
   <section id="filmen" class="film-sec" aria-labelledby="film-rubrik">
     <div class="wrap film-head">
@@ -183,6 +188,9 @@ const otherPaths = (await getCollection('paths')).filter((p) => p.id !== path.id
   }
   .learn ol {
     margin: 0.4rem 0 0;
+  }
+  .daily-wrap {
+    padding-bottom: 3rem;
   }
   .film-sec {
     scroll-margin-top: 1rem;

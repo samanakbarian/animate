@@ -88,5 +88,14 @@
       "type": "quizzes",
       "count": 12
     }
+  },
+  {
+    "id": "fem-dagar",
+    "title": "Fem dagar i rad",
+    "description": "Svara på Dagens AI-fråga fem dagar i rad.",
+    "rule": {
+      "type": "streak",
+      "count": 5
+    }
   }
 ]
