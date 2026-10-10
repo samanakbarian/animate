@@ -183,5 +183,23 @@
     "term": "Minne (i chattjänster)",
     "definition": "Korta anteckningar som en tjänst sparar om dig och lägger in i kontextfönstret i nya samtal. Själva modellen ändras inte och lär sig inget av samtalet.",
     "module": "kontext"
+  },
+  {
+    "id": "ai-forordningen",
+    "term": "AI-förordningen",
+    "definition": "EU:s lag om AI. Den delar in AI efter hur stor risken är för människor: förbjudet, hög risk, krav på öppenhet och låg risk. Ju större risk, desto fler krav.",
+    "module": "ai-och-lagen"
+  },
+  {
+    "id": "gdpr",
+    "term": "GDPR",
+    "definition": "Dataskyddsförordningen, EU:s lag om personuppgifter. Den ger dig bland annat rätt att få veta vilka uppgifter om dig som används och att få fel rättade.",
+    "module": "ai-och-lagen"
+  },
+  {
+    "id": "deepfake",
+    "term": "Deepfake",
+    "definition": "En bild, film eller röst som AI har gjort och som ser ut att visa en riktig person. Enligt AI-förordningen ska sådant märkas som AI-skapat.",
+    "module": "ai-och-lagen"
   }
 ]

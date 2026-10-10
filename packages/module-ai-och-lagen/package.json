@@ -1,0 +1,17 @@
+{
+  "name": "@nastasteg/module-ai-och-lagen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modul 18 – AI och lagen: AI-förordningens risknivåer och dina rättigheter.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./rules": "./src/rules.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nastasteg/engine": "workspace:*"
+  }
+}

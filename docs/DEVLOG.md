@@ -5,6 +5,23 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-10 – Modul 18: AI och lagen (B-30, sjätte av åtta)
+
+**Vad**
+
+- `packages/module-ai-och-lagen`: AI-förordningens fyra nivåer som pyramid (förbjudet, hög risk, krav på öppenhet,
+  låg risk) med nio exempel och förkortade krav per nivå. Sista kapitlet visar rättigheter enligt GDPR.
+- Exemplen och kraven ligger i `rules.ts` och följer förordningen (EU) 2024/1689, artikel 5 (förbud), bilaga III
+  (hög risk: anställning, utbildning, kreditprövning) och artikel 50 (chattbotar, deepfakes). Inga datum i bild,
+  eftersom tillämpningen sker stegvis och kan skjutas upp.
+- Lektion 8 ”AI och samhället” täcker nu AI och arbete och AI och lagen. Ordlistan: AI-förordningen, GDPR, deepfake.
+
+**Återstår**
+
+- Två moduler kvar i B-30: klimat, framtid. Upphovsrätt saknas medvetet (oklart rättsläge), kan bli en egen modul.
+
+---
+
 ## 2026-10-09 (11) – Modul 17: AI och arbete (B-30, femte av åtta)
 
 **Vad**

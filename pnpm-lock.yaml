@@ -98,6 +98,9 @@ importers:
       '@nastasteg/module-agenten':
         specifier: workspace:*
         version: link:../../packages/module-agenten
+      '@nastasteg/module-ai-och-lagen':
+        specifier: workspace:*
+        version: link:../../packages/module-ai-och-lagen
       '@nastasteg/module-ai-som-gor-bilder':
         specifier: workspace:*
         version: link:../../packages/module-ai-som-gor-bilder
@@ -276,6 +279,12 @@ importers:
         version: link:../engine
 
   packages/module-agenten:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-ai-och-lagen:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*
