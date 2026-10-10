@@ -32,7 +32,8 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
 - Pedagogiska rättelser: kausal uppmärksamhet i Transformern (reglaget ”Får titta”), Tokenjakten säger att färst
   bitar är en förenkling, Resonerande modeller lovar ingen garanti, Agenten jämför samtal och agent i en tabell.
-- **Filmen:** statisk startskärm, 3D-motorn laddas först vid klick, fel visas med ”Försök igen”, paus, filmen i text.
+- **Filmen:** statisk startskärm, 3D-motorn laddas först vid klick, fel visas med ”Försök igen”, paus, spola
+  (tidslinje och ←/→), filmen i text.
 - Tillgänglighet: 32 px reglage, kapiteltext till skärmläsare en gång (inte tecken för tecken), reducerad rörelse,
   tangentbord i Dra gränsen. Statistik utan kakor finns men är **avstängd** (ADR 0012).
 - **Tre lärvägar** på `/lar` (B-18): Förstå hur AI fungerar (20 min), Hur skriver en chattbot? (25 min) och Kan man

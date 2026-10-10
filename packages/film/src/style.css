@@ -234,6 +234,7 @@
 /* Paus: tid och knapp nere till höger. Syns när musen är över filmen, vid fokus och i paus. */
 .ns-player .ns-ctrl {
   position: absolute;
+  left: 10px;
   right: 10px;
   bottom: 10px;
   z-index: 6;
@@ -256,6 +257,7 @@
   }
 }
 .ns-player .ns-pp {
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   display: grid;
@@ -271,7 +273,16 @@
 .ns-player .ns-pp:hover {
   background: rgba(232, 235, 238, 0.12);
 }
+.ns-player .ns-seek {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  margin: 0;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
 .ns-player .ns-time {
+  white-space: nowrap;
   background: rgba(0, 0, 0, 0.45);
   padding: 2px 6px;
   border-radius: 4px;

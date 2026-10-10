@@ -39,7 +39,7 @@ export interface PlayerOptions {
   quality?: Quality | 'auto';
   /** Starttid i sekunder (dev). */
   startAt?: number;
-  /** Visa t/fps och aktivera tangenterna ←/→ (hoppa 5 s). */
+  /** Visa t/fps (dev). */
   dev?: boolean;
   /** Bygg scenen direkt i stället för vid klick (dev-sidan). */
   preload?: boolean;
@@ -147,16 +147,40 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
 
     const devEl = opts.dev ? Object.assign(document.createElement('div'), { className: 'ns-dev' }) : null;
     if (devEl) root.appendChild(devEl);
-    const now = () => (paused ? pausedAt : audio.currentTime - engine.origin);
+    // Medan besökaren drar i tidslinjen visas den tiden, och ljudet står still.
+    let scrubT: number | null = null;
+    const now = () => scrubT ?? (paused ? pausedAt : audio.currentTime - engine.origin);
 
-    // Paus: knapp nere till höger, klick i bilden eller mellanslag.
+    // Kontroller längs nederkanten: paus, tidslinje att spola i och tid.
+    // Paus också med klick i bilden eller mellanslag, spola med ←/→ (10 s).
     const ctrl = document.createElement('div');
     ctrl.className = 'ns-ctrl';
-    ctrl.innerHTML = `<span class="ns-time"></span><button type="button" class="ns-pp" aria-label="Pausa">❚❚</button>`;
+    ctrl.innerHTML = `<button type="button" class="ns-pp" aria-label="Pausa">❚❚</button>
+      <input type="range" class="ns-seek" min="0" max="${DURATION}" step="0.1" value="${startAt}" aria-label="Spola i filmen" />
+      <span class="ns-time"></span>`;
     const pausedEl = Object.assign(document.createElement('div'), { className: 'ns-paused', textContent: 'PAUS' });
     root.append(ctrl, pausedEl);
     const ppBtn = ctrl.querySelector<HTMLButtonElement>('.ns-pp')!;
     const timeEl = ctrl.querySelector<HTMLSpanElement>('.ns-time')!;
+    const seekEl = ctrl.querySelector<HTMLInputElement>('.ns-seek')!;
+    /** Hoppa till tiden `t`: tysta den gamla ljudmotorn och schemalägg om därifrån. Bilden är en ren funktion av t. */
+    const seekTo = (t: number) => {
+      t = Math.max(0, Math.min(DURATION - 0.05, t));
+      engine.stopAll();
+      engine = new AudioEngine(audio, filmScore());
+      engine.begin(t, audio.currentTime + 0.05);
+      if (paused) pausedAt = t;
+    };
+    seekEl.addEventListener('input', () => {
+      if (scrubT === null && !paused) void audio.suspend();
+      scrubT = Number(seekEl.value);
+    });
+    seekEl.addEventListener('change', () => {
+      const t = Number(seekEl.value);
+      scrubT = null;
+      seekTo(t);
+      if (!paused) void audio.resume();
+    });
     const togglePause = () => {
       const t = now();
       paused = !paused;
@@ -185,13 +209,10 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
         e.preventDefault();
         if (e.target !== ppBtn) togglePause();
       }
-      if (opts.dev && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-        // Hoppa: tysta den gamla motorn och schemalägg om från nya t.
-        const t = Math.max(0, Math.min(DURATION - 0.01, now() + (e.key === 'ArrowRight' ? 5 : -5)));
-        engine.stopAll();
-        engine = new AudioEngine(audio, filmScore());
-        engine.begin(t, audio.currentTime + 0.05);
-        if (paused) pausedAt = t;
+      // pilarna på själva tidslinjen sköter den själv
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && inView() && e.target !== seekEl) {
+        e.preventDefault();
+        seekTo(now() + (e.key === 'ArrowRight' ? 10 : -10));
       }
     };
     window.addEventListener('keydown', onKey);
@@ -218,7 +239,8 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
         return;
       }
       const tc = Math.max(0, Math.min(DURATION, now()));
-      engine.scheduleUntil(tc + 0.4);
+      // medan någon drar i tidslinjen schemaläggs inget ljud, det görs om vid släpp
+      if (scrubT === null) engine.scheduleUntil(tc + 0.4);
       f.renderAt(tc);
       const t1 = performance.now();
       const dt = t1 - last;
@@ -232,9 +254,11 @@ export function mountPlayer(root: HTMLElement, opts: PlayerOptions = {}): Player
           acc = n = 0;
         }
       }
+      if (scrubT === null) seekEl.value = String(tc);
       if (Math.floor(tc) !== shownSec) {
         shownSec = Math.floor(tc);
         timeEl.textContent = `${mmss(tc)} / ${mmss(DURATION)}`;
+        seekEl.setAttribute('aria-valuetext', `${mmss(tc)} av ${mmss(DURATION)}`);
       }
       if (devEl)
         devEl.textContent = `t ${tc.toFixed(2)}  ${(1000 / Math.max(1, dt)).toFixed(0)} fps  q=${quality} scale=${f.dynamicScale.toFixed(2)}`;

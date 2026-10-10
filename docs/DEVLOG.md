@@ -5,6 +5,21 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-10 (2) – Spola i kortfilmen
+
+**Vad**
+
+- `packages/film/src/player.ts`: kontrollerna är nu en rad längs nederkanten med paus, en tidslinje
+  (`input type=range`) och tiden. Pilarna ←/→ hoppar 10 s för alla (förut bara i dev-läge).
+- Spolning: bilden är en ren funktion av t, så bara ljudet behöver göras om. `seekTo` tystar ljudmotorn och
+  startar en ny från den nya tiden. Medan man drar visas den tiden, ljudet står still och inget schemaläggs.
+
+**Fällor**
+
+- Schemalägg inte ljud medan man drar i tidslinjen: att dra framåt 100 s schemalägger annars 100 s ljud på en gång.
+
+---
+
 ## 2026-10-10 – Modul 18: AI och lagen (B-30, sjätte av åtta)
 
 **Vad**
