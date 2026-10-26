@@ -5,6 +5,32 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-26 (2) – Modul 19: AI och klimatet (B-30, sjunde av åtta)
+
+**Vad**
+
+- `packages/module-ai-och-klimatet`: ett år av AI-användning. Reglage: vad du gör (kort svar, långt resonemang,
+  bild, kort film), gånger per dag och var elen kommer från (Sverige, EU-snitt, kolkraft). Scenen visar kWh per år
+  som mobilladdningar, elbil-km och liter kokt vatten, andel av hushållselen i en lägenhet, koldioxid med tre
+  sorters el, och träningen av GPT-3 mot en miljard korta svar om dagen.
+- Kapitel: datacenter (ritat), ett svar, olika mycket, lite gånger många, träning och användning, elen avgör,
+  AI kan också hjälpa (lista, bara i filmen), din tur.
+- Siffrorna står med källor i `energy.ts`: 0,3 Wh per kort svar (Epoch AI, Google 2025), 3 Wh per bild
+  (Luccioni m.fl. 2023), ~1 kWh per 5 s film (MIT Technology Review 2025), GPT-3 1 300 MWh (Patterson m.fl. 2021).
+  Resonemang ×10 är en grov uppskattning, och miljarden svar om dagen är tänkt. Det står på modulsidan.
+- Ny lektion 9 ”AI och klimatet”. Ordlistan: datacenter, kilowattimme. Märket Hela kartan kräver nu 19 quiz.
+- `/skola` räknar lektionerna i beskrivningen i stället för att skriva antalet.
+
+**Fällor**
+
+- På mobil (4:5) får bara två vardagsjämförelser plats ovanför bildtexten. Den tredje ritas bara på bred skärm.
+
+**Återstår**
+
+- En modul kvar i B-30: framtid. Den kan läggas i lektion 9 eller en egen lektion.
+
+---
+
 ## 2026-10-26 – Språkgranskning av hela sajten
 
 **Vad**

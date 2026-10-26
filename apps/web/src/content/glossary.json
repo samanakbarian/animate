@@ -201,5 +201,17 @@
     "term": "Deepfake",
     "definition": "En bild, film eller röst som AI har gjort och som ser ut att visa en riktig person. Enligt AI-förordningen ska sådant märkas som AI-skapat.",
     "module": "ai-och-lagen"
+  },
+  {
+    "id": "datacenter",
+    "term": "Datacenter",
+    "definition": "En byggnad full av datorer som kör tjänster på internet, till exempel AI. Datorerna kräver el och blir varma, så de måste kylas, ofta med vatten.",
+    "module": "ai-och-klimatet"
+  },
+  {
+    "id": "kilowattimme",
+    "term": "Kilowattimme (kWh)",
+    "definition": "Ett mått på hur mycket el som går åt. En kilowattimme är 1 000 wattimmar (Wh). Ett kort svar från en chattbot kräver ungefär 0,3 Wh, att koka en liter vatten ungefär 0,1 kWh.",
+    "module": "ai-och-klimatet"
   }
 ]
