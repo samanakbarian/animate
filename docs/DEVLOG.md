@@ -5,6 +5,25 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-26 – Språkgranskning av hela sajten
+
+**Vad**
+
+- Läste all synlig text: sidor, moduler (brödtext och quiz), ordlista, lärvägar, lektioner, märken, spel och
+  bildtexter i modulfilmerna. Texten var redan rak och enkel. Rättade 25 ställen som lät maskinella eller var fel.
+- Fyllnadsfraser bort (”Det låter enkelt, men”, ”helt enkelt”, ”Det är alltid en avvägning”), sloganen ”Tonen säger
+  ingenting om sanningen” omskriven, anglicismen ”Uppmärksamheten är hur den gör det” omskriven.
+- ”Man” som pronomen bredvid ordet _man_ i räkningen kung − man + kvinna ersatt med ”du”.
+- Fel: ”rena nonsens” → ”rent nonsens”, ”hur lika bilden” → ”hur lik”, ”sorten av svar”, ”Sex färdiga lektioner”
+  → åtta (beskrivningen på `/skola`). Raka citattecken → ” ” i modultexterna.
+- Färre upprepningar av ”påhittade för att visa idén” i ”Vad vi förenklar här”.
+
+**Medvetet kvar**
+
+- Filmens korta affischrader (”Utan oss.”, ”Nästa steg är vårt att ta.”) är ett stilval, inte fyllnad.
+
+---
+
 ## 2026-10-10 (2) – Spola i kortfilmen
 
 **Vad**

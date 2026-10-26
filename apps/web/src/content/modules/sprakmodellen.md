@@ -50,7 +50,7 @@ quiz:
         why: 'Längden styrs av hur många ord du väljer, inte av temperaturen.'
 ---
 
-En språkmodell är ett stort neuralt nätverk som har tränats på väldigt mycket text för att gissa nästa token. Det låter enkelt, men för att gissa bra måste modellen fånga grammatik, fakta och sammanhang. Därför kan den också sammanfatta, översätta och svara på frågor.
+En språkmodell är ett stort neuralt nätverk som har tränats på väldigt mycket text för att gissa nästa token. För att gissa bra har modellen behövt lära sig grammatik, fakta och sammanhang. Därför kan den också sammanfatta, översätta och svara på frågor.
 
 ## Filmen visar
 

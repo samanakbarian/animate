@@ -31,7 +31,7 @@ quiz:
     see: 'seende#brus'
     q: 'En kamera på en fabrik ska hitta trasiga delar. På natten blir bilderna brusiga, och modellen säger ofta ”hel” med 95 % säkerhet. Vad är klokast?'
     right: 'Testa modellen på brusiga nattbilder och träna den på sådana, och lita inte blint på säkerheten'
-    why: 'Säkerheten säger hur lika bilden är det modellen sett, inte om den har rätt.'
+    why: 'Säkerheten säger hur lik bilden är det modellen sett, inte om den har rätt.'
     wrong:
       - text: 'Lita på svaret, 95 % är väldigt säkert'
         why: 'En modell kan vara säker och ändå ha fel, särskilt på bilder som skiljer sig från träningen.'

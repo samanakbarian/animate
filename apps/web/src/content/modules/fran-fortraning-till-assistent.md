@@ -42,10 +42,10 @@ quiz:
     see: 'fran-fortraning-till-assistent#resultat'
     q: 'Du lägger till fler jämförelser där människor väljer det hjälpsamma svaret. Vad händer med sannolikheterna?'
     right: 'Hjälpsamma svar blir troligare på alla frågor'
-    why: 'Belöningen gäller sorten av svar, så den följer med till nya frågor.'
+    why: 'Belöningen gäller vilken sorts svar det är, så den följer med till nya frågor.'
     wrong:
       - text: 'Bara frågan du jämförde ändras'
-        why: 'Modellen lär sig sorten av svar, inte ett svar per fråga.'
+        why: 'Modellen lär sig vilken sorts svar som gillas, inte ett svar per fråga.'
       - text: 'Alla svar blir lika troliga'
         why: 'Jämförelserna flyttar sannolikheten mot det som väljs. De jämnar inte ut den.'
 ---
@@ -56,6 +56,6 @@ Sedan får människor jämföra svar och välja det bästa. Av deras val lär si
 
 ## Vad vi förenklar här
 
-- Svaren och sannolikheterna är påhittade för att visa idén. Det är ingen riktig modell som tränas.
+- Svaren och sannolikheterna är påhittade. Det är ingen riktig modell som tränas.
 - Här finns fyra sorters svar. En riktig modell kan svara på oändligt många sätt.
 - Återkopplingen kan göras på flera sätt. Ibland ersätts människorna delvis av andra modeller eller av skrivna regler.
