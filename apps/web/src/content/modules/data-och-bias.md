@@ -51,7 +51,7 @@ quiz:
 
 En modell lär sig av exempel, och den lär sig allt som skiljer exemplen åt, även saker vi inte tänkt på. Om vargarna i bilderna nästan alltid står i snö kan modellen lära sig att snö betyder varg. Det kallas att modellen tar en genväg.
 
-Samma sak händer med människor. En taligenkänning som mest har hört stockholmska förstår skånska sämre. En ansiktsigenkänning som mest har sett vissa ansikten gör fler fel på andra. Snittet kan ändå se bra ut, eftersom den stora gruppen väger tyngst. Det kallas bias, eller snedvridning.
+Samma sak kan drabba människor. En taligenkänning som mest har hört stockholmska förstår skånska sämre. En ansiktsigenkänning som mest har sett vissa ansikten gör fler fel på andra. Snittet kan ändå se bra ut, eftersom den stora gruppen väger tyngst. Det kallas bias, eller snedvridning.
 
 Det som hjälper är bättre data, att testa på det svåra och att alltid dela upp resultatet per grupp.
 
@@ -67,5 +67,5 @@ Det som hjälper är bättre data, att testa på det svåra och att alltid dela 
 ## Vad vi förenklar här
 
 - Bilderna i del 1 är punkter med två egenskaper, och modellen är en enda neuron. Riktiga bildmodeller ser miljontals pixlar, men kan ta precis samma sorts genvägar.
-- Kurvan i del 2 är påhittad för att visa idén. Hur mycket data som behövs beror på uppgiften.
+- Kurvan i del 2 är påhittad. Hur mycket data som behövs beror på uppgiften.
 - Bias kommer inte bara från datan, utan också från vad man väljer att mäta och hur modellen används.

@@ -2,7 +2,7 @@
 
 _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
-**Senast uppdaterad:** 2026-10-10
+**Senast uppdaterad:** 2026-10-26
 
 ## Nuläge
 
@@ -40,6 +40,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
   lita på AI? (20 min). Varje lärväg ger ett **diplom** att skriva ut eller spara som PDF (B-28). Menyn: Lärvägar.
 - **Framsteg och märken** på `/framsteg` (B-19): tio märken i `content/badges.json`, regler i `lib/progress.ts`,
   allt läst ur webbläsarens lagring. Quizet säger till när man får ett nytt märke. Länk i sidfoten.
+- Språkgranskning av all synlig text 2026-10-26 (se devloggen).
 - 202 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
 
 ## Nästa (i prioritetsordning)

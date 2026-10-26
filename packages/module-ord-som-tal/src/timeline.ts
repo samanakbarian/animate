@@ -46,7 +46,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'rakna',
     start: 42,
     title: 'Räkna med ord',
-    caption: 'Man kan till och med räkna med betydelser. Ta kung, dra bort man och lägg till kvinna, så hamnar man vid drottning.',
+    caption: 'Det går till och med att räkna med betydelser. Ta kung, dra bort man och lägg till kvinna, så hamnar du vid drottning.',
   },
   {
     id: 'fler',

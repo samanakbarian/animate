@@ -24,7 +24,7 @@ export const LEVELS: Level[] = [
   {
     title: 'Fakta',
     goal: 'Stämmer svaret, eller har AI:n hittat på?',
-    lesson: 'Ett påhittat svar låter precis lika säkert som ett rätt. Tonen säger ingenting om sanningen.',
+    lesson: 'Ett påhittat svar låter precis lika säkert som ett rätt. Du kan inte höra på tonen om det stämmer.',
     items: [
       {
         question: 'Vilket är Sveriges högsta berg?',

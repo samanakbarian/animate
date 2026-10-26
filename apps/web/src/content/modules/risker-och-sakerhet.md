@@ -35,7 +35,7 @@ quiz:
     why: 'Påhittade källor är en vanlig sorts hallucination.'
     wrong:
       - text: 'Använder den, den lät säker'
-        why: 'En säker ton säger ingenting om sanningen.'
+        why: 'Att den låter säker betyder inte att källan finns.'
       - text: 'Frågar chattboten om källan stämmer'
         why: 'Den kan bekräfta sitt eget fel lika säkert. Kontrollera i källan själv.'
   - kind: 'förutsägelse'
@@ -54,6 +54,6 @@ En modell kan låta säker och ändå ha fel. Den kan återge fördomar från te
 
 ## Vad vi förenklar här
 
-- Frågorna, svaren och sannolikheterna är påhittade för att visa idén.
+- Frågorna, svaren och sannolikheterna är påhittade exempel.
 - Spärren i del 2 är ett enkelt riskvärde med en gräns. Riktiga skydd består av flera lager: träning, regler, filter och människor som granskar.
 - Att en modell anger hur säker den är betyder inte att den vet. Säkerheten kan själv vara fel.

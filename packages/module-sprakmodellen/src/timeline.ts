@@ -39,7 +39,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'temperatur',
     start: 42,
     title: 'Temperatur',
-    caption: 'Temperaturen styr hur mycket slump som får vara med. Låg blir förutsägbart och tjatigt. Hög blir snabbt rena nonsens.',
+    caption: 'Temperaturen styr hur mycket slump som får vara med. Låg blir förutsägbart och tjatigt. Hög blir snabbt rent nonsens.',
   },
   {
     id: 'storlek',

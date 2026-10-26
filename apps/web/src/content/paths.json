@@ -200,7 +200,7 @@
     "summary": "Varför en AI kan låta säker och ändå ha fel, vad träningen gör med svaren och hur spärrar fungerar. Med övningar i att avslöja påhittade svar.",
     "doneTitle": "Klart! Nu vet du när du ska dubbelkolla.",
     "insights": [
-      "En AI kan låta säker och ändå ha fel. Tonen säger ingenting om sanningen.",
+      "En AI kan låta säker och ändå ha fel. Att svaret låter säkert betyder inte att det stämmer.",
       "En assistent är tränad att ge svar som människor gillar, inte svar som garanterat stämmer.",
       "Spärrar minskar riskerna men är aldrig perfekta. Kontrollera det som är viktigt."
     ],
@@ -242,7 +242,7 @@
         "minutes": 4,
         "title": "Spärrar och hur de luras",
         "why": "Hur stoppar man skadliga förfrågningar, och varför går det aldrig helt?",
-        "takeaway": "En strikt spärr stoppar även vanliga frågor, en slapp släpper igenom mer. Det är alltid en avvägning."
+        "takeaway": "En strikt spärr stoppar även vanliga frågor, en slapp släpper igenom mer. Någonstans måste gränsen dras."
       },
       {
         "id": "test",

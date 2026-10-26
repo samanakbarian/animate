@@ -51,9 +51,9 @@ quiz:
 
 En språkmodell ser bara en begränsad mängd text åt gången. Det kallas kontextfönstret och mäts i tokens, ungefär ordbitar. Allt som ska påverka svaret måste rymmas där: dina meddelanden, modellens egna svar, instruktioner och dokument du klistrat in.
 
-När ett samtal blir längre än fönstret faller det äldsta bort. Modellen glömmer inte på samma sätt som en människa. Texten finns helt enkelt inte i det den ser. Dagens största modeller rymmer hela böcker, men fönstret tar alltid slut någon gång, och även inom fönstret kan detaljer långt bak få mindre uppmärksamhet.
+När ett samtal blir längre än fönstret faller det äldsta bort. Modellen glömmer inte som en människa gör. Texten finns bara inte längre i det den ser. Dagens största modeller rymmer hela böcker, men fönstret tar alltid slut någon gång, och även inom fönstret kan detaljer långt bak få mindre uppmärksamhet.
 
-Modellen lär sig inget av samtalet. När en chattjänst ”minns” dig har den sparat korta anteckningar som läggs in i fönstret i nästa samtal. Det är bra att veta vad som sparas, och att du ofta kan se och ta bort det.
+Modellen lär sig inget av samtalet. När en chattjänst ”minns” dig har den sparat korta anteckningar som läggs in i fönstret i nästa samtal. Ofta kan du se vad som sparats och ta bort det.
 
 ## Filmen visar
 
