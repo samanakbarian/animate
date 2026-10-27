@@ -122,7 +122,8 @@
   {
     "id": "agi",
     "term": "AGI",
-    "definition": "Artificiell generell intelligens: en tänkt AI som är minst lika bra som människor på i stort sett allt."
+    "definition": "Artificiell generell intelligens: en tänkt AI som är minst lika bra som människor på i stort sett allt.",
+    "module": "framtiden"
   },
   {
     "id": "aterkoppling",
@@ -213,5 +214,23 @@
     "term": "Kilowattimme (kWh)",
     "definition": "Ett mått på hur mycket el som går åt. En kilowattimme är 1 000 wattimmar (Wh). Ett kort svar från en chattbot kräver ungefär 0,3 Wh, att koka en liter vatten ungefär 0,1 kWh.",
     "module": "ai-och-klimatet"
+  },
+  {
+    "id": "asi",
+    "term": "ASI",
+    "definition": "Artificiell superintelligens: en tänkt AI som är bättre än alla människor på i stort sett allt.",
+    "module": "framtiden"
+  },
+  {
+    "id": "alignment",
+    "term": "Alignment",
+    "definition": "Forskning om hur man får en AI att göra det människor menar och vill, även i lägen som ingen har tänkt på i förväg.",
+    "module": "framtiden"
+  },
+  {
+    "id": "fordubblingstid",
+    "term": "Fördubblingstid",
+    "definition": "Hur lång tid det tar för något som växer exponentiellt att bli dubbelt så stort. Små skillnader i fördubblingstid ger stora skillnader efter några år.",
+    "module": "framtiden"
   }
 ]
