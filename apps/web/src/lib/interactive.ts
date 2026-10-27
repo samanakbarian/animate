@@ -23,6 +23,7 @@ export const INTERACTIVE_MODULES: Record<string, () => Promise<{ parts: ModuleDe
   verktyg: () => import('@nastasteg/module-verktyg'),
   arbete: () => import('@nastasteg/module-arbete'),
   'ai-och-lagen': () => import('@nastasteg/module-ai-och-lagen'),
+  'ai-och-klimatet': () => import('@nastasteg/module-ai-och-klimatet'),
 };
 
 export const hasInteractive = (slug: string) => slug in INTERACTIVE_MODULES;

@@ -343,5 +343,48 @@
       "Finns det uppgifter som en människa alltid ska göra, även om AI skulle klara dem?",
       "Varför är det förbjudet att läsa av elevers känslor i skolan? Håller ni med?"
     ]
+  },
+  {
+    "id": "ai-och-klimatet",
+    "order": 9,
+    "title": "AI och klimatet",
+    "goal": "Eleverna kan förklara varför AI kräver el, varför olika saker kräver olika mycket och varför utsläppen beror på hur elen har gjorts.",
+    "modules": ["ai-och-klimatet"],
+    "games": [],
+    "prep": [
+      "Gå igenom modulen AI och klimatet och prova alla fyra sorterna och alla tre sorterna av el.",
+      "Skriv upp några saker eleverna gör med el varje dag, som att ladda mobilen eller duscha varmt."
+    ],
+    "plan": [
+      {
+        "minutes": 5,
+        "what": "Start: Hur mycket el tror ni att en fråga till en chattbot kräver? Låt eleverna gissa och skriv upp gissningarna."
+      },
+      {
+        "minutes": 12,
+        "what": "Visa AI och klimatet tillsammans. Pausa efter ”Olika mycket” och jämför med gissningarna."
+      },
+      {
+        "minutes": 10,
+        "what": "Övning i par: hur många frågor, bilder och filmer gör ni på en vecka? Räkna fram ett år med reglagen."
+      },
+      {
+        "minutes": 8,
+        "what": "Byt elen i modulen. Varför blir det så stor skillnad, fast det är lika mycket el?"
+      },
+      {
+        "minutes": 10,
+        "what": "Diskussion i grupp."
+      },
+      {
+        "minutes": 5,
+        "what": "Avslut: quizet i AI och klimatet."
+      }
+    ],
+    "discussion": [
+      "När är AI värt elen den kräver, och när är det slöseri?",
+      "Borde företagen redovisa hur mycket el och vatten deras AI kräver?",
+      "AI kan både hjälpa klimatet och skada det. Vad väger tyngst, och vem bestämmer?"
+    ]
   }
 ]

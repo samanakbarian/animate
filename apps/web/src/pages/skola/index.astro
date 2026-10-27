@@ -10,7 +10,7 @@ const title = (slug: string) => modules.find((m) => m.id === slug)?.data.title ?
 
 <Base
   title="För skolan"
-  description="Åtta färdiga lektioner om hur AI fungerar, med tidsplan, diskussionsfrågor och facit. Gratis och utan inloggning."
+  description={`${lessons.length} färdiga lektioner om hur AI fungerar, med tidsplan, diskussionsfrågor och facit. Gratis och utan inloggning.`}
 >
   <div class="wrap page">
     <header class="prose">
