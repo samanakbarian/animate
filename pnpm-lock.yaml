@@ -122,6 +122,9 @@ importers:
       '@nastasteg/module-flera-agenter':
         specifier: workspace:*
         version: link:../../packages/module-flera-agenter
+      '@nastasteg/module-framtiden':
+        specifier: workspace:*
+        version: link:../../packages/module-framtiden
       '@nastasteg/module-fran-fortraning-till-assistent':
         specifier: workspace:*
         version: link:../../packages/module-fran-fortraning-till-assistent
@@ -330,6 +333,12 @@ importers:
         version: link:../engine
 
   packages/module-flera-agenter:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-framtiden:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

@@ -386,5 +386,50 @@
       "Borde företagen redovisa hur mycket el och vatten deras AI kräver?",
       "AI kan både hjälpa klimatet och skada det. Vad väger tyngst, och vem bestämmer?"
     ]
+  },
+  {
+    "id": "framtiden",
+    "order": 10,
+    "title": "AI:s framtid",
+    "goal": "Eleverna kan förklara vad AGI och ASI betyder, varför det är osäkert att förlänga en trend och vad forskare gör för att AI ska bli säker.",
+    "modules": ["framtiden"],
+    "games": ["ai-tidslinjen"],
+    "prep": [
+      "Gå igenom modulen Framtiden och prova alla fyra takterna.",
+      "Se kortfilmen NÄSTA STEG, särskilt slutet om AGI och ASI.",
+      "Rita en tallinje på tavlan från i dag till år 2100."
+    ],
+    "plan": [
+      {
+        "minutes": 5,
+        "what": "Start: Visa slutet av kortfilmen NÄSTA STEG. Vad menas med AGI?"
+      },
+      {
+        "minutes": 12,
+        "what": "Visa Framtiden tillsammans. Pausa efter ”Om trenden håller” och låt eleverna gissa vad som händer med en annan takt."
+      },
+      {
+        "minutes": 8,
+        "what": "Övning i par: välj takt och år med reglagen. Hur stor blir skillnaden mellan fyra och fjorton månader år 2035?"
+      },
+      {
+        "minutes": 8,
+        "what": "Tallinjen: varje elev sätter en lapp för när hen tror att maskiner klarar allt bättre än människor, eller ”aldrig”. Jämför med enkäten i modulen."
+      },
+      {
+        "minutes": 12,
+        "what": "Diskussion i grupp."
+      },
+      {
+        "minutes": 5,
+        "what": "Avslut: quizet i Framtiden."
+      }
+    ],
+    "discussion": [
+      "Varför är forskare så oense om när AGI kommer?",
+      "Vad borde ett företag visa innan det släpper en ny, mycket kraftfull modell?",
+      "Vem ska bestämma hur kraftfull AI får bli: företagen, staterna eller alla tillsammans?",
+      "Filmen slutar med ”Nästa steg är vårt att ta.” Vad betyder det för er?"
+    ]
   }
 ]

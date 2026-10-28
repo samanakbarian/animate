@@ -39,6 +39,7 @@
     "@nastasteg/module-verktyg": "workspace:*",
     "@nastasteg/module-arbete": "workspace:*",
     "@nastasteg/module-ai-och-klimatet": "workspace:*",
+    "@nastasteg/module-framtiden": "workspace:*",
     "@nastasteg/module-ai-och-lagen": "workspace:*",
     "@nastasteg/module-flera-agenter": "workspace:*",
     "@nastasteg/module-fran-fortraning-till-assistent": "workspace:*",

@@ -5,6 +5,31 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-27 – Modul 20: Framtiden (B-30, åttonde av åtta)
+
+**Vad**
+
+- `packages/module-framtiden`: ett diagram med logaritmisk skala över hur långa uppgifter AI-agenter klarar, mätt i
+  människotid (METR, 50 % chans att lyckas, mest programmering). Sex avrundade mätpunkter 2019–2025 (2 s till 2 h,
+  ungefär 6,6 månader per fördubbling). Reglage: fördubblingstid (4, 7, 14 månader eller att trenden stannar) och år
+  2026–2035. Valt år läses av i arbetstid (`workTime`), de andra takterna syns som svaga linjer.
+- Kapitel: AGI och ASI (kort), ett sätt att mäta (punkterna dyker upp), trenden, om trenden håller (2030 ≈ 2
+  arbetsmånader), osäkert, olika syner (tidslinje med AI Impacts enkät 2023: 50 % år 2047), vad forskare gör
+  (alignment, tolkningsbarhet, utvärdering, styrning), din tur.
+- Lektion 10 ”AI:s framtid” med tallinje i klassrummet. Ordlistan: ASI, alignment, fördubblingstid. AGI länkar nu
+  till modulen. Hela kartan kräver 20 quiz.
+
+**Fällor**
+
+- Mätpunkterna slutar 2025 med flit. Lägg bara till nyare punkter från METR:s egna publiceringar.
+- Med fyra månader blir 2035 absurt stort. Linjen klipps vid diagrammets topp och texten säger ”mer än 100 arbetsår”.
+
+**Återstår**
+
+- B-30 är klar. Upphovsrätt kan bli en egen modul.
+
+---
+
 ## 2026-10-26 (2) – Modul 19: AI och klimatet (B-30, sjunde av åtta)
 
 **Vad**

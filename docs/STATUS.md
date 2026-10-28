@@ -2,12 +2,12 @@
 
 _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 
-**Senast uppdaterad:** 2026-10-26
+**Senast uppdaterad:** 2026-10-27
 
 ## Nuläge
 
 - **iLearnAI** på https://ilearnai.se (Netlify, gren master, HTTPS, www → ilearnai.se). Monorepo: `apps/web` (Astro),
-  `packages/engine`, `packages/film`, `packages/module-*` (19), `packages/game-*` (12), `tools/render`.
+  `packages/engine`, `packages/film`, `packages/module-*` (20), `packages/game-*` (12), `tools/render`.
 - **Väg in:** startsidan leder till lärvägen `/lar/forsta-ai` (”Förstå hur AI fungerar på 20 minuter”, sex steg:
   neuron, nätverk, språkmodell, spelet Slå maskinen, agent, slutprov). Framsteg sparas lokalt; startsidan visar
   ”Fortsätt lärvägen”. Kortfilmen ligger under hjälten, med länk vidare efter filmen. Tre spel visas, resten på `/spel`.
@@ -26,9 +26,11 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Modul 18 – AI och lagen** (B-30): AI-förordningens risknivåer med exempel, och dina rättigheter enligt GDPR.
 - **Modul 19 – AI och klimatet** (B-30): el per svar, bild och film, ett år jämfört med vardagssaker, träning
   mot användning och hur elen avgör utsläppen. Lektion 9 på `/skola`.
+- **Modul 20 – Framtiden** (B-30): AGI och ASI, METR:s mått på hur långa uppgifter agenter klarar (2019–2025),
+  linjen framåt med vald fördubblingstid, olika syner och vad forskare gör för säkerheten. Lektion 10.
 - **Dagens AI-fråga** (B-24) på startsidan: en fråga per dag ur modulernas quiz (`lib/daily.ts`), svit i rad och
   märket Fem dagar i rad.
-- **För skolan** (B-25): `/skola` med nio lektioner på 50 minuter som täcker alla moduler (`content/lessons.json`),
+- **För skolan** (B-25): `/skola` med tio lektioner på 50 minuter som täcker alla moduler (`content/lessons.json`),
   tidsplan, diskussionsfrågor och facit med vanliga missförstånd. Utskrivbara. Länk i sidfoten.
 - **Alla moduler** med film, reglage och ljud. Varje modul har ”Vad vi förenklar här” och ett quiz (förstå ×2,
   använd, förutsäg) där fel svar förklaras och länkar tillbaka till kapitlet i filmen.
@@ -43,7 +45,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 - **Framsteg och märken** på `/framsteg` (B-19): tio märken i `content/badges.json`, regler i `lib/progress.ts`,
   allt läst ur webbläsarens lagring. Quizet säger till när man får ett nytt märke. Länk i sidfoten.
 - Språkgranskning av all synlig text 2026-10-26 (se devloggen).
-- 209 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
+- 215 tester gröna. CI kör format, lint, typecheck, test och bygge på `master`.
 
 ## Nästa (i prioritetsordning)
 
@@ -53,7 +55,7 @@ _Uppdateras i slutet av varje arbetspass. Håll filen under ~50 rader._
 2. **Grundaren:** välj statistiktjänst (ADR 0012) och sätt `PUBLIC_STATS_URL` i Netlify. Byt repots standardgren
    till `master` på GitHub (i dag `ccr-f401e4bd-y1vmji`, CI körs bara på master).
 3. Testa lärvägen med riktiga nybörjare. Mät avhopp per steg när statistiken är på.
-4. B-30 nya moduler, en i taget (klar: bilder, datorseende, kontext, verktyg, arbete, lagen, klimat; kvar: framtid). Lärare: testa en lektion med en riktig klass. Skolmaterial: `docs/SKOLMATERIAL.md`.
+4. B-30 är klar (åtta nya moduler). Lärare: testa en lektion med en riktig klass. Skolmaterial: `docs/SKOLMATERIAL.md`.
 5. Backend avvaktar (ADR 0011). Spärrvakten är pausad (exempeltexterna stoppas av säkerhetsfiltret).
 
 ## Kända problem och fällor
