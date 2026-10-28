@@ -54,7 +54,7 @@ Det som kallas AI i dag bygger nästan alltid på **artificiella neurala nätver
 
 En artificiell neuron härmar den idén, men med tal: några tal in, en vikt för varje tal, en summa och ett tal ut. Den är mycket enklare än en riktig nervcell, och ett nätverk fungerar inte som en hjärna. Liknelsen handlar om idén, inte om biologin.
 
-Ett neuralt nätverk är många sådana neuroner ordnade i lager. Allt nätverket "kan" sitter i vikterna.
+Ett neuralt nätverk är många sådana neuroner ordnade i lager. Allt nätverket ”kan” sitter i vikterna.
 
 ## Filmen visar
 

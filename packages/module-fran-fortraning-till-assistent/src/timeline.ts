@@ -46,7 +46,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'resultat',
     start: 66,
     title: 'Samma smak överallt',
-    caption: 'Belöningen gäller sorten av svar, inte en viss fråga. Därför blir modellen hjälpsammare på alla frågor.',
+    caption: 'Belöningen gäller vilken sorts svar det är, inte en viss fråga. Därför blir modellen hjälpsammare på alla frågor.',
   },
   {
     id: 'din-tur',

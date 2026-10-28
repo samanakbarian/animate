@@ -52,7 +52,7 @@ quiz:
 
 Äldre modeller läste text ett ord i taget och fick bära med sig allt de läst i ett slags minne. En transformer låter i stället varje ord jämföra sig direkt med de andra orden och väga in dem som verkar viktiga. Det kallas uppmärksamhet.
 
-I meningen "katten låg på mattan, för den var trött" behöver modellen lista ut att "den" syftar på katten. Uppmärksamheten är hur den gör det.
+I meningen ”katten låg på mattan, för den var trött” behöver modellen lista ut att ”den” syftar på katten. Det är uppmärksamheten som gör det möjligt.
 
 ## Full uppmärksamhet och bara bakåt
 

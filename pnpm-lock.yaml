@@ -98,6 +98,9 @@ importers:
       '@nastasteg/module-agenten':
         specifier: workspace:*
         version: link:../../packages/module-agenten
+      '@nastasteg/module-ai-och-klimatet':
+        specifier: workspace:*
+        version: link:../../packages/module-ai-och-klimatet
       '@nastasteg/module-ai-och-lagen':
         specifier: workspace:*
         version: link:../../packages/module-ai-och-lagen
@@ -119,6 +122,9 @@ importers:
       '@nastasteg/module-flera-agenter':
         specifier: workspace:*
         version: link:../../packages/module-flera-agenter
+      '@nastasteg/module-framtiden':
+        specifier: workspace:*
+        version: link:../../packages/module-framtiden
       '@nastasteg/module-fran-fortraning-till-assistent':
         specifier: workspace:*
         version: link:../../packages/module-fran-fortraning-till-assistent
@@ -284,6 +290,12 @@ importers:
         specifier: workspace:*
         version: link:../engine
 
+  packages/module-ai-och-klimatet:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
   packages/module-ai-och-lagen:
     dependencies:
       '@nastasteg/engine':
@@ -321,6 +333,12 @@ importers:
         version: link:../engine
 
   packages/module-flera-agenter:
+    dependencies:
+      '@nastasteg/engine':
+        specifier: workspace:*
+        version: link:../engine
+
+  packages/module-framtiden:
     dependencies:
       '@nastasteg/engine':
         specifier: workspace:*

@@ -52,6 +52,7 @@ Här spåras det som är byggt. Bocka av och länka till devloggen.
 ## Senare
 
 - [x] Moduler: Flera agenter, Risker och säkerhet (två delar)
+- [x] B-30, åtta nya moduler: AI som gör bilder, Datorseende, Kontext, Verktyg, AI och arbete, AI och lagen, AI och klimatet, Framtiden
 - [x] Ljud i modulerna (`module/sound.ts`)
 - [ ] Fråga sajten (svarar bara från sajtens innehåll)
 - [ ] Lärarmaterial, inloggning, framsteg och diplom

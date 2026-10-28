@@ -5,6 +5,76 @@ Nyaste överst. En post per arbetspass. Skriv för nästa agent: **vad**, **varf
 
 ---
 
+## 2026-10-27 – Modul 20: Framtiden (B-30, åttonde av åtta)
+
+**Vad**
+
+- `packages/module-framtiden`: ett diagram med logaritmisk skala över hur långa uppgifter AI-agenter klarar, mätt i
+  människotid (METR, 50 % chans att lyckas, mest programmering). Sex avrundade mätpunkter 2019–2025 (2 s till 2 h,
+  ungefär 6,6 månader per fördubbling). Reglage: fördubblingstid (4, 7, 14 månader eller att trenden stannar) och år
+  2026–2035. Valt år läses av i arbetstid (`workTime`), de andra takterna syns som svaga linjer.
+- Kapitel: AGI och ASI (kort), ett sätt att mäta (punkterna dyker upp), trenden, om trenden håller (2030 ≈ 2
+  arbetsmånader), osäkert, olika syner (tidslinje med AI Impacts enkät 2023: 50 % år 2047), vad forskare gör
+  (alignment, tolkningsbarhet, utvärdering, styrning), din tur.
+- Lektion 10 ”AI:s framtid” med tallinje i klassrummet. Ordlistan: ASI, alignment, fördubblingstid. AGI länkar nu
+  till modulen. Hela kartan kräver 20 quiz.
+
+**Fällor**
+
+- Mätpunkterna slutar 2025 med flit. Lägg bara till nyare punkter från METR:s egna publiceringar.
+- Med fyra månader blir 2035 absurt stort. Linjen klipps vid diagrammets topp och texten säger ”mer än 100 arbetsår”.
+
+**Återstår**
+
+- B-30 är klar. Upphovsrätt kan bli en egen modul.
+
+---
+
+## 2026-10-26 (2) – Modul 19: AI och klimatet (B-30, sjunde av åtta)
+
+**Vad**
+
+- `packages/module-ai-och-klimatet`: ett år av AI-användning. Reglage: vad du gör (kort svar, långt resonemang,
+  bild, kort film), gånger per dag och var elen kommer från (Sverige, EU-snitt, kolkraft). Scenen visar kWh per år
+  som mobilladdningar, elbil-km och liter kokt vatten, andel av hushållselen i en lägenhet, koldioxid med tre
+  sorters el, och träningen av GPT-3 mot en miljard korta svar om dagen.
+- Kapitel: datacenter (ritat), ett svar, olika mycket, lite gånger många, träning och användning, elen avgör,
+  AI kan också hjälpa (lista, bara i filmen), din tur.
+- Siffrorna står med källor i `energy.ts`: 0,3 Wh per kort svar (Epoch AI, Google 2025), 3 Wh per bild
+  (Luccioni m.fl. 2023), ~1 kWh per 5 s film (MIT Technology Review 2025), GPT-3 1 300 MWh (Patterson m.fl. 2021).
+  Resonemang ×10 är en grov uppskattning, och miljarden svar om dagen är tänkt. Det står på modulsidan.
+- Ny lektion 9 ”AI och klimatet”. Ordlistan: datacenter, kilowattimme. Märket Hela kartan kräver nu 19 quiz.
+- `/skola` räknar lektionerna i beskrivningen i stället för att skriva antalet.
+
+**Fällor**
+
+- På mobil (4:5) får bara två vardagsjämförelser plats ovanför bildtexten. Den tredje ritas bara på bred skärm.
+
+**Återstår**
+
+- En modul kvar i B-30: framtid. Den kan läggas i lektion 9 eller en egen lektion.
+
+---
+
+## 2026-10-26 – Språkgranskning av hela sajten
+
+**Vad**
+
+- Läste all synlig text: sidor, moduler (brödtext och quiz), ordlista, lärvägar, lektioner, märken, spel och
+  bildtexter i modulfilmerna. Texten var redan rak och enkel. Rättade 25 ställen som lät maskinella eller var fel.
+- Fyllnadsfraser bort (”Det låter enkelt, men”, ”helt enkelt”, ”Det är alltid en avvägning”), sloganen ”Tonen säger
+  ingenting om sanningen” omskriven, anglicismen ”Uppmärksamheten är hur den gör det” omskriven.
+- ”Man” som pronomen bredvid ordet _man_ i räkningen kung − man + kvinna ersatt med ”du”.
+- Fel: ”rena nonsens” → ”rent nonsens”, ”hur lika bilden” → ”hur lik”, ”sorten av svar”, ”Sex färdiga lektioner”
+  → åtta (beskrivningen på `/skola`). Raka citattecken → ” ” i modultexterna.
+- Färre upprepningar av ”påhittade för att visa idén” i ”Vad vi förenklar här”.
+
+**Medvetet kvar**
+
+- Filmens korta affischrader (”Utan oss.”, ”Nästa steg är vårt att ta.”) är ett stilval, inte fyllnad.
+
+---
+
 ## 2026-10-10 (2) – Spola i kortfilmen
 
 **Vad**

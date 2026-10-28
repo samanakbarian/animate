@@ -36,7 +36,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'ai-tar',
     start: 14,
     title: 'AI tar uppgifter',
-    caption: 'AI tar sällan ett helt jobb, men delar av uppgifter. Först sådant som är text och följer mönster, som vanliga frågor.',
+    caption: 'AI tar sällan ett helt jobb, men ofta delar av uppgifter. Först sådant som är text och följer mönster, som vanliga frågor.',
   },
   {
     id: 'granska',

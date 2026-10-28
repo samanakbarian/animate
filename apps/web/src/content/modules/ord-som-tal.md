@@ -41,17 +41,17 @@ quiz:
     see: 'ord-som-tal#rakna'
     q: 'Du räknar kung − man + kvinna. Var hamnar pilen?'
     right: 'Nära drottning'
-    why: 'Steget från man till kvinna är en riktning. Lägger man den till kung hamnar man vid drottning.'
+    why: 'Steget från man till kvinna är en riktning. Lägger du den till kung hamnar du vid drottning.'
     wrong:
       - text: 'Nära kvinna'
-        why: 'Man drar bara bort det som skiljer man från kvinna. Det kungliga finns kvar.'
+        why: 'Räkningen tar bara bort det som skiljer man från kvinna. Det kungliga finns kvar.'
       - text: 'Tillbaka vid kung'
         why: 'Steget från man till kvinna flyttar pilen, så den hamnar inte på samma ställe.'
 ---
 
 En dator kan bara räkna med tal. Därför delas texten först upp i bitar, så kallade tokens. Sedan får varje bit en lista med tal, en inbäddning. Ord som brukar förekomma i liknande sammanhang får liknande tal.
 
-Det gör att man kan räkna med betydelser. Tar man kung, drar bort man och lägger till kvinna hamnar man nära drottning.
+Då går det att räkna med betydelser. Ta talen för kung, dra bort man och lägg till kvinna, så hamnar du nära drottning.
 
 ## Vad vi förenklar här
 

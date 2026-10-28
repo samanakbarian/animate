@@ -65,6 +65,6 @@ Ta med eller ta bort delar av frågan och se hur mejlet ändras.
 
 ## Vad vi förenklar här
 
-- Svaren i modulen är förskrivna för att visa idén. En riktig modell svarar olika varje gång och kan göra andra misstag.
+- Svaren i modulen är skrivna i förväg. En riktig modell svarar olika varje gång och kan göra andra misstag.
 - Det finns inga magiska ord. Det som hjälper är att vara tydlig, ge sammanhang och säga vad du vill ha.
 - Skriv aldrig in känsliga uppgifter om dig själv eller andra i en AI-tjänst utan att veta vart de tar vägen.
